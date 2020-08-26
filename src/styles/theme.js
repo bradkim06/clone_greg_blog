@@ -146,7 +146,7 @@ const theme = createMuiTheme({
     }
   },
   typography: {
-    fontFamily: `Arial, sans-serif`,
+    fontFamily: `Open Sans, Arial, sans-serif`,
     fontSize: 16
   }
 });

@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "@emotion/styled";
 import theme from "../../styles/theme";
+import InfoHeader from "./InfoHeader";
+import InfoText from "./InfoText";
 
 const StyleInfoBox = styled.aside`
   ${({ theme }) => ` 
@@ -10,12 +12,13 @@ const StyleInfoBox = styled.aside`
     color: ${theme.info.colors.text};
     background: ${theme.info.colors.background};
     position: absolute;
-    left: 0;
+left: 0;
     top: 0;
     width: ${theme.info.sizes.width}px;
+    height: 100%;
     padding: 20px 40px;
     &::after {
-      content: '::after content';
+      content: '';
       position: absolute;
       right: 0;
       top: 20px;
@@ -44,11 +47,12 @@ transition-timing-function: ease;
 
 class InfoBox extends React.Component {
   render() {
+    const info = "const info";
     return (
       <StyleInfoBox>
-        <h1>Hello InfoBox!</h1>
+        <InfoHeader />
         <InfoContent>
-          <h1>Hello InfoContent</h1>
+          <InfoText />
         </InfoContent>
       </StyleInfoBox>
     );
