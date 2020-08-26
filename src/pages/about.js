@@ -1,20 +1,26 @@
 import React from "react";
-import Container from "@material-ui/core/Container";
+import Layout from "../components/Layout/Layout";
+import InfoBox from "../components/InfoBox/InfoBox";
+import InfoBar from "../components/InfoBox/InfoBar";
+import ActionsBar from "../components/ActionsBar/ActionsBar";
+
 import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
 import ProTip from "../components/ProTip";
 import Link from "../components/Link";
 import Copyright from "../components/Copyright";
 
 export default function About() {
   return (
-    <React.Fragment>
+    <Layout>
       <Typography variant="h4" component="h1" gutterBottom>
         Gatsby v4-beta example
       </Typography>
       <Link to="/">Go to the main page</Link>
       <ProTip />
       <Copyright />
-    </React.Fragment>
+      <ActionsBar />
+      <InfoBar />
+      <InfoBox />
+    </Layout>
   );
 }
