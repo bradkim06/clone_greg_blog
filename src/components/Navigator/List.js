@@ -2,6 +2,51 @@ import React from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import ListHeader from "./ListHeader";
+import { forceCheck } from "react-lazyload";
+
+class List extends React.Component {
+  static propTypes = {
+    classes: PropTypes.object.isRequired,
+    posts: PropTypes.array.isRequired,
+    linkOnClick: PropTypes.func.isRequired,
+    expandOnClick: PropTypes.func.isRequired,
+    navigatorPosition: PropTypes.string.isRequired,
+    navigatorShape: PropTypes.string.isRequired,
+    categoryFilter: PropTypes.string.isRequired,
+    removeFilter: PropTypes.func.isRequired,
+  };
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.categoryFilter !== this.props.categoryFilter) {
+      setTimeout(forceCheck, 300);
+    }
+  }
+
+  render() {
+    const {
+      classes,
+      posts,
+      linkOnClick,
+      expandOnClick,
+      categoryFilter,
+      navigatorShape,
+      removeFilter,
+    } = this.props;
+
+    return (
+      <Posts>
+        <Inner>
+          <ListHeader
+            expandOnClick={expandOnClick}
+            categoryFilter={categoryFilter}
+            navigatorShape={navigatorShape}
+            removeFilter={removeFilter}
+          />
+        </Inner>
+      </Posts>
+    );
+  }
+}
 
 const Posts = styled.div`
   position: absolute;
@@ -29,18 +74,5 @@ const Inner = styled.div`
     }
   }
 `;
-
-class List extends React.Component {
-  render() {
-    return (
-      <Posts>
-        <Inner>
-          Hello Inner!
-          <ListHeader />
-        </Inner>
-      </Posts>
-    );
-  }
-}
 
 export default List;

@@ -1,22 +1,65 @@
 import React from "react";
 import styled from "@emotion/styled";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+
 import InfoHeader from "./InfoHeader";
 import InfoText from "./InfoText";
 import InfoMenu from "./InfoMenu";
 
-export default class InfoBox extends React.Component {
+import { featureNavigator, moveNavigatorAside } from "./../../utils/shared";
+import { setNavigatorPosition, setNavigatorShape } from "../../state/store";
+
+class InfoBox extends React.Component {
+  static propTypes = {
+    classes: PropTypes.object.isRequired,
+    parts: PropTypes.array.isRequired,
+    pages: PropTypes.array.isRequired,
+    navigatorPosition: PropTypes.string.isRequired,
+    navigatorShape: PropTypes.string.isRequired,
+    isWideScreen: PropTypes.bool.isRequired,
+    setNavigatorShape: PropTypes.func.isRequired,
+  };
+
+  avatarOnClick = featureNavigator.bind(this);
+  menulinkOnClick = moveNavigatorAside.bind(this);
+
+  expandOnClick = (e) => {
+    this.props.setNavigatorShape("closed");
+  };
+
   render() {
+    const { parts, pages, navigatorPosition, navigatorShape } = this.props;
+
     return (
-      <StyleInfoBox>
+      <StyleInfoBox
+        // className="is-aside
+        //          closed"
+        className={`${navigatorPosition ? navigatorPosition : ""} 
+         ${navigatorShape ? navigatorShape : ""}`}
+      >
         <InfoHeader />
         <InfoContent>
           <InfoText />
-          <InfoMenu />
+          <InfoMenu linkOnClick={this.menulinkOnClick} />
         </InfoContent>
       </StyleInfoBox>
     );
   }
 }
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    navigatorPosition: state.navigatorPosition,
+    navigatorShape: state.navigatorShape,
+    isWideScreen: state.isWideScreen,
+  };
+};
+
+const mapDispatchToProps = {
+  setNavigatorPosition,
+  setNavigatorShape,
+};
 
 const StyleInfoBox = styled.aside`
   display: none;
@@ -59,7 +102,13 @@ const InfoContent = styled.div`
     bottom: ${(props) => props.theme.navigator.sizes.closedHeight}px;
   }
 
+  .is-aside.open & {
+    display: none;
+  }
+
   .moving-featured & {
     bottom: 0;
   }
 `;
+
+export default connect(mapStateToProps, mapDispatchToProps)(InfoBox);

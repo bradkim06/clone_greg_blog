@@ -8,7 +8,13 @@ export default function About() {
     <Main>
       <Article>
         <PageHeader title="About" />
-        <h1> Hello About!</h1>
+        This website made with Gatsby is not my creation. This site is a
+        modified of{" "}
+        <a href="https://github.com/greglobinski/gatsby-starter-personal-blog">
+          greg lobinski's starter.{" "}
+        </a>
+        I like this starter, but it doesn't work on Gatsby V2. So I moved this
+        starter to V2 with some changes.
       </Article>
     </Main>
   );

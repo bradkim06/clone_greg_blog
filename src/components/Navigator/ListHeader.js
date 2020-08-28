@@ -1,11 +1,51 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { css } from "emotion";
+import PropTypes from "prop-types";
+import theme from "../../styles/theme";
+
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
+import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 
 const ListHeader = (props) => {
+  const {
+    classes,
+    expandOnClick,
+    categoryFilter,
+    navigatorShape,
+    removeFilter,
+  } = props;
+
   return (
     <header>
-      <Closed>Hello List Header!</Closed>
+      {navigatorShape === "closed" && (
+        <Closed>
+          <h3>List of posts</h3>
+          <IconButton
+            aria-label="Expand the list"
+            onClick={expandOnClick}
+            title="Expand the list"
+            className={expand(theme)}
+          >
+            <ExpandLessIcon />
+          </IconButton>
+        </Closed>
+      )}
+      {navigatorShape === "open" && categoryFilter !== "all posts" && (
+        <Filter>
+          <small>Active category filter:</small>{" "}
+          <strong>{categoryFilter}</strong>
+          <IconButton
+            aria-label="Remove filtering"
+            className={clear(theme)}
+            onClick={removeFilter}
+            title="Clear filtering"
+          >
+            <CloseIcon />
+          </IconButton>
+        </Filter>
+      )}
     </header>
   );
 };

@@ -1,7 +1,15 @@
 import React from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
+import { forceCheck } from "react-lazyload";
+import { connect } from "react-redux";
 
+import {
+  setNavigatorPosition,
+  setNavigatorShape,
+  setCategoryFilter,
+} from "../../state/store";
+import { moveNavigatorAside } from "./../../utils/shared";
 import List from "./List";
 
 class Navigator extends React.Component {
@@ -17,15 +25,60 @@ class Navigator extends React.Component {
     setCategoryFilter: PropTypes.func.isRequired,
   };
 
+  linkOnClick = moveNavigatorAside.bind(this);
+
+  expandOnClick = (e) => {
+    this.props.setNavigatorShape("open");
+    setTimeout(forceCheck, 600);
+  };
+
+  removefilterOnClick = (e) => {
+    this.props.setCategoryFilter("all posts");
+  };
+
   render() {
+    const {
+      classes,
+      posts,
+      navigatorPosition,
+      navigatorShape,
+      categoryFilter,
+    } = this.props;
+
     return (
-      <StyleNavigator className="test">
-        Hello Navigator
-        <List />
+      <StyleNavigator
+        className={`${navigatorPosition ? navigatorPosition : ""} ${
+          navigatorShape ? navigatorShape : ""
+        } `}
+      >
+        <List
+          posts={posts}
+          navigatorPosition={navigatorPosition}
+          navigatorShape={navigatorShape}
+          linkOnClick={this.linkOnClick}
+          expandOnClick={this.expandOnClick}
+          categoryFilter={categoryFilter}
+          removeFilter={this.removefilterOnClick}
+        />
       </StyleNavigator>
     );
   }
 }
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    navigatorPosition: state.navigatorPosition,
+    navigatorShape: state.navigatorShape,
+    isWideScreen: state.isWideScreen,
+    categoryFilter: state.categoryFilter,
+  };
+};
+
+const mapDispatchToProps = {
+  setNavigatorPosition,
+  setNavigatorShape,
+  setCategoryFilter,
+};
 
 const StyleNavigator = styled(`nav`)`
   transform: translate3d(0, 0, 0);
@@ -77,7 +130,7 @@ const StyleNavigator = styled(`nav`)`
       }
 
       &::after {
-        content: "navi content test";
+        content: "";
         position: absolute;
         top: 0;
         left: ${(props) => props.theme.base.sizes.lineMargin};
@@ -134,4 +187,4 @@ const StyleNavigator = styled(`nav`)`
   }
 `;
 
-export default Navigator;
+export default connect(mapStateToProps, mapDispatchToProps)(Navigator);

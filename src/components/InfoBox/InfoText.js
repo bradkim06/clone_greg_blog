@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "@emotion/styled";
+import Link from "gatsby-link";
 
 export default function InfoHeader() {
   return (
     <Text>
-      I am a front-end web developer. I used to be a web designer too, but now I
-      concentrate on the code.
+      I am a junior embedded developer. This blog is part of my study. this site
+      code is open on my github.
     </Text>
   );
 }
@@ -24,5 +25,9 @@ const Text = styled.div`
 
   & p::last-child {
     margin-bottom: 0;
+  }
+
+  .is-aside.open & {
+    display: none;
   }
 `;

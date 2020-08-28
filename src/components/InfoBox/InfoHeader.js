@@ -45,6 +45,15 @@ const HeaderAvatarLink = styled.div`
     margin-left: -30px;
     transition: all 0.5s;
     transition-timing-function: ease;
+
+    .navigator-in-transition-from.navigator-is-opened & {
+      left: 50%;
+    }
+
+    .is-aside.open & {
+      left: 8%;
+      top: 0;
+    }
   }
 `;
 
@@ -52,8 +61,6 @@ const HeaderAvatar = styled.div`
   ${({ theme }) => ` 
     width: 36px;
     height: 36px;
-    border-radius: 65% 75%;
-    border: 1px solid #ddd;
     transition: all .3s;
     transition-timing-function: ease;
     display: inline-block;
@@ -73,7 +80,8 @@ const HeaderAvatar = styled.div`
 
     @media (hover: hover) {
       &:hover {
-        border-radius: 75% 65%;
+        border-radius: 85% 85%;
+    border: 1px solid #ddd;
       }
     }
   `}
@@ -104,5 +112,11 @@ const HeaderTitle = styled.h1`
     left: 50%;
     transform: translate(-50%);
     transition: all 0.5s;
+
+    .is-aside.open & {
+      left: 60%;
+      top: 0.2em;
+      text-align: left;
+    }
   }
 `;

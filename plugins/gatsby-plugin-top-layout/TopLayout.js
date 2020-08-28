@@ -34,7 +34,6 @@ class TopLayout extends React.Component {
         <MaterialProvider theme={theme}>
           <EmotionProvider theme={theme}>
             {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-            <CssBaseline />
             <GlobalStyle />
             <LayoutWrapper>
               {this.props.children}

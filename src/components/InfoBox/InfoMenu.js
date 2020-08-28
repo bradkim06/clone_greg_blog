@@ -1,13 +1,25 @@
 import React from "react";
 import styled from "@emotion/styled";
+import PropTypes from "prop-types";
 import { css } from "emotion";
 import Link from "gatsby-link";
 import theme from "../../styles/theme";
 
-export default function InfoMenu() {
+InfoMenu.propTypes = {
+  pages: PropTypes.array.isRequired,
+  linkOnClick: PropTypes.func.isRequired,
+};
+
+function InfoMenu({ pages, linkOnClick }) {
   return (
     <StyleInfoMenu>
-      <Link to="/about/" className={link(theme)}>
+      <Link
+        key="/about/"
+        to="/about/"
+        onClick={linkOnClick}
+        className={link(theme)}
+        data-shape="closed"
+      >
         About
       </Link>
     </StyleInfoMenu>
@@ -33,3 +45,5 @@ const link = (theme) => css`
     color: ${theme.info.colors.menuLinkHover};
   }
 `;
+
+export default InfoMenu;
