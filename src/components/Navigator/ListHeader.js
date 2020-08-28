@@ -1,0 +1,84 @@
+import React from "react";
+import styled from "@emotion/styled";
+import { css } from "emotion";
+
+const ListHeader = (props) => {
+  return (
+    <header>
+      <Closed>Hello List Header!</Closed>
+    </header>
+  );
+};
+
+const Closed = styled.div`
+  display: none;
+  .is-aside.closed &,
+  .moving-featured.closed & {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    height: ${(props) => props.theme.navigator.sizes.closedHeight}px;
+    padding: 0 30px 0 40px;
+  }
+  & h3 {
+    font-size: 1.1em;
+    color: ${(props) => props.theme.navigator.colors.postsHeader};
+    font-weight: 600;
+    margin: -0.2em 0 0 0;
+    text-transform: uppercase;
+    & small {
+      font-size: 0.6em;
+      display: block;
+      margin: 0 0 0.1em;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+    }
+  }
+`;
+
+const expand = (theme) => css`
+  color: ${(props) => props.theme.navigator.colors.postsHeader};
+`;
+
+const Filter = styled.div`
+  margin: 0 calc(-0.5rem + ${(props) => props.theme.base.sizes.linesMargin}) 1em
+    calc(-0.5rem + ${(props) => props.theme.base.sizes.linesMargin});
+  position: relative;
+  font-size: 1.2em;
+  line-height: 1;
+  color: ${(props) => props.theme.base.colors.accent};
+  border-bottom: 1px solid ${(props) => props.theme.base.colors.lines};
+  padding: 0 1em 1em;
+  font-weight: 300;
+  & strong {
+    font-weight: 600;
+    display: block;
+  }
+  & small {
+    display: block;
+    margin: 0 0 0.3em 0;
+  }
+  @media (min-width: ${(props) => props.theme.mediaQueryTresholds.L}px) {
+    margin: 0 0 1em 0;
+    padding: 0 1em 1.5em;
+    .is-aside & {
+      padding: 0 0 1em 0.5em;
+      margin: 0 calc(-0.5rem + ${(props) => props.theme.base.sizes.linesMargin})
+        1em calc(-0.5rem + ${(props) => props.theme.base.sizes.linesMargin});
+    }
+  }
+`;
+
+const clear = (theme) => css`
+  position: absolute;
+  top: 0;
+  right: 0;
+`;
+
+export default ListHeader;

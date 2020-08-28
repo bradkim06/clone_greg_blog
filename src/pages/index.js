@@ -7,7 +7,6 @@ export default function Home() {
   return (
     <Main>
       <Article>
-        <PageHeader title="Index" />
         <h1> Hello Index!</h1>
       </Article>
     </Main>

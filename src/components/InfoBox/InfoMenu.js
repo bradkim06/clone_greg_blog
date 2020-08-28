@@ -7,7 +7,9 @@ import theme from "../../styles/theme";
 export default function InfoMenu() {
   return (
     <StyleInfoMenu>
-      <Link className={link(theme)}>Hello InfoMenu Link!</Link>
+      <Link to="/about/" className={link(theme)}>
+        About
+      </Link>
     </StyleInfoMenu>
   );
 }
