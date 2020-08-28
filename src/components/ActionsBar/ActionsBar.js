@@ -4,10 +4,14 @@ import styled from "@emotion/styled";
 
 import HomeIcon from "@material-ui/icons/Home";
 import SearchIcon from "@material-ui/icons/Search";
-
+import { css } from "emotion";
 import Link from "gatsby-link";
+import theme from "../../styles/theme";
 
-export default class ActionsBar extends React.Component {
+import { featureNavigator, moveNavigatorAside } from "../../utils/shared";
+
+class ActionsBar extends React.Component {
+  homeOnClick = featureNavigator.bind(this);
   render() {
     return (
       <StyleActionsBar>
@@ -16,6 +20,7 @@ export default class ActionsBar extends React.Component {
             aria-label="Back to list"
             onClick={this.homeOnClick}
             title="Back to the list"
+            className={button(theme)}
           >
             <HomeIcon />
           </IconButton>
@@ -26,10 +31,12 @@ export default class ActionsBar extends React.Component {
             data-shape="closed"
             to="/search/"
             title="Search"
+            className={button(theme)}
           >
             <SearchIcon />
           </IconButton>
         </Group>
+        <Group></Group>
       </StyleActionsBar>
     );
   }
@@ -88,3 +95,9 @@ const Group = styled.div`
     flex-direction: column;
   }
 `;
+
+const button = (theme) => css`
+  color: ${theme.bars.colors.icon};
+`;
+
+export default ActionsBar;

@@ -15,10 +15,12 @@
     "gatsby-plugin-catch-links": "^2.3.11",
     "gatsby-plugin-material-ui": "latest",
     "gatsby-plugin-react-helmet": "latest",
+    "normalize.css": "^8.0.1",
     "prop-types": "^15.7.2",
     "react": "latest",
     "react-dom": "latest",
     "react-helmet": "latest",
+    "react-lazyload": "^3.0.0",
     "react-redux": "^7.2.1"
   },
   "scripts": {
