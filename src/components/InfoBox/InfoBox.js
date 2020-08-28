@@ -4,6 +4,20 @@ import InfoHeader from "./InfoHeader";
 import InfoText from "./InfoText";
 import InfoMenu from "./InfoMenu";
 
+export default class InfoBox extends React.Component {
+  render() {
+    return (
+      <StyleInfoBox>
+        <InfoHeader />
+        <InfoContent>
+          <InfoText />
+          <InfoMenu />
+        </InfoContent>
+      </StyleInfoBox>
+    );
+  }
+}
+
 const StyleInfoBox = styled.aside`
   ${({ theme }) => ` 
   display: none;
@@ -45,19 +59,3 @@ const InfoContent = styled.div`
 transition-timing-function: ease;
 `}
 `;
-
-class InfoBox extends React.Component {
-  render() {
-    return (
-      <StyleInfoBox>
-        <InfoHeader />
-        <InfoContent>
-          <InfoText />
-          <InfoMenu />
-        </InfoContent>
-      </StyleInfoBox>
-    );
-  }
-}
-
-export default InfoBox;

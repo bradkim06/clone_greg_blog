@@ -3,6 +3,25 @@ import Link from "gatsby-link";
 import styled from "@emotion/styled";
 
 import avatar from "../../images/jpg/avatar.jpg";
+
+export default function InfoHeader() {
+  return (
+    <Header>
+      <HeaderAvatarLink>
+        <Link to="/" title="back to Home">
+          <HeaderAvatar>
+            <img src={avatar} alt="" />
+          </HeaderAvatar>
+        </Link>
+      </HeaderAvatarLink>
+      <HeaderTitle>
+        bradkim06
+        <small>Personal Blog</small>
+      </HeaderTitle>
+    </Header>
+  );
+}
+
 const Header = styled.header`
   line-height: 1;
   position: relative;
@@ -87,21 +106,3 @@ const HeaderTitle = styled.h1`
     transition: all 0.5s;
   }
 `;
-
-export default function InfoHeader(props) {
-  return (
-    <Header>
-      <HeaderAvatarLink>
-        <Link to="/" title="back to Home">
-          <HeaderAvatar>
-            <img src={avatar} alt="" />
-          </HeaderAvatar>
-        </Link>
-      </HeaderAvatarLink>
-      <HeaderTitle>
-        bradkim06
-        <small>Personal Blog</small>
-      </HeaderTitle>
-    </Header>
-  );
-}

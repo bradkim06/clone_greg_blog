@@ -12,6 +12,7 @@
     "emotion": "^10.0.27",
     "emotion-theming": "^10.0.27",
     "gatsby": "latest",
+    "gatsby-plugin-catch-links": "^2.3.11",
     "gatsby-plugin-material-ui": "latest",
     "gatsby-plugin-react-helmet": "latest",
     "prop-types": "^15.7.2",

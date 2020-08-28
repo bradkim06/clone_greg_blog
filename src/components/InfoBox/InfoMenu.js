@@ -4,10 +4,10 @@ import { css } from "emotion";
 import Link from "gatsby-link";
 import theme from "../../styles/theme";
 
-function InfoMenu(props) {
+export default function InfoMenu() {
   return (
     <StyleInfoMenu>
-      Hello InfoMenu!<Link className={link(theme)}>Hello Link!</Link>
+      <Link className={link(theme)}>Hello InfoMenu Link!</Link>
     </StyleInfoMenu>
   );
 }
@@ -31,5 +31,3 @@ const link = (theme) => css`
     color: ${theme.info.colors.menuLinkHover};
   }
 `;
-
-export default InfoMenu;

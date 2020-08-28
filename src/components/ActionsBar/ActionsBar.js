@@ -7,6 +7,34 @@ import SearchIcon from "@material-ui/icons/Search";
 
 import Link from "gatsby-link";
 
+export default class ActionsBar extends React.Component {
+  render() {
+    return (
+      <StyleActionsBar>
+        <Group>
+          <IconButton
+            aria-label="Back to list"
+            onClick={this.homeOnClick}
+            title="Back to the list"
+          >
+            <HomeIcon />
+          </IconButton>
+          <IconButton
+            aria-label="Search"
+            onClick={this.searchOnClick}
+            component={Link}
+            data-shape="closed"
+            to="/search/"
+            title="Search"
+          >
+            <SearchIcon />
+          </IconButton>
+        </Group>
+      </StyleActionsBar>
+    );
+  }
+}
+
 const StyleActionsBar = styled.div`
   position: absolute;
   background: ${(props) => props.theme.bars.colors.background};
@@ -60,31 +88,3 @@ const Group = styled.div`
     flex-direction: column;
   }
 `;
-
-export default class ActionsBar extends React.Component {
-  render() {
-    return (
-      <StyleActionsBar>
-        <Group>
-          <IconButton
-            aria-label="Back to list"
-            onClick={this.homeOnClick}
-            title="Back to the list"
-          >
-            <HomeIcon />
-          </IconButton>
-          <IconButton
-            aria-label="Search"
-            onClick={this.searchOnClick}
-            component={Link}
-            data-shape="closed"
-            to="/search/"
-            title="Search"
-          >
-            <SearchIcon />
-          </IconButton>
-        </Group>
-      </StyleActionsBar>
-    );
-  }
-}

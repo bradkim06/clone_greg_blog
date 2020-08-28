@@ -3,7 +3,7 @@ import Main from "../components/Main/Main";
 import Article from "../components/Main/Article";
 import PageHeader from "../components/Page/PageHeader";
 
-function About() {
+export default function About() {
   return (
     <Main>
       <Article>
@@ -13,5 +13,3 @@ function About() {
     </Main>
   );
 }
-
-export default About;

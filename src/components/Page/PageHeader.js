@@ -1,6 +1,15 @@
 import React from "react";
 import styled from "@emotion/styled";
 
+export default function PageHeader(props) {
+  const { title } = props;
+  return (
+    <StyleHeader>
+      <PageHeaderTitle>{title}</PageHeaderTitle>
+    </StyleHeader>
+  );
+}
+
 const StyleHeader = styled.header`
   margin: 0 0 3em;
   display: flex;
@@ -26,12 +35,3 @@ const PageHeaderTitle = styled.h1`
     letter-spacing: -0.05em;
   }
 `;
-
-export default function PageHeader(props) {
-  const { title } = props;
-  return (
-    <StyleHeader>
-      <PageHeaderTitle>{title}</PageHeaderTitle>
-    </StyleHeader>
-  );
-}
