@@ -1,26 +1,17 @@
 import React from "react";
-import Layout from "../components/Layout/Layout";
-import InfoBox from "../components/InfoBox/InfoBox";
-import InfoBar from "../components/InfoBox/InfoBar";
-import ActionsBar from "../components/ActionsBar/ActionsBar";
+import Main from "../components/Main/Main";
+import Article from "../components/Main/Article";
+import PageHeader from "../components/Page/PageHeader";
 
-import Typography from "@material-ui/core/Typography";
-import ProTip from "../components/ProTip";
-import Link from "../components/Link";
-import Copyright from "../components/Copyright";
-
-export default function About() {
+function About() {
   return (
-    <Layout>
-      <Typography variant="h4" component="h1" gutterBottom>
-        Gatsby v4-beta example
-      </Typography>
-      <Link to="/">Go to the main page</Link>
-      <ProTip />
-      <Copyright />
-      <ActionsBar />
-      <InfoBar />
-      <InfoBox />
-    </Layout>
+    <Main>
+      <Article>
+        <PageHeader title="About" />
+        <h1> Hello About!</h1>
+      </Article>
+    </Main>
   );
 }
+
+export default About;

@@ -1,7 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Link from "gatsby-link";
-import IconButton from "@material-ui/core/IconButton";
 import styled from "@emotion/styled";
 
 import avatar from "../../images/jpg/avatar.jpg";
@@ -17,16 +15,16 @@ const HeaderAvatarLink = styled.div`
   position: relative;
   margin: 0 12px 0 0;
 
-  @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
+  @media (min-width: ${(props) => props.theme.mediaQueryTresholds.M}px) {
     margin: 0 20px 0 0;
   }
 
-  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
+  @media (min-width: ${(props) => props.theme.mediaQueryTresholds.L}px) {
     position: absolute;
     top: 10px;
     left: 50%;
     margin-left: -30px;
-    transition: all .5s;
+    transition: all 0.5s;
     transition-timing-function: ease;
   }
 `;
@@ -64,7 +62,7 @@ const HeaderAvatar = styled.div`
 
 const HeaderTitle = styled.h1`
   will-change: transform, left, top;
-  font-size: ${props => props.theme.info.fonts.boxTitleSize}em;
+  font-size: ${(props) => props.theme.info.fonts.boxTitleSize}em;
   margin: 0;
   float: left;
   transition-timing-function: ease;
@@ -75,12 +73,12 @@ const HeaderTitle = styled.h1`
     margin-top: 0.3em;
   }
 
-  @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
-    font-size: ${props => props.theme.info.fonts.boxTitleSizeM}em;
+  @media (min-width: ${(props) => props.theme.mediaQueryTresholds.M}px) {
+    font-size: ${(props) => props.theme.info.fonts.boxTitleSizeM}em;
   }
 
-  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
-    font-size: ${props => props.theme.info.fonts.boxTitleSizeL}em;
+  @media (min-width: ${(props) => props.theme.mediaQueryTresholds.L}px) {
+    font-size: ${(props) => props.theme.info.fonts.boxTitleSizeL}em;
     position: absolute;
     top: 85px;
     text-align: center;

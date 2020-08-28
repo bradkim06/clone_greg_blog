@@ -1,17 +1,16 @@
 import React from "react";
-import Layout from "../components/Layout/Layout";
-import InfoBox from "../components/InfoBox/InfoBox";
-import InfoBar from "../components/InfoBox/InfoBar";
-import ActionsBar from "../components/ActionsBar/ActionsBar";
+import Main from "../components/Main/Main";
+import Article from "../components/Main/Article";
+import PageHeader from "../components/Page/PageHeader";
 
 function Home() {
   return (
-    <Layout>
-      <ActionsBar />
-      <InfoBar />
-      <InfoBox />
-      <h1> Hello Index!</h1>
-    </Layout>
+    <Main>
+      <Article>
+        <PageHeader title="Index" />
+        <h1> Hello Index!</h1>
+      </Article>
+    </Main>
   );
 }
 
