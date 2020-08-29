@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { css } from "emotion";
 import PropTypes from "prop-types";
-import theme from "../../styles/theme";
 
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";

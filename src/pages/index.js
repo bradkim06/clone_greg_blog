@@ -5,9 +5,6 @@ import PropTypes from "prop-types";
 import { setNavigatorPosition, setNavigatorShape } from "../state/store";
 import { featureNavigator } from "../utils/shared";
 
-import Main from "../components/Main/Main";
-import Article from "../components/Main/Article";
-
 class Home extends React.Component {
   static propTypes = {
     data: PropTypes.object.isRequired,

@@ -1,7 +1,5 @@
 import React from "react";
-import { Helmet } from "react-helmet";
 import PropTypes from "prop-types";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import { ThemeProvider as MaterialProvider } from "@material-ui/core/styles";
 import { ThemeProvider as EmotionProvider } from "emotion-theming";
 import theme from "../../src/styles/theme";
@@ -65,12 +63,6 @@ class TopLayout extends React.Component {
     const { navigatorPosition, navigatorShape } = this.props;
     return (
       <React.Fragment>
-        <Helmet>
-          <meta
-            name="viewport"
-            content="minimum-scale=1, initial-scale=1, width=device-width"
-          />
-        </Helmet>
         <EmotionProvider theme={theme}>
           <MaterialProvider theme={theme}>
             {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
