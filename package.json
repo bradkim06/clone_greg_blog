@@ -21,6 +21,7 @@
     "gatsby-plugin-mdx": "^1.2.37",
     "gatsby-plugin-react-helmet": "latest",
     "gatsby-remark-prismjs": "^3.5.11",
+    "gatsby-source-filesystem": "^2.3.27",
     "normalize.css": "^8.0.1",
     "prismjs": "^1.21.0",
     "prop-types": "^15.7.2",

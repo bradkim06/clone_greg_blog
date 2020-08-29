@@ -62,6 +62,7 @@ class TopLayout extends React.Component {
   };
 
   render() {
+    const { navigatorPosition, navigatorShape } = this.props;
     return (
       <React.Fragment>
         <Helmet>
@@ -75,7 +76,7 @@ class TopLayout extends React.Component {
             {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
             <GlobalStyle />
             <LayoutWrapper>
-              {this.props.children}
+              {navigatorPosition !== "is-featured" && this.props.children}
               <Navigator />
               <ActionsBar />
               <InfoBar />
@@ -93,6 +94,8 @@ const mapStateToProps = (state, ownProps) => {
     pages: state.pages,
     isWideScreen: state.isWideScreen,
     fontSizeIncrease: state.fontSizeIncrease,
+    navigatorPosition: state.navigatorPosition,
+    navigatorShape: state.navigatorShape,
   };
 };
 

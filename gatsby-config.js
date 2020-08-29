@@ -3,6 +3,20 @@ module.exports = {
     title: "My page",
   },
   plugins: [
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/content/posts/`,
+        name: "posts",
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/content/pages/`,
+        name: "pages",
+      },
+    },
     "gatsby-plugin-top-layout",
     {
       resolve: "gatsby-plugin-material-ui",
