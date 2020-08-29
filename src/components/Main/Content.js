@@ -5,14 +5,8 @@ import { connect } from "react-redux";
 
 import { setFontSizeIncrease } from "../../state/store";
 
-const Content = (props) => {
-  const { html, children } = props;
-
-  if (html) {
-    return <PageContent>html</PageContent>;
-  } else {
-    return <PageContent>{children}</PageContent>;
-  }
+const Content = ({ children }) => {
+  return <PageContent>{children}</PageContent>;
 };
 
 const PageContent = styled.div`

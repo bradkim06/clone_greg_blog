@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import ListHeader from "./ListHeader";
 import { forceCheck } from "react-lazyload";
+import SpringScrollbars from "../SpringScrollbars";
 
 class List extends React.Component {
   static propTypes = {
@@ -33,18 +34,20 @@ class List extends React.Component {
 
     return (
       <Posts>
-        <Inner>
-          <ListHeader
-            expandOnClick={expandOnClick}
-            categoryFilter={categoryFilter}
-            navigatorShape={navigatorShape}
-            removeFilter={removeFilter}
-          />
-          <PostList>
-            <li>testlist1</li>
-            <li>testlist2</li>
-          </PostList>
-        </Inner>
+        <SpringScrollbars forceCheckOnScroll={true} isNavigator={true}>
+          <Inner>
+            <ListHeader
+              expandOnClick={expandOnClick}
+              categoryFilter={categoryFilter}
+              navigatorShape={navigatorShape}
+              removeFilter={removeFilter}
+            />
+            <PostList>
+              <li>testlist1</li>
+              <li>testlist2</li>
+            </PostList>
+          </Inner>
+        </SpringScrollbars>
       </Posts>
     );
   }

@@ -1,8 +1,13 @@
 import React from "react";
 import styled from "@emotion/styled";
+import SpringScrollbars from "../SpringScrollbars";
 
-function Main(props) {
-  return <StyleMain>{props.children}</StyleMain>;
+function Main({ children }) {
+  return (
+    <StyleMain>
+      <SpringScrollbars>{children}</SpringScrollbars>
+    </StyleMain>
+  );
 }
 
 const StyleMain = styled.main`

@@ -1,6 +1,10 @@
 {
-  "name": "gatsby",
-  "version": "4.0.0",
+  "name": "bradkim06",
+  "description": "personal blog with Gatsby",
+  "author": "Kim Junsu <bradkim06@gmail.com>",
+  "repository": "https://github.com/bradkim06",
+  "license": "MIT",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@emotion/core": "^10.0.35",
@@ -14,14 +18,19 @@
     "gatsby": "latest",
     "gatsby-plugin-catch-links": "^2.3.11",
     "gatsby-plugin-material-ui": "latest",
+    "gatsby-plugin-mdx": "^1.2.37",
     "gatsby-plugin-react-helmet": "latest",
+    "gatsby-remark-prismjs": "^3.5.11",
     "normalize.css": "^8.0.1",
+    "prismjs": "^1.21.0",
     "prop-types": "^15.7.2",
     "react": "latest",
+    "react-custom-scrollbars": "^4.2.1",
     "react-dom": "latest",
     "react-helmet": "latest",
     "react-lazyload": "^3.0.0",
     "react-redux": "^7.2.1",
+    "rebound": "^0.1.0",
     "redux-devtools-extension": "^2.13.8"
   },
   "scripts": {

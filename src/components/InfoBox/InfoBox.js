@@ -38,7 +38,10 @@ class InfoBox extends React.Component {
         className={`${navigatorPosition ? navigatorPosition : ""} 
          ${navigatorShape ? navigatorShape : ""}`}
       >
-        <InfoHeader />
+        <InfoHeader
+          avatarOnClick={this.avatarOnClick}
+          expandOnClick={this.expandOnClick}
+        />
         <InfoContent>
           <InfoText />
           <InfoMenu linkOnClick={this.menulinkOnClick} />

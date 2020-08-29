@@ -2,9 +2,12 @@ import React from "react";
 import Link from "gatsby-link";
 import styled from "@emotion/styled";
 
+import IconButton from "@material-ui/core/IconButton";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+
 import avatar from "../../images/jpg/avatar.jpg";
 
-export default function InfoHeader() {
+function InfoHeader({ avatarOnClick, expandOnClick }) {
   return (
     <Header>
       <HeaderAvatarLink>
@@ -18,6 +21,14 @@ export default function InfoHeader() {
         bradkim06
         <small>Personal Blog</small>
       </HeaderTitle>
+      <IconButton
+        aria-label="Expand the box"
+        className="expand"
+        onClick={expandOnClick}
+        title="Expand the box"
+      >
+        <ExpandMoreIcon />
+      </IconButton>
     </Header>
   );
 }
@@ -25,6 +36,17 @@ export default function InfoHeader() {
 const Header = styled.header`
   line-height: 1;
   position: relative;
+
+  .expand {
+    position: absolute;
+    top: 30px;
+    right: -25px;
+    display: none;
+
+    .is-aside.open & {
+      display: block;
+    }
+  }
 `;
 
 const HeaderAvatarLink = styled.div`
@@ -120,3 +142,5 @@ const HeaderTitle = styled.h1`
     }
   }
 `;
+
+export default InfoHeader;
