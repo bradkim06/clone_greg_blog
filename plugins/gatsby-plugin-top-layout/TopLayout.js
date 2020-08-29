@@ -36,6 +36,31 @@ class TopLayout extends React.Component {
     }
   }
 
+  componentWillMount() {
+    if (typeof localStorage !== "undefined") {
+      const inLocal = +localStorage.getItem("font-size-increase");
+
+      const inStore = this.props.fontSizeIncrease;
+
+      if (inLocal && inLocal !== inStore && inLocal >= 1 && inLocal <= 1.5) {
+        this.props.setFontSizeIncrease(inLocal);
+      }
+    }
+  }
+
+  resizeThrottler = () => {
+    return timeoutThrottlerHandler(
+      this.timeouts,
+      "resize",
+      500,
+      this.resizeHandler
+    );
+  };
+
+  resizeHandler = () => {
+    this.props.setIsWideScreen(isWideScreen());
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -45,8 +70,8 @@ class TopLayout extends React.Component {
             content="minimum-scale=1, initial-scale=1, width=device-width"
           />
         </Helmet>
-        <MaterialProvider theme={theme}>
-          <EmotionProvider theme={theme}>
+        <EmotionProvider theme={theme}>
+          <MaterialProvider theme={theme}>
             {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
             <GlobalStyle />
             <LayoutWrapper>
@@ -56,8 +81,8 @@ class TopLayout extends React.Component {
               <InfoBar />
               <InfoBox />
             </LayoutWrapper>
-          </EmotionProvider>
-        </MaterialProvider>
+          </MaterialProvider>
+        </EmotionProvider>
       </React.Fragment>
     );
   }

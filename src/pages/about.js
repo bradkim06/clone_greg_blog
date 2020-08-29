@@ -10,13 +10,15 @@ export default function About() {
       <Article>
         <PageHeader title="About" />
         <Content>
-          This website made with Gatsby is not my creation. This site is a
-          modified of{" "}
+          I'm embedded developer in South Korea.
+          <br />
+          This website made with{" "}
           <a href="https://github.com/greglobinski/gatsby-starter-personal-blog">
-            greg lobinski's starter.{" "}
-          </a>
-          I like this starter, but it doesn't work on Gatsby V2. So I moved this
-          starter to V2 with some changes.
+            greg lobinski's starter
+          </a>{" "}
+          not my creation. I like this starter, but it only work on Gatsby v1.
+          So I port this starter to gatsby v2 with some changes. Thank greg
+          lobinski for providing a beautiful starter as open source.{" "}
         </Content>
       </Article>
     </Main>

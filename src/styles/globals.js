@@ -12,7 +12,7 @@ export const GlobalStyle = () => (
         -webkit-text-size-adjust: 100%;
         -moz-text-size-adjust: none;
         -ms-text-size-adjust: 100%;
-        font-family: Open Sans, Arial, San-serif;
+        font-family: Open Sans;
         line-height: 1.15;
         text-size-adjust: 100%;
       }

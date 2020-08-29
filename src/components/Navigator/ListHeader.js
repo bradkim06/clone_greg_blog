@@ -8,9 +8,19 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 
-const ListHeader = (props) => {
-  const { expandOnClick, categoryFilter, navigatorShape, removeFilter } = props;
+ListHeader.propTypes = {
+  expandOnClick: PropTypes.func.isRequired,
+  categoryFilter: PropTypes.string.isRequired,
+  navigatorShape: PropTypes.string.isRequired,
+  removeFilter: PropTypes.func.isRequired,
+};
 
+function ListHeader({
+  expandOnClick,
+  categoryFilter,
+  navigatorShape,
+  removeFilter,
+}) {
   return (
     <header>
       {navigatorShape === "closed" && (
@@ -20,21 +30,21 @@ const ListHeader = (props) => {
             aria-label="Expand the list"
             onClick={expandOnClick}
             title="Expand the list"
-            className={expand(theme)}
+            className="expandButton"
           >
             <ExpandLessIcon />
           </IconButton>
         </Closed>
       )}
-      {navigatorShape === "open" && categoryFilter !== "all posts" && (
+      {navigatorShape === "open" && (
         <Filter>
           <small>Active category filter:</small>{" "}
           <strong>{categoryFilter}</strong>
           <IconButton
             aria-label="Remove filtering"
-            className={clear(theme)}
             onClick={removeFilter}
             title="Clear filtering"
+            className="removeButton"
           >
             <CloseIcon />
           </IconButton>
@@ -42,10 +52,13 @@ const ListHeader = (props) => {
       )}
     </header>
   );
-};
+}
 
 const Closed = styled.div`
   display: none;
+  .expandButton {
+    color: ${(props) => props.theme.navigator.colors.postsHeader};
+  }
   .is-aside.closed &,
   .moving-featured.closed & {
     display: flex;
@@ -76,10 +89,6 @@ const Closed = styled.div`
   }
 `;
 
-const expand = (theme) => css`
-  color: ${(props) => props.theme.navigator.colors.postsHeader};
-`;
-
 const Filter = styled.div`
   margin: 0 calc(-0.5rem + ${(props) => props.theme.base.sizes.linesMargin}) 1em
     calc(-0.5rem + ${(props) => props.theme.base.sizes.linesMargin});
@@ -90,6 +99,11 @@ const Filter = styled.div`
   border-bottom: 1px solid ${(props) => props.theme.base.colors.lines};
   padding: 0 1em 1em;
   font-weight: 300;
+  .removeButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
   & strong {
     font-weight: 600;
     display: block;
@@ -107,12 +121,6 @@ const Filter = styled.div`
         1em calc(-0.5rem + ${(props) => props.theme.base.sizes.linesMargin});
     }
   }
-`;
-
-const clear = (theme) => css`
-  position: absolute;
-  top: 0;
-  right: 0;
 `;
 
 export default ListHeader;
