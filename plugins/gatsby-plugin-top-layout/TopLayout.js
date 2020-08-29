@@ -6,11 +6,15 @@ import { ThemeProvider as MaterialProvider } from "@material-ui/core/styles";
 import { ThemeProvider as EmotionProvider } from "emotion-theming";
 import theme from "../../src/styles/theme";
 import Navigator from "../../src/components/Navigator/Navigator";
-import InfoBox from "../../src/components/InfoBox/InfoBox";
 import InfoBar from "../../src/components/InfoBox/InfoBar";
+import InfoBox from "../../src/components/InfoBox";
 import ActionsBar from "../../src/components/ActionsBar/ActionsBar";
 import { GlobalStyle } from "../../src/styles/globals";
 import LayoutWrapper from "../../src/components/LayoutWrapper/";
+import { connect } from "react-redux";
+
+import { setFontSizeIncrease, setIsWideScreen } from "../../src/state/store";
+import { isWideScreen, timeoutThrottlerHandler } from "../../src/utils/helpers";
 
 class TopLayout extends React.Component {
   static propTypes = {
@@ -21,6 +25,16 @@ class TopLayout extends React.Component {
     fontSizeIncrease: PropTypes.number.isRequired,
     setFontSizeIncrease: PropTypes.func.isRequired,
   };
+
+  timeouts = {};
+  categories = [];
+
+  componentDidMount() {
+    this.props.setIsWideScreen(isWideScreen());
+    if (typeof window !== "undefined") {
+      window.addEventListener("resize", this.resizeThrottler, false);
+    }
+  }
 
   render() {
     return (
@@ -49,4 +63,17 @@ class TopLayout extends React.Component {
   }
 }
 
-export default TopLayout;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    pages: state.pages,
+    isWideScreen: state.isWideScreen,
+    fontSizeIncrease: state.fontSizeIncrease,
+  };
+};
+
+const mapDispatchToProps = {
+  setIsWideScreen,
+  setFontSizeIncrease,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TopLayout);

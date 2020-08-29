@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 
-export default function Main(props) {
+function Main(props) {
   return <StyleMain>{props.children}</StyleMain>;
 }
 
@@ -33,3 +33,5 @@ const StyleMain = styled.main`
     }
   }
 `;
+
+export default Main;

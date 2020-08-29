@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import IconButton from "@material-ui/core/IconButton";
 import styled from "@emotion/styled";
 
@@ -7,12 +8,44 @@ import SearchIcon from "@material-ui/icons/Search";
 import { css } from "emotion";
 import Link from "gatsby-link";
 import theme from "../../styles/theme";
+import { connect } from "react-redux";
 
+import {
+  setNavigatorPosition,
+  setNavigatorShape,
+  setScrollToTop,
+  setFontSizeIncrease,
+  setCategoryFilter,
+} from "../../state/store";
 import { featureNavigator, moveNavigatorAside } from "../../utils/shared";
 
 class ActionsBar extends React.Component {
+  static propTypes = {
+    navigatorPosition: PropTypes.string.isRequired,
+    navigatorShape: PropTypes.string.isRequired,
+    isWideScreen: PropTypes.bool.isRequired,
+    setScrollToTop: PropTypes.func.isRequired,
+    setFontSizeIncrease: PropTypes.func.isRequired,
+    categories: PropTypes.array.isRequired,
+    setCategoryFilter: PropTypes.func.isRequired,
+    categoryFilter: PropTypes.string.isRequired,
+  };
+
+  state = {
+    fullscreen: false,
+  };
+
   homeOnClick = featureNavigator.bind(this);
+  searchOnClick = moveNavigatorAside.bind(this);
+
   render() {
+    const {
+      navigatorPosition,
+      navigatorShape,
+      isWideScreen,
+      categories,
+    } = this.props;
+
     return (
       <StyleActionsBar>
         <Group>
@@ -41,6 +74,23 @@ class ActionsBar extends React.Component {
     );
   }
 }
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    navigatorPosition: state.navigatorPosition,
+    navigatorShape: state.navigatorShape,
+    isWideScreen: state.isWideScreen,
+    categoryFilter: state.categoryFilter,
+  };
+};
+
+const mapDispatchToProps = {
+  setNavigatorPosition,
+  setNavigatorShape,
+  setScrollToTop,
+  setFontSizeIncrease,
+  setCategoryFilter,
+};
 
 const StyleActionsBar = styled.div`
   position: absolute;
@@ -100,4 +150,4 @@ const button = (theme) => css`
   color: ${theme.bars.colors.icon};
 `;
 
-export default ActionsBar;
+export default connect(mapStateToProps, mapDispatchToProps)(ActionsBar);

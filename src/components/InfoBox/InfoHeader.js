@@ -115,7 +115,7 @@ const HeaderTitle = styled.h1`
 
     .is-aside.open & {
       left: 60%;
-      top: 0.2em;
+      top: 0.15em;
       text-align: left;
     }
   }

@@ -9,13 +9,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 
 const ListHeader = (props) => {
-  const {
-    classes,
-    expandOnClick,
-    categoryFilter,
-    navigatorShape,
-    removeFilter,
-  } = props;
+  const { expandOnClick, categoryFilter, navigatorShape, removeFilter } = props;
 
   return (
     <header>

@@ -6,7 +6,6 @@ import { forceCheck } from "react-lazyload";
 
 class List extends React.Component {
   static propTypes = {
-    classes: PropTypes.object.isRequired,
     posts: PropTypes.array.isRequired,
     linkOnClick: PropTypes.func.isRequired,
     expandOnClick: PropTypes.func.isRequired,
@@ -24,7 +23,6 @@ class List extends React.Component {
 
   render() {
     const {
-      classes,
       posts,
       linkOnClick,
       expandOnClick,
@@ -42,6 +40,10 @@ class List extends React.Component {
             navigatorShape={navigatorShape}
             removeFilter={removeFilter}
           />
+          <PostList>
+            <li>testlist1</li>
+            <li>testlist2</li>
+          </PostList>
         </Inner>
       </Posts>
     );
@@ -72,6 +74,16 @@ const Inner = styled.div`
     .moving-featured & .is-aside & {
       padding: 1rem 0.5rem 1rem 0.5rem;
     }
+  }
+`;
+
+const PostList = styled.ul`
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  .is-aside.closed &,
+  .moving-featured.closed & {
+    display: none;
   }
 `;
 

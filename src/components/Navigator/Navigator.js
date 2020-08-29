@@ -15,7 +15,6 @@ import List from "./List";
 class Navigator extends React.Component {
   static propTypes = {
     posts: PropTypes.array.isRequired,
-    classes: PropTypes.object.isRequired,
     navigatorPosition: PropTypes.string.isRequired,
     navigatorShape: PropTypes.string.isRequired,
     setNavigatorPosition: PropTypes.func.isRequired,
@@ -38,7 +37,6 @@ class Navigator extends React.Component {
 
   render() {
     const {
-      classes,
       posts,
       navigatorPosition,
       navigatorShape,
@@ -108,6 +106,8 @@ const StyleNavigator = styled(`nav`)`
         100vw - ${(props) => props.theme.info.sizes.width}px -
           ${(props) => props.theme.bars.sizes.actionsBar}px
       );
+      left: ${(props) => props.theme.info.sizes.width}px;
+      top: 0;
     }
 
     &.is-aside {
