@@ -29,7 +29,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
   const { createPage } = boundActionCreators;
 
   return new Promise((resolve, reject) => {
-    // const postTemplate = path.resolve("./src/templates/PostTemplate.js");
+    const postTemplate = path.resolve("./src/templates/PostTemplate.js");
     const pageTemplate = path.resolve("./src/templates/PageTemplate.js");
     resolve(
       graphql(
@@ -39,6 +39,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
               edges {
                 node {
                   id
+                  body
                   fields {
                     slug
                     prefix
@@ -50,6 +51,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         `
       ).then((result) => {
         if (result.errors) {
+          console.log(bradkim06);
           console.log(result.errors);
           reject(result.errors);
         }
@@ -57,11 +59,10 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         // Create posts and pages.
         _.each(result.data.allMdx.edges, (edge) => {
           const slug = edge.node.fields.slug;
-          const isPost = /posts/.test(edge.node.id);
 
           createPage({
             path: slug,
-            component: pageTemplate,
+            component: postTemplate,
             context: {
               slug: slug,
             },
