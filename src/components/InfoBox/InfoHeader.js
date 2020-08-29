@@ -11,7 +11,7 @@ function InfoHeader({ avatarOnClick, expandOnClick }) {
   return (
     <Header>
       <HeaderAvatarLink>
-        <Link to="/" title="back to Home">
+        <Link to="/" onClick={avatarOnClick} title="back to Home">
           <HeaderAvatar>
             <img src={avatar} alt="" />
           </HeaderAvatar>

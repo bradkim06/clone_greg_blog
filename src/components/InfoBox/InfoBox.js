@@ -33,8 +33,6 @@ class InfoBox extends React.Component {
 
     return (
       <StyleInfoBox
-        // className="is-aside
-        //          closed"
         className={`${navigatorPosition ? navigatorPosition : ""} 
          ${navigatorShape ? navigatorShape : ""}`}
       >
