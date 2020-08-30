@@ -98,7 +98,7 @@ const reducer = (state, action) => {
 };
 
 const initialState = {
-  navigatorPosition: "is-featured",
+  navigatorPosition: "is-aside",
   navigatorShape: "open",
   navigatorFilter: "",
   isWideScreen: false,

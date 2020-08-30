@@ -1,6 +1,9 @@
 import React from "react";
-import { Provider } from "react-redux";
-import TopLayout from "./TopLayout";
+import { Provider as ReduxProvider } from "react-redux";
+import { ThemeProvider as MaterialProvider } from "@material-ui/core/styles";
+import { ThemeProvider as EmotionProvider } from "emotion-theming";
+import theme from "../../src/styles/theme";
+import { GlobalStyle } from "../../src/styles/globals";
 
 import createStore from "../../src/state/store";
 
@@ -11,8 +14,15 @@ export default ({ element }) => {
   //  - it will be called only once in browser, when React mounts
   const store = createStore();
   return (
-    <Provider store={store}>
-      <TopLayout>{element}</TopLayout>
-    </Provider>
+    <ReduxProvider store={store}>
+      <EmotionProvider theme={theme}>
+        <MaterialProvider theme={theme}>
+          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+          <GlobalStyle />
+          {element}
+        </MaterialProvider>
+        >
+      </EmotionProvider>
+    </ReduxProvider>
   );
 };

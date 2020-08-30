@@ -1,13 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { ThemeProvider as MaterialProvider } from "@material-ui/core/styles";
-import { ThemeProvider as EmotionProvider } from "emotion-theming";
-import theme from "../../src/styles/theme";
 import Navigator from "../../src/components/Navigator/Navigator";
 import InfoBar from "../../src/components/InfoBox/InfoBar";
 import InfoBox from "../../src/components/InfoBox";
 import ActionsBar from "../../src/components/ActionsBar/ActionsBar";
-import { GlobalStyle } from "../../src/styles/globals";
 import LayoutWrapper from "../../src/components/LayoutWrapper/";
 import { connect } from "react-redux";
 
@@ -63,19 +59,13 @@ class TopLayout extends React.Component {
     const { navigatorPosition, navigatorShape } = this.props;
     return (
       <React.Fragment>
-        <EmotionProvider theme={theme}>
-          <MaterialProvider theme={theme}>
-            {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-            <GlobalStyle />
-            <LayoutWrapper>
-              {navigatorPosition !== "is-featured" && this.props.children}
-              <Navigator />
-              <ActionsBar />
-              <InfoBar />
-              <InfoBox />
-            </LayoutWrapper>
-          </MaterialProvider>
-        </EmotionProvider>
+        <LayoutWrapper>
+          {this.props.children}
+          <Navigator />
+          <ActionsBar />
+          <InfoBar />
+          <InfoBox />
+        </LayoutWrapper>
       </React.Fragment>
     );
   }

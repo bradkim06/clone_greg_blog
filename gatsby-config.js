@@ -3,6 +3,7 @@ module.exports = {
     title: "My page",
   },
   plugins: [
+    "gatsby-plugin-top-layout",
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -17,7 +18,7 @@ module.exports = {
         name: "pages",
       },
     },
-    "gatsby-plugin-top-layout",
+    `gatsby-plugin-emotion`,
     {
       resolve: "gatsby-plugin-material-ui",
       // If you want to use styled components you should change the injection order.

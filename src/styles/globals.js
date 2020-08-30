@@ -12,9 +12,13 @@ export const GlobalStyle = () => (
         -webkit-text-size-adjust: 100%;
         -moz-text-size-adjust: none;
         -ms-text-size-adjust: 100%;
-        font-family: Open Sans;
+        font-family: ${(props) => props.theme.base.fonts.unstyledFamily};
         line-height: 1.15;
         text-size-adjust: 100%;
+      }
+
+      html.wf-active {
+        font-family: ${(props) => props.theme.base.fonts.styledFamily};
       }
 
       *,
@@ -39,10 +43,12 @@ export const GlobalStyle = () => (
 
       body {
         margin: 0;
-        background: #fafafa;
+        background: ${(props) => props.theme.base.colors.background};
         -webkit-tap-highlight-color: rgba(0, 0, 0, 0.05);
       }
 
+      wrapper: {
+      }
       main {
         position: relative;
       }
@@ -62,7 +68,7 @@ export const GlobalStyle = () => (
       }
 
       input:-webkit-autofill {
-        -webkit-box-shadow: 0 0 0 50px white inset;
+        box-shadow: 0 0 0 50px white inset;
       }
 
       :not(pre) > code[class*="language-"] {

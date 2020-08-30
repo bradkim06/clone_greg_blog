@@ -44,6 +44,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                     slug
                     prefix
                   }
+                  slug
                 }
               }
             }
@@ -58,13 +59,14 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
 
         // Create posts and pages.
         _.each(result.data.allMdx.edges, (edge) => {
-          const slug = edge.node.fields.slug;
+          const slug = edge.node.slug;
 
           createPage({
             path: slug,
             component: postTemplate,
             context: {
-              slug: slug,
+              // slug: slug,
+              id: edge.node.id,
             },
           });
         });
@@ -73,37 +75,37 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
   });
 };
 
-exports.onCreateWebpackConfig = ({ stage, actions }) => {
-  switch (stage) {
-    case "build-javascript": {
-      let components = store
-        .getState()
-        .pages.map((page) => page.componentChunkName);
-      components = _.uniq(components);
-      actions.setWebpackConfig({
-        plugins: [
-          webpack.optimize.CommonsChunkPlugin({
-            name: `commons`,
-            chunks: [`app`, ...components],
-            minChunks: (module, count) => {
-              const vendorModuleList = []; // [`material-ui`, `lodash`];
-              const isFramework = _.some(
-                vendorModuleList.map((vendor) => {
-                  const regex = new RegExp(
-                    `[\\\\/]node_modules[\\\\/]${vendor}[\\\\/].*`,
-                    `i`
-                  );
-                  return regex.test(module.resource);
-                })
-              );
-              return isFramework || count > 1;
-            },
-          }),
-        ],
-      });
-    }
-  }
-};
+// exports.onCreateWebpackConfig = ({ stage, actions }) => {
+//   switch (stage) {
+//     case "build-javascript": {
+//       let components = store
+//         .getState()
+//         .pages.map((page) => page.componentChunkName);
+//       components = _.uniq(components);
+//       actions.setWebpackConfig({
+//         plugins: [
+//           webpack.optimize.CommonsChunkPlugin({
+//             name: `commons`,
+//             chunks: [`app`, ...components],
+//             minChunks: (module, count) => {
+//               const vendorModuleList = []; // [`material-ui`, `lodash`];
+//               const isFramework = _.some(
+//                 vendorModuleList.map((vendor) => {
+//                   const regex = new RegExp(
+//                     `[\\\\/]node_modules[\\\\/]${vendor}[\\\\/].*`,
+//                     `i`
+//                   );
+//                   return regex.test(module.resource);
+//                 })
+//               );
+//               return isFramework || count > 1;
+//             },
+//           }),
+//         ],
+//       });
+//     }
+//   }
+// };
 
 exports.onCreateBabelConfig = ({ actions }) => {
   actions.setBabelPlugin({
