@@ -21,7 +21,6 @@ export default ({ element }) => {
           <GlobalStyle />
           {element}
         </MaterialProvider>
-        >
       </EmotionProvider>
     </ReduxProvider>
   );
