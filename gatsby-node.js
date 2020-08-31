@@ -59,14 +59,13 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
 
         // Create posts and pages.
         _.each(result.data.allMdx.edges, (edge) => {
-          const slug = edge.node.slug;
+          const slug = edge.node.fields.slug;
 
           createPage({
             path: slug,
             component: postTemplate,
             context: {
-              // slug: slug,
-              id: edge.node.id,
+              slug: slug,
             },
           });
         });

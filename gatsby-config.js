@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: "My page",
+    title: "bradkim06",
   },
   plugins: [
     "gatsby-plugin-top-layout",
@@ -36,7 +36,7 @@ module.exports = {
       options: {
         extensions: [`.mdx`, `.md`],
         defaultLayouts: {
-          default: require.resolve(`./src/templates/PageTemplate`),
+          default: require.resolve("./src/templates/PostTemplate.js"),
         },
         gatsbyRemarkPlugins: ["gatsby-remark-prismjs"],
       },

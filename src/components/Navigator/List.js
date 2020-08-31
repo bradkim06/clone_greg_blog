@@ -2,6 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import ListHeader from "./ListHeader";
+import ListItem from "./ListItem";
 import { forceCheck } from "react-lazyload";
 import SpringScrollbars from "../SpringScrollbars";
 
@@ -43,8 +44,15 @@ class List extends React.Component {
               removeFilter={removeFilter}
             />
             <PostList>
-              <li>testlist1</li>
-              <li>testlist2</li>
+              {posts &&
+                posts.map((post, i) => (
+                  <ListItem
+                    key={i}
+                    post={post}
+                    linkOnClick={linkOnClick}
+                    categoryFilter={categoryFilter}
+                  />
+                ))}
             </PostList>
           </Inner>
         </SpringScrollbars>

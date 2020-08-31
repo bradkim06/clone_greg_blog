@@ -53,8 +53,8 @@ const mapDispatchToProps = {
 };
 
 export const pageQuery = graphql`
-  query BlogPostQuery($id: String) {
-    mdx(id: { eq: $id }) {
+  query BlogPostQuery($slug: String) {
+    mdx(fields: { slug: { eq: $slug } }) {
       id
       body
       fields {
