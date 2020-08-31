@@ -1,25 +1,41 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { useLayoutQuery } from "./layoutQuery";
+
 import Navigator from "../../src/components/Navigator/Navigator";
+import ActionsBar from "../../src/components/ActionsBar/ActionsBar";
 import InfoBar from "../../src/components/InfoBox/InfoBar";
 import InfoBox from "../../src/components/InfoBox";
-import ActionsBar from "../../src/components/ActionsBar/ActionsBar";
 import LayoutWrapper from "../../src/components/LayoutWrapper/";
-import { connect } from "react-redux";
-import { StaticQuery, graphql } from "gatsby";
-import { useSiteMetadata } from "../../src/components/Test";
 
 import { setFontSizeIncrease, setIsWideScreen } from "../../src/state/store";
 import { isWideScreen, timeoutThrottlerHandler } from "../../src/utils/helpers";
 
+const propTypes = {
+  layoutData: PropTypes.object.isRequired,
+  children: PropTypes.func.isRequired,
+  setIsWideScreen: PropTypes.func.isRequired,
+  isWideScreen: PropTypes.bool.isRequired,
+  fontSizeIncrease: PropTypes.number.isRequired,
+  setFontSizeIncrease: PropTypes.func.isRequired,
+};
+
 const TopLayout = (props) => {
-  const { site, posts } = useSiteMetadata();
-  const { navigatorPosition, navigatorShape, data } = props;
+  const { site, posts } = useLayoutQuery();
+  const {
+    navigatorPosition,
+    navigatorShape,
+    children,
+    setIsWideScreen,
+    fontSizeIncrease,
+    setFontSizeIncrease,
+  } = props;
   let timeouts = {};
   let categories = [];
 
   useEffect(() => {
-    props.setIsWideScreen(isWideScreen());
+    setIsWideScreen(isWideScreen());
     if (typeof window !== "undefined") {
       window.addEventListener("resize", resizeThrottler, false);
     }
@@ -29,10 +45,10 @@ const TopLayout = (props) => {
     if (typeof localStorage !== "undefined") {
       const inLocal = +localStorage.getItem("font-size-increase");
 
-      const inStore = props.fontSizeIncrease;
+      const inStore = fontSizeIncrease;
 
       if (inLocal && inLocal !== inStore && inLocal >= 1 && inLocal <= 1.5) {
-        props.setFontSizeIncrease(inLocal);
+        setFontSizeIncrease(inLocal);
       }
 
       getCategories();
@@ -55,16 +71,13 @@ const TopLayout = (props) => {
   };
 
   const resizeHandler = () => {
-    props.setIsWideScreen(isWideScreen());
+    setIsWideScreen(isWideScreen());
   };
 
   return (
     <React.Fragment>
       <LayoutWrapper>
-        {props.children}
-        {site.siteMetadata.title}
-        {site.id}
-        {posts.totalCount}
+        {children}
         <Navigator posts={posts.edges} />
         <ActionsBar />
         <InfoBar />
@@ -89,4 +102,5 @@ const mapDispatchToProps = {
   setFontSizeIncrease,
 };
 
+TopLayout.propTypes = propTypes;
 export default connect(mapStateToProps, mapDispatchToProps)(TopLayout);

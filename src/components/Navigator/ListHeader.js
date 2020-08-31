@@ -1,12 +1,12 @@
 import React from "react";
-import styled from "@emotion/styled";
 import PropTypes from "prop-types";
+import styled from "@emotion/styled";
 
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 
-ListHeader.propTypes = {
+const propTypes = {
   expandOnClick: PropTypes.func.isRequired,
   categoryFilter: PropTypes.string.isRequired,
   navigatorShape: PropTypes.string.isRequired,
@@ -121,4 +121,5 @@ const Filter = styled.div`
   }
 `;
 
+ListHeader.propTypes = propTypes;
 export default ListHeader;

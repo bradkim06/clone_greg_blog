@@ -1,6 +1,6 @@
 import { useStaticQuery, graphql } from "gatsby";
 
-export const useSiteMetadata = () => {
+export const useLayoutQuery = () => {
   const layoutData = useStaticQuery(
     graphql`
       query LayoutData {

@@ -1,8 +1,8 @@
 import React from "react";
-import styled from "@emotion/styled";
-import PropTypes from "prop-types";
-import { forceCheck } from "react-lazyload";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import styled from "@emotion/styled";
+import { forceCheck } from "react-lazyload";
 
 import {
   setNavigatorPosition,
@@ -49,15 +49,17 @@ class Navigator extends React.Component {
           navigatorShape ? navigatorShape : ""
         } `}
       >
-        <List
-          posts={posts}
-          navigatorPosition={navigatorPosition}
-          navigatorShape={navigatorShape}
-          linkOnClick={this.linkOnClick}
-          expandOnClick={this.expandOnClick}
-          categoryFilter={categoryFilter}
-          removeFilter={this.removefilterOnClick}
-        />
+        {this.props.posts.length && (
+          <List
+            posts={posts}
+            navigatorPosition={navigatorPosition}
+            navigatorShape={navigatorShape}
+            linkOnClick={this.linkOnClick}
+            expandOnClick={this.expandOnClick}
+            categoryFilter={categoryFilter}
+            removeFilter={this.removefilterOnClick}
+          />
+        )}
       </StyleNavigator>
     );
   }

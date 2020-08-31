@@ -2,36 +2,8 @@
 title: About
 ---
 
-This is a demo site of the [PersonalBlog](https://github.com/greglobinski/gatsby-starter-personal-blog) GatsbyJS starter.
+I'm embedded developer in South Korea. But personally, But personally, I like to study various fields of programming. This blog is for personal study review. I hope that the content here will be helpful to many people Thank you for letting me know if there are any errors in the blog content.
 
-The starter is a ready to use, easy to customize 'like theme' starter. It has everything what blog should have and some more.
-
-### Standard features:
-
-* Easy editable content in **Markdown** files (posts, pages and parts)
-* **SEO** (sitemap generation, robot.txt, meta and OpenGraph Tags)
-* **Social** sharing (Twitter, Facebook, Google, LinkedIn)
-* **Comments** (Facebook)
-* **Images** lazy loading and `webp` support (gatsby-image)
-* Post **categories** (post list filtering)
-* Full text **searching** (Algolia)
-* **Contact** form (Netlify form handling)
-* **RSS** feed
-* **PWA** (manifest.json, offline support, favicons)
-* Google **Analytics**
-* **Favicons** generator (node script)
-* **Material UI** (@next)
-
-### Advanced features:
-
-* Easy customizable base **styles** via `theme` object (fonts, colors, sizes)
-* **Components** lazy loading (social sharing, comments)
-* **ESLint** (google config)
-* **Prettier** code styling
-* Custom webpack `CommonsChunkPlugin` settings
-* Webpack `BundleAnalyzerPlugin`
-* Contact **form validation** (react-material-ui-form-validator)
-
-## Instructions
-
-For detailed instructions go to [Front-end web development with Greg](https://dev.greglobinski.com/gatsby-starter-personal-blog/).
+This Blog made with <a href="https://github.com/greglobinski/gatsby-starter-personal-blog">
+greg lobinski's starter </a> not my creation. I like this starter so I wanted to use original, but it only work on Gatsby v1. So I port this starter to gatsby v2 with some changes. Thank greg
+lobinski for providing a beautiful starter as open source.

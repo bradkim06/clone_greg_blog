@@ -1,10 +1,101 @@
 import React from "react";
+import Link from "gatsby-link";
 import PropTypes from "prop-types";
 import LazyLoad from "react-lazyload";
-import theme from "../../styles/theme";
-import Link from "gatsby-link";
+
 import styled from "@emotion/styled";
+import theme from "../../styles/theme";
 import { css } from "emotion";
+
+class ListItem extends React.Component {
+  static propTypes = {
+    post: PropTypes.object.isRequired,
+    linkOnClick: PropTypes.func.isRequired,
+    categoryFilter: PropTypes.string.isRequired,
+  };
+
+  state = {
+    hidden: false,
+  };
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.categoryFilter !== this.props.categoryFilter) {
+      const category = this.props.post.node.frontmatter.category;
+      const categoryFilter = this.props.categoryFilter;
+
+      if (categoryFilter === "all posts") {
+        this.setState({ hidden: false });
+      } else if (category !== categoryFilter) {
+        this.setState({ hidden: true });
+      } else if (category === categoryFilter) {
+        this.setState({ hidden: false });
+      }
+    }
+  }
+
+  render() {
+    const { post, linkOnClick } = this.props;
+    return (
+      <StyledListItem>
+        <li
+          className={`${post.node.frontmatter.category}`}
+          style={{ display: `${this.state.hidden ? "none" : "block"}` }}
+          key={post.node.fields.slug}
+        >
+          <Link
+            activeClassName="active"
+            className={link(theme)}
+            to={post.node.fields.slug}
+            onClick={linkOnClick}
+          >
+            {post.node.frontmatter.cover &&
+              post.node.frontmatter.cover.children[0] && (
+                <ListItemPointer>
+                  <LazyLoad
+                    height={60}
+                    overflow={true}
+                    throttle={300}
+                    once={true}
+                    offset={100}
+                  >
+                    <picture>
+                      <source
+                        type="image/webp"
+                        srcSet={
+                          post.node.frontmatter.cover.children[0].resolutions
+                            .srcSetWebp
+                        }
+                      />
+                      <source
+                        srcSet={
+                          post.node.frontmatter.cover.children[0].resolutions
+                            .srcSet
+                        }
+                      />
+                      <img
+                        src={
+                          post.node.frontmatter.cover.children[0].resolutions
+                            .src
+                        }
+                        alt=""
+                      />
+                    </picture>
+                  </LazyLoad>
+                </ListItemPointer>
+              )}
+            <ListItemText>
+              <h1>{post.node.frontmatter.title} </h1>
+
+              {post.node.frontmatter.subTitle && (
+                <h2>{post.node.frontmatter.subTitle}</h2>
+              )}
+            </ListItemText>
+          </Link>
+        </li>
+      </StyledListItem>
+    );
+  }
+}
 
 const StyledListItem = styled.div`
   & li {
@@ -140,55 +231,5 @@ const ListItemText = styled.div`
     }
   }
 `;
-
-class ListItem extends React.Component {
-  state = {
-    hidden: false,
-  };
-
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.categoryFilter !== this.props.categoryFilter) {
-      const category = this.props.post.node.frontmatter.category;
-      const categoryFilter = this.props.categoryFilter;
-
-      if (categoryFilter === "all posts") {
-        this.setState({ hidden: false });
-      } else if (category !== categoryFilter) {
-        this.setState({ hidden: true });
-      } else if (category === categoryFilter) {
-        this.setState({ hidden: false });
-      }
-    }
-  }
-
-  render() {
-    const { post, linkOnClick } = this.props;
-    return (
-      <StyledListItem>
-        <li
-          className={`${post.node.frontmatter.category}`}
-          style={{ display: `${this.state.hidden ? "none" : "block"}` }}
-          key={post.node.fields.slug}
-        >
-          <Link
-            activeClassName="active"
-            className={link(theme)}
-            to={post.node.fields.slug}
-            onClick={linkOnClick}
-          >
-            <ListItemText>
-              <h1>
-                {post.node.frontmatter.title}{" "}
-                {post.node.frontmatter.subTitle && (
-                  <h2>{post.node.frontmatter.subTitle}</h2>
-                )}
-              </h1>
-            </ListItemText>
-          </Link>
-        </li>
-      </StyledListItem>
-    );
-  }
-}
 
 export default ListItem;
