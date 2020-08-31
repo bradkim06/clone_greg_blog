@@ -81,6 +81,7 @@ const mapDispatchToProps = {
 const StyleNavigator = styled(`nav`)`
   transform: translate3d(0, 0, 0);
   will-change: left, top, bottom, width;
+  background: ${(props) => props.theme.navigator.colors.background};
   position: absolute;
   top: 0;
   left: 0;

@@ -34,7 +34,7 @@ function ListHeader({
           </IconButton>
         </Closed>
       )}
-      {navigatorShape === "open" && (
+      {navigatorShape === "open" && categoryFilter !== "all posts" && (
         <Filter>
           <small>Active category filter:</small>{" "}
           <strong>{categoryFilter}</strong>

@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Article from "../Main/Article";
 import PostHeader from "./PostHeader";
+import Content from "../Main/Content";
 import { MDXProvider } from "@mdx-js/react";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 import { Link } from "gatsby";
@@ -17,7 +18,9 @@ function Post({ post }) {
         date={post.fields.prefix}
       />
       <MDXProvider components={shortcodes}>
-        <MDXRenderer>{post.body}</MDXRenderer>
+        <Content>
+          <MDXRenderer>{post.body}</MDXRenderer>
+        </Content>
       </MDXProvider>
     </Article>
   );
