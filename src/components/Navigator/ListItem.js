@@ -48,41 +48,6 @@ class ListItem extends React.Component {
             to={post.node.fields.slug}
             onClick={linkOnClick}
           >
-            {post.node.frontmatter.cover &&
-              post.node.frontmatter.cover.children[0] && (
-                <ListItemPointer>
-                  <LazyLoad
-                    height={60}
-                    overflow={true}
-                    throttle={300}
-                    once={true}
-                    offset={100}
-                  >
-                    <picture>
-                      <source
-                        type="image/webp"
-                        srcSet={
-                          post.node.frontmatter.cover.children[0].resolutions
-                            .srcSetWebp
-                        }
-                      />
-                      <source
-                        srcSet={
-                          post.node.frontmatter.cover.children[0].resolutions
-                            .srcSet
-                        }
-                      />
-                      <img
-                        src={
-                          post.node.frontmatter.cover.children[0].resolutions
-                            .src
-                        }
-                        alt=""
-                      />
-                    </picture>
-                  </LazyLoad>
-                </ListItemPointer>
-              )}
             <ListItemText>
               <h1>{post.node.frontmatter.title} </h1>
 

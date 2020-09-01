@@ -49,9 +49,9 @@ class Navigator extends React.Component {
           navigatorShape ? navigatorShape : ""
         } `}
       >
-        {this.props.posts.length && (
+        {this.props.posts.totalCount && (
           <List
-            posts={posts}
+            posts={posts.edges}
             navigatorPosition={navigatorPosition}
             navigatorShape={navigatorShape}
             linkOnClick={this.linkOnClick}

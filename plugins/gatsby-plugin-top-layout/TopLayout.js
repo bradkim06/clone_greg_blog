@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { useLayoutQuery } from "./layoutQuery";
+import { useLayoutQuery } from "../../src/components/query/LayoutQuery";
 
 import Navigator from "../../src/components/Navigator/Navigator";
 import ActionsBar from "../../src/components/ActionsBar/ActionsBar";
@@ -78,7 +78,7 @@ const TopLayout = (props) => {
     <React.Fragment>
       <LayoutWrapper>
         {children}
-        <Navigator posts={posts.edges} />
+        <Navigator posts={posts} />
         <ActionsBar />
         <InfoBar />
         <InfoBox />
