@@ -25,7 +25,7 @@ import {
 } from "../../state/store";
 import { featureNavigator, moveNavigatorAside } from "../../utils/shared";
 import FontSetter from "./FontSetter";
-// import CategoryFilter from "./CategoryFilter";
+import CategoryFilter from "./CategoryFilter";
 
 class ActionsBar extends React.Component {
   static propTypes = {
@@ -87,6 +87,10 @@ class ActionsBar extends React.Component {
           >
             <HomeIcon />
           </IconButton>
+          <CategoryFilter
+            categories={categories}
+            filterCategory={this.categoryFilterOnClick}
+          />
           <IconButton
             aria-label="Search"
             onClick={this.searchOnClick}

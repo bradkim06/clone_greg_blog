@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { useLayoutQuery } from "../../src/components/query/LayoutQuery";
@@ -32,7 +32,14 @@ const TopLayout = (props) => {
     setFontSizeIncrease,
   } = props;
   let timeouts = {};
-  let categories = [];
+  let categories = (categories = posts.edges.reduce((list, edge, i) => {
+    const category = edge.node.frontmatter.category;
+    if (category && !~list.indexOf(category)) {
+      return list.concat(edge.node.frontmatter.category);
+    } else {
+      return list;
+    }
+  }, []));
 
   useEffect(() => {
     setIsWideScreen(isWideScreen());
@@ -50,21 +57,8 @@ const TopLayout = (props) => {
       if (inLocal && inLocal !== inStore && inLocal >= 1 && inLocal <= 1.5) {
         setFontSizeIncrease(inLocal);
       }
-
-      getCategories();
     }
   });
-
-  const getCategories = () => {
-    categories = posts.edges.reduce((list, edge, i) => {
-      const category = edge.node.frontmatter.category;
-      if (category && !~list.indexOf(category)) {
-        return list.concat(edge.node.frontmatter.category);
-      } else {
-        return list;
-      }
-    }, []);
-  };
 
   const resizeThrottler = () => {
     return timeoutThrottlerHandler(timeouts, "resize", 500, resizeHandler);

@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 
 import List from "@material-ui/core/List";
 import IconButton from "@material-ui/core/IconButton";
-import FormatSizeIcon from "@material-ui/icons/FormatSize";
+import FilterListIcon from "@material-ui/icons/FilterList";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 
@@ -12,21 +12,20 @@ const propTypes = {
   increaseFont: PropTypes.func.isRequired,
 };
 
-function FontSetter({ increaseFont }) {
+function FontSetter({ categories, filterCategory }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
 
-  const handleClickListItem = (event) => {
-    setAnchorEl(event.currentTarget);
+  const handleClickListItem = (e) => {
+    setAnchorEl(e.currentTarget);
   };
 
   const handleMenuItemClick = (e, index) => {
     setSelectedIndex(index);
     setAnchorEl(null);
 
-    const val = e.target.innerText.replace("%", "");
-    const factor = +val / 100;
-    increaseFont(factor);
+    const category = e.target.innerText.trim();
+    filterCategory(category);
   };
 
   const handleClose = () => {
@@ -37,14 +36,14 @@ function FontSetter({ increaseFont }) {
     <FontSizeSetter>
       <List component="nav" aria-label="Device settings">
         <IconButton
-          aria-label="Increase font size"
+          aria-label="Filter by category"
           aria-controls="lock-menu"
           aria-haspopup="true"
           onClick={handleClickListItem}
-          title="Change font size"
-          className="fontOpen"
+          title="Filter the list by category"
+          className="categoryOpen"
         >
-          <FormatSizeIcon />
+          <FilterListIcon />
         </IconButton>
       </List>
       <Menu
@@ -54,21 +53,26 @@ function FontSetter({ increaseFont }) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        {options.map((option, index) => (
+        <MenuItem
+          key="all"
+          selected={0 === selectedIndex}
+          onClick={(event) => handleMenuItemClick(event, 0)}
+        >
+          all posts
+        </MenuItem>
+        {categories.map((category, index) => (
           <MenuItem
-            key={option}
-            selected={index === selectedIndex}
-            onClick={(event) => handleMenuItemClick(event, index)}
+            key={category}
+            selected={index + 1 === selectedIndex}
+            onClick={(event) => handleMenuItemClick(event, index + 1)}
           >
-            {option}
+            {category}
           </MenuItem>
         ))}
       </Menu>
     </FontSizeSetter>
   );
 }
-
-const options = ["150%", "125%", "100%"];
 
 const FontSizeSetter = styled.nav`
   @media (min-width: ${(props) => props.theme.mediaQueryTresholds.M}px) {
