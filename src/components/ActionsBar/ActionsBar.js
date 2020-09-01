@@ -1,14 +1,20 @@
 import React from "react";
 import PropTypes from "prop-types";
-import IconButton from "@material-ui/core/IconButton";
 import styled from "@emotion/styled";
+import IconButton from "@material-ui/core/IconButton";
+
+import Link from "gatsby-link";
+import { connect } from "react-redux";
+import screenfull from "screenfull";
 
 import HomeIcon from "@material-ui/icons/Home";
 import SearchIcon from "@material-ui/icons/Search";
+import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
+import FullscreenIcon from "@material-ui/icons/Fullscreen";
+import FullscreenExitIcon from "@material-ui/icons/FullscreenExit";
+
 import { css } from "emotion";
-import Link from "gatsby-link";
 import theme from "../../styles/theme";
-import { connect } from "react-redux";
 
 import {
   setNavigatorPosition,
@@ -18,6 +24,8 @@ import {
   setCategoryFilter,
 } from "../../state/store";
 import { featureNavigator, moveNavigatorAside } from "../../utils/shared";
+import FontSetter from "./FontSetter";
+// import CategoryFilter from "./CategoryFilter";
 
 class ActionsBar extends React.Component {
   static propTypes = {
@@ -38,6 +46,28 @@ class ActionsBar extends React.Component {
   homeOnClick = featureNavigator.bind(this);
   searchOnClick = moveNavigatorAside.bind(this);
 
+  fullscreenOnClick = () => {
+    if (screenfull.enabled) {
+      screenfull.toggle();
+    }
+  };
+
+  arrowUpOnClick = () => {
+    this.props.setScrollToTop(true);
+  };
+
+  fontSetterOnClick = (val) => {
+    this.props.setFontSizeIncrease(val);
+
+    if (typeof localStorage !== "undefined") {
+      localStorage.setItem("font-size-increase", val);
+    }
+  };
+
+  categoryFilterOnClick = (val) => {
+    this.props.setCategoryFilter(val);
+  };
+
   render() {
     const {
       navigatorPosition,
@@ -53,7 +83,7 @@ class ActionsBar extends React.Component {
             aria-label="Back to list"
             onClick={this.homeOnClick}
             title="Back to the list"
-            className={button(theme)}
+            className="iconButton"
           >
             <HomeIcon />
           </IconButton>
@@ -64,12 +94,16 @@ class ActionsBar extends React.Component {
             data-shape="closed"
             to="/search/"
             title="Search"
-            className={button(theme)}
+            className="iconButton"
           >
             <SearchIcon />
           </IconButton>
         </Group>
-        <Group></Group>
+        <Group>
+          {navigatorPosition === "is-aside" && (
+            <FontSetter increaseFont={this.fontSetterOnClick} />
+          )}
+        </Group>
       </StyleActionsBar>
     );
   }
@@ -98,7 +132,10 @@ const StyleActionsBar = styled.div`
   left: 0;
   bottom: 0;
   display: flex;
+  flex-direction: row;
   padding: 0 ${(props) => props.theme.bars.sizes.actionsBar}px;
+  justify-content: space-between;
+  height: ${(props) => props.theme.bars.sizes.actionsBar}px;
   width: 100%;
 
   &::before {
@@ -144,10 +181,10 @@ const Group = styled.div`
   @media (min-width: ${(props) => props.theme.mediaQueryTresholds.L}px) {
     flex-direction: column;
   }
-`;
 
-const button = (theme) => css`
-  color: ${theme.bars.colors.icon};
+  .iconButton {
+    color: ${theme.bars.colors.icon};
+  }
 `;
 
 export default connect(mapStateToProps, mapDispatchToProps)(ActionsBar);

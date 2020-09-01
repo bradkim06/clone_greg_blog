@@ -15,7 +15,9 @@
     "@material-ui/styles": "latest",
     "@mdx-js/mdx": "^1.6.16",
     "@mdx-js/react": "^1.6.16",
+    "@popperjs/core": "^2.4.4",
     "babel-plugin-dynamic-import-webpack": "^1.1.0",
+    "classnames": "^2.2.6",
     "color": "^3.1.2",
     "emotion": "^10.0.27",
     "emotion-theming": "^10.0.27",
@@ -36,12 +38,14 @@
     "react-dom": "latest",
     "react-helmet": "latest",
     "react-lazyload": "^3.0.0",
+    "react-popper": "^2.2.3",
     "react-redux": "^7.2.1",
     "rebound": "^0.1.0",
-    "redux-devtools-extension": "^2.13.8"
+    "redux-devtools-extension": "^2.13.8",
+    "screenfull": "^5.0.2"
   },
   "scripts": {
-    "develop": "gatsby develop",
+    "dev": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
     "post-update": "echo \"codesandbox preview only, need an update\" && yarn upgrade --latest"

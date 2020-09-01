@@ -1,26 +1,55 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
+import { css } from "@emotion/core";
 import { connect } from "react-redux";
+import theme from "../../styles/theme";
 
 import { setFontSizeIncrease } from "../../state/store";
 
-const Content = ({ children }) => {
-  return <PageContent>{children}</PageContent>;
+const propTypes = {
+  children: PropTypes.node,
+  setFontSizeIncrease: PropTypes.func.isRequired,
+  fontSizeIncrease: PropTypes.number.isRequired,
 };
+
+const Content = ({ children, fontSizeIncrease }) => {
+  return (
+    <PageContent theme={theme} fontSize={fontSizeIncrease}>
+      {children}
+    </PageContent>
+  );
+};
+
+const fontSize = ({ theme, fontSize }) => css`
+  font-size: calc(${theme.main.fonts.content.size}em * ${fontSize});
+
+  @media (min-width: ${theme.mediaQueryTresholds.M}px) {
+    font-size: calc(${theme.main.fonts.content.sizeM}em * ${fontSize});
+  }
+
+  @media (min-width: ${theme.mediaQueryTresholds.L}px) {
+    font-size: calc(${theme.main.fonts.content.sizeL}em * ${fontSize});
+  }
+`;
 
 const PageContent = styled.div`
   color: ${(props) => props.theme.main.colors.content};
+  ${fontSize};
   line-height: ${(props) => props.theme.main.fonts.content.lineHeight};
+
   & a {
     color: ${(props) => props.theme.base.colors.link};
   }
+
   & .gatsby-highlight {
     margin: 2em 0;
   }
+
   & .gatsby-resp-iframe-wrapper {
     margin: 2em 0;
   }
+
   & .gatsby-resp-image-link {
     margin: 2em -1.5rem;
     border: none;
@@ -28,6 +57,7 @@ const PageContent = styled.div`
       margin: 2.5em -3.5rem;
     }
   }
+
   & h2,
   & h3 {
     color: ${(props) => props.theme.main.colors.contentHeading};
@@ -79,12 +109,6 @@ const PageContent = styled.div`
       bottom: -5px;
     }
   }
-  @media (min-width: ${(props) => props.theme.mediaQueryTresholds.M}px) {
-    font-size: ${(props) => props.theme.main.fonts.content.sizeM}em;
-  }
-  @media (min-width: ${(props) => props.theme.mediaQueryTresholds.L}px) {
-    font-size: ${(props) => props.theme.main.fonts.content.sizeL}em;
-  }
 `;
 
 const mapStateToProps = (state, ownProps) => {
@@ -97,4 +121,5 @@ const mapDispatchToProps = {
   setFontSizeIncrease,
 };
 
+Content.propTypes = propTypes;
 export default connect(mapStateToProps, mapDispatchToProps)(Content);

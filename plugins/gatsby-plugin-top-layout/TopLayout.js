@@ -79,7 +79,7 @@ const TopLayout = (props) => {
       <LayoutWrapper>
         {children}
         <Navigator posts={posts} />
-        <ActionsBar />
+        <ActionsBar categories={categories} />
         <InfoBar />
         <InfoBox />
       </LayoutWrapper>
