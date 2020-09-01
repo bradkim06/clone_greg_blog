@@ -47,7 +47,7 @@ class ActionsBar extends React.Component {
   searchOnClick = moveNavigatorAside.bind(this);
 
   fullscreenOnClick = () => {
-    if (screenfull.enabled) {
+    if (screenfull.isEnabled) {
       screenfull.toggle();
     }
   };
@@ -102,6 +102,20 @@ class ActionsBar extends React.Component {
         <Group>
           {navigatorPosition === "is-aside" && (
             <FontSetter increaseFont={this.fontSetterOnClick} />
+          )}
+          {screenfull.isEnabled && (
+            <IconButton
+              aria-label="Fullscreen"
+              onClick={this.fullscreenOnClick}
+              title="Fullscreen mode"
+              className="iconButton"
+            >
+              {this.state.fullscreen ? (
+                <FullscreenExitIcon />
+              ) : (
+                <FullscreenIcon />
+              )}
+            </IconButton>
           )}
         </Group>
       </StyleActionsBar>
