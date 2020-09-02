@@ -102,13 +102,13 @@ const InfoContent = styled.div`
     bottom: ${(props) => props.theme.navigator.sizes.closedHeight}px;
   }
 
-  .is-aside.open & {
-    display: none;
-  }
-
   .moving-featured & {
     bottom: 0;
   }
+
+  // .is-aside.open & {
+  //   display: none;
+  // }
 `;
 
 export default connect(mapStateToProps, mapDispatchToProps)(InfoBox);

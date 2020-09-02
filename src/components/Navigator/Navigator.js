@@ -114,7 +114,7 @@ const StyleNavigator = styled(`nav`)`
     }
 
     &.is-aside {
-      transition: none, bottom 0.5s;
+      transition: bottom 0.5s;
       left: 0;
       width: ${(props) => props.theme.info.sizes.width - 1}px;
       z-index: 1;
@@ -136,8 +136,8 @@ const StyleNavigator = styled(`nav`)`
         content: "";
         position: absolute;
         top: 0;
-        left: ${(props) => props.theme.base.sizes.lineMargin};
-        right: ${(props) => props.theme.base.sizes.lineMargin};
+        left: ${(props) => props.theme.base.sizes.linesMargin};
+        right: ${(props) => props.theme.base.sizes.linesMargin};
         height: 0;
         border-top: 1px solid ${(props) => props.theme.base.colors.lines};
       }

@@ -83,6 +83,7 @@ const HeaderAvatar = styled.div`
   ${({ theme }) => ` 
     width: 36px;
     height: 36px;
+
     transition: all .3s;
     transition-timing-function: ease;
     display: inline-block;
@@ -100,12 +101,11 @@ const HeaderAvatar = styled.div`
       height: 60px;
     }
 
-    @media (hover: hover) {
-      &:hover {
-        border-radius: 85% 85%;
-    border: 1px solid #ddd;
-      }
-    }
+    // @media (hover: hover) {
+    //   &:hover {
+    //     border-radius: 75% 65%;
+    //   }
+    // }
   `}
 `;
 

@@ -8,6 +8,7 @@ import avatar from "../../images/jpg/avatar.jpg";
 export default function InfoBar() {
   return (
     <InfoBarStyle>
+      testing!
       <AvatarLinkBar>
         <Link to="/" title="back to Home">
           <Avatar src={avatar} />

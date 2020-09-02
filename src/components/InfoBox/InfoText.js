@@ -27,7 +27,7 @@ const Text = styled.div`
     margin-bottom: 0;
   }
 
-  .is-aside.open & {
-    display: none;
-  }
+  // .is-aside.open & {
+  //   display: none;
+  // }
 `;

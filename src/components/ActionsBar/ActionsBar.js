@@ -92,10 +92,13 @@ class ActionsBar extends React.Component {
           >
             <HomeIcon />
           </IconButton>
-          <CategoryFilter
-            categories={categories}
-            filterCategory={this.categoryFilterOnClick}
-          />
+          {((isWideScreen && navigatorShape === "open") ||
+            navigatorPosition !== "is-aside") && (
+            <CategoryFilter
+              categories={categories}
+              filterCategory={this.categoryFilterOnClick}
+            />
+          )}
           <IconButton
             aria-label="Search"
             onClick={this.searchOnClick}
