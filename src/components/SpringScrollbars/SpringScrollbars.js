@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { SpringSystem, MathUtil } from "rebound";
 import { forceCheck } from "react-lazyload";
 import { connect } from "react-redux";
+import colors from "../../styles/colors";
 
 import { setScrollToTop } from "../../state/store";
 
@@ -11,6 +12,7 @@ class SpringScrollbars extends Component {
   constructor(props, ...rest) {
     super(props, ...rest);
     this.handleSpringUpdate = this.handleSpringUpdate.bind(this);
+    this.renderThumb = this.renderThumb.bind(this);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -76,6 +78,13 @@ class SpringScrollbars extends Component {
     });
   }
 
+  renderThumb({ style, ...props }) {
+    const thumbStyle = {
+      backgroundColor: colors.lightGray,
+    };
+    return <div style={{ ...style, ...thumbStyle }} {...props} />;
+  }
+
   render() {
     const { children, forceCheckOnScroll } = this.props;
 
@@ -87,6 +96,9 @@ class SpringScrollbars extends Component {
         ref={(comp) => {
           this.scrollbars = comp;
         }}
+        renderThumbHorizontal={this.renderThumb}
+        renderThumbVertical={this.renderThumb}
+        onUpdate={this.handleUpdate}
       >
         {children}
       </Scrollbars>
