@@ -10,10 +10,13 @@ export function isWideScreen(width) {
   }
 }
 
-const getWidth = () =>
-  window.innerWidth ||
-  document.documentElement.clientWidth ||
-  document.body.clientWidth;
+const getWidth = () => {
+  if (typeof window !== "undefined") {
+    window.innerWidth ||
+      document.documentElement.clientWidth ||
+      document.body.clientWidth;
+  }
+};
 
 export function useCurrentWitdh() {
   // save current window width in the state object

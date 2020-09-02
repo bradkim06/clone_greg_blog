@@ -48,15 +48,15 @@ function TopLayout(props) {
 }
 
 const category = (posts) => {
-  let categories = (categories = posts.edges.reduce((list, edge) => {
+  let categoryArray = posts.edges.reduce((list, edge) => {
     const category = edge.node.frontmatter.category;
     if (category && !~list.indexOf(category)) {
       return list.concat(edge.node.frontmatter.category);
     } else {
       return list;
     }
-  }, []));
-  return categories;
+  }, []);
+  return categoryArray;
 };
 
 const mapStateToProps = (state) => {
