@@ -76,8 +76,8 @@ const Inner = styled.div`
   @media (min-width: ${(props) => props.theme.mediaQueryTresholds.L}px) {
     padding: 2rem calc(1rem + 17px) calc(2rem + 17px) 2rem;
     left: ${(props) => props.theme.info.sizes.width}px;
-
-    .moving-featured & .is-aside & {
+    .moving-featured &,
+    .is-aside & {
       padding: 1rem 0.5rem 1rem 0.5rem;
     }
   }

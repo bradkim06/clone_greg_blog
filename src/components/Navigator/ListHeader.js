@@ -36,7 +36,7 @@ function ListHeader({
       )}
       {navigatorShape === "open" && categoryFilter !== "all posts" && (
         <Filter>
-          <small>Active category filter:</small>{" "}
+          <small>Category Filter:</small>
           <strong>{categoryFilter}</strong>
           <IconButton
             aria-label="Remove filtering"
@@ -54,9 +54,7 @@ function ListHeader({
 
 const Closed = styled.div`
   display: none;
-  .expandButton {
-    color: ${(props) => props.theme.navigator.colors.postsHeader};
-  }
+
   .is-aside.closed &,
   .moving-featured.closed & {
     display: flex;
@@ -71,6 +69,7 @@ const Closed = styled.div`
     height: ${(props) => props.theme.navigator.sizes.closedHeight}px;
     padding: 0 30px 0 40px;
   }
+
   & h3 {
     font-size: 1.1em;
     color: ${(props) => props.theme.navigator.colors.postsHeader};
@@ -84,6 +83,10 @@ const Closed = styled.div`
       font-weight: 300;
       letter-spacing: 0.2em;
     }
+  }
+
+  .expandButton {
+    color: ${(props) => props.theme.navigator.colors.postsHeader};
   }
 `;
 

@@ -8,7 +8,7 @@ const theme = createMuiTheme({
       background: colors.background,
       text: colors.bright,
       link: colors.accent,
-      linkHover: Color(colors.accent).lighten(0.2).string(),
+      linkHover: Color(colors.accent).lighten(0.3).string(),
       accent: colors.accent,
       lines: colors.gray,
     },
