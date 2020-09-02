@@ -83,7 +83,8 @@ const HeaderAvatar = styled.div`
   ${({ theme }) => ` 
     width: 36px;
     height: 36px;
-
+    border-radius: 95% 95%;
+    border: 1px solid #ddd;
     transition: all .3s;
     transition-timing-function: ease;
     display: inline-block;

@@ -3,12 +3,7 @@ import styled from "@emotion/styled";
 import Link from "gatsby-link";
 
 export default function InfoHeader() {
-  return (
-    <Text>
-      I'm software developer. This blog is part of my private study. this blog
-      code is open on my github.
-    </Text>
-  );
+  return <Text>I'm a software developer.</Text>;
 }
 
 const Text = styled.div`
@@ -18,6 +13,7 @@ const Text = styled.div`
   font-size: 0.95em;
   text-align: left;
   margin-bottom: 0.8em;
+  word-break: break-word;
 
   & p::first-of-type {
     margin-top: 0;

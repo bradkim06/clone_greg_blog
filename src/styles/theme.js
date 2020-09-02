@@ -6,29 +6,28 @@ const theme = createMuiTheme({
   base: {
     colors: {
       background: colors.background,
-      text: colors.dark,
+      text: colors.bright,
       link: colors.accent,
-      linkHover: Color(colors.accent).lighten(0.1).string(),
+      linkHover: Color(colors.accent).lighten(0.2).string(),
       accent: colors.accent,
-      lines: colors.superLightGray,
+      lines: colors.gray,
     },
     sizes: {
       linesMargin: "20px",
     },
     fonts: {
       unstyledFamily: `Arial`,
-      // styledFamily: `Input Serif`,
-      styledFamily: `Fira Code`,
-      styledFonts: `300,400,600`,
+      styledFamily: "Fira Code",
+      styledFonts: "300,400,600",
     },
   },
   info: {
     colors: {
-      text: colors.gray,
+      text: colors.bright,
       background: colors.background,
       socialIcons: colors.lightGray,
       socialIconsHover: colors.accent,
-      menuLink: colors.gray,
+      menuLink: colors.bright,
       menuLinkHover: colors.accent,
     },
     sizes: {
@@ -44,9 +43,9 @@ const theme = createMuiTheme({
   navigator: {
     colors: {
       background: colors.background,
-      postsListItemLink: colors.gray,
+      postsListItemLink: colors.bright,
       postsListItemLinkHover: colors.accent,
-      postsHeader: colors.gray,
+      postsHeader: colors.bright,
     },
     sizes: {
       closedHeight: 80,
@@ -59,19 +58,19 @@ const theme = createMuiTheme({
   main: {
     colors: {
       background: colors.background,
-      title: colors.gray,
-      subTitle: colors.gray,
-      meta: colors.gray,
-      content: colors.dark,
-      footer: colors.gray,
-      contentHeading: colors.gray,
-      blockquoteFrame: colors.lightGray,
+      title: colors.bright,
+      subTitle: colors.bright,
+      meta: colors.bright,
+      content: colors.bright,
+      footer: colors.bright,
+      contentHeading: colors.bright,
+      blockquoteFrame: colors.dark,
       link: colors.accent,
       linkHover: colors.dark,
-      fbCommentsColorscheme: "light",
+      fbCommentsColorscheme: "dark",
     },
     sizes: {
-      articleMaxWidth: "70em",
+      articleMaxWidth: "80%",
     },
     fonts: {
       title: {
@@ -94,8 +93,8 @@ const theme = createMuiTheme({
       },
       content: {
         size: 1.0,
-        sizeM: 1.1,
-        sizeL: 1.2,
+        sizeM: 1.15,
+        sizeL: 1.1,
         lineHeight: 1.6,
       },
       contentHeading: {
@@ -126,8 +125,8 @@ const theme = createMuiTheme({
   bars: {
     colors: {
       background: colors.background,
-      icon: colors.gray,
-      text: colors.gray,
+      icon: colors.bright,
+      text: colors.bright,
     },
     sizes: {
       actionsBar: 60,
@@ -140,8 +139,9 @@ const theme = createMuiTheme({
   },
   palette: {
     primary: {
-      main: colors.accent,
+      main: "#709425",
     },
+    type: "dark",
     action: {
       hover: "rgba(0, 0, 0, 0.01)",
     },
