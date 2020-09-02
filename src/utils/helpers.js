@@ -12,9 +12,11 @@ export function isWideScreen(width) {
 
 const getWidth = () => {
   if (typeof window !== "undefined") {
-    window.innerWidth ||
+    return (
+      window.innerWidth ||
       document.documentElement.clientWidth ||
-      document.body.clientWidth;
+      document.body.clientWidth
+    );
   }
 };
 
