@@ -13,7 +13,6 @@ import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import FullscreenIcon from "@material-ui/icons/Fullscreen";
 import FullscreenExitIcon from "@material-ui/icons/FullscreenExit";
 
-import { css } from "emotion";
 import theme from "../../styles/theme";
 
 import {
@@ -68,11 +67,6 @@ class ActionsBar extends React.Component {
 
   fontSetterOnClick = (val) => {
     this.props.setFontSizeIncrease(val);
-
-    // wastefull code
-    // if (typeof localStorage !== "undefined") {
-    //   localStorage.setItem("font-size-increase", val);
-    // }
   };
 
   categoryFilterOnClick = (val) => {
