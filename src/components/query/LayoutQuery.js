@@ -4,12 +4,6 @@ export const useLayoutQuery = () => {
   const layoutData = useStaticQuery(
     graphql`
       query LayoutData {
-        site {
-          siteMetadata {
-            title
-          }
-          id
-        }
         posts: allMdx(filter: { fileAbsolutePath: { regex: "//posts//" } }) {
           totalCount
           edges {
@@ -24,6 +18,15 @@ export const useLayoutQuery = () => {
                 title
                 subTitle
                 category
+              }
+            }
+          }
+        }
+        posts: allMdx(filter: { fileAbsolutePath: { regex: "//posts//" } }) {
+          edges {
+            node {
+              frontmatter {
+                title
               }
             }
           }

@@ -26,12 +26,12 @@ class Navigator extends React.Component {
 
   linkOnClick = moveNavigatorAside.bind(this);
 
-  expandOnClick = (e) => {
+  expandOnClick = () => {
     this.props.setNavigatorShape("open");
     setTimeout(forceCheck, 600);
   };
 
-  removefilterOnClick = (e) => {
+  removefilterOnClick = () => {
     this.props.setCategoryFilter("all posts");
   };
 

@@ -85,7 +85,6 @@ const StyleInfoBox = styled.aside`
     }
   }
 `;
-//test
 
 const InfoContent = styled.div`
   position: absolute;

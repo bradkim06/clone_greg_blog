@@ -69,9 +69,10 @@ class ActionsBar extends React.Component {
   fontSetterOnClick = (val) => {
     this.props.setFontSizeIncrease(val);
 
-    if (typeof localStorage !== "undefined") {
-      localStorage.setItem("font-size-increase", val);
-    }
+    // wastefull code
+    // if (typeof localStorage !== "undefined") {
+    //   localStorage.setItem("font-size-increase", val);
+    // }
   };
 
   categoryFilterOnClick = (val) => {

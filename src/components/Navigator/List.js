@@ -18,11 +18,12 @@ class List extends React.Component {
     removeFilter: PropTypes.func.isRequired,
   };
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.categoryFilter !== this.props.categoryFilter) {
-      setTimeout(forceCheck, 300);
-    }
-  }
+  // wastefull code
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (prevProps.categoryFilter !== this.props.categoryFilter) {
+  //     setTimeout(forceCheck, 300);
+  //   }
+  // }
 
   render() {
     const {

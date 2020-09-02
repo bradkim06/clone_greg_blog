@@ -22,7 +22,7 @@ const propTypes = {
 };
 
 const TopLayout = (props) => {
-  const { site, posts } = useLayoutQuery();
+  const { posts, pages } = useLayoutQuery();
   const {
     navigatorPosition,
     navigatorShape,
@@ -32,41 +32,33 @@ const TopLayout = (props) => {
     setFontSizeIncrease,
   } = props;
   let timeouts = {};
-  let categories = (categories = posts.edges.reduce((list, edge, i) => {
-    const category = edge.node.frontmatter.category;
-    if (category && !~list.indexOf(category)) {
-      return list.concat(edge.node.frontmatter.category);
-    } else {
-      return list;
-    }
-  }, []));
+  const categories = category({ posts });
 
   useEffect(() => {
     setIsWideScreen(isWideScreen());
-    if (typeof window !== "undefined") {
-      window.addEventListener("resize", resizeThrottler, false);
-    }
+    // wastefull code
+    // if (typeof window !== "undefined") {
+    //   window.addEventListener("resize", resizeThrottler, false);
+    // }
+
+    // if (typeof localStorage !== "undefined") {
+    //   const inLocal = +localStorage.getItem("font-size-increase");
+    //
+    //   const inStore = fontSizeIncrease;
+    //
+    //   if (inLocal && inLocal !== inStore && inLocal >= 1 && inLocal <= 1.5) {
+    //     setFontSizeIncrease(inLocal);
+    //   }
+    // }
   });
 
-  useEffect(() => {
-    if (typeof localStorage !== "undefined") {
-      const inLocal = +localStorage.getItem("font-size-increase");
-
-      const inStore = fontSizeIncrease;
-
-      if (inLocal && inLocal !== inStore && inLocal >= 1 && inLocal <= 1.5) {
-        setFontSizeIncrease(inLocal);
-      }
-    }
-  });
-
-  const resizeThrottler = () => {
-    return timeoutThrottlerHandler(timeouts, "resize", 500, resizeHandler);
-  };
-
-  const resizeHandler = () => {
-    setIsWideScreen(isWideScreen());
-  };
+  // const resizeThrottler = () => {
+  //   return timeoutThrottlerHandler(timeouts, "resize", 500, resizeHandler);
+  // };
+  //
+  // const resizeHandler = () => {
+  //   setIsWideScreen(isWideScreen());
+  // };
 
   return (
     <React.Fragment>
@@ -75,13 +67,25 @@ const TopLayout = (props) => {
         <Navigator posts={posts} />
         <ActionsBar categories={categories} />
         <InfoBar />
-        <InfoBox />
+        {isWideScreen && <InfoBox />}
       </LayoutWrapper>
     </React.Fragment>
   );
 };
 
-const mapStateToProps = (state, ownProps) => {
+const category = ({ posts }) => {
+  let categories = (categories = posts.edges.reduce((list, edge) => {
+    const category = edge.node.frontmatter.category;
+    if (category && !~list.indexOf(category)) {
+      return list.concat(edge.node.frontmatter.category);
+    } else {
+      return list;
+    }
+  }, []));
+  return categories;
+};
+
+const mapStateToProps = (state) => {
   return {
     pages: state.pages,
     isWideScreen: state.isWideScreen,
