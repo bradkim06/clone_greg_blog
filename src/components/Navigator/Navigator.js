@@ -145,9 +145,7 @@ const StyleNavigator = styled(`nav`)`
 
     &.moving-aside {
       transition: left 0.9s;
-      left: calc(
-        -100vw + ${2 * ((props) => props.theme.info.sizes.width) + 60}px
-      );
+      left: calc(-100vw + ${(props) => props.theme.info.sizes.width}*2px + 2px);
       width: calc(100vw - ${(props) => props.theme.info.sizes.width}px - 60px);
       top: 0;
     }
@@ -183,7 +181,7 @@ const StyleNavigator = styled(`nav`)`
       top: 0;
       bottom: auto;
       left: calc(
-        -100vw + ${2 * ((props) => props.theme.info.sizes.width) + 60}px
+        -100vw + ${(props) => props.theme.info.sizes.width}*2px + 60px
       );
       width: calc(100vw - ${(props) => props.theme.info.sizes.width}px - 60px);
     }
