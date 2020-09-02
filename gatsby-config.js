@@ -20,6 +20,17 @@ module.exports = {
     },
     `gatsby-plugin-emotion`,
     {
+      resolve: `gatsby-plugin-prefetch-google-fonts`,
+      options: {
+        fonts: [
+          {
+            family: `Open Sans`,
+            variants: [`300`, `400`, `600`],
+          },
+        ],
+      },
+    },
+    {
       resolve: "gatsby-plugin-material-ui",
       // If you want to use styled components you should change the injection order.
       options: {

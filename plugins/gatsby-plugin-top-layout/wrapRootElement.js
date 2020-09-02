@@ -3,6 +3,7 @@ import { Provider as ReduxProvider } from "react-redux";
 import { ThemeProvider as MaterialProvider } from "@material-ui/core/styles";
 import { ThemeProvider as EmotionProvider } from "emotion-theming";
 import theme from "../../src/styles/theme";
+import CssBaseline from "@material-ui/core/CssBaseline";
 import { GlobalStyle } from "../../src/styles/globals";
 
 import createStore from "../../src/state/store";
@@ -18,6 +19,7 @@ export default ({ element }) => {
       <EmotionProvider theme={theme}>
         <MaterialProvider theme={theme}>
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+          <CssBaseline />
           <GlobalStyle />
           {element}
         </MaterialProvider>

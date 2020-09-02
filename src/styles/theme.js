@@ -17,8 +17,9 @@ const theme = createMuiTheme({
     },
     fonts: {
       unstyledFamily: `Arial`,
-      styledFamily: "Open Sans",
-      styledFonts: "300,400,600",
+      // styledFamily: `Input Serif`,
+      styledFamily: `Fira Code`,
+      styledFonts: `300,400,600`,
     },
   },
   info: {
@@ -146,7 +147,7 @@ const theme = createMuiTheme({
     },
   },
   typography: {
-    fontFamily: `Open Sans, Arial, sans-serif`,
+    fontFamily: `Arial, sans-serif`,
     fontSize: 16,
   },
 });

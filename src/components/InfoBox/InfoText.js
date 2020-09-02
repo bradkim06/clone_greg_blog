@@ -5,8 +5,8 @@ import Link from "gatsby-link";
 export default function InfoHeader() {
   return (
     <Text>
-      I am a software developer. This blog is part of my private study. this
-      blog code is open on my github.
+      I'm software developer. This blog is part of my private study. this blog
+      code is open on my github.
     </Text>
   );
 }

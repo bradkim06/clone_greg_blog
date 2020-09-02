@@ -40,7 +40,7 @@ function TopLayout(props) {
         {children}
         <Navigator posts={posts} />
         <ActionsBar categories={categories} />
-        <InfoBar />
+        <InfoBar pages={pages} />
         {isWideScreen && <InfoBox />}
       </LayoutWrapper>
     </React.Fragment>

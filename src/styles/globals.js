@@ -1,24 +1,29 @@
 import React from "react";
 import { Global, css } from "@emotion/core";
 import normalize from "normalize.css";
+import emotionReset from "emotion-reset";
+import theme from "../styles/theme";
+
+const font = theme.base.fonts.unstyledFamily;
 
 export const GlobalStyle = () => (
   <Global
     styles={css`
       ${normalize}
+      ${emotionReset}
 
       html {
         box-sizing: border-box;
         -webkit-text-size-adjust: 100%;
         -moz-text-size-adjust: none;
         -ms-text-size-adjust: 100%;
-        font-family: ${(props) => props.theme.base.fonts.unstyledFamily};
+        font-family: ${theme.base.fonts.styledFamily};
         line-height: 1.15;
         text-size-adjust: 100%;
       }
 
       html.wf-active {
-        font-family: ${(props) => props.theme.base.fonts.styledFamily};
+        font-family: ${theme.base.fonts.unstyledFamily};
       }
 
       *,
