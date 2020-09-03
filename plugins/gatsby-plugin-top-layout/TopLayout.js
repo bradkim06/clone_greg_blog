@@ -32,7 +32,7 @@ function TopLayout(props) {
 
   useEffect(() => {
     setIsWideScreen(isWideScreenFunc(width));
-  });
+  }, []);
 
   return (
     <React.Fragment>

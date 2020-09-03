@@ -7,30 +7,31 @@ import { MDXProvider } from "@mdx-js/react";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 import { Link } from "gatsby";
 
-const shortcodes = { Link }; // Provide common components here
-
-function Post({ post }) {
-  return (
-    <Article>
-      <PostHeader
-        title={post.frontmatter.title}
-        subTitle={post.frontmatter.subTitle}
-        date={post.fields.prefix}
-      />
-      <MDXProvider components={shortcodes}>
-        <Content>
-          <MDXRenderer>{post.body}</MDXRenderer>
-        </Content>
-      </MDXProvider>
-    </Article>
-  );
-}
-
-Post.propTypes = {
+const postPropTypes = {
   post: PropTypes.object.isRequired,
   author: PropTypes.object.isRequired,
   slug: PropTypes.string.isRequired,
   facebook: PropTypes.object.isRequired,
 };
 
+function Post({ post }) {
+  const { title, subTitle } = post.frontmatter;
+  const { prefix } = post.fields;
+  const { body } = post;
+
+  return (
+    <Article>
+      <PostHeader title={title} subTitle={subTitle} date={prefix} />
+      <Content>
+        <MDXProvider components={shortcodes}>
+          <MDXRenderer>{body}</MDXRenderer>
+        </MDXProvider>
+      </Content>
+    </Article>
+  );
+}
+
+const shortcodes = { Link }; // Provide common components here
+
+Post.propTypes = postPropTypes;
 export default Post;

@@ -7,10 +7,19 @@ const PostHeader = ({ title, subTitle, date }) => {
     <PostHead>
       <PostTitle>{title}</PostTitle>
       <PostSubTitle>{subTitle}</PostSubTitle>
-      <PostDate>{date}</PostDate>
+      <PostDate>{myDate(date)}</PostDate>
     </PostHead>
   );
 };
+
+function myDate(dateString) {
+  const dateObj = new Date(dateString).toUTCString();
+  const dateToShow = dateObj.split(" ").slice(0, 4).join(" ");
+
+  if (dateToShow !== "Invalid Date") {
+    return dateToShow;
+  }
+}
 
 const PostHead = styled.div`
   margin: 0 0 3em;
@@ -29,7 +38,7 @@ const PostTitle = styled.h1`
   }
 
   @media (min-width: ${(props) => props.theme.mediaQueryTresholds.L}px) {
-    font-size: ${(props) => props.theme.main.fonts.title.sizeL};
+    font-size: ${(props) => props.theme.main.fonts.title.sizeL}em;
     letter-spacing: -0.05em;
   }
 `;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import Main from "../components/Main/Main";
 import Post from "../components/Post/Post";
@@ -7,38 +7,29 @@ import { graphql } from "gatsby";
 
 import { setNavigatorPosition, setNavigatorShape } from "../state/store";
 import { moveNavigatorAside } from "../utils/shared";
-import { MDXProvider } from "@mdx-js/react";
-import { MDXRenderer } from "gatsby-plugin-mdx";
-import { Link } from "gatsby";
 
-const shortcodes = { Link }; // Provide common components here
+require("prismjs/themes/prism-okaidia.css");
 
-class PostTemplate extends React.Component {
-  moveNavigatorAside = moveNavigatorAside.bind(this);
-
-  componentDidMount() {
-    if (this.props.navigatorPosition === "is-featured") {
-      this.moveNavigatorAside();
-    }
-  }
-
-  render() {
-    const mdx = this.props.data.mdx;
-    return (
-      <Main>
-        <Post post={mdx} />
-      </Main>
-    );
-  }
-}
-
-PostTemplate.propTypes = {
+const propTypes = {
   data: PropTypes.object.isRequired,
-  pathContext: PropTypes.object.isRequired,
   navigatorPosition: PropTypes.string.isRequired,
-  setNavigatorPosition: PropTypes.func.isRequired,
-  isWideScreen: PropTypes.bool.isRequired,
 };
+
+function PostTemplate({ data, navigatorPosition }) {
+  const { mdx } = data;
+
+  useEffect(() => {
+    if (navigatorPosition === "is-featured") {
+      moveNavigatorAside();
+    }
+  }, [moveNavigatorAside]);
+
+  return (
+    <Main>
+      <Post post={mdx} />
+    </Main>
+  );
+}
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -69,4 +60,5 @@ export const pageQuery = graphql`
   }
 `;
 
+PostTemplate.propTypes = propTypes;
 export default connect(mapStateToProps, mapDispatchToProps)(PostTemplate);
