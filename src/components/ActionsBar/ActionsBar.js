@@ -43,11 +43,13 @@ class ActionsBar extends React.Component {
   };
 
   componentDidMount() {
-    screenfull.on("change", () => {
-      this.setState({
-        fullscreen: screenfull.isFullscreen,
+    if (screenfull.isEnabled) {
+      screenfull.on("change", () => {
+        this.setState({
+          fullscreen: screenfull.isFullscreen,
+        });
       });
-    });
+    }
   }
 
   homeOnClick = featureNavigator.bind(this);
