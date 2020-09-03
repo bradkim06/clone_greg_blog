@@ -113,20 +113,14 @@ class ActionsBar extends React.Component {
           {navigatorPosition === "is-aside" && (
             <FontSetter increaseFont={this.fontSetterOnClick} />
           )}
-          {screenfull.isEnabled && (
-            <IconButton
-              aria-label="Fullscreen"
-              onClick={this.fullscreenOnClick}
-              title="Fullscreen mode"
-              className="iconButton"
-            >
-              {this.state.fullscreen ? (
-                <FullscreenExitIcon />
-              ) : (
-                <FullscreenIcon />
-              )}
-            </IconButton>
-          )}
+          <IconButton
+            aria-label="Fullscreen"
+            onClick={this.fullscreenOnClick}
+            title="Fullscreen mode"
+            className="iconButton"
+          >
+            <FullscreenIcon />
+          </IconButton>
           <IconButton
             aria-label="Back to top"
             onClick={this.arrowUpOnClick}
