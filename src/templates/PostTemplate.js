@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import Main from "../components/Main/Main";
 import Post from "../components/Post/Post";
@@ -15,21 +15,22 @@ const propTypes = {
   navigatorPosition: PropTypes.string.isRequired,
 };
 
-function PostTemplate({ data, navigatorPosition }) {
-  const { mdx } = data;
-  const { facebook } = data.site.siteMetadata;
+class PostTemplate extends React.Component {
+  moveNavigatorAside = moveNavigatorAside.bind(this);
 
-  useEffect(() => {
-    if (navigatorPosition === "is-featured") {
-      moveNavigatorAside();
+  componentDidMount() {
+    if (this.props.navigatorPosition === "is-featured") {
+      this.moveNavigatorAside();
     }
-  }, [moveNavigatorAside]);
-
-  return (
-    <Main>
-      <Post post={mdx} />
-    </Main>
-  );
+  }
+  render() {
+    const { mdx } = data;
+    return (
+      <Main>
+        <Post post={mdx} />
+      </Main>
+    );
+  }
 }
 
 const mapStateToProps = (state, ownProps) => {
@@ -44,7 +45,7 @@ const mapDispatchToProps = {
   setNavigatorShape,
 };
 
-export const pageQuery = graphql`
+export const postQuery = graphql`
   query BlogPostQuery($slug: String) {
     mdx(fields: { slug: { eq: $slug } }) {
       id
