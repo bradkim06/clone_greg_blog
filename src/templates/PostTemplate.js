@@ -23,6 +23,7 @@ class PostTemplate extends React.Component {
       this.moveNavigatorAside();
     }
   }
+
   render() {
     const { mdx } = this.props.data;
     return (

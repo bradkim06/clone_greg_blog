@@ -43,13 +43,11 @@ class ActionsBar extends React.Component {
   };
 
   componentDidMount() {
-    if (screenfull.isEnabled) {
-      screenfull.on("change", () => {
-        this.setState({
-          fullscreen: screenfull.isFullscreen,
-        });
+    screenfull.on("change", () => {
+      this.setState({
+        fullscreen: screenfull.isFullscreen,
       });
-    }
+    });
   }
 
   homeOnClick = featureNavigator.bind(this);
@@ -133,8 +131,9 @@ class ActionsBar extends React.Component {
             aria-label="Back to top"
             onClick={this.arrowUpOnClick}
             title="Scroll to top"
+            className="iconButton"
           >
-            <ArrowUpwardIcon className="iconButton" />
+            <ArrowUpwardIcon />
           </IconButton>
         </Group>
       </StyleActionsBar>

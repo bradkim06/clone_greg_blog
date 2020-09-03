@@ -28,11 +28,11 @@ function TopLayout(props) {
   const { children, setIsWideScreen, isWideScreen } = props;
 
   const categories = category(posts);
-  // let width = useCurrentWitdh();
+  let width = useCurrentWitdh();
 
-  // useEffect(() => {
-  //   setIsWideScreen(isWideScreenFunc(width));
-  // }, []);
+  useEffect(() => {
+    setIsWideScreen(isWideScreenFunc(width));
+  }, []);
 
   return (
     <React.Fragment>
