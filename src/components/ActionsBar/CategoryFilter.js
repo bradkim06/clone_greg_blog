@@ -1,87 +1,116 @@
-import React from "react";
-import PropTypes from "prop-types";
-import styled from "@emotion/styled";
-
-import List from "@material-ui/core/List";
+import React, { useEffect } from "react";
+import ClickAwayListener from "@material-ui/core/ClickAwayListener";
+import Grow from "@material-ui/core/Grow";
+import Paper from "@material-ui/core/Paper";
+import Popper from "@material-ui/core/Popper";
+import MenuItem from "@material-ui/core/MenuItem";
+import MenuList from "@material-ui/core/MenuList";
 import IconButton from "@material-ui/core/IconButton";
 import FilterListIcon from "@material-ui/icons/FilterList";
-import MenuItem from "@material-ui/core/MenuItem";
-import Menu from "@material-ui/core/Menu";
-
-const propTypes = {
-  increaseFont: PropTypes.func.isRequired,
-};
+import styled from "@emotion/styled";
 
 function FontSetter({ categories, filterCategory }) {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [selectedIndex, setSelectedIndex] = React.useState(0);
+  const [open, setOpen] = React.useState(false);
+  const anchorRef = React.useRef(null);
 
-  const handleClickListItem = (e) => {
-    setAnchorEl(e.currentTarget);
+  const handleToggle = () => {
+    setOpen((prevOpen) => !prevOpen);
   };
 
-  const handleMenuItemClick = (e, index) => {
-    setSelectedIndex(index);
-    setAnchorEl(null);
+  const handleClose = (event) => {
+    if (anchorRef.current && anchorRef.current.contains(event.target)) {
+      return;
+    }
 
+    setOpen(false);
+  };
+
+  function handleListKeyDown(event) {
+    if (event.key === "Tab") {
+      event.preventDefault();
+      setOpen(false);
+    }
+  }
+
+  const handleSetting = (e) => {
     const category = e.target.innerText.trim();
     filterCategory(category);
+
+    if (anchorRef.current && anchorRef.current.contains(e.target)) {
+      return;
+    }
+
+    setOpen(false);
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  // return focus to the button when we transitioned from !open -> open
+  const prevOpen = React.useRef(open);
+
+  useEffect(() => {
+    if (prevOpen.current === true && open === false) {
+      anchorRef.current.focus();
+    }
+
+    prevOpen.current = open;
+  }, [open]);
 
   return (
-    <FontSizeSetter>
-      <List component="nav" aria-label="Device settings">
-        <IconButton
-          aria-label="Filter by category"
-          aria-controls="lock-menu"
-          aria-haspopup="true"
-          onClick={handleClickListItem}
-          title="Filter the list by category"
-          className="categoryOpen"
-        >
-          <FilterListIcon />
-        </IconButton>
-      </List>
-      <Menu
-        id="lock-menu"
-        anchorEl={anchorEl}
-        keepMounted
-        open={Boolean(anchorEl)}
-        onClose={handleClose}
+    <FilterWrapper>
+      <IconButton
+        ref={anchorRef}
+        aria-controls={open ? "menu-list-grow" : undefined}
+        aria-haspopup="true"
+        onClick={handleToggle}
+        className="categoryOpen"
       >
-        <MenuItem
-          key="all"
-          selected={0 === selectedIndex}
-          onClick={(event) => handleMenuItemClick(event, 0)}
-        >
-          all posts
-        </MenuItem>
-        {categories.map((category, index) => (
-          <MenuItem
-            key={category}
-            selected={index + 1 === selectedIndex}
-            onClick={(event) => handleMenuItemClick(event, index + 1)}
+        <FilterListIcon />
+      </IconButton>
+      <Popper
+        open={open}
+        anchorEl={anchorRef.current}
+        role={undefined}
+        transition
+        disablePortal
+      >
+        {({ TransitionProps, placement }) => (
+          <Grow
+            {...TransitionProps}
+            style={{
+              transformOrigin:
+                placement === "bottom" ? "center top" : "center bottom",
+            }}
           >
-            {category}
-          </MenuItem>
-        ))}
-      </Menu>
-    </FontSizeSetter>
+            <Paper>
+              <ClickAwayListener onClickAway={handleClose}>
+                <MenuList
+                  autoFocusItem={open}
+                  id="menu-list-grow"
+                  onKeyDown={handleListKeyDown}
+                >
+                  <MenuItem key="all" onClick={handleSetting}>
+                    all posts
+                  </MenuItem>
+                  {categories.map((category, index) => (
+                    <MenuItem key={category} onClick={handleSetting}>
+                      {category}
+                    </MenuItem>
+                  ))}
+                </MenuList>
+              </ClickAwayListener>
+            </Paper>
+          </Grow>
+        )}
+      </Popper>
+    </FilterWrapper>
   );
 }
 
-const FontSizeSetter = styled.nav`
+const FilterWrapper = styled.nav`
   @media (min-width: ${(props) => props.theme.mediaQueryTresholds.M}px) {
   }
-
-  .fontOpen {
+  .categoryOpen {
     color: ${(props) => props.theme.bars.colors.icon};
   }
 `;
 
-FontSetter.propTypes = propTypes;
 export default FontSetter;

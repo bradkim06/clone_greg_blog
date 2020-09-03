@@ -2,23 +2,31 @@ import React from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Link from "gatsby-link";
 import styled from "@emotion/styled";
+import { connect } from "react-redux";
 
 import avatar from "../../images/jpg/avatar.jpg";
+import { setNavigatorPosition } from "../../state/store";
+import { featureNavigator, moveNavigatorAside } from "./../../utils/shared";
 
-export default function InfoBar() {
-  return (
-    <InfoBarStyle>
-      <AvatarLinkBar>
-        <Link to="/" title="back to Home">
-          <Avatar src={avatar} alt="Avatar" />
-        </Link>
-      </AvatarLinkBar>
-      <BarTitle>
-        bradkim06
-        <small>Hello small Title!</small>
-      </BarTitle>
-    </InfoBarStyle>
-  );
+class InfoBar extends React.Component {
+  homeLinkOnClick = featureNavigator.bind(this);
+  pageLinkOnClick = moveNavigatorAside.bind(this);
+
+  render() {
+    return (
+      <InfoBarStyle>
+        <AvatarLinkBar>
+          <Link to="/" title="back to Home">
+            <Avatar src={avatar} alt="Avatar" />
+          </Link>
+        </AvatarLinkBar>
+        <BarTitle>
+          bradkim06
+          <small>Hello small Title!</small>
+        </BarTitle>
+      </InfoBarStyle>
+    );
+  }
 }
 
 const InfoBarStyle = styled.aside`
@@ -59,3 +67,16 @@ const BarTitle = styled.h3`
     margin: 2px 0 0 0;
   }
 `;
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    navigatorPosition: state.navigatorPosition,
+    navigatorShape: state.navigatorShape,
+  };
+};
+
+const mapDispatchToProps = {
+  setNavigatorPosition,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(InfoBar);
