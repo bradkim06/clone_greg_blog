@@ -3,8 +3,6 @@ import { Global, css } from "@emotion/core";
 import normalize from "normalize.css";
 import theme from "../styles/theme";
 
-const font = theme.base.fonts.unstyledFamily;
-
 export const GlobalStyle = () => (
   <Global
     styles={css`

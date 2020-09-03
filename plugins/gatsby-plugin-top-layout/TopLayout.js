@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { useLayoutQuery } from "../../src/components/query/LayoutQuery";
@@ -11,7 +11,6 @@ import LayoutWrapper from "../../src/components/LayoutWrapper/";
 
 import { setIsWideScreen } from "../../src/state/store";
 import {
-  useCurrentWitdh,
   isWideScreen as isWideScreenFunc,
 } from "../../src/utils/helpers";
 
@@ -25,13 +24,12 @@ const propTypes = {
 
 function TopLayout(props) {
   const { posts, pages } = useLayoutQuery();
-  const { children, setIsWideScreen, isWideScreen } = props;
+  const { children, setIsWideScreen } = props;
 
   const categories = category(posts);
-  let width = useCurrentWitdh();
 
   useEffect(() => {
-    setIsWideScreen(isWideScreenFunc(width));
+    setIsWideScreen(isWideScreenFunc());
   }, []);
 
   return (

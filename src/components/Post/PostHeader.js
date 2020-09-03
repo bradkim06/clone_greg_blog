@@ -2,6 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 
+const propTypes = {
+  title: PropTypes.string.isRequired,
+  subTitle: PropTypes.string,
+  date: PropTypes.string.isRequired,
+};
+
 const PostHeader = ({ title, subTitle, date }) => {
   return (
     <PostHead>
@@ -64,4 +70,5 @@ const PostDate = styled.div`
   color: ${(props) => props.theme.main.colors.meta};
 `;
 
+PostHeader.propTypes = propTypes;
 export default PostHeader;

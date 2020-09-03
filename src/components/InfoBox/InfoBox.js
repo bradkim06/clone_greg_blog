@@ -29,7 +29,7 @@ class InfoBox extends React.Component {
   };
 
   render() {
-    const { parts, pages, navigatorPosition, navigatorShape } = this.props;
+    const { navigatorPosition, navigatorShape } = this.props;
 
     return (
       <StyleInfoBox

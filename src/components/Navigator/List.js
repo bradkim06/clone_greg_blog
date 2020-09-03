@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
-import { forceCheck } from "react-lazyload";
+// import { forceCheck } from "react-lazyload";
 
 import ListHeader from "./ListHeader";
 import ListItem from "./ListItem";

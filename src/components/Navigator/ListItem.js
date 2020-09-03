@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "gatsby-link";
 import PropTypes from "prop-types";
-import LazyLoad from "react-lazyload";
+// import LazyLoad from "react-lazyload";
 
 import styled from "@emotion/styled";
 import theme from "../../styles/theme";
@@ -99,40 +99,40 @@ const link = (theme) => css`
   }
 `;
 
-const ListItemPointer = styled.div`
-  position: relative;
-  flex-shrink: 0;
-  overflow: hidden;
-  border-radius: 75% 65%;
-  width: 60px;
-  margin: 0;
-  transition: all 0.5s;
-
-  & img {
-    width: 100%;
-    height: 100%;
-  }
-
-  @media (min-width: ${(props) => props.theme.mediaQueryTresholds.M}px) {
-    margin-right: 0.5em;
-    width: 80px;
-    height: 80px;
-  }
-
-  @media (min-width: ${(props) => props.theme.mediaQueryTresholds.L}px) {
-    margin-right: 0.8em;
-    width: 90px;
-    height: 90px;
-    transition: all 0.3s;
-    transition-timing-function: ease;
-
-    .moving-featured &,
-    .is-aside & {
-      width: 30px;
-      height: 30px;
-    }
-  }
-`;
+// const ListItemPointer = styled.div`
+//   position: relative;
+//   flex-shrink: 0;
+//   overflow: hidden;
+//   border-radius: 75% 65%;
+//   width: 60px;
+//   margin: 0;
+//   transition: all 0.5s;
+//
+//   & img {
+//     width: 100%;
+//     height: 100%;
+//   }
+//
+//   @media (min-width: ${(props) => props.theme.mediaQueryTresholds.M}px) {
+//     margin-right: 0.5em;
+//     width: 80px;
+//     height: 80px;
+//   }
+//
+//   @media (min-width: ${(props) => props.theme.mediaQueryTresholds.L}px) {
+//     margin-right: 0.8em;
+//     width: 90px;
+//     height: 90px;
+//     transition: all 0.3s;
+//     transition-timing-function: ease;
+//
+//     .moving-featured &,
+//     .is-aside & {
+//       width: 30px;
+//       height: 30px;
+//     }
+//   }
+// `;
 
 const ListItemText = styled.div`
   margin: 0 0 0 1.5em;
@@ -140,6 +140,7 @@ const ListItemText = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  text-align: center;
 
   & h1 {
     line-height: 1.15;

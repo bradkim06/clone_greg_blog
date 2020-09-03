@@ -1,8 +1,7 @@
 import React from "react";
 import { useStaticQuery, graphql } from "gatsby";
-import PropTypes from "prop-types";
 import styled from "@emotion/styled";
-import { DiscussionEmbed, CommentEmbed } from "disqus-react";
+import { DiscussionEmbed } from "disqus-react";
 
 const StyledComments = styled.div`
   margin: 3em 0 0;

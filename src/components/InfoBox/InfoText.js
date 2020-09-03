@@ -1,9 +1,8 @@
 import React from "react";
 import styled from "@emotion/styled";
-import Link from "gatsby-link";
 
 export default function InfoHeader() {
-  return <Text>I'm a software developer.</Text>;
+  return <Text>software developer.</Text>;
 }
 
 const Text = styled.div`
@@ -11,7 +10,7 @@ const Text = styled.div`
   font-weight: 300;
   line-height: 1.5;
   font-size: 0.95em;
-  text-align: left;
+  text-align: center;
   margin-bottom: 0.8em;
   word-break: break-word;
 

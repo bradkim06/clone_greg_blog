@@ -17,7 +17,7 @@ const theme = createMuiTheme({
     },
     fonts: {
       unstyledFamily: `Arial`,
-      styledFamily: "Fira Code",
+      styledFamily: "Lato",
       styledFonts: "300,400,600",
     },
   },

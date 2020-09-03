@@ -1,9 +1,9 @@
 import theme from "../styles/theme";
 import { useEffect, useState } from "react";
 
-export function isWideScreen(width) {
+export function isWideScreen() {
   if (typeof window !== `undefined`) {
-    const windowWidth = width;
+    const windowWidth = window.innerWidth;
     const mediaQueryL = theme.mediaQueryTresholds.L;
 
     return windowWidth >= mediaQueryL;

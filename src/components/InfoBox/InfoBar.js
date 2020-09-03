@@ -10,7 +10,7 @@ export default function InfoBar() {
     <InfoBarStyle>
       <AvatarLinkBar>
         <Link to="/" title="back to Home">
-          <Avatar src={avatar} />
+          <Avatar src={avatar} alt="Avatar" />
         </Link>
       </AvatarLinkBar>
       <BarTitle>
