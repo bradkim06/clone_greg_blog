@@ -58,13 +58,13 @@ const theme = createMuiTheme({
   main: {
     colors: {
       background: colors.background,
-      title: colors.bright,
+      title: colors.white,
       subTitle: colors.bright,
       meta: colors.bright,
       content: colors.bright,
       footer: colors.bright,
       contentHeading: colors.bright,
-      blockquoteFrame: colors.dark,
+      blockquoteFrame: colors.accent,
       link: colors.accent,
       linkHover: colors.dark,
       fbCommentsColorscheme: "dark",

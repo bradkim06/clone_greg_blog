@@ -28,11 +28,11 @@ function TopLayout(props) {
   const { children, setIsWideScreen, isWideScreen } = props;
 
   const categories = category(posts);
-  let width = useCurrentWitdh();
+  // let width = useCurrentWitdh();
 
-  useEffect(() => {
-    setIsWideScreen(isWideScreenFunc(width));
-  }, []);
+  // useEffect(() => {
+  //   setIsWideScreen(isWideScreenFunc(width));
+  // }, []);
 
   return (
     <React.Fragment>
@@ -41,7 +41,7 @@ function TopLayout(props) {
         <Navigator posts={posts} />
         <ActionsBar categories={categories} />
         <InfoBar pages={pages} />
-        {isWideScreen && <InfoBox />}
+        <InfoBox />
       </LayoutWrapper>
     </React.Fragment>
   );

@@ -17,6 +17,7 @@ const propTypes = {
 
 function PostTemplate({ data, navigatorPosition }) {
   const { mdx } = data;
+  const { facebook } = data.site.siteMetadata;
 
   useEffect(() => {
     if (navigatorPosition === "is-featured") {
@@ -55,6 +56,13 @@ export const pageQuery = graphql`
       frontmatter {
         title
         subTitle
+      }
+    }
+    site {
+      siteMetadata {
+        facebook {
+          appId
+        }
       }
     }
   }

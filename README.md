@@ -1,30 +1,5 @@
-# Gatsby example
+# bradkim06's Gatsby Blog
 
-## How to use
+![demo_img]:(./static/demo-img.png)
 
-Download the example [or clone the repo](https://github.com/mui-org/material-ui):
-
-```sh
-curl https://codeload.github.com/mui-org/material-ui/tar.gz/master | tar -xz --strip=2  material-ui-master/examples/gatsby
-cd gatsby
-```
-
-Install it and run:
-
-```sh
-npm install
-npm run develop
-```
-
-or:
-
-[![Edit on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/mui-org/material-ui/tree/master/examples/gatsby)
-
-## The idea behind the example
-
-[Gatsby](https://github.com/gatsbyjs/gatsby) is a static site generator for React.
-
-## gatsby-theme-material-ui
-
-Looking for an example with less boilerplate but also less freedom?
-Check [`/examples/gatsby-theme`](https://github.com/mui-org/material-ui/tree/master/examples/gatsby-theme) out.
+This blog is not my pure creation, but was created with reference to <a href="https://github.com/greglobinski/gatsby-starter-personal-blog"> greg lobinski's starter</a>. I like this starter so I wanted to use original, but it only work on Gatsby v1. So I port this starter to gatsby v2 with some changes. Thank greg lobinski for providing a beautiful design starter as open source.

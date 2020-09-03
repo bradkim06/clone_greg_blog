@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Article from "../Main/Article";
 import PostHeader from "./PostHeader";
+import PostFooter from "./PostFooter";
 import Content from "../Main/Content";
 import { MDXProvider } from "@mdx-js/react";
 import { MDXRenderer } from "gatsby-plugin-mdx";
@@ -27,6 +28,7 @@ function Post({ post }) {
           <MDXRenderer>{body}</MDXRenderer>
         </MDXProvider>
       </Content>
+      <PostFooter />
     </Article>
   );
 }

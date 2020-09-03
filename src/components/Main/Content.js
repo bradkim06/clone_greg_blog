@@ -109,6 +109,34 @@ const PageContent = styled.div`
       bottom: -5px;
     }
   }
+
+  & table {
+    display: inline-block;
+    overflow-x: auto;
+    margin: 0.5em 0 2.5em;
+    max-width: 100%;
+    width: auto;
+    border-spacing: 0;
+    border-collapse: collapse;
+    white-space: nowrap;
+    vertical-align: top;
+  }
+
+  & table th {
+    // color: ${(props) => props.theme.base.colors.text};
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    text-align: left;
+    text-transform: uppercase;
+    background-color: ${(props) => props.theme.base.colors.lines};
+  }
+
+  & table th,
+  & table td {
+    padding: 6px 12px;
+    border: 1px solid ${(props) => props.theme.base.colors.text};
+  }
 `;
 
 const mapStateToProps = (state, ownProps) => {
