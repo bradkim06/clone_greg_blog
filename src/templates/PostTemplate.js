@@ -24,7 +24,7 @@ class PostTemplate extends React.Component {
     }
   }
   render() {
-    const { mdx } = data;
+    const { mdx } = this.props.data;
     return (
       <Main>
         <Post post={mdx} />
