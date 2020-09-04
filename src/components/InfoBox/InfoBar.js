@@ -21,8 +21,7 @@ class InfoBar extends React.Component {
           </Link>
         </AvatarLinkBar>
         <BarTitle>
-          bradkim06
-          <small>Hello small Title!</small>
+          bradkim06 <small>Hello small Title!</small>
         </BarTitle>
       </InfoBarStyle>
     );
@@ -57,10 +56,12 @@ const AvatarLinkBar = styled.div`
   margin: 13px 0 0 30px;
 `;
 
-const BarTitle = styled.h3`
+const BarTitle = styled.div`
   float: left;
   margin: 10px 0 0 15px;
+  font-size: 1.1em;
   color: ${(props) => props.theme.bars.colors.text};
+
   & small {
     display: block;
     font-size: 0.65em;
