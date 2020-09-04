@@ -70,7 +70,7 @@ const theme = createMuiTheme({
       fbCommentsColorscheme: "dark",
     },
     sizes: {
-      articleMaxWidth: "80%",
+      articleMaxWidth: "70em",
     },
     fonts: {
       title: {
