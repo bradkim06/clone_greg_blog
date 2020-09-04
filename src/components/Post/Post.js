@@ -10,9 +10,6 @@ import { Link } from "gatsby";
 
 const postPropTypes = {
   post: PropTypes.object.isRequired,
-  author: PropTypes.object.isRequired,
-  slug: PropTypes.string.isRequired,
-  facebook: PropTypes.object.isRequired,
 };
 
 function Post({ post }) {

@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { useLayoutQuery } from "../../src/components/query/LayoutQuery";
+import theme from "../../src/styles/theme";
 
 import Navigator from "../../src/components/Navigator/Navigator";
 import ActionsBar from "../../src/components/ActionsBar/ActionsBar";
@@ -10,27 +11,20 @@ import InfoBox from "../../src/components/InfoBox";
 import LayoutWrapper from "../../src/components/LayoutWrapper/";
 
 import { setIsWideScreen } from "../../src/state/store";
-import {
-  isWideScreen as isWideScreenFunc,
-} from "../../src/utils/helpers";
 
 const propTypes = {
-  posts: PropTypes.object.isRequired,
-  pages: PropTypes.object.isRequired,
-  children: PropTypes.func.isRequired,
+  children: PropTypes.object.isRequired,
   setIsWideScreen: PropTypes.func.isRequired,
   isWideScreen: PropTypes.bool.isRequired,
 };
 
-function TopLayout(props) {
+function TopLayout({ children, setIsWideScreen, isWideScreen }) {
   const { posts, pages } = useLayoutQuery();
-  const { children, setIsWideScreen } = props;
 
   const categories = category(posts);
 
-  useEffect(() => {
-    setIsWideScreen(isWideScreenFunc());
-  }, []);
+  setIsWideScreen(useCurrentWidth());
+  console.log(isWideScreen);
 
   return (
     <React.Fragment>
@@ -43,6 +37,45 @@ function TopLayout(props) {
       </LayoutWrapper>
     </React.Fragment>
   );
+}
+
+const getWidth = () => {
+  if (typeof window !== "undefined") {
+    return (
+      window.innerWidth ||
+      document.documentElement.clientWidth ||
+      document.body.clientWidth
+    );
+  }
+};
+
+export function useCurrentWidth() {
+  // save current window width in the state object
+  const [width, setWidth] = useState(getWidth());
+
+  // in this case useEffect will execute only once because
+  // it does not have any dependencies.
+  useEffect(() => {
+    // timeoutId for debounce mechanism
+    let timeoutId = null;
+    const resizeListener = () => {
+      // prevent execution of previous setTimeout
+      clearTimeout(timeoutId);
+      // change width from the state object after 150 milliseconds
+      timeoutId = setTimeout(() => setWidth(getWidth()), 200);
+    };
+    // set resize listener
+    window.addEventListener("resize", resizeListener);
+
+    // clean up function
+    return () => {
+      // remove resize listener
+      window.removeEventListener("resize", resizeListener);
+    };
+  }, []);
+
+  const mediaQueryL = theme.mediaQueryTresholds.L;
+  return width >= mediaQueryL;
 }
 
 const category = (posts) => {

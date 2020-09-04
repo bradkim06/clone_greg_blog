@@ -14,7 +14,7 @@ import List from "./List";
 
 class Navigator extends React.Component {
   static propTypes = {
-    posts: PropTypes.array.isRequired,
+    posts: PropTypes.object.isRequired,
     navigatorPosition: PropTypes.string.isRequired,
     navigatorShape: PropTypes.string.isRequired,
     setNavigatorPosition: PropTypes.func.isRequired,

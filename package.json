@@ -51,8 +51,7 @@
     "react-popper": "^2.2.3",
     "react-redux": "^7.2.1",
     "rebound": "^0.1.0",
-    "redux-devtools-extension": "^2.13.8",
-    "screenfull": "^5.0.2"
+    "redux-devtools-extension": "^2.13.8"
   },
   "scripts": {
     "deploy": "gatsby build && gh-pages -d public -b master -r https://github.com/bradkim06/bradkim06.github.io",

@@ -12,9 +12,6 @@ import { setNavigatorPosition, setNavigatorShape } from "../../state/store";
 
 class InfoBox extends React.Component {
   static propTypes = {
-    classes: PropTypes.object.isRequired,
-    parts: PropTypes.array.isRequired,
-    pages: PropTypes.array.isRequired,
     navigatorPosition: PropTypes.string.isRequired,
     navigatorShape: PropTypes.string.isRequired,
     isWideScreen: PropTypes.bool.isRequired,

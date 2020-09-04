@@ -6,11 +6,10 @@ import Link from "gatsby-link";
 import theme from "../../styles/theme";
 
 InfoMenu.propTypes = {
-  pages: PropTypes.array.isRequired,
   linkOnClick: PropTypes.func.isRequired,
 };
 
-function InfoMenu({ pages, linkOnClick }) {
+function InfoMenu({ linkOnClick }) {
   return (
     <StyleInfoMenu>
       <Link
