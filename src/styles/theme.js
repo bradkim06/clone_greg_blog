@@ -8,7 +8,7 @@ const theme = createMuiTheme({
       background: colors.background,
       text: colors.bright,
       link: colors.accent,
-      linkHover: Color(colors.accent).lighten(0.3).string(),
+      linkHover: Color(colors.accent).darken(0.3).string(),
       accent: colors.accent,
       lines: colors.gray,
     },
@@ -17,18 +17,18 @@ const theme = createMuiTheme({
     },
     fonts: {
       unstyledFamily: `Arial`,
-      styledFamily: "Lato",
+      styledFamily: "Fira Code",
       styledFonts: "300,400,600",
     },
   },
   info: {
     colors: {
-      text: colors.bright,
+      text: colors.white,
       background: colors.background,
       socialIcons: colors.lightGray,
       socialIconsHover: colors.accent,
-      menuLink: colors.bright,
-      menuLinkHover: colors.accent,
+      menuLink: colors.accent,
+      menuLinkHover: Color(colors.accent).darken(0.3).string(),
     },
     sizes: {
       width: 320,
@@ -43,7 +43,7 @@ const theme = createMuiTheme({
   navigator: {
     colors: {
       background: colors.background,
-      postsListItemLink: colors.bright,
+      postsListItemLink: colors.white,
       postsListItemLinkHover: colors.accent,
       postsHeader: colors.bright,
     },
@@ -63,7 +63,7 @@ const theme = createMuiTheme({
       meta: colors.bright,
       content: colors.bright,
       footer: colors.bright,
-      contentHeading: colors.bright,
+      contentHeading: colors.white,
       blockquoteFrame: colors.accent,
       link: colors.accent,
       linkHover: colors.dark,
@@ -113,7 +113,7 @@ const theme = createMuiTheme({
     colors: {
       text: Color(colors.gray).lighten(0.5).string(),
       link: colors.accent,
-      linkHover: Color(colors.accent).lighten(0.2).string(),
+      linkHover: Color(colors.accent).darken(0.3).string(),
     },
     fonts: {
       footnote: {

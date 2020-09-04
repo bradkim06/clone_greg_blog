@@ -58,10 +58,10 @@ const PageContent = styled.div`
     }
   }
 
+  & h1,
   & h2,
   & h3 {
     color: ${(props) => props.theme.main.colors.contentHeading};
-    font-size: ${(props) => props.theme.main.fonts.contentHeading.h2Size}em;
     font-weight: ${(props) => props.theme.main.fonts.contentHeading.weight};
     line-height: ${(props) => props.theme.main.fonts.contentHeading.lineHeight};
     margin: 2em 0 1em;
