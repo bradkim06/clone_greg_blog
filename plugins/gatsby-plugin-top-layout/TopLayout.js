@@ -4,13 +4,19 @@ import { connect } from "react-redux";
 import { useLayoutQuery } from "../../src/components/query/LayoutQuery";
 import theme from "../../src/styles/theme";
 
-import Navigator from "../../src/components/Navigator/Navigator";
-import ActionsBar from "../../src/components/ActionsBar/ActionsBar";
-import InfoBar from "../../src/components/InfoBox/InfoBar";
-import InfoBox from "../../src/components/InfoBox";
 import LayoutWrapper from "../../src/components/LayoutWrapper/";
 
+import loadable from "@loadable/component";
 import { setIsWideScreen } from "../../src/state/store";
+
+const InfoBox = loadable(() => import("../../src/components/InfoBox"));
+const Navigator = loadable(() =>
+  import("../../src/components/Navigator/Navigator")
+);
+const ActionsBar = loadable(() =>
+  import("../../src/components/ActionsBar/ActionsBar")
+);
+const InfoBar = loadable(() => import("../../src/components/InfoBox/InfoBar"));
 
 const propTypes = {
   children: PropTypes.object.isRequired,
