@@ -1,3 +1,5 @@
+const config = require("./content/meta/config");
+
 module.exports = {
   siteMetadata: {
     title: "bradkim06",
@@ -19,6 +21,17 @@ module.exports = {
       },
     },
     `gatsby-plugin-emotion`,
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: config.manifestName,
+        short_name: config.manifestShortName,
+        start_url: config.manifestStartUrl,
+        background_color: config.manifestBackgroundColor,
+        theme_color: config.manifestThemeColor,
+        display: config.manifestDisplay,
+      },
+    },
     `gatsby-plugin-offline`,
     {
       resolve: `gatsby-plugin-prefetch-google-fonts`,
