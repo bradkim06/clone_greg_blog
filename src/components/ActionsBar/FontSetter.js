@@ -62,6 +62,7 @@ function FontSetter({ increaseFont }) {
         aria-controls={open ? "menu-list-grow" : undefined}
         aria-haspopup="true"
         onClick={handleToggle}
+        aria-label="fontOpen"
         className="fontOpen"
       >
         <FormatSizeIcon />
