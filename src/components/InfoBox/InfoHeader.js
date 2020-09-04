@@ -42,6 +42,7 @@ const Header = styled.header`
     top: 30px;
     right: -25px;
     display: none;
+    color: ${(props) => props.theme.info.colors.socialIcons};
 
     .is-aside.open & {
       display: block;
