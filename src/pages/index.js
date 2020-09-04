@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import Seo from "../components/seo/Seo";
 
 import { setNavigatorPosition, setNavigatorShape } from "../state/store";
 import { featureNavigator } from "../utils/shared";
@@ -22,7 +23,12 @@ class Home extends React.Component {
   }
 
   render() {
-    return <div></div>;
+    return (
+      <div>
+        {" "}
+        <Seo />
+      </div>
+    );
   }
 }
 

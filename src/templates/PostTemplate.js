@@ -4,6 +4,7 @@ import Main from "../components/Main/Main";
 import Post from "../components/Post/Post";
 import { connect } from "react-redux";
 import { graphql } from "gatsby";
+import Seo from "../components/seo/Seo";
 
 import { setNavigatorPosition, setNavigatorShape } from "../state/store";
 import { moveNavigatorAside } from "../utils/shared";
@@ -28,6 +29,7 @@ class PostTemplate extends React.Component {
     const { mdx } = this.props.data;
     return (
       <Main>
+        <Seo data={mdx} />
         <Post post={mdx} />
       </Main>
     );
