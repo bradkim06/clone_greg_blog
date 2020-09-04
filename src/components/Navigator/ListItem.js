@@ -37,26 +37,28 @@ class ListItem extends React.Component {
     const { post, linkOnClick } = this.props;
     return (
       <StyledListItem>
-        <li
-          className={`${post.node.frontmatter.category}`}
-          style={{ display: `${this.state.hidden ? "none" : "block"}` }}
-          key={post.node.fields.slug}
-        >
-          <Link
-            activeClassName="active"
-            className={link(theme)}
-            to={post.node.fields.slug}
-            onClick={linkOnClick}
+        <ul>
+          <li
+            className={`${post.node.frontmatter.category}`}
+            style={{ display: `${this.state.hidden ? "none" : "block"}` }}
+            key={post.node.fields.slug}
           >
-            <ListItemText>
-              <h1>{post.node.frontmatter.title} </h1>
+            <Link
+              activeClassName="active"
+              className={link(theme)}
+              to={post.node.fields.slug}
+              onClick={linkOnClick}
+            >
+              <ListItemText>
+                <h1>{post.node.frontmatter.title} </h1>
 
-              {post.node.frontmatter.subTitle && (
-                <h2>{post.node.frontmatter.subTitle}</h2>
-              )}
-            </ListItemText>
-          </Link>
-        </li>
+                {post.node.frontmatter.subTitle && (
+                  <h2>{post.node.frontmatter.subTitle}</h2>
+                )}
+              </ListItemText>
+            </Link>
+          </li>
+        </ul>
       </StyledListItem>
     );
   }
