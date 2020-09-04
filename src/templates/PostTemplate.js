@@ -60,13 +60,6 @@ export const postQuery = graphql`
         subTitle
       }
     }
-    site {
-      siteMetadata {
-        facebook {
-          appId
-        }
-      }
-    }
   }
 `;
 

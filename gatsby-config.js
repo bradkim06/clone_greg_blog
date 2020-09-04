@@ -1,9 +1,6 @@
 module.exports = {
   siteMetadata: {
     title: "bradkim06",
-    facebook: {
-      appId: process.env.FB_APP_ID ? process.env.FB_APP_ID : "",
-    },
   },
   plugins: [
     "gatsby-plugin-top-layout",
@@ -22,6 +19,7 @@ module.exports = {
       },
     },
     `gatsby-plugin-emotion`,
+    `gatsby-plugin-offline`,
     {
       resolve: `gatsby-plugin-prefetch-google-fonts`,
       options: {
