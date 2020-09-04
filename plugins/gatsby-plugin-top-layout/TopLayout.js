@@ -24,7 +24,6 @@ function TopLayout({ children, setIsWideScreen, isWideScreen }) {
   const categories = category(posts);
 
   setIsWideScreen(useCurrentWidth());
-  console.log(isWideScreen);
 
   return (
     <React.Fragment>
