@@ -3,6 +3,7 @@ const config = require("./content/meta/config");
 module.exports = {
   siteMetadata: {
     title: "bradkim06",
+    siteUrl: `https://bradkim06.github.io`,
   },
   plugins: [
     "gatsby-plugin-top-layout",
@@ -83,5 +84,6 @@ module.exports = {
       },
     },
     `gatsby-plugin-sharp`,
+    `gatsby-plugin-sitemap`,
   ],
 };
