@@ -14,7 +14,6 @@ class InfoBox extends React.Component {
   static propTypes = {
     navigatorPosition: PropTypes.string.isRequired,
     navigatorShape: PropTypes.string.isRequired,
-    isWideScreen: PropTypes.bool.isRequired,
     setNavigatorShape: PropTypes.func.isRequired,
   };
 
@@ -50,7 +49,6 @@ const mapStateToProps = (state, ownProps) => {
   return {
     navigatorPosition: state.navigatorPosition,
     navigatorShape: state.navigatorShape,
-    isWideScreen: state.isWideScreen,
   };
 };
 

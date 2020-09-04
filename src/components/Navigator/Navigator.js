@@ -19,7 +19,6 @@ class Navigator extends React.Component {
     navigatorShape: PropTypes.string.isRequired,
     setNavigatorPosition: PropTypes.func.isRequired,
     setNavigatorShape: PropTypes.func.isRequired,
-    isWideScreen: PropTypes.bool.isRequired,
     categoryFilter: PropTypes.string.isRequired,
     setCategoryFilter: PropTypes.func.isRequired,
   };
@@ -69,7 +68,6 @@ const mapStateToProps = (state, ownProps) => {
   return {
     navigatorPosition: state.navigatorPosition,
     navigatorShape: state.navigatorShape,
-    isWideScreen: state.isWideScreen,
     categoryFilter: state.categoryFilter,
   };
 };
