@@ -5,7 +5,7 @@ import styled from "@emotion/styled";
 import IconButton from "@material-ui/core/IconButton";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
-import avatar from "../../images/jpg/avatar.jpg";
+import avatar from "../../images/jpg/test.png";
 
 function InfoHeader({ avatarOnClick, expandOnClick }) {
   return (
@@ -83,8 +83,6 @@ const HeaderAvatar = styled.div`
   ${({ theme }) => ` 
     width: 36px;
     height: 36px;
-    border-radius: 95% 95%;
-    border: 1px solid #ddd;
     transition: all .3s;
     transition-timing-function: ease;
     display: inline-block;
