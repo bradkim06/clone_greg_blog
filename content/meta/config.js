@@ -22,4 +22,6 @@ module.exports = {
   manifestDisplay: "standalone",
   // contact
   contactEmail: "bradkim06@gmail.com",
+  // Google Search
+  googleSiteVerification: "87GTb3Xk9fFlW-c1OLlIX3JinPcgE7GNTSbInlWdbB0",
 };

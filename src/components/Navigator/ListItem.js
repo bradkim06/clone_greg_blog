@@ -65,6 +65,10 @@ class ListItem extends React.Component {
 }
 
 const StyledListItem = styled.div`
+  & ul {
+    padding: 0;
+    list-style: none;
+  }
   & li {
     margin: 0 0 0.7em 0;
     transition: height 1s;

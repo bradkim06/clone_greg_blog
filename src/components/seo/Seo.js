@@ -47,6 +47,12 @@ const Seo = (props) => {
         name="twitter:creator"
         content={config.authorTwitterAccount ? config.authorTwitterAccount : ""}
       />
+      {config.googleSiteVerification && (
+        <meta
+          name="google-site-verification"
+          content={config.googleSiteVerification}
+        />
+      )}
       >
     </Helmet>
   );
