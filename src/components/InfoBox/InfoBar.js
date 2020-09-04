@@ -4,7 +4,7 @@ import Link from "gatsby-link";
 import styled from "@emotion/styled";
 import { connect } from "react-redux";
 
-import avatar from "../../images/jpg/avatar.jpg";
+import avatar from "../../images/jpg/test.png";
 import { setNavigatorPosition } from "../../state/store";
 import { featureNavigator, moveNavigatorAside } from "./../../utils/shared";
 
