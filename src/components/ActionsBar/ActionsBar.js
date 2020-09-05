@@ -7,8 +7,8 @@ import Link from "gatsby-link";
 import { connect } from "react-redux";
 
 import HomeIcon from "@material-ui/icons/Home";
-import SearchIcon from "@material-ui/icons/Search";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
+import Search from "./Search";
 
 import theme from "../../styles/theme";
 
@@ -73,17 +73,7 @@ class ActionsBar extends React.Component {
           >
             <HomeIcon />
           </IconButton>
-          <IconButton
-            aria-label="Search"
-            onClick={this.searchOnClick}
-            component={Link}
-            data-shape="closed"
-            to="/search/"
-            title="Search"
-            className="iconButton"
-          >
-            <SearchIcon />
-          </IconButton>
+          <Search />
           {((isWideScreen && navigatorShape === "open") ||
             navigatorPosition !== "is-aside") && (
             <CategoryFilter
