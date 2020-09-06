@@ -17,9 +17,9 @@ import {
   setNavigatorShape,
   setScrollToTop,
   setFontSizeIncrease,
-  setCategoryFilter,
+  setCategoryFilter
 } from "../../state/store";
-import { featureNavigator, moveNavigatorAside } from "../../utils/shared";
+import { featureNavigator } from "../../utils/shared";
 import FontSetter from "./FontSetter";
 import CategoryFilter from "./CategoryFilter";
 
@@ -32,25 +32,24 @@ class ActionsBar extends React.Component {
     setFontSizeIncrease: PropTypes.func.isRequired,
     categories: PropTypes.array.isRequired,
     setCategoryFilter: PropTypes.func.isRequired,
-    categoryFilter: PropTypes.string.isRequired,
+    categoryFilter: PropTypes.string.isRequired
   };
 
   state = {
-    fullscreen: false,
+    fullscreen: false
   };
 
   homeOnClick = featureNavigator.bind(this);
-  searchOnClick = moveNavigatorAside.bind(this);
 
   arrowUpOnClick = () => {
     this.props.setScrollToTop(true);
   };
 
-  fontSetterOnClick = (val) => {
+  fontSetterOnClick = val => {
     this.props.setFontSizeIncrease(val);
   };
 
-  categoryFilterOnClick = (val) => {
+  categoryFilterOnClick = val => {
     this.props.setCategoryFilter(val);
   };
 
@@ -59,7 +58,7 @@ class ActionsBar extends React.Component {
       navigatorPosition,
       navigatorShape,
       isWideScreen,
-      categories,
+      categories
     } = this.props;
 
     return (
@@ -105,7 +104,7 @@ const mapStateToProps = (state, ownProps) => {
     navigatorPosition: state.navigatorPosition,
     navigatorShape: state.navigatorShape,
     isWideScreen: state.isWideScreen,
-    categoryFilter: state.categoryFilter,
+    categoryFilter: state.categoryFilter
   };
 };
 
@@ -114,52 +113,52 @@ const mapDispatchToProps = {
   setNavigatorShape,
   setScrollToTop,
   setFontSizeIncrease,
-  setCategoryFilter,
+  setCategoryFilter
 };
 
 const StyleActionsBar = styled.div`
   position: absolute;
-  background: ${(props) => props.theme.bars.colors.background};
+  background: ${props => props.theme.bars.colors.background};
   left: 0;
   bottom: 0;
   display: flex;
   flex-direction: row;
-  padding: 0 ${(props) => props.theme.bars.sizes.actionsBar}px;
+  padding: 0 ${props => props.theme.bars.sizes.actionsBar}px;
   justify-content: space-between;
-  height: ${(props) => props.theme.bars.sizes.actionsBar}px;
+  height: ${props => props.theme.bars.sizes.actionsBar}px;
   width: 100%;
 
   &::before {
     content: "";
     position: absolute;
-    left: ${(props) => props.theme.base.sizes.linesMargin};
-    right: ${(props) => props.theme.base.sizes.linesMargin};
+    left: ${props => props.theme.base.sizes.linesMargin};
+    right: ${props => props.theme.base.sizes.linesMargin};
     height: 0;
     top: 0;
-    border-top: 1px solid ${(props) => props.theme.base.colors.lines};
+    border-top: 1px solid ${props => props.theme.base.colors.lines};
   }
 
-  @media (min-width: ${(props) => props.theme.mediaQueryTresholds.M}px) {
-    padding: 0 calc(${(props) => props.theme.base.sizes.linesMargin} * 1.5);
+  @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
+    padding: 0 calc(${props => props.theme.base.sizes.linesMargin} * 1.5);
   }
 
-  @media (min-width: ${(props) => props.theme.mediaQueryTresholds.L}px) {
+  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
     flex-direction: column;
     top: 0;
     right: 0;
     left: auto;
     height: 100%;
-    padding: ${(props) => props.theme.base.sizes.linesMargin} 0;
-    width: ${(props) => props.theme.bars.sizes.actionsBar}px;
+    padding: ${props => props.theme.base.sizes.linesMargin} 0;
+    width: ${props => props.theme.bars.sizes.actionsBar}px;
 
     &::before {
-      top: ${(props) => props.theme.base.sizes.linesMargin};
-      bottom: ${(props) => props.theme.base.sizes.linesMargin};
+      top: ${props => props.theme.base.sizes.linesMargin};
+      bottom: ${props => props.theme.base.sizes.linesMargin};
       left: 0;
       right: auto;
       width: 0;
       height: auto;
-      border-left: 1px solid ${(props) => props.theme.base.colors.lines};
+      border-left: 1px solid ${props => props.theme.base.colors.lines};
     }
   }
 `;
@@ -169,7 +168,7 @@ const Group = styled.div`
   flex-direction: row;
   align-items: center;
 
-  @media (min-width: ${(props) => props.theme.mediaQueryTresholds.L}px) {
+  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
     flex-direction: column;
   }
 

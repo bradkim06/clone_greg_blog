@@ -21,28 +21,39 @@ interface TopLayoutProps {
   children?: any;
   setIsWideScreen: (val: boolean) => void;
   isWideScreen: boolean;
-  navigatorPosition: string;
-  navigatorShape: string;
+}
+
+interface CategoryProps {
+  edges: Array<{
+    node: {
+      frontmatter: {
+        category: string;
+      };
+    };
+  }>;
+}
+
+interface ThemeContextProps {
+  mediaQueryTresholds: {
+    L: number;
+  };
 }
 
 function TopLayout({
   children,
   setIsWideScreen,
-  isWideScreen,
-  navigatorPosition,
-  navigatorShape
+  isWideScreen
 }: TopLayoutProps) {
   const { posts, pages } = useLayoutQuery();
-  const themeContext = useContext(ThemeContext);
+  const themeContext: ThemeContextProps = useContext(ThemeContext);
 
-  const categories = category(posts);
+  const categories: string[] = category(posts);
   setIsWideScreen(useCurrentWidth(themeContext));
 
   return (
     <React.Fragment>
       <LayoutWrapper>
-        {(navigatorPosition === "is-featured" && navigatorShape === "open") ||
-          children}
+        {children}
         <Navigator posts={posts} />
         <ActionsBar categories={categories} />
         {isWideScreen || <InfoBar pages={pages} />}
@@ -52,23 +63,20 @@ function TopLayout({
   );
 }
 
-const getWidth = () => {
+const getWidth = (): number => {
+  let width: number = 0;
+
   if (typeof window !== "undefined") {
-    return (
+    width =
       window.innerWidth ||
       document.documentElement.clientWidth ||
-      document.body.clientWidth
-    );
+      document.body.clientWidth;
   }
+
+  return width;
 };
 
-interface ThemeContextProps {
-  mediaQueryTresholds: {
-    L: number;
-  };
-}
-
-const useCurrentWidth = (ThemeContext: ThemeContextProps) => {
+const useCurrentWidth = (ThemeContext: ThemeContextProps): boolean => {
   // save current window width in the state object
   const [width, setWidth] = useState(getWidth());
 
@@ -76,7 +84,7 @@ const useCurrentWidth = (ThemeContext: ThemeContextProps) => {
   // it does not have any dependencies.
   useEffect(() => {
     // timeoutId for debounce mechanism
-    let timeoutId = null;
+    let timeoutId: number = null;
     const resizeListener = () => {
       // prevent execution of previous setTimeout
       clearTimeout(timeoutId);
@@ -93,22 +101,12 @@ const useCurrentWidth = (ThemeContext: ThemeContextProps) => {
     };
   }, []);
 
-  const mediaQueryL = ThemeContext.mediaQueryTresholds.L;
+  const mediaQueryL: number = ThemeContext.mediaQueryTresholds.L;
   return width >= mediaQueryL;
 };
 
-interface CategoryProps {
-  edges: Array<{
-    node: {
-      frontmatter: {
-        category: string;
-      };
-    };
-  }>;
-}
-
-const category = (posts: CategoryProps) => {
-  let categoryArray = posts.edges.reduce((list, edge) => {
+const category = (posts: CategoryProps): string[] => {
+  let categoryArray: string[] = posts.edges.reduce((list, edge) => {
     const category = edge.node.frontmatter.category;
     if (category && !~list.indexOf(category)) {
       return list.concat(edge.node.frontmatter.category);
@@ -121,14 +119,10 @@ const category = (posts: CategoryProps) => {
 
 interface ReduxState {
   isWideScreen: boolean;
-  navigatorPosition: string;
-  navigatorShape: string;
 }
 const mapStateToProps = (state: ReduxState) => {
   return {
-    isWideScreen: state.isWideScreen,
-    navigatorPosition: state.navigatorPosition,
-    navigatorShape: state.navigatorShape
+    isWideScreen: state.isWideScreen
   };
 };
 

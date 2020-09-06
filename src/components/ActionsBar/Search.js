@@ -23,7 +23,7 @@ function SearchDialog() {
   const [scroll, setScroll] = useState("paper");
   const [query, updateQuery] = useState("");
 
-  const handleClickOpen = (scrollType) => () => {
+  const handleClickOpen = scrollType => () => {
     setOpen(true);
     setScroll(scrollType);
   };
@@ -90,7 +90,7 @@ function SearchDialog() {
               autoComplete="off"
             />
             {results &&
-              results.map((post) => (
+              results.map(post => (
                 <SearchResult
                   title={post.item.node.frontmatter.title}
                   subTitle={post.item.node.frontmatter.subTitle}
@@ -114,12 +114,17 @@ const SearchResult = ({ title, subTitle, slug, linkOnClick }) => {
   const titleName = JSON.stringify(title, null, 4);
   const subTitleName = JSON.stringify(subTitle, null, 4);
   const path = JSON.stringify(slug, null, 4);
+
+  const movePage = () => {
+    linkOnClick();
+  };
+
   return (
     <SearchWrapper>
       <li>
         <Link
           className={link(theme)}
-          onClick={linkOnClick}
+          onClick={movePage}
           to={path.replace(/\"/g, "")}
         >
           <h2>{titleName.replace(/\"/g, "")}</h2>
@@ -148,8 +153,8 @@ const options = {
   keys: [
     "node.frontmatter.title",
     "node.frontmatter.subTitle",
-    "node.frontmatter.category",
-  ],
+    "node.frontmatter.category"
+  ]
 };
 
 const SearchWrapper = styled.ul`
@@ -163,7 +168,7 @@ const SearchWrapper = styled.ul`
   }
 `;
 
-const link = (theme) => css`
+const link = theme => css`
   display: block;
   align-content: center;
   align-items: center;
