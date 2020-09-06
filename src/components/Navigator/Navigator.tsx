@@ -1,28 +1,29 @@
 import React from "react";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { forceCheck } from "react-lazyload";
-
 import {
   setNavigatorPosition,
   setNavigatorShape,
-  setCategoryFilter,
+  setCategoryFilter
 } from "../../state/store";
 import { moveNavigatorAside } from "./../../utils/shared";
 import List from "./List";
 
-class Navigator extends React.Component {
-  static propTypes = {
-    posts: PropTypes.object.isRequired,
-    navigatorPosition: PropTypes.string.isRequired,
-    navigatorShape: PropTypes.string.isRequired,
-    setNavigatorPosition: PropTypes.func.isRequired,
-    setNavigatorShape: PropTypes.func.isRequired,
-    categoryFilter: PropTypes.string.isRequired,
-    setCategoryFilter: PropTypes.func.isRequired,
+interface NavigatorProps {
+  posts: {
+    totalCount: number;
+    edges: Array<object>;
   };
+  navigatorPosition: string;
+  navigatorShape: string;
+  categoryFilter: string;
+  setNavigatorPosition: (val: string) => void;
+  setNavigatorShape: (val: string) => void;
+  setCategoryFilter: (val: string) => void;
+}
 
+class Navigator extends React.Component<NavigatorProps> {
   linkOnClick = moveNavigatorAside.bind(this);
 
   expandOnClick = () => {
@@ -35,12 +36,9 @@ class Navigator extends React.Component {
   };
 
   render() {
-    const {
-      posts,
-      navigatorPosition,
-      navigatorShape,
-      categoryFilter,
-    } = this.props;
+    const { navigatorPosition, navigatorShape, categoryFilter } = this.props;
+
+    const { totalCount, edges } = this.props.posts;
 
     return (
       <StyleNavigator
@@ -48,9 +46,9 @@ class Navigator extends React.Component {
           navigatorShape ? navigatorShape : ""
         } `}
       >
-        {this.props.posts.totalCount && (
+        {totalCount && (
           <List
-            posts={posts.edges}
+            posts={edges}
             navigatorPosition={navigatorPosition}
             navigatorShape={navigatorShape}
             linkOnClick={this.linkOnClick}
@@ -64,24 +62,30 @@ class Navigator extends React.Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
+interface ReduxState {
+  navigatorPosition: string;
+  navigatorShape: string;
+  categoryFilter: string;
+}
+
+const mapStateToProps = (state: ReduxState) => {
   return {
     navigatorPosition: state.navigatorPosition,
     navigatorShape: state.navigatorShape,
-    categoryFilter: state.categoryFilter,
+    categoryFilter: state.categoryFilter
   };
 };
 
 const mapDispatchToProps = {
   setNavigatorPosition,
   setNavigatorShape,
-  setCategoryFilter,
+  setCategoryFilter
 };
 
-const StyleNavigator = styled(`nav`)`
+const StyleNavigator = styled.nav`
   transform: translate3d(0, 0, 0);
   will-change: left, top, bottom, width;
-  background: ${(props) => props.theme.navigator.colors.background};
+  background: ${props => props.theme.navigator.colors.background};
   position: absolute;
   top: 0;
   left: 0;
@@ -90,7 +94,7 @@ const StyleNavigator = styled(`nav`)`
   transition: left 0.9s;
   width: 100%;
 
-  @media (max-width: ${(props) => props.theme.mediaQueryTresholds.L - 1}px) {
+  @media (max-width: ${props => props.theme.mediaQueryTresholds.L - 1}px) {
     &.is-aside {
       left: -100%;
     }
@@ -100,27 +104,27 @@ const StyleNavigator = styled(`nav`)`
     }
   }
 
-  @media (min-width: ${(props) => props.theme.mediaQueryTresholds.L}px) {
+  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
     &.is-featured {
       transition: left 0.9s;
       width: calc(
-        100vw - ${(props) => props.theme.info.sizes.width}px -
-          ${(props) => props.theme.bars.sizes.actionsBar}px
+        100vw - ${props => props.theme.info.sizes.width}px -
+          ${props => props.theme.bars.sizes.actionsBar}px
       );
-      left: ${(props) => props.theme.info.sizes.width}px;
+      left: ${props => props.theme.info.sizes.width}px;
       top: 0;
     }
 
     &.is-aside {
       transition: bottom 0.5s;
       left: 0;
-      width: ${(props) => props.theme.info.sizes.width - 1}px;
+      width: ${props => props.theme.info.sizes.width - 1}px;
       z-index: 1;
       top: auto;
 
       &.closed {
         bottom: calc(
-          -100% + 100px + ${(props) => props.theme.navigator.sizes.closedHeight}px
+          -100% + 100px + ${props => props.theme.navigator.sizes.closedHeight}px
         );
         height: calc(100% - 100px);
       }
@@ -134,23 +138,23 @@ const StyleNavigator = styled(`nav`)`
         content: "";
         position: absolute;
         top: 0;
-        left: ${(props) => props.theme.base.sizes.linesMargin};
-        right: ${(props) => props.theme.base.sizes.linesMargin};
+        left: ${props => props.theme.base.sizes.linesMargin};
+        right: ${props => props.theme.base.sizes.linesMargin};
         height: 0;
-        border-top: 1px solid ${(props) => props.theme.base.colors.lines};
+        border-top: 1px solid ${props => props.theme.base.colors.lines};
       }
     }
 
     &.moving-aside {
       transition: left 0.9s;
-      left: calc(-100vw + ${(props) => props.theme.info.sizes.width}*2px + 2px);
-      width: calc(100vw - ${(props) => props.theme.info.sizes.width}px - 60px);
+      left: calc(-100vw + ${props => props.theme.info.sizes.width}*2px + 2px);
+      width: calc(100vw - ${props => props.theme.info.sizes.width}px - 60px);
       top: 0;
     }
 
     &.resizing-aside {
       transition: none;
-      width: ${(props) => props.theme.info.sizes.width}px;
+      width: ${props => props.theme.info.sizes.width}px;
       top: auto;
       left: 0;
 
@@ -171,17 +175,15 @@ const StyleNavigator = styled(`nav`)`
       top: auto;
       left: 0;
       z-index: 1;
-      width: ${(props) => props.theme.info.sizes.width - 1}px;
+      width: ${props => props.theme.info.sizes.width - 1}px;
     }
 
     &.resizing-featured {
       transition: none;
       top: 0;
       bottom: auto;
-      left: calc(
-        -100vw + ${(props) => props.theme.info.sizes.width}*2px + 60px
-      );
-      width: calc(100vw - ${(props) => props.theme.info.sizes.width}px - 60px);
+      left: calc(-100vw + ${props => props.theme.info.sizes.width}*2px + 60px);
+      width: calc(100vw - ${props => props.theme.info.sizes.width}px - 60px);
     }
   }
 `;

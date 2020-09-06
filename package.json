@@ -18,6 +18,10 @@
     "@mdx-js/react": "^1.6.16",
     "@popperjs/core": "^2.4.4",
     "@types/loadable__component": "^5.13.0",
+    "@types/node": "^14.6.4",
+    "@types/react": "^16.9.49",
+    "@types/react-custom-scrollbars": "^4.0.7",
+    "@types/react-lazyload": "^2.6.0",
     "@types/react-redux": "^7.1.9",
     "@types/styled-components": "^5.1.3",
     "babel-plugin-dynamic-import-webpack": "^1.1.0",
@@ -59,7 +63,8 @@
     "react-redux": "^7.2.1",
     "rebound": "^0.1.0",
     "redux-devtools-extension": "^2.13.8",
-    "styled-components": "^5.2.0"
+    "styled-components": "^5.2.0",
+    "typescript": "^4.0.2"
   },
   "scripts": {
     "deploy": "gatsby build && gh-pages -d public -b master -r https://github.com/bradkim06/bradkim06.github.io",

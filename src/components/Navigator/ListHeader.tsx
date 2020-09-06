@@ -1,24 +1,23 @@
 import React from "react";
-import PropTypes from "prop-types";
-import styled from "@emotion/styled";
+import styled from "styled-components";
 
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 
-const propTypes = {
-  expandOnClick: PropTypes.func.isRequired,
-  categoryFilter: PropTypes.string.isRequired,
-  navigatorShape: PropTypes.string.isRequired,
-  removeFilter: PropTypes.func.isRequired,
-};
+interface ListHeaderProps {
+  expandOnClick(event: React.MouseEvent<HTMLButtonElement>): void;
+  removeFilter(event: React.MouseEvent<HTMLButtonElement>): void;
+  categoryFilter: string;
+  navigatorShape: string;
+}
 
 function ListHeader({
   expandOnClick,
   categoryFilter,
   navigatorShape,
-  removeFilter,
-}) {
+  removeFilter
+}: ListHeaderProps) {
   return (
     <header>
       {navigatorShape === "closed" && (
@@ -66,13 +65,13 @@ const Closed = styled.div`
     left: 0;
     width: 100%;
     margin: 0;
-    height: ${(props) => props.theme.navigator.sizes.closedHeight}px;
+    height: ${props => props.theme.navigator.sizes.closedHeight}px;
     padding: 0 30px 0 40px;
   }
 
   & h3 {
     font-size: 1.1em;
-    color: ${(props) => props.theme.navigator.colors.postsHeader};
+    color: ${props => props.theme.navigator.colors.postsHeader};
     font-weight: 600;
     margin: -0.2em 0 0 0;
     text-transform: uppercase;
@@ -86,18 +85,18 @@ const Closed = styled.div`
   }
 
   .expandButton {
-    color: ${(props) => props.theme.navigator.colors.postsHeader};
+    color: ${props => props.theme.navigator.colors.postsHeader};
   }
 `;
 
 const Filter = styled.div`
-  margin: 0 calc(-0.5rem + ${(props) => props.theme.base.sizes.linesMargin}) 1em
-    calc(-0.5rem + ${(props) => props.theme.base.sizes.linesMargin});
+  margin: 0 calc(-0.5rem + ${props => props.theme.base.sizes.linesMargin}) 1em
+    calc(-0.5rem + ${props => props.theme.base.sizes.linesMargin});
   position: relative;
   font-size: 1.2em;
   line-height: 1;
-  color: ${(props) => props.theme.base.colors.accent};
-  border-bottom: 1px solid ${(props) => props.theme.base.colors.lines};
+  color: ${props => props.theme.base.colors.accent};
+  border-bottom: 1px solid ${props => props.theme.base.colors.lines};
   padding: 0 1em 1em;
   font-weight: 300;
   .removeButton {
@@ -113,16 +112,15 @@ const Filter = styled.div`
     display: block;
     margin: 0 0 0.3em 0;
   }
-  @media (min-width: ${(props) => props.theme.mediaQueryTresholds.L}px) {
+  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
     margin: 0 0 1em 0;
     padding: 0 1em 1.5em;
     .is-aside & {
       padding: 0 0 1em 0.5em;
-      margin: 0 calc(-0.5rem + ${(props) => props.theme.base.sizes.linesMargin})
-        1em calc(-0.5rem + ${(props) => props.theme.base.sizes.linesMargin});
+      margin: 0 calc(-0.5rem + ${props => props.theme.base.sizes.linesMargin})
+        1em calc(-0.5rem + ${props => props.theme.base.sizes.linesMargin});
     }
   }
 `;
 
-ListHeader.propTypes = propTypes;
 export default ListHeader;

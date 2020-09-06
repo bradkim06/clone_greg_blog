@@ -1,31 +1,29 @@
 import React from "react";
-import PropTypes from "prop-types";
-import styled from "@emotion/styled";
-// import { forceCheck } from "react-lazyload";
+import styled from "styled-components";
 
 import ListHeader from "./ListHeader";
 import ListItem from "./ListItem";
 import SpringScrollbars from "../SpringScrollbars";
 
-class List extends React.Component {
-  static propTypes = {
-    posts: PropTypes.array.isRequired,
-    linkOnClick: PropTypes.func.isRequired,
-    expandOnClick: PropTypes.func.isRequired,
-    navigatorPosition: PropTypes.string.isRequired,
-    navigatorShape: PropTypes.string.isRequired,
-    categoryFilter: PropTypes.string.isRequired,
-    removeFilter: PropTypes.func.isRequired,
-  };
+interface ListProps {
+  posts: Array<object>;
+  linkOnClick(event: React.MouseEvent<HTMLButtonElement>): void;
+  expandOnClick(event: React.MouseEvent<HTMLButtonElement>): void;
+  removeFilter(event: React.MouseEvent<HTMLButtonElement>): void;
+  navigatorPosition: string;
+  navigatorShape: string;
+  categoryFilter: string;
+}
 
+class List extends React.Component<ListProps> {
   render() {
     const {
       posts,
       linkOnClick,
       expandOnClick,
-      categoryFilter,
-      navigatorShape,
       removeFilter,
+      categoryFilter,
+      navigatorShape
     } = this.props;
 
     return (
@@ -65,17 +63,17 @@ const Posts = styled.div`
 `;
 
 const Inner = styled.div`
-  padding: calc(${(props) => props.theme.bars.sizes.infoBar}px + 1.3rem) 1.3rem
-    calc(${(props) => props.theme.bars.sizes.actionsBar}px + 1.3rem) 1.3rem;
+  padding: calc(${props => props.theme.bars.sizes.infoBar}px + 1.3rem) 1.3rem
+    calc(${props => props.theme.bars.sizes.actionsBar}px + 1.3rem) 1.3rem;
 
-  @media (min-width: ${(props) => props.theme.mediaQueryTresholds.M}px) {
-    padding: calc(${(props) => props.theme.bars.sizes.infoBar}px + 2rem) 2rem
-      calc(${(props) => props.theme.bars.sizes.actionsBar}px + 2rem) 2rem;
+  @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
+    padding: calc(${props => props.theme.bars.sizes.infoBar}px + 2rem) 2rem
+      calc(${props => props.theme.bars.sizes.actionsBar}px + 2rem) 2rem;
   }
 
-  @media (min-width: ${(props) => props.theme.mediaQueryTresholds.L}px) {
+  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
     padding: 2rem calc(1rem + 17px) calc(2rem + 17px) 2rem;
-    left: ${(props) => props.theme.info.sizes.width}px;
+    left: ${props => props.theme.info.sizes.width}px;
     .moving-featured &,
     .is-aside & {
       padding: 1rem 0.5rem 1rem 0.5rem;

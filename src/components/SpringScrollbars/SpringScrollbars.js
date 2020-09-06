@@ -15,7 +15,7 @@ class SpringScrollbars extends Component {
     this.renderThumb = this.renderThumb.bind(this);
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps) {
     if (
       this.props.isNavigator &&
       this.props.navigatorPosition !== "is-featured"
@@ -80,7 +80,7 @@ class SpringScrollbars extends Component {
 
   renderThumb({ style, ...props }) {
     const thumbStyle = {
-      backgroundColor: colors.lightGray,
+      backgroundColor: colors.lightGray
     };
     return <div style={{ ...style, ...thumbStyle }} {...props} />;
   }
@@ -90,10 +90,9 @@ class SpringScrollbars extends Component {
 
     return (
       <Scrollbars
-        autoHide
         universal={true}
         onScroll={forceCheckOnScroll && forceCheck}
-        ref={(comp) => {
+        ref={comp => {
           this.scrollbars = comp;
         }}
         renderThumbHorizontal={this.renderThumb}
@@ -112,18 +111,18 @@ SpringScrollbars.propTypes = {
   setScrollToTop: PropTypes.func.isRequired,
   forceCheckOnScroll: PropTypes.bool,
   navigatorPosition: PropTypes.string.isRequired,
-  isNavigator: PropTypes.bool,
+  isNavigator: PropTypes.bool
 };
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = state => {
   return {
     scrollToTop: state.scrollToTop,
-    navigatorPosition: state.navigatorPosition,
+    navigatorPosition: state.navigatorPosition
   };
 };
 
 const mapDispatchToProps = {
-  setScrollToTop,
+  setScrollToTop
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SpringScrollbars);

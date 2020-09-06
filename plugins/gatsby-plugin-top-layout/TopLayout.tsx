@@ -1,6 +1,10 @@
 import React, { useEffect, useState, useContext } from "react";
 import { connect } from "react-redux";
-import { useLayoutQuery } from "../../src/components/query/LayoutQuery";
+import {
+  useLayoutQuery,
+  PostsProps,
+  PagesProps
+} from "../../src/components/query/LayoutQuery";
 
 import LayoutWrapper from "../../src/components/LayoutWrapper/";
 import { ThemeContext } from "styled-components";
@@ -21,22 +25,8 @@ interface TopLayoutProps {
   children?: any;
   setIsWideScreen: (val: boolean) => void;
   isWideScreen: boolean;
-}
-
-interface CategoryProps {
-  edges: Array<{
-    node: {
-      frontmatter: {
-        category: string;
-      };
-    };
-  }>;
-}
-
-interface ThemeContextProps {
-  mediaQueryTresholds: {
-    L: number;
-  };
+  posts: PostsProps[];
+  pages: PagesProps[];
 }
 
 function TopLayout({
@@ -76,6 +66,12 @@ const getWidth = (): number => {
   return width;
 };
 
+interface ThemeContextProps {
+  mediaQueryTresholds: {
+    L: number;
+  };
+}
+
 const useCurrentWidth = (ThemeContext: ThemeContextProps): boolean => {
   // save current window width in the state object
   const [width, setWidth] = useState(getWidth());
@@ -104,6 +100,16 @@ const useCurrentWidth = (ThemeContext: ThemeContextProps): boolean => {
   const mediaQueryL: number = ThemeContext.mediaQueryTresholds.L;
   return width >= mediaQueryL;
 };
+
+interface CategoryProps {
+  edges: Array<{
+    node: {
+      frontmatter: {
+        category: string;
+      };
+    };
+  }>;
+}
 
 const category = (posts: CategoryProps): string[] => {
   let categoryArray: string[] = posts.edges.reduce((list, edge) => {
