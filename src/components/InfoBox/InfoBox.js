@@ -14,13 +14,13 @@ class InfoBox extends React.Component {
   static propTypes = {
     navigatorPosition: PropTypes.string.isRequired,
     navigatorShape: PropTypes.string.isRequired,
-    setNavigatorShape: PropTypes.func.isRequired,
+    setNavigatorShape: PropTypes.func.isRequired
   };
 
   avatarOnClick = featureNavigator.bind(this);
   menulinkOnClick = moveNavigatorAside.bind(this);
 
-  expandOnClick = (e) => {
+  expandOnClick = e => {
     this.props.setNavigatorShape("closed");
   };
 
@@ -48,25 +48,25 @@ class InfoBox extends React.Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     navigatorPosition: state.navigatorPosition,
-    navigatorShape: state.navigatorShape,
+    navigatorShape: state.navigatorShape
   };
 };
 
 const mapDispatchToProps = {
   setNavigatorPosition,
-  setNavigatorShape,
+  setNavigatorShape
 };
 
 const StyleInfoBox = styled.aside`
   display: none;
-  @media (min-width: ${(props) => props.theme.mediaQueryTresholds.L}px) {
+  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
     display: block;
-    color: ${(props) => props.theme.info.colors.text};
-    background: ${(props) => props.theme.info.colors.background};
+    color: ${props => props.theme.info.colors.text};
+    background: ${props => props.theme.info.colors.background};
     position: absolute;
     left: 0;
     top: 0;
-    width: ${(props) => props.theme.info.sizes.width}px;
+    width: ${props => props.theme.info.sizes.width}px;
     height: 100%;
     padding: 20px 40px;
     &::after {
@@ -76,14 +76,14 @@ const StyleInfoBox = styled.aside`
       top: 20px;
       bottom: 20px;
       width: 1px;
-      border-right: 1px solid ${(props) => props.theme.base.colors.lines};
+      border-right: 1px solid ${props => props.theme.base.colors.lines};
     }
   }
 `;
 
 const InfoContent = styled.div`
   position: absolute;
-  top: ${(props) => props.theme.info.sizes.headerHeight}px;
+  top: ${props => props.theme.info.sizes.headerHeight}px;
   bottom: 0;
   left: 0;
   width: 100%;
@@ -94,7 +94,7 @@ const InfoContent = styled.div`
   transition-timing-function: ease;
 
   .is-aside.closed & {
-    bottom: ${(props) => props.theme.navigator.sizes.closedHeight}px;
+    bottom: ${props => props.theme.navigator.sizes.closedHeight}px;
   }
 
   .moving-featured & {

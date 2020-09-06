@@ -16,7 +16,7 @@ class InfoBar extends React.Component {
     return (
       <InfoBarStyle>
         <AvatarLinkBar>
-          <Link to="/" title="back to Home">
+          <Link to="/" onClick={this.homeLinkOnClick} title="back to Home">
             <Avatar src={avatar} alt="avatar" />
           </Link>
         </AvatarLinkBar>

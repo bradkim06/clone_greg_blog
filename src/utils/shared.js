@@ -13,19 +13,17 @@ export function featureNavigator(e) {
         setTimeout(() => {
           this.props.setNavigatorPosition("is-featured");
           this.props.setNavigatorShape("open");
-
-          // uncomment following lines if you want to count featuring Navigator as a visit
-          // to index page ('/'), you have to also uncomment import { navigateTo }...
-          setTimeout(() => {
-            navigate("/");
-          }, 300);
         });
-      }, 300);
+      }, 200);
     } else {
       setTimeout(() => {
         this.props.setNavigatorPosition("is-featured");
       }, 0);
     }
+
+    // uncomment following lines if you want to count featuring Navigator as a visit
+    // to index page ('/'), you have to also uncomment import { navigateTo }...
+    navigate("/");
   }
 }
 
@@ -44,7 +42,7 @@ export function moveNavigatorAside(e) {
           this.props.setNavigatorShape(navigatorShape);
           setTimeout(() => {
             this.props.setNavigatorPosition("is-aside");
-            setTimeout(forceCheck, 600);
+            setTimeout(forceCheck, 300);
           });
         }
       }
