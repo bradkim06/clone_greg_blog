@@ -17,7 +17,7 @@ class InfoBar extends React.Component {
       <InfoBarStyle>
         <AvatarLinkBar>
           <Link to="/" title="back to Home">
-            <Avatar src={avatar} alt="Avatar" />
+            <img src={avatar} alt="avatar" width="60px" height="60px" />
           </Link>
         </AvatarLinkBar>
         <BarTitle>
@@ -30,22 +30,22 @@ class InfoBar extends React.Component {
 
 const InfoBarStyle = styled.aside`
   position: absolute;
-  background: ${(props) => props.theme.bars.colors.background};
+  background: ${props => props.theme.bars.colors.background};
   top: 0;
   left: 0;
   width: 100%;
-  height: ${(props) => props.theme.bars.sizes.infoBar}px;
+  height: ${props => props.theme.bars.sizes.infoBar}px;
   &::before {
     content: "";
     position: absolute;
-    left: ${(props) => props.theme.base.sizes.linesMargin};
-    right: ${(props) => props.theme.base.sizes.linesMargin};
+    left: ${props => props.theme.base.sizes.linesMargin};
+    right: ${props => props.theme.base.sizes.linesMargin};
     height: 0;
     bottom: 0;
-    border-top: 1px solid ${(props) => props.theme.base.colors.lines};
+    border-top: 1px solid ${props => props.theme.base.colors.lines};
   }
 
-  @media (min-width: ${(props) => props.theme.mediaQueryTresholds.L}px) {
+  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
     display: none;
   }
 `;
@@ -60,7 +60,7 @@ const BarTitle = styled.div`
   float: left;
   margin: 10px 0 0 15px;
   font-size: 1.1em;
-  color: ${(props) => props.theme.bars.colors.text};
+  color: ${props => props.theme.bars.colors.text};
 
   & small {
     display: block;
@@ -72,12 +72,12 @@ const BarTitle = styled.div`
 const mapStateToProps = (state, ownProps) => {
   return {
     navigatorPosition: state.navigatorPosition,
-    navigatorShape: state.navigatorShape,
+    navigatorShape: state.navigatorShape
   };
 };
 
 const mapDispatchToProps = {
-  setNavigatorPosition,
+  setNavigatorPosition
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(InfoBar);

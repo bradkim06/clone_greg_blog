@@ -13,7 +13,7 @@ function InfoHeader({ avatarOnClick, expandOnClick }) {
       <HeaderAvatarLink>
         <Link to="/" onClick={avatarOnClick} title="back to Home">
           <HeaderAvatar>
-            <img src={avatar} alt="" />
+            <img src={avatar} alt="avatar" width="60px" height="60px" />
           </HeaderAvatar>
         </Link>
       </HeaderAvatarLink>
@@ -42,7 +42,7 @@ const Header = styled.header`
     top: 30px;
     right: -25px;
     display: none;
-    color: ${(props) => props.theme.info.colors.socialIcons};
+    color: ${props => props.theme.info.colors.socialIcons};
 
     .is-aside.open & {
       display: block;
@@ -57,11 +57,11 @@ const HeaderAvatarLink = styled.div`
   position: relative;
   margin: 0 12px 0 0;
 
-  @media (min-width: ${(props) => props.theme.mediaQueryTresholds.M}px) {
+  @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
     margin: 0 20px 0 0;
   }
 
-  @media (min-width: ${(props) => props.theme.mediaQueryTresholds.L}px) {
+  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
     position: absolute;
     top: 10px;
     left: 50%;
@@ -111,7 +111,7 @@ const HeaderAvatar = styled.div`
 
 const HeaderTitle = styled.h1`
   will-change: transform, left, top;
-  font-size: ${(props) => props.theme.info.fonts.boxTitleSize}em;
+  font-size: ${props => props.theme.info.fonts.boxTitleSize}em;
   margin: 0;
   float: left;
   transition-timing-function: ease;
@@ -122,12 +122,12 @@ const HeaderTitle = styled.h1`
     margin-top: 0.3em;
   }
 
-  @media (min-width: ${(props) => props.theme.mediaQueryTresholds.M}px) {
-    font-size: ${(props) => props.theme.info.fonts.boxTitleSizeM}em;
+  @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
+    font-size: ${props => props.theme.info.fonts.boxTitleSizeM}em;
   }
 
-  @media (min-width: ${(props) => props.theme.mediaQueryTresholds.L}px) {
-    font-size: ${(props) => props.theme.info.fonts.boxTitleSizeL}em;
+  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
+    font-size: ${props => props.theme.info.fonts.boxTitleSizeL}em;
     position: absolute;
     top: 85px;
     text-align: center;
