@@ -1,24 +1,34 @@
 import React from "react";
-import Link from "gatsby-link";
-import PropTypes from "prop-types";
-// import LazyLoad from "react-lazyload";
+import { Link } from "gatsby";
 
-import styled from "@emotion/styled";
-import theme from "../../styles/theme";
-import { css } from "emotion";
+import styled from "styled-components";
 
-class ListItem extends React.Component {
-  static propTypes = {
-    post: PropTypes.object.isRequired,
-    linkOnClick: PropTypes.func.isRequired,
-    categoryFilter: PropTypes.string.isRequired,
+interface ListItemProps {
+  post: {
+    node: {
+      excerpt: string;
+      slug: string;
+      fields: {
+        slug: string;
+        prefix: string;
+      };
+      frontmatter: {
+        title: string;
+        subTitle?: string;
+        category?: string;
+      };
+    };
   };
+  categoryFilter: string;
+  linkOnClick: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
+}
 
+class ListItem extends React.Component<ListItemProps> {
   state = {
-    hidden: false,
+    hidden: false
   };
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps: ListItemProps) {
     if (prevProps.categoryFilter !== this.props.categoryFilter) {
       const category = this.props.post.node.frontmatter.category;
       const categoryFilter = this.props.categoryFilter;
@@ -43,9 +53,8 @@ class ListItem extends React.Component {
             style={{ display: `${this.state.hidden ? "none" : "block"}` }}
             key={post.node.fields.slug}
           >
-            <Link
+            <StyledLink
               activeClassName="active"
-              className={link(theme)}
               to={post.node.fields.slug}
               onClick={linkOnClick}
             >
@@ -56,7 +65,7 @@ class ListItem extends React.Component {
                   <h2>{post.node.frontmatter.subTitle}</h2>
                 )}
               </ListItemText>
-            </Link>
+            </StyledLink>
           </li>
         </ul>
       </StyledListItem>
@@ -73,11 +82,11 @@ const StyledListItem = styled.div`
     margin: 0 0 0.7em 0;
     transition: height 1s;
 
-    @media (min-width: ${(props) => props.theme.mediaQueryTresholds.M}px) {
+    @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
       margin: 0 0 1.5rem 0;
     }
 
-    @media (min-width: ${(props) => props.theme.mediaQueryTresholds.L}px) {
+    @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
       .moving-featured &,
       .is-aside & {
         margin: 0 0 0 0;
@@ -86,18 +95,18 @@ const StyledListItem = styled.div`
   }
 `;
 
-const link = (theme) => css`
+const StyledLink = styled(Link)`
   display: flex;
   align-content: center;
   align-items: center;
   justify-content: flex-start;
   flex-direction: row;
   padding: 0.7em 1em 0.7em 1em;
-  color: ${theme.navigator.colors.postsListItemLink};
+  color: ${props => props.theme.navigator.colors.postsListItemLink};
 
   @media (hover: hover) {
     &:hover {
-      color: ${theme.navigator.colors.postsListItemLinkHover};
+      color: ${props => props.theme.navigator.colors.postsListItemLinkHover};
       & .pointer {
         border-radius: 65% 75%;
       }
@@ -153,16 +162,16 @@ const ListItemText = styled.div`
     font-weight: 600;
     letter-spacing: -0.03em;
     margin: 0;
-    font-size: ${(props) => props.theme.navigator.sizes.postsListItemH1Font}em;
+    font-size: ${props => props.theme.navigator.sizes.postsListItemH1Font}em;
 
-    @media (min-width: ${(props) => props.theme.mediaQueryTresholds.M}px) {
-      font-size: ${(props) =>
+    @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
+      font-size: ${props =>
         props.theme.navigator.sizes.postsListItemH1Font *
         props.theme.navigator.sizes.fontIncraseForM}em;
     }
 
-    @media (min-width: ${(props) => props.theme.mediaQueryTresholds.L}px) {
-      font-size: ${(props) =>
+    @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
+      font-size: ${props =>
         props.theme.navigator.sizes.postsListItemH1Font *
         props.theme.navigator.sizes.fontIncraseForL}em;
       .moving-featured &,
@@ -176,17 +185,17 @@ const ListItemText = styled.div`
   & h2 {
     line-height: 1.2;
     display: block;
-    font-size: ${(props) => props.theme.navigator.sizes.postsListItemH2Font}em;
+    font-size: ${props => props.theme.navigator.sizes.postsListItemH2Font}em;
     margin: 0.3em 0 0 0;
 
-    @media (min-width: ${(props) => props.theme.mediaQueryTresholds.M}px) {
-      font-size: ${(props) =>
+    @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
+      font-size: ${props =>
         props.theme.navigator.sizes.postsListItemH2Font *
         props.theme.navigator.sizes.fontIncraseForM}em;
     }
 
-    @media (min-width: ${(props) => props.theme.mediaQueryTresholds.L}px) {
-      font-size: ${(props) =>
+    @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
+      font-size: ${props =>
         props.theme.navigator.sizes.postsListItemH2Font *
         props.theme.navigator.sizes.fontIncraseForL}em;
       .moving-featured &,
@@ -196,7 +205,7 @@ const ListItemText = styled.div`
     }
   }
 
-  @media (min-width: ${(props) => props.theme.mediaQueryTresholds.L}px) {
+  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
     .moving-featured &,
     .is-aside & {
       margin: 0 0 0 0.5em;

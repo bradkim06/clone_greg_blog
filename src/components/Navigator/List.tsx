@@ -1,13 +1,14 @@
 import React from "react";
 import styled from "styled-components";
+import { PostsProps } from "../query/LayoutQuery";
 
 import ListHeader from "./ListHeader";
 import ListItem from "./ListItem";
 import SpringScrollbars from "../SpringScrollbars";
 
 interface ListProps {
-  posts: Array<object>;
-  linkOnClick(event: React.MouseEvent<HTMLButtonElement>): void;
+  posts: PostsProps;
+  linkOnClick: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
   expandOnClick(event: React.MouseEvent<HTMLButtonElement>): void;
   removeFilter(event: React.MouseEvent<HTMLButtonElement>): void;
   navigatorPosition: string;
@@ -37,8 +38,8 @@ class List extends React.Component<ListProps> {
               removeFilter={removeFilter}
             />
             <PostList>
-              {posts &&
-                posts.map((post, i) => (
+              {posts.edges &&
+                posts.edges.map((post, i) => (
                   <ListItem
                     key={i}
                     post={post}

@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { PostsProps } from "../query/LayoutQuery";
 import styled from "styled-components";
 import { forceCheck } from "react-lazyload";
 import {
@@ -11,10 +12,7 @@ import { moveNavigatorAside } from "./../../utils/shared";
 import List from "./List";
 
 interface NavigatorProps {
-  posts: {
-    totalCount: number;
-    edges: Array<object>;
-  };
+  posts: PostsProps;
   navigatorPosition: string;
   navigatorShape: string;
   categoryFilter: string;
@@ -36,9 +34,12 @@ class Navigator extends React.Component<NavigatorProps> {
   };
 
   render() {
-    const { navigatorPosition, navigatorShape, categoryFilter } = this.props;
-
-    const { totalCount, edges } = this.props.posts;
+    const {
+      posts,
+      navigatorPosition,
+      navigatorShape,
+      categoryFilter
+    } = this.props;
 
     return (
       <StyleNavigator
@@ -46,9 +47,9 @@ class Navigator extends React.Component<NavigatorProps> {
           navigatorShape ? navigatorShape : ""
         } `}
       >
-        {totalCount && (
+        {posts.totalCount && (
           <List
-            posts={edges}
+            posts={posts}
             navigatorPosition={navigatorPosition}
             navigatorShape={navigatorShape}
             linkOnClick={this.linkOnClick}

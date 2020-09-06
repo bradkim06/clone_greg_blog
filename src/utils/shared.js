@@ -40,18 +40,16 @@ export function moveNavigatorAside(e) {
     if (this.props.isWideScreen) {
       this.props.setNavigatorPosition("moving-aside");
 
-      setTimeout(() => {
-        if (typeof window !== `undefined`) {
-          if (window.location.pathname !== "/") {
-            this.props.setNavigatorPosition("resizing-aside");
-            this.props.setNavigatorShape(navigatorShape);
-            setTimeout(() => {
-              this.props.setNavigatorPosition("is-aside");
-              setTimeout(forceCheck, 600);
-            });
-          }
+      if (typeof window !== `undefined`) {
+        if (window.location.pathname !== "/") {
+          this.props.setNavigatorPosition("resizing-aside");
+          this.props.setNavigatorShape(navigatorShape);
+          setTimeout(() => {
+            this.props.setNavigatorPosition("is-aside");
+            setTimeout(forceCheck, 600);
+          });
         }
-      }, 1000);
+      }
     } else {
       setTimeout(() => {
         this.props.setNavigatorPosition("is-aside");

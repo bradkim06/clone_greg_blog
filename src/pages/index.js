@@ -11,14 +11,14 @@ class Home extends React.Component {
     data: PropTypes.object.isRequired,
     navigatorPosition: PropTypes.string.isRequired,
     setNavigatorPosition: PropTypes.func.isRequired,
-    isWideScreen: PropTypes.bool.isRequired,
+    isWideScreen: PropTypes.bool.isRequired
   };
 
   featureNavigator = featureNavigator.bind(this);
 
-  componentWillMount() {
-    if (this.props.navigatorPosition !== "is-featured") {
-      this.props.setNavigatorPosition("is-featured");
+  componentDidMount() {
+    if (this.props.navigatorPosition === "is-aside") {
+      this.featureNavigator();
     }
   }
 
@@ -35,13 +35,13 @@ class Home extends React.Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     navigatorPosition: state.navigatorPosition,
-    isWideScreen: state.isWideScreen,
+    isWideScreen: state.isWideScreen
   };
 };
 
 const mapDispatchToProps = {
   setNavigatorPosition,
-  setNavigatorShape,
+  setNavigatorShape
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
