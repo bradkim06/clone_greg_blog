@@ -14,7 +14,7 @@ export function featureNavigator(e) {
           this.props.setNavigatorPosition("is-featured");
           this.props.setNavigatorShape("open");
         });
-      }, 200);
+      }, 300);
     } else {
       setTimeout(() => {
         this.props.setNavigatorPosition("is-featured");
@@ -42,7 +42,7 @@ export function moveNavigatorAside(e) {
           this.props.setNavigatorShape(navigatorShape);
           setTimeout(() => {
             this.props.setNavigatorPosition("is-aside");
-            setTimeout(forceCheck, 300);
+            setTimeout(forceCheck, 600);
           });
         }
       }
