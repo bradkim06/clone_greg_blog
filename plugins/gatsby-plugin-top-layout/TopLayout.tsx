@@ -20,9 +20,14 @@ const InfoBar = loadable(() => import("../../src/components/InfoBox/InfoBar"));
 interface TopLayoutProps {
   children?: any;
   setIsWideScreen: (val: boolean) => void;
+  isWideScreen: boolean;
 }
 
-function TopLayout({ children, setIsWideScreen }: TopLayoutProps) {
+function TopLayout({
+  children,
+  setIsWideScreen,
+  isWideScreen
+}: TopLayoutProps) {
   const { posts, pages } = useLayoutQuery();
   const themeContext = useContext(ThemeContext);
 
@@ -35,8 +40,8 @@ function TopLayout({ children, setIsWideScreen }: TopLayoutProps) {
         {children}
         <Navigator posts={posts} />
         <ActionsBar categories={categories} />
-        <InfoBar pages={pages} />
-        <InfoBox />
+        {isWideScreen || <InfoBar pages={pages} />}
+        {isWideScreen && <InfoBox />}
       </LayoutWrapper>
     </React.Fragment>
   );
@@ -58,7 +63,7 @@ interface ThemeContextProps {
   };
 }
 
-export function useCurrentWidth(ThemeContext: ThemeContextProps) {
+const useCurrentWidth = (ThemeContext: ThemeContextProps) => {
   // save current window width in the state object
   const [width, setWidth] = useState(getWidth());
 
@@ -85,7 +90,7 @@ export function useCurrentWidth(ThemeContext: ThemeContextProps) {
 
   const mediaQueryL = ThemeContext.mediaQueryTresholds.L;
   return width >= mediaQueryL;
-}
+};
 
 interface CategoryProps {
   edges: Array<{
