@@ -21,12 +21,16 @@ interface TopLayoutProps {
   children?: any;
   setIsWideScreen: (val: boolean) => void;
   isWideScreen: boolean;
+  navigatorPosition: string;
+  navigatorShape: string;
 }
 
 function TopLayout({
   children,
   setIsWideScreen,
-  isWideScreen
+  isWideScreen,
+  navigatorPosition,
+  navigatorShape
 }: TopLayoutProps) {
   const { posts, pages } = useLayoutQuery();
   const themeContext = useContext(ThemeContext);
@@ -37,7 +41,8 @@ function TopLayout({
   return (
     <React.Fragment>
       <LayoutWrapper>
-        {children}
+        {(navigatorPosition === "is-featured" && navigatorShape === "open") ||
+          children}
         <Navigator posts={posts} />
         <ActionsBar categories={categories} />
         {isWideScreen || <InfoBar pages={pages} />}
@@ -116,10 +121,14 @@ const category = (posts: CategoryProps) => {
 
 interface ReduxState {
   isWideScreen: boolean;
+  navigatorPosition: string;
+  navigatorShape: string;
 }
 const mapStateToProps = (state: ReduxState) => {
   return {
-    isWideScreen: state.isWideScreen
+    isWideScreen: state.isWideScreen,
+    navigatorPosition: state.navigatorPosition,
+    navigatorShape: state.navigatorShape
   };
 };
 
