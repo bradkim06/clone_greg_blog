@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import Grow from "@material-ui/core/Grow";
 import Paper from "@material-ui/core/Paper";
@@ -7,17 +7,32 @@ import MenuItem from "@material-ui/core/MenuItem";
 import MenuList from "@material-ui/core/MenuList";
 import IconButton from "@material-ui/core/IconButton";
 import FilterListIcon from "@material-ui/icons/FilterList";
-import styled from "@emotion/styled";
+import styled from "styled-components";
 
-function FontSetter({ categories, filterCategory }) {
-  const [open, setOpen] = React.useState(false);
-  const anchorRef = React.useRef(null);
+interface CategoryFilterProps {
+  categories: string[];
+  filterCategory: (val: string) => void;
+}
+
+function CategoryFilter({ categories, filterCategory }: CategoryFilterProps) {
+  const [open, setOpen] = useState(false);
+  const anchorRef: any = useRef(null);
 
   const handleToggle = () => {
-    setOpen((prevOpen) => !prevOpen);
+    setOpen(prevOpen => !prevOpen);
   };
 
-  const handleClose = (event) => {
+  const handleClose = (event: React.MouseEvent<Document>) => {
+    if (anchorRef.current && anchorRef.current.contains(event.target)) {
+      return;
+    }
+    setOpen(false);
+  };
+
+  const handleSetting = (event: React.MouseEvent<HTMLElement>) => {
+    const category: string = (event.target as any).innerText.trim();
+    filterCategory(category);
+
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
     }
@@ -25,26 +40,8 @@ function FontSetter({ categories, filterCategory }) {
     setOpen(false);
   };
 
-  function handleListKeyDown(event) {
-    if (event.key === "Tab") {
-      event.preventDefault();
-      setOpen(false);
-    }
-  }
-
-  const handleSetting = (e) => {
-    const category = e.target.innerText.trim();
-    filterCategory(category);
-
-    if (anchorRef.current && anchorRef.current.contains(e.target)) {
-      return;
-    }
-
-    setOpen(false);
-  };
-
   // return focus to the button when we transitioned from !open -> open
-  const prevOpen = React.useRef(open);
+  const prevOpen = useRef(open);
 
   useEffect(() => {
     if (prevOpen.current === true && open === false) {
@@ -78,20 +75,16 @@ function FontSetter({ categories, filterCategory }) {
             {...TransitionProps}
             style={{
               transformOrigin:
-                placement === "bottom" ? "center top" : "center bottom",
+                placement === "bottom" ? "center top" : "center bottom"
             }}
           >
             <Paper>
               <ClickAwayListener onClickAway={handleClose}>
-                <MenuList
-                  autoFocusItem={open}
-                  id="menu-list-grow"
-                  onKeyDown={handleListKeyDown}
-                >
+                <MenuList autoFocusItem={open} id="menu-list-grow">
                   <MenuItem key="all" onClick={handleSetting}>
                     all posts
                   </MenuItem>
-                  {categories.map((category, index) => (
+                  {categories.map(category => (
                     <MenuItem key={category} onClick={handleSetting}>
                       {category}
                     </MenuItem>
@@ -107,11 +100,11 @@ function FontSetter({ categories, filterCategory }) {
 }
 
 const FilterWrapper = styled.nav`
-  @media (min-width: ${(props) => props.theme.mediaQueryTresholds.M}px) {
+  @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
   }
   .categoryOpen {
-    color: ${(props) => props.theme.bars.colors.icon};
+    color: ${props => props.theme.bars.colors.icon};
   }
 `;
 
-export default FontSetter;
+export default CategoryFilter;
