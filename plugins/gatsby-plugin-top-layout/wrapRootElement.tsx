@@ -2,6 +2,7 @@ import React from "react";
 import { Provider as ReduxProvider } from "react-redux";
 import { ThemeProvider as MaterialProvider } from "@material-ui/core/styles";
 import { ThemeProvider as EmotionProvider } from "emotion-theming";
+import { ThemeProvider as StyledProvider } from "styled-components";
 import theme from "../../src/styles/theme";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { GlobalStyle } from "../../src/styles/globals";
@@ -16,14 +17,16 @@ export default ({ element }) => {
   const store = createStore();
   return (
     <ReduxProvider store={store}>
-      <EmotionProvider theme={theme}>
-        <MaterialProvider theme={theme}>
-          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-          <CssBaseline />
-          <GlobalStyle />
-          {element}
-        </MaterialProvider>
-      </EmotionProvider>
+      <StyledProvider theme={theme}>
+        <EmotionProvider theme={theme}>
+          <MaterialProvider theme={theme}>
+            {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+            <CssBaseline />
+            <GlobalStyle />
+            {element}
+          </MaterialProvider>
+        </EmotionProvider>
+      </StyledProvider>
     </ReduxProvider>
   );
 };
