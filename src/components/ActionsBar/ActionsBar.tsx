@@ -1,16 +1,10 @@
 import React from "react";
-import PropTypes from "prop-types";
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import IconButton from "@material-ui/core/IconButton";
-
-import Link from "gatsby-link";
 import { connect } from "react-redux";
-
 import HomeIcon from "@material-ui/icons/Home";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import Search from "./Search";
-
-import theme from "../../styles/theme";
 
 import {
   setNavigatorPosition,
@@ -23,18 +17,17 @@ import { featureNavigator } from "../../utils/shared";
 import FontSetter from "./FontSetter";
 import CategoryFilter from "./CategoryFilter";
 
-class ActionsBar extends React.Component {
-  static propTypes = {
-    navigatorPosition: PropTypes.string.isRequired,
-    navigatorShape: PropTypes.string.isRequired,
-    isWideScreen: PropTypes.bool.isRequired,
-    setScrollToTop: PropTypes.func.isRequired,
-    setFontSizeIncrease: PropTypes.func.isRequired,
-    categories: PropTypes.array.isRequired,
-    setCategoryFilter: PropTypes.func.isRequired,
-    categoryFilter: PropTypes.string.isRequired
-  };
+interface ActionsBarProps {
+  navigatorPosition: string;
+  navigatorShape: string;
+  isWideScreen: boolean;
+  categories: string[];
+  setScrollToTop: (val: boolean) => void;
+  setFontSizeIncrease: (val: number) => void;
+  setCategoryFilter: (val: string) => void;
+}
 
+class ActionsBar extends React.Component<ActionsBarProps> {
   state = {
     fullscreen: false
   };
@@ -45,11 +38,11 @@ class ActionsBar extends React.Component {
     this.props.setScrollToTop(true);
   };
 
-  fontSetterOnClick = val => {
+  fontSetterOnClick = (val: number) => {
     this.props.setFontSizeIncrease(val);
   };
 
-  categoryFilterOnClick = val => {
+  categoryFilterOnClick = (val: string) => {
     this.props.setCategoryFilter(val);
   };
 
@@ -99,7 +92,14 @@ class ActionsBar extends React.Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
+interface ReduxState {
+  navigatorPosition: string;
+  navigatorShape: string;
+  isWideScreen: boolean;
+  categoryFilter: string;
+}
+
+const mapStateToProps = (state: ReduxState) => {
   return {
     navigatorPosition: state.navigatorPosition,
     navigatorShape: state.navigatorShape,
@@ -173,7 +173,7 @@ const Group = styled.div`
   }
 
   .iconButton {
-    color: ${theme.bars.colors.icon};
+    color: ${props => props.theme.bars.colors.icon};
   }
 `;
 

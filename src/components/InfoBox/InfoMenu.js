@@ -2,11 +2,11 @@ import React from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import { css } from "emotion";
-import Link from "gatsby-link";
+import { Link } from "gatsby";
 import theme from "../../styles/theme";
 
 InfoMenu.propTypes = {
-  linkOnClick: PropTypes.func.isRequired,
+  linkOnClick: PropTypes.func.isRequired
 };
 
 function InfoMenu({ linkOnClick }) {
@@ -34,7 +34,7 @@ const StyleInfoMenu = styled.nav`
   width: 100%;
 `;
 
-const link = (theme) => css`
+const link = theme => css`
   padding: 0.5em;
   font-weight: 300;
   text-transform: lowercase;

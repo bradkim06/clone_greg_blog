@@ -1,5 +1,5 @@
 import React from "react";
-import Link from "gatsby-link";
+import { Link } from "gatsby";
 import styled from "@emotion/styled";
 
 import IconButton from "@material-ui/core/IconButton";

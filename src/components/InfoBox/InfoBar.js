@@ -1,6 +1,6 @@
 import React from "react";
 import Avatar from "@material-ui/core/Avatar";
-import Link from "gatsby-link";
+import { Link } from "gatsby";
 import styled from "@emotion/styled";
 import { connect } from "react-redux";
 
