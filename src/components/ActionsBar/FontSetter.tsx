@@ -7,17 +7,21 @@ import MenuItem from "@material-ui/core/MenuItem";
 import MenuList from "@material-ui/core/MenuList";
 import IconButton from "@material-ui/core/IconButton";
 import FormatSizeIcon from "@material-ui/icons/FormatSize";
-import styled from "@emotion/styled";
+import styled from "styled-components";
 
-function FontSetter({ increaseFont }) {
+interface FontSetterProps {
+  increaseFont: (val: number) => void;
+}
+
+function FontSetter({ increaseFont }: FontSetterProps) {
   const [open, setOpen] = React.useState(false);
-  const anchorRef = React.useRef(null);
+  const anchorRef: any = React.useRef(null);
 
   const handleToggle = () => {
-    setOpen((prevOpen) => !prevOpen);
+    setOpen(prevOpen => !prevOpen);
   };
 
-  const handleClose = (event) => {
+  const handleClose = (event: React.MouseEvent<Document>) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
     }
@@ -25,19 +29,12 @@ function FontSetter({ increaseFont }) {
     setOpen(false);
   };
 
-  function handleListKeyDown(event) {
-    if (event.key === "Tab") {
-      event.preventDefault();
-      setOpen(false);
-    }
-  }
-
-  const handleSetting = (e) => {
-    const val = e.target.innerText.replace("%", "");
+  const handleSetting = (event: React.MouseEvent<HTMLElement>) => {
+    const val = (event.target as any).innerText.replace("%", "");
     const factor = +val / 100;
     increaseFont(factor);
 
-    if (anchorRef.current && anchorRef.current.contains(e.target)) {
+    if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
     }
 
@@ -79,16 +76,12 @@ function FontSetter({ increaseFont }) {
             {...TransitionProps}
             style={{
               transformOrigin:
-                placement === "bottom" ? "center top" : "center bottom",
+                placement === "bottom" ? "center top" : "center bottom"
             }}
           >
             <Paper>
               <ClickAwayListener onClickAway={handleClose}>
-                <MenuList
-                  autoFocusItem={open}
-                  id="menu-list-grow"
-                  onKeyDown={handleListKeyDown}
-                >
+                <MenuList autoFocusItem={open} id="menu-list-grow">
                   <MenuItem onClick={handleSetting}>150%</MenuItem>
                   <MenuItem onClick={handleSetting}>125%</MenuItem>
                   <MenuItem onClick={handleSetting}>100%</MenuItem>
@@ -103,10 +96,10 @@ function FontSetter({ increaseFont }) {
 }
 
 const FontSizeSetter = styled.nav`
-  @media (min-width: ${(props) => props.theme.mediaQueryTresholds.M}px) {
+  @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
   }
   .fontOpen {
-    color: ${(props) => props.theme.bars.colors.icon};
+    color: ${props => props.theme.bars.colors.icon};
   }
 `;
 

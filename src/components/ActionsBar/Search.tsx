@@ -11,19 +11,34 @@ import IconButton from "@material-ui/core/IconButton";
 import TextField from "@material-ui/core/TextField";
 import Fuse from "fuse.js";
 import Link from "gatsby-link";
-import theme from "../../styles/theme";
-import { css } from "emotion";
-import styled from "@emotion/styled";
+import styled from "styled-components";
+
+interface allMdxProps {
+  allMdx: {
+    edges: Array<{
+      node: {
+        fields: {
+          slug: string;
+        };
+        frontmatter: {
+          title: string;
+          subTitle?: string;
+          category?: string;
+        };
+      };
+    }>;
+  };
+}
 
 function SearchDialog() {
-  const { allMdx } = useSearchData();
-  const fuse = new Fuse(allMdx.edges, options);
+  const data: allMdxProps = useSearchData();
+  const fuse = new Fuse(data.allMdx.edges, options);
 
   const [open, setOpen] = useState(false);
-  const [scroll, setScroll] = useState("paper");
+  const [scroll, setScroll] = useState<"paper" | "body" | undefined>("paper");
   const [query, updateQuery] = useState("");
 
-  const handleClickOpen = scrollType => () => {
+  const handleClickOpen = (scrollType: "paper" | "body" | undefined) => () => {
     setOpen(true);
     setScroll(scrollType);
   };
@@ -33,15 +48,15 @@ function SearchDialog() {
     updateQuery("");
   };
 
-  const onSearch = ({ currentTarget }) => {
-    updateQuery(currentTarget.value);
+  const onSearch = (event: any) => {
+    updateQuery(event.currentTarget.value);
   };
 
   const descriptionElementRef = React.useRef(null);
 
   useEffect(() => {
     if (open) {
-      const { current: descriptionElement } = descriptionElementRef;
+      const { current: descriptionElement }: any = descriptionElementRef;
       if (descriptionElement !== null) {
         descriptionElement.focus();
       }
@@ -83,14 +98,14 @@ function SearchDialog() {
               type="search"
               variant="outlined"
               fullWidth
-              autoFocus="true"
+              autoFocus={true}
               helperText="fuzzy searching"
               value={query}
               onChange={onSearch}
               autoComplete="off"
             />
             {results &&
-              results.map(post => (
+              results.map((post: any) => (
                 <SearchResult
                   title={post.item.node.frontmatter.title}
                   subTitle={post.item.node.frontmatter.subTitle}
@@ -110,7 +125,19 @@ function SearchDialog() {
   );
 }
 
-const SearchResult = ({ title, subTitle, slug, linkOnClick }) => {
+interface SearchResultProps {
+  title: string;
+  subTitle?: string;
+  slug: string;
+  linkOnClick: () => void;
+}
+
+const SearchResult = ({
+  title,
+  subTitle,
+  slug,
+  linkOnClick
+}: SearchResultProps) => {
   const titleName = JSON.stringify(title, null, 4);
   const subTitleName = JSON.stringify(subTitle, null, 4);
   const path = JSON.stringify(slug, null, 4);
@@ -122,16 +149,12 @@ const SearchResult = ({ title, subTitle, slug, linkOnClick }) => {
   return (
     <SearchWrapper>
       <li>
-        <Link
-          className={link(theme)}
-          onClick={movePage}
-          to={path.replace(/\"/g, "")}
-        >
+        <StyledLink onClick={movePage} to={path.replace(/\"/g, "")}>
           <h2>{titleName.replace(/\"/g, "")}</h2>
           <small>
             {subTitleName !== "null" && subTitleName.replace(/\"/g, "")}
           </small>
-        </Link>
+        </StyledLink>
       </li>
     </SearchWrapper>
   );
@@ -168,18 +191,18 @@ const SearchWrapper = styled.ul`
   }
 `;
 
-const link = theme => css`
+const StyledLink = styled(Link)`
   display: block;
   align-content: center;
   align-items: center;
   justify-content: flex-start;
   flex-direction: row;
-  color: ${theme.navigator.colors.postsListItemLink};
+  color: ${props => props.theme.navigator.colors.postsListItemLink};
 
   @media (hover: hover) {
     &:hover {
-      color: ${theme.navigator.colors.postsListItemLinkHover};
-      background-color: ${theme.base.colors.lines};
+      color: ${props => props.theme.navigator.colors.postsListItemLinkHover};
+      background-color: ${props => props.theme.base.colors.lines};
       & .pointer {
         border-radius: 65% 75%;
       }
