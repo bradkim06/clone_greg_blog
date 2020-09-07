@@ -11,7 +11,8 @@ import {
   setNavigatorShape,
   setScrollToTop,
   setFontSizeIncrease,
-  setCategoryFilter
+  setCategoryFilter,
+  ReduxState
 } from "../../state/store";
 import { featureNavigator } from "../../utils/shared";
 import FontSetter from "./FontSetter";
@@ -90,13 +91,6 @@ class ActionsBar extends React.Component<ActionsBarProps> {
       </StyleActionsBar>
     );
   }
-}
-
-interface ReduxState {
-  navigatorPosition: string;
-  navigatorShape: string;
-  isWideScreen: boolean;
-  categoryFilter: string;
 }
 
 const mapStateToProps = (state: ReduxState) => {

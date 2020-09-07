@@ -1,13 +1,20 @@
 import React from "react";
 import { Link } from "gatsby";
-import styled from "@emotion/styled";
+import styled from "styled-components";
 
 import IconButton from "@material-ui/core/IconButton";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 import avatar from "../../images/jpg/test.png";
 
-function InfoHeader({ avatarOnClick, expandOnClick }) {
+interface InfoHeaderProps {
+  avatarOnClick: (
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) => void;
+  expandOnClick: () => void;
+}
+
+function InfoHeader({ avatarOnClick, expandOnClick }: InfoHeaderProps) {
   return (
     <Header>
       <HeaderAvatarLink>

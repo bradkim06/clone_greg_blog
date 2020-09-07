@@ -6,9 +6,10 @@ import { forceCheck } from "react-lazyload";
 import {
   setNavigatorPosition,
   setNavigatorShape,
-  setCategoryFilter
+  setCategoryFilter,
+  ReduxState
 } from "../../state/store";
-import { moveNavigatorAside } from "./../../utils/shared";
+import { moveNavigatorAside } from "../../utils/shared";
 import List from "./List";
 
 interface NavigatorProps {
@@ -26,7 +27,7 @@ class Navigator extends React.Component<NavigatorProps> {
 
   expandOnClick = () => {
     this.props.setNavigatorShape("open");
-    setTimeout(forceCheck, 600);
+    // setTimeout(forceCheck, 600);
   };
 
   removefilterOnClick = () => {
@@ -61,12 +62,6 @@ class Navigator extends React.Component<NavigatorProps> {
       </StyleNavigator>
     );
   }
-}
-
-interface ReduxState {
-  navigatorPosition: string;
-  navigatorShape: string;
-  categoryFilter: string;
 }
 
 const mapStateToProps = (state: ReduxState) => {

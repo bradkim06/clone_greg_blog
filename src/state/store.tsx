@@ -53,43 +53,43 @@ const reducer = (state, action) => {
     case SET_NAVIGATOR_POSITION:
       return {
         ...state,
-        navigatorPosition: action.val,
+        navigatorPosition: action.val
       };
 
     case SET_NAVIGATOR_SHAPE:
       return {
         ...state,
-        navigatorShape: action.val,
+        navigatorShape: action.val
       };
 
     case SET_NAVIGATOR_FILTER:
       return {
         ...state,
-        navigatorFilter: action.val,
+        navigatorFilter: action.val
       };
 
     case SET_IS_WIDE_SCREEN:
       return {
         ...state,
-        isWideScreen: action.val,
+        isWideScreen: action.val
       };
 
     case SET_SCROLL_TO_TOP:
       return {
         ...state,
-        scrollToTop: action.val,
+        scrollToTop: action.val
       };
 
     case SET_FONT_SIZE_INCREASE:
       return {
         ...state,
-        fontSizeIncrease: action.val,
+        fontSizeIncrease: action.val
       };
 
     case SET_CATEGORY_FILTER:
       return {
         ...state,
-        categoryFilter: action.val,
+        categoryFilter: action.val
       };
 
     default:
@@ -97,14 +97,24 @@ const reducer = (state, action) => {
   }
 };
 
-const initialState = {
+export interface ReduxState {
+  navigatorPosition: string;
+  navigatorShape: string;
+  navigatorFilter: string;
+  isWideScreen: boolean;
+  scrollToTop: boolean;
+  fontSizeIncrease: number;
+  categoryFilter: string;
+}
+
+const initialState: ReduxState = {
   navigatorPosition: "is-aside",
   navigatorShape: "open",
   navigatorFilter: "",
   isWideScreen: false,
   scrollToTop: false,
   fontSizeIncrease: 1,
-  categoryFilter: "all posts",
+  categoryFilter: "all posts"
 };
 
 const createStore = () =>

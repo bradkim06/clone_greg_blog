@@ -1,26 +1,27 @@
 import React from "react";
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import PropTypes from "prop-types";
-import { css } from "emotion";
 import { Link } from "gatsby";
-import theme from "../../styles/theme";
 
 InfoMenu.propTypes = {
   linkOnClick: PropTypes.func.isRequired
 };
 
-function InfoMenu({ linkOnClick }) {
+interface InfoMenuProps {
+  linkOnClick: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
+}
+
+function InfoMenu({ linkOnClick }: InfoMenuProps) {
   return (
     <StyleInfoMenu>
-      <Link
+      <StyledLink
         key="/about/"
         to="/about/"
         onClick={linkOnClick}
-        className={link(theme)}
         data-shape="closed"
       >
         About
-      </Link>
+      </StyledLink>
     </StyleInfoMenu>
   );
 }
@@ -34,14 +35,14 @@ const StyleInfoMenu = styled.nav`
   width: 100%;
 `;
 
-const link = theme => css`
+const StyledLink = styled(Link)`
   padding: 0.5em;
   font-weight: 300;
   text-transform: lowercase;
-  color: ${theme.info.colors.menuLink};
+  color: ${props => props.theme.info.colors.menuLink};
 
   &:hover {
-    color: ${theme.info.colors.menuLinkHover};
+    color: ${props => props.theme.info.colors.menuLinkHover};
   }
 `;
 

@@ -1,14 +1,19 @@
 import React from "react";
 import Avatar from "@material-ui/core/Avatar";
 import { Link } from "gatsby";
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { connect } from "react-redux";
+import { PagesProps } from "../query/LayoutQuery";
 
 import avatar from "../../images/jpg/test.png";
-import { setNavigatorPosition } from "../../state/store";
+import { setNavigatorPosition, ReduxState } from "../../state/store";
 import { featureNavigator, moveNavigatorAside } from "./../../utils/shared";
 
-class InfoBar extends React.Component {
+interface InfoBarProps {
+  pages: PagesProps;
+}
+
+class InfoBar extends React.Component<InfoBarProps> {
   homeLinkOnClick = featureNavigator.bind(this);
   pageLinkOnClick = moveNavigatorAside.bind(this);
 
@@ -17,7 +22,7 @@ class InfoBar extends React.Component {
       <InfoBarStyle>
         <AvatarLinkBar>
           <Link to="/" onClick={this.homeLinkOnClick} title="back to Home">
-            <Avatar src={avatar} alt="avatar" />
+            <Avatar src={avatar} alt="infoBar avatar" />
           </Link>
         </AvatarLinkBar>
         <BarTitle>
@@ -69,7 +74,7 @@ const BarTitle = styled.div`
   }
 `;
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state: ReduxState) => {
   return {
     navigatorPosition: state.navigatorPosition,
     navigatorShape: state.navigatorShape

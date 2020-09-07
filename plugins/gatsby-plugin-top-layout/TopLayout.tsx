@@ -10,9 +10,9 @@ import LayoutWrapper from "../../src/components/LayoutWrapper/";
 import { ThemeContext } from "styled-components";
 
 import loadable from "@loadable/component";
-import { setIsWideScreen } from "../../src/state/store";
+import { setIsWideScreen, ReduxState } from "../../src/state/store";
 
-const InfoBox = loadable(() => import("../../src/components/InfoBox"));
+const InfoBox = loadable(() => import("../../src/components/InfoBox/InfoBox"));
 const Navigator = loadable(
   () => import("../../src/components/Navigator/Navigator")
 );
@@ -123,9 +123,6 @@ const category = (posts: CategoryProps): string[] => {
   return categoryArray;
 };
 
-interface ReduxState {
-  isWideScreen: boolean;
-}
 const mapStateToProps = (state: ReduxState) => {
   return {
     isWideScreen: state.isWideScreen

@@ -90,6 +90,7 @@ class SpringScrollbars extends Component {
 
     return (
       <Scrollbars
+        autoHide
         universal={true}
         onScroll={forceCheckOnScroll && forceCheck}
         ref={comp => {

@@ -23,7 +23,9 @@ export function featureNavigator(e) {
 
     // uncomment following lines if you want to count featuring Navigator as a visit
     // to index page ('/'), you have to also uncomment import { navigateTo }...
-    navigate("/");
+    setTimeout(() => {
+      navigate("/");
+    }, 500);
   }
 }
 

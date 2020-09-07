@@ -1,6 +1,5 @@
 import React from "react";
-import styled from "@emotion/styled";
-import PropTypes from "prop-types";
+import styled from "styled-components";
 import { connect } from "react-redux";
 
 import InfoHeader from "./InfoHeader";
@@ -8,19 +7,23 @@ import InfoText from "./InfoText";
 import InfoMenu from "./InfoMenu";
 
 import { featureNavigator, moveNavigatorAside } from "./../../utils/shared";
-import { setNavigatorPosition, setNavigatorShape } from "../../state/store";
+import {
+  setNavigatorPosition,
+  setNavigatorShape,
+  ReduxState
+} from "../../state/store";
 
-class InfoBox extends React.Component {
-  static propTypes = {
-    navigatorPosition: PropTypes.string.isRequired,
-    navigatorShape: PropTypes.string.isRequired,
-    setNavigatorShape: PropTypes.func.isRequired
-  };
+interface InfoBoxProps {
+  navigatorPosition: string;
+  navigatorShape: string;
+  setNavigatorShape: (val: string) => void;
+}
 
+class InfoBox extends React.Component<InfoBoxProps> {
   avatarOnClick = featureNavigator.bind(this);
   menulinkOnClick = moveNavigatorAside.bind(this);
 
-  expandOnClick = e => {
+  expandOnClick = () => {
     this.props.setNavigatorShape("closed");
   };
 
@@ -45,7 +48,7 @@ class InfoBox extends React.Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state: ReduxState) => {
   return {
     navigatorPosition: state.navigatorPosition,
     navigatorShape: state.navigatorShape
@@ -101,9 +104,9 @@ const InfoContent = styled.div`
     bottom: 0;
   }
 
-  // .is-aside.open & {
-  //   display: none;
-  // }
+  .is-aside.open & {
+    display: none;
+  }
 `;
 
 export default connect(mapStateToProps, mapDispatchToProps)(InfoBox);

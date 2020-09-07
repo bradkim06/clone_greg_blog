@@ -12,8 +12,8 @@ export interface PostsProps {
       };
       frontmatter: {
         title: string;
-        subTitle?: string;
-        category?: string;
+        subTitle: string;
+        category: string;
       };
     };
   }>;

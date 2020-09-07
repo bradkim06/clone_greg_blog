@@ -210,6 +210,8 @@ const StyledLink = styled(Link)`
   }
 `;
 
+export default SearchDialog;
+
 const useSearchData = () => {
   let searchData = useStaticQuery(
     graphql`
@@ -233,5 +235,3 @@ const useSearchData = () => {
   );
   return searchData;
 };
-
-export default SearchDialog;
