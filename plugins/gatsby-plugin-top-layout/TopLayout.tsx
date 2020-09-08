@@ -1,16 +1,14 @@
 import React, { useEffect, useState, useContext } from "react";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
+import LayoutWrapper from "./LayoutWrapper";
+import { ThemeContext } from "styled-components";
+import loadable from "@loadable/component";
+import { setIsWideScreen } from "../../src/state/store";
 import {
   useLayoutQuery,
   PostsProps,
   PagesProps
 } from "../../src/components/query/LayoutQuery";
-
-import LayoutWrapper from "../../src/components/LayoutWrapper/";
-import { ThemeContext } from "styled-components";
-
-import loadable from "@loadable/component";
-import { setIsWideScreen, ReduxState } from "../../src/state/store";
 
 const InfoBox = loadable(() => import("../../src/components/InfoBox/InfoBox"));
 const Navigator = loadable(
@@ -24,21 +22,21 @@ const InfoBar = loadable(() => import("../../src/components/InfoBox/InfoBar"));
 interface TopLayoutProps {
   children?: any;
   setIsWideScreen: (val: boolean) => void;
-  isWideScreen: boolean;
   posts: PostsProps[];
   pages: PagesProps[];
 }
 
-function TopLayout({
-  children,
-  setIsWideScreen,
-  isWideScreen
-}: TopLayoutProps) {
+function TopLayout({ children }: TopLayoutProps) {
   const { posts, pages } = useLayoutQuery();
-  const themeContext: ThemeContextProps = useContext(ThemeContext);
+  const themeContext = useContext(ThemeContext);
+  const dispatch = useDispatch();
 
   const categories: string[] = category(posts);
-  setIsWideScreen(useCurrentWidth(themeContext));
+
+  const isWide = useCurrentWidth(themeContext);
+  useEffect(() => {
+    dispatch(setIsWideScreen(isWide));
+  }, [isWide]);
 
   return (
     <React.Fragment>
@@ -46,8 +44,8 @@ function TopLayout({
         {children}
         <Navigator posts={posts} />
         <ActionsBar categories={categories} />
-        {isWideScreen || <InfoBar pages={pages} />}
-        {isWideScreen && <InfoBox />}
+        {isWide || <InfoBar pages={pages} />}
+        {isWide && <InfoBox />}
       </LayoutWrapper>
     </React.Fragment>
   );
@@ -66,13 +64,9 @@ const getWidth = (): number => {
   return width;
 };
 
-interface ThemeContextProps {
-  mediaQueryTresholds: {
-    L: number;
-  };
-}
-
-const useCurrentWidth = (ThemeContext: ThemeContextProps): boolean => {
+const useCurrentWidth = (ThemeContext: {
+  mediaQueryTresholds: { L: number };
+}): boolean => {
   // save current window width in the state object
   const [width, setWidth] = useState(getWidth());
 
@@ -97,7 +91,7 @@ const useCurrentWidth = (ThemeContext: ThemeContextProps): boolean => {
     };
   }, []);
 
-  const mediaQueryL: number = ThemeContext.mediaQueryTresholds.L;
+  const mediaQueryL = ThemeContext.mediaQueryTresholds.L;
   return width >= mediaQueryL;
 };
 
@@ -123,14 +117,4 @@ const category = (posts: CategoryProps): string[] => {
   return categoryArray;
 };
 
-const mapStateToProps = (state: ReduxState) => {
-  return {
-    isWideScreen: state.isWideScreen
-  };
-};
-
-const mapDispatchToProps = {
-  setIsWideScreen
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(TopLayout);
+export default TopLayout;

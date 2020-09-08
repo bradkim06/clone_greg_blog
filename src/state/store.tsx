@@ -74,6 +74,7 @@ const reducer = (state: any, action: any) => {
       };
 
     case SET_IS_WIDE_SCREEN:
+      console.log("test");
       return {
         ...state,
         isWideScreen: action.val

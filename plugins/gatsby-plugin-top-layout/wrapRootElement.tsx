@@ -1,7 +1,6 @@
 import React from "react";
 import { Provider as ReduxProvider, useSelector } from "react-redux";
 import { ThemeProvider as MaterialProvider } from "@material-ui/core/styles";
-import { ThemeProvider as EmotionProvider } from "emotion-theming";
 import { ThemeProvider as StyledProvider } from "styled-components";
 import { lightTheme } from "../../src/styles/lightTheme";
 import { darkTheme } from "../../src/styles/darkTheme";

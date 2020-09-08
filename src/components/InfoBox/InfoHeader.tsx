@@ -6,6 +6,7 @@ import IconButton from "@material-ui/core/IconButton";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 import avatar from "../../images/jpg/test.png";
+import config from "../../../content/meta/config";
 
 interface InfoHeaderProps {
   avatarOnClick: (
@@ -25,8 +26,8 @@ function InfoHeader({ avatarOnClick, expandOnClick }: InfoHeaderProps) {
         </Link>
       </HeaderAvatarLink>
       <HeaderTitle>
-        bradkim06
-        <small>Personal Blog</small>
+        {config.infoTitle.replace(/ /g, "\u00a0")}
+        <small>{config.infoTitleNote}</small>
       </HeaderTitle>
       <IconButton
         aria-label="Expand the box"

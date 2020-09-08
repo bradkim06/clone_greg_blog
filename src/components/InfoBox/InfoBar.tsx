@@ -4,10 +4,10 @@ import { Link } from "gatsby";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { PagesProps } from "../query/LayoutQuery";
-
 import avatar from "../../images/jpg/test.png";
 import { setNavigatorPosition, ReduxState } from "../../state/store";
 import { featureNavigator, moveNavigatorAside } from "./../../utils/shared";
+import config from "../../../content/meta/config";
 
 interface InfoBarProps {
   pages: PagesProps;
@@ -26,7 +26,8 @@ class InfoBar extends React.Component<InfoBarProps> {
           </Link>
         </AvatarLinkBar>
         <BarTitle>
-          bradkim06 <small>Hello small Title!</small>
+          {config.infoTitle}
+          <small>{config.infoTitleNote}</small>
         </BarTitle>
       </InfoBarStyle>
     );
