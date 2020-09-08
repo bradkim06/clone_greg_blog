@@ -10,8 +10,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import IconButton from "@material-ui/core/IconButton";
 import TextField from "@material-ui/core/TextField";
 import Fuse from "fuse.js";
-import Link from "gatsby-link";
-import styled from "styled-components";
+import SearchListItem from "./SearchListItem";
 
 interface allMdxProps {
   allMdx: {
@@ -82,7 +81,7 @@ function SearchDialog() {
         scroll={scroll}
         aria-labelledby="scroll-dialog-title"
         aria-describedby="scroll-dialog-description"
-        maxWidth="md"
+        maxWidth="lg"
         fullWidth
       >
         <DialogTitle id="scroll-dialog-title">Search by fuse.js</DialogTitle>
@@ -106,7 +105,7 @@ function SearchDialog() {
             />
             {results &&
               results.map((post: any) => (
-                <SearchResult
+                <SearchListItem
                   title={post.item.node.frontmatter.title}
                   subTitle={post.item.node.frontmatter.subTitle}
                   slug={post.item.node.fields.slug}
@@ -124,41 +123,6 @@ function SearchDialog() {
     </div>
   );
 }
-
-interface SearchResultProps {
-  title: string;
-  subTitle?: string;
-  slug: string;
-  linkOnClick: () => void;
-}
-
-const SearchResult = ({
-  title,
-  subTitle,
-  slug,
-  linkOnClick
-}: SearchResultProps) => {
-  const titleName = JSON.stringify(title, null, 4);
-  const subTitleName = JSON.stringify(subTitle, null, 4);
-  const path = JSON.stringify(slug, null, 4);
-
-  const movePage = () => {
-    linkOnClick();
-  };
-
-  return (
-    <SearchWrapper>
-      <li>
-        <StyledLink onClick={movePage} to={path.replace(/\"/g, "")}>
-          <h2>{titleName.replace(/\"/g, "")}</h2>
-          <small>
-            {subTitleName !== "null" && subTitleName.replace(/\"/g, "")}
-          </small>
-        </StyledLink>
-      </li>
-    </SearchWrapper>
-  );
-};
 
 const options = {
   // isCaseSensitive: false,
@@ -179,36 +143,6 @@ const options = {
     "node.frontmatter.category"
   ]
 };
-
-const SearchWrapper = styled.ul`
-  margin: 0;
-
-  & h3 {
-  }
-
-  & small {
-    display: block;
-  }
-`;
-
-const StyledLink = styled(Link)`
-  display: block;
-  align-content: center;
-  align-items: center;
-  justify-content: flex-start;
-  flex-direction: row;
-  color: ${props => props.theme.navigator.colors.postsListItemLink};
-
-  @media (hover: hover) {
-    &:hover {
-      color: ${props => props.theme.navigator.colors.postsListItemLinkHover};
-      background-color: ${props => props.theme.base.colors.lines};
-      & .pointer {
-        border-radius: 65% 75%;
-      }
-    }
-  }
-`;
 
 export default SearchDialog;
 
