@@ -1,4 +1,4 @@
-const colors = require("../../src/styles/colors");
+const lightColors = require("../../src/styles/lightColors");
 
 module.exports = {
   siteTitle: "bradkim06", // <title>
@@ -17,11 +17,11 @@ module.exports = {
   manifestName: "bradkim06",
   manifestShortName: "Personal Blog", // max 12 characters
   manifestStartUrl: "/",
-  manifestBackgroundColor: colors.background,
-  manifestThemeColor: colors.accent,
+  manifestBackgroundColor: lightColors.background,
+  manifestThemeColor: lightColors.accent,
   manifestDisplay: "standalone",
   // contact
   contactEmail: "bradkim06@gmail.com",
   // Google Search
-  googleSiteVerification: "87GTb3Xk9fFlW-c1OLlIX3JinPcgE7GNTSbInlWdbB0",
+  googleSiteVerification: "87GTb3Xk9fFlW-c1OLlIX3JinPcgE7GNTSbInlWdbB0"
 };

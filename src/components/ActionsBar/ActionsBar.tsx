@@ -5,6 +5,9 @@ import { connect } from "react-redux";
 import HomeIcon from "@material-ui/icons/Home";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import Search from "./Search";
+import FullscreenIcon from "@material-ui/icons/Fullscreen";
+import WbSunnyIcon from "@material-ui/icons/WbSunny";
+import Brightness2 from "@material-ui/icons/Brightness2";
 
 import {
   setNavigatorPosition,
@@ -12,6 +15,7 @@ import {
   setScrollToTop,
   setFontSizeIncrease,
   setCategoryFilter,
+  setThemeToggle,
   ReduxState
 } from "../../state/store";
 import { featureNavigator } from "../../utils/shared";
@@ -23,9 +27,11 @@ interface ActionsBarProps {
   navigatorShape: string;
   isWideScreen: boolean;
   categories: string[];
+  themeToggle: boolean;
   setScrollToTop: (val: boolean) => void;
   setFontSizeIncrease: (val: number) => void;
   setCategoryFilter: (val: string) => void;
+  setThemeToggle: () => void;
 }
 
 class ActionsBar extends React.Component<ActionsBarProps> {
@@ -45,6 +51,10 @@ class ActionsBar extends React.Component<ActionsBarProps> {
 
   categoryFilterOnClick = (val: string) => {
     this.props.setCategoryFilter(val);
+  };
+
+  themeToggleClick = () => {
+    this.props.setThemeToggle();
   };
 
   render() {
@@ -87,6 +97,14 @@ class ActionsBar extends React.Component<ActionsBarProps> {
           >
             <ArrowUpwardIcon />
           </IconButton>
+          <IconButton
+            aria-label="Theme Toggle"
+            onClick={this.themeToggleClick}
+            title="Theme Change"
+            className="iconButton"
+          >
+            {this.props.themeToggle ? <Brightness2 /> : <WbSunnyIcon />}
+          </IconButton>
         </Group>
       </StyleActionsBar>
     );
@@ -98,7 +116,8 @@ const mapStateToProps = (state: ReduxState) => {
     navigatorPosition: state.navigatorPosition,
     navigatorShape: state.navigatorShape,
     isWideScreen: state.isWideScreen,
-    categoryFilter: state.categoryFilter
+    categoryFilter: state.categoryFilter,
+    themeToggle: state.themeToggle
   };
 };
 
@@ -107,7 +126,8 @@ const mapDispatchToProps = {
   setNavigatorShape,
   setScrollToTop,
   setFontSizeIncrease,
-  setCategoryFilter
+  setCategoryFilter,
+  setThemeToggle
 };
 
 const StyleActionsBar = styled.div`

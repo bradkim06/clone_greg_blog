@@ -1,7 +1,6 @@
 import React from "react";
 import { Global, css } from "@emotion/core";
 import normalize from "normalize.css";
-import theme from "../styles/theme";
 
 export const GlobalStyle = () => (
   <Global
@@ -29,13 +28,13 @@ export const GlobalStyle = () => (
         -webkit-text-size-adjust: 100%;
         -moz-text-size-adjust: none;
         -ms-text-size-adjust: 100%;
-        font-family: ${theme.base.fonts.styledFamily};
+        font-family: ${props => props.theme.base.fonts.styledFamily};
         line-height: 1.15;
         text-size-adjust: 100%;
       }
 
       html.wf-active {
-        font-family: ${theme.base.fonts.unstyledFamily};
+        font-family: ${props => props.theme.base.fonts.unstyledFamily};
       }
 
       *,
@@ -60,7 +59,7 @@ export const GlobalStyle = () => (
 
       body {
         margin: 0;
-        background: ${(props) => props.theme.base.colors.background};
+        background: ${props => props.theme.base.colors.background};
         -webkit-tap-highlight-color: rgba(0, 0, 0, 0.05);
       }
 

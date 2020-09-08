@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { SpringSystem, MathUtil } from "rebound";
 import { forceCheck } from "react-lazyload";
 import { connect } from "react-redux";
-import colors from "../../styles/colors";
+import { withTheme } from "styled-components";
 
 import { setScrollToTop } from "../../state/store";
 
@@ -80,7 +80,7 @@ class SpringScrollbars extends Component {
 
   renderThumb({ style, ...props }) {
     const thumbStyle = {
-      backgroundColor: colors.lightGray
+      backgroundColor: this.props.theme.main.colors.subTitle
     };
     return <div style={{ ...style, ...thumbStyle }} {...props} />;
   }
@@ -126,4 +126,7 @@ const mapDispatchToProps = {
   setScrollToTop
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SpringScrollbars);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withTheme(SpringScrollbars));

@@ -1,45 +1,44 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styled from "@emotion/styled";
-import { css } from "@emotion/core";
+import styled from "styled-components";
 import { connect } from "react-redux";
-import theme from "../../styles/theme";
 
 import { setFontSizeIncrease } from "../../state/store";
 
 const propTypes = {
   children: PropTypes.node,
   setFontSizeIncrease: PropTypes.func.isRequired,
-  fontSizeIncrease: PropTypes.number.isRequired,
+  fontSizeIncrease: PropTypes.number.isRequired
 };
 
 const Content = ({ children, fontSizeIncrease }) => {
-  return (
-    <PageContent theme={theme} fontSize={fontSizeIncrease}>
-      {children}
-    </PageContent>
-  );
+  return <PageContent fontIncrease={fontSizeIncrease}>{children}</PageContent>;
 };
 
-const fontSize = ({ theme, fontSize }) => css`
-  font-size: calc(${theme.main.fonts.content.size}em * ${fontSize});
-
-  @media (min-width: ${theme.mediaQueryTresholds.M}px) {
-    font-size: calc(${theme.main.fonts.content.sizeM}em * ${fontSize});
-  }
-
-  @media (min-width: ${theme.mediaQueryTresholds.L}px) {
-    font-size: calc(${theme.main.fonts.content.sizeL}em * ${fontSize});
-  }
-`;
-
 const PageContent = styled.div`
-  color: ${(props) => props.theme.main.colors.content};
-  ${fontSize};
-  line-height: ${(props) => props.theme.main.fonts.content.lineHeight};
+  color: ${props => props.theme.main.colors.content};
+  font-size: calc(
+    ${props => props.theme.main.fonts.content.size}em *
+      ${props => props.fontIncrease}
+  );
+
+  @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
+    font-size: calc(
+      ${props => props.theme.main.fonts.content.sizeM}em *
+        ${props => props.fontIncrease}
+    );
+  }
+
+  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
+    font-size: calc(
+      ${props => props.theme.main.fonts.content.sizeL}em *
+        ${props => props.fontIncrease}
+    );
+  }
+  line-height: ${props => props.theme.main.fonts.content.lineHeight};
 
   & a {
-    color: ${(props) => props.theme.base.colors.link};
+    color: ${props => props.theme.base.colors.link};
   }
 
   & .gatsby-highlight {
@@ -53,7 +52,7 @@ const PageContent = styled.div`
   & .gatsby-resp-image-link {
     margin: 2em -1.5rem;
     border: none;
-    @media (min-width: ${(props) => props.theme.mediaQueryTresholds.M}px) {
+    @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
       margin: 2.5em -3.5rem;
     }
   }
@@ -61,14 +60,14 @@ const PageContent = styled.div`
   & h1,
   & h2,
   & h3 {
-    color: ${(props) => props.theme.main.colors.contentHeading};
-    font-weight: ${(props) => props.theme.main.fonts.contentHeading.weight};
-    line-height: ${(props) => props.theme.main.fonts.contentHeading.lineHeight};
+    color: ${props => props.theme.main.colors.contentHeading};
+    font-weight: ${props => props.theme.main.fonts.contentHeading.weight};
+    line-height: ${props => props.theme.main.fonts.contentHeading.lineHeight};
     margin: 2em 0 1em;
     letter-spacing: -0.02em;
   }
   & h3 {
-    font-size: ${(props) => props.theme.main.fonts.contentHeading.h3Size}em;
+    font-size: ${props => props.theme.main.fonts.contentHeading.h3Size}em;
   }
   & p {
     margin: 0 0 1.5em 0;
@@ -77,7 +76,7 @@ const PageContent = styled.div`
   & ul {
     list-style: circle;
     padding: 0 0 0 1.3em;
-    @media (min-width: ${(props) => props.theme.mediaQueryTresholds.M}px) {
+    @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
       padding: 0 0 0 2em;
     }
   }
@@ -85,7 +84,7 @@ const PageContent = styled.div`
     margin: 0 0 0.5em 0;
   }
   & blockquote {
-    border: 5px solid ${(props) => props.theme.main.colors.blockquoteFrame};
+    border: 5px solid ${props => props.theme.main.colors.blockquoteFrame};
     font-style: italic;
     margin: 2.5em 0;
     padding: 1em 1.1em 1em 1.3em;
@@ -95,7 +94,7 @@ const PageContent = styled.div`
     }
     &::before,
     &::after {
-      background: ${(props) => props.theme.main.colors.background};
+      background: ${props => props.theme.main.colors.background};
       content: "";
       height: 5px;
       left: 50%;
@@ -123,30 +122,30 @@ const PageContent = styled.div`
   }
 
   & table th {
-    // color: ${(props) => props.theme.base.colors.text};
+    // color: ${props => props.theme.base.colors.text};
     font-size: 1.2rem;
     font-weight: 700;
     letter-spacing: 0.2px;
     text-align: left;
     text-transform: uppercase;
-    background-color: ${(props) => props.theme.base.colors.lines};
+    background-color: ${props => props.theme.base.colors.lines};
   }
 
   & table th,
   & table td {
     padding: 6px 12px;
-    border: 1px solid ${(props) => props.theme.base.colors.text};
+    border: 1px solid ${props => props.theme.base.colors.text};
   }
 `;
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    fontSizeIncrease: state.fontSizeIncrease,
+    fontSizeIncrease: state.fontSizeIncrease
   };
 };
 
 const mapDispatchToProps = {
-  setFontSizeIncrease,
+  setFontSizeIncrease
 };
 
 Content.propTypes = propTypes;

@@ -12,43 +12,48 @@ const SET_IS_WIDE_SCREEN = "SET_IS_WIDE_SCREEN";
 const SET_SCROLL_TO_TOP = "SET_SCROLL_TO_TOP";
 const SET_FONT_SIZE_INCREASE = "SET_FONT_SIZE_INCREASE";
 const SET_CATEGORY_FILTER = "SET_CATEGORY_FILTER";
+const SET_THEME_TOGGLE = "SET_THEME_TOGGLE";
 
 /*
  * action creators
  */
 
-export function setNavigatorPosition(val) {
+export function setNavigatorPosition(val: string) {
   return { type: SET_NAVIGATOR_POSITION, val };
 }
 
-export function setNavigatorShape(val) {
+export function setNavigatorShape(val: string) {
   return { type: SET_NAVIGATOR_SHAPE, val };
 }
 
-export function setNavigatorFilter(val) {
+export function setNavigatorFilter(val: string) {
   return { type: SET_NAVIGATOR_FILTER, val };
 }
 
-export function setIsWideScreen(val) {
+export function setIsWideScreen(val: boolean) {
   return { type: SET_IS_WIDE_SCREEN, val };
 }
 
-export function setScrollToTop(val) {
+export function setScrollToTop(val: boolean) {
   return { type: SET_SCROLL_TO_TOP, val };
 }
 
-export function setFontSizeIncrease(val) {
+export function setFontSizeIncrease(val: boolean) {
   return { type: SET_FONT_SIZE_INCREASE, val };
 }
 
-export function setCategoryFilter(val) {
+export function setCategoryFilter(val: string) {
   return { type: SET_CATEGORY_FILTER, val };
+}
+
+export function setThemeToggle() {
+  return { type: SET_THEME_TOGGLE };
 }
 
 /*
  * reducer
  */
-const reducer = (state, action) => {
+const reducer = (state: any, action: any) => {
   switch (action.type) {
     case SET_NAVIGATOR_POSITION:
       return {
@@ -92,6 +97,12 @@ const reducer = (state, action) => {
         categoryFilter: action.val
       };
 
+    case SET_THEME_TOGGLE:
+      return {
+        ...state,
+        themeToggle: !state.themeToggle
+      };
+
     default:
       return state;
   }
@@ -105,6 +116,7 @@ export interface ReduxState {
   scrollToTop: boolean;
   fontSizeIncrease: number;
   categoryFilter: string;
+  themeToggle: boolean;
 }
 
 const initialState: ReduxState = {
@@ -114,7 +126,8 @@ const initialState: ReduxState = {
   isWideScreen: false,
   scrollToTop: false,
   fontSizeIncrease: 1,
-  categoryFilter: "all posts"
+  categoryFilter: "all posts",
+  themeToggle: true
 };
 
 const createStore = () =>
