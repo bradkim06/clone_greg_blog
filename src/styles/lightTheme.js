@@ -132,6 +132,11 @@ export const lightTheme = {
       infoBar: 60
     }
   },
+  search: {
+    colors: {
+      listBackground: Color(lightColors.background).darken(0.05).string()
+    }
+  },
   mediaQueryTresholds: {
     M: 600,
     L: 1024
