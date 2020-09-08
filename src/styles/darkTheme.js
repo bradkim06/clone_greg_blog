@@ -1,5 +1,8 @@
+// This is a custom theme, for details go to http://forgatsby.greglobinski.com/customize-personal-blog-starter/
+
 import { createMuiTheme } from "@material-ui/core/styles";
 import Color from "color";
+
 import darkColors from "./darkColors";
 
 export const darkTheme = {
@@ -8,7 +11,7 @@ export const darkTheme = {
       background: darkColors.background,
       text: darkColors.bright,
       link: darkColors.accent,
-      linkHover: Color(darkColors.accent).darken(0.3).string(),
+      linkHover: Color(darkColors.accent).lighten(0.1).string(),
       accent: darkColors.accent,
       lines: darkColors.gray
     },
@@ -17,18 +20,18 @@ export const darkTheme = {
     },
     fonts: {
       unstyledFamily: `Arial`,
-      styledFamily: "Fira Code",
+      styledFamily: "IBM Plex Serif",
       styledFonts: "300,400,600"
     }
   },
   info: {
     colors: {
-      text: darkColors.white,
+      text: darkColors.bright,
       background: darkColors.background,
       socialIcons: darkColors.lightGray,
       socialIconsHover: darkColors.accent,
-      menuLink: darkColors.accent,
-      menuLinkHover: Color(darkColors.accent).darken(0.3).string()
+      menuLink: darkColors.bright,
+      menuLinkHover: darkColors.accent
     },
     sizes: {
       width: 320,
@@ -43,7 +46,7 @@ export const darkTheme = {
   navigator: {
     colors: {
       background: darkColors.background,
-      postsListItemLink: darkColors.white,
+      postsListItemLink: darkColors.bright,
       postsListItemLinkHover: darkColors.accent,
       postsHeader: darkColors.bright
     },
@@ -58,13 +61,13 @@ export const darkTheme = {
   main: {
     colors: {
       background: darkColors.background,
-      title: darkColors.white,
+      title: darkColors.bright,
       subTitle: darkColors.bright,
       meta: darkColors.bright,
       content: darkColors.bright,
       footer: darkColors.bright,
-      contentHeading: darkColors.white,
-      blockquoteFrame: darkColors.accent,
+      contentHeading: darkColors.bright,
+      blockquoteFrame: darkColors.dark,
       link: darkColors.accent,
       linkHover: darkColors.dark,
       fbCommentsColorscheme: "dark"
@@ -93,8 +96,8 @@ export const darkTheme = {
       },
       content: {
         size: 1.0,
-        sizeM: 1.15,
-        sizeL: 1.1,
+        sizeM: 1.1,
+        sizeL: 1.2,
         lineHeight: 1.6
       },
       contentHeading: {
@@ -113,7 +116,7 @@ export const darkTheme = {
     colors: {
       text: Color(darkColors.gray).lighten(0.5).string(),
       link: darkColors.accent,
-      linkHover: Color(darkColors.accent).darken(0.3).string()
+      linkHover: Color(darkColors.accent).lighten(0.2).string()
     },
     fonts: {
       footnote: {

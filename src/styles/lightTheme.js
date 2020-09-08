@@ -92,8 +92,8 @@ export const lightTheme = {
       },
       content: {
         size: 1.0,
-        sizeM: 1.15,
-        sizeL: 1.1,
+        sizeM: 1.1,
+        sizeL: 1.2,
         lineHeight: 1.6
       },
       contentHeading: {
