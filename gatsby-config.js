@@ -45,6 +45,21 @@ module.exports = {
       }
     },
     {
+      resolve: `gatsby-plugin-prefetch-google-fonts`,
+      options: {
+        fonts: [
+          {
+            family: `Open Sans`,
+            subsets: ["korean"]
+          },
+          {
+            family: `IBM Plex Serif`,
+            subsets: ["korean"]
+          }
+        ]
+      }
+    },
+    {
       resolve: "gatsby-plugin-material-ui",
       // If you want to use styled components you should change the injection order.
       options: {
