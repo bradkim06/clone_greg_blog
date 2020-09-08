@@ -29,7 +29,7 @@ function SearchListItem({
       <Grow in={true} timeout={500}>
         <SearchWrapper>
           <FlexChild>
-            <h1>{titleName.replace(/\"/g, "")}</h1>
+            <h3>{titleName.replace(/\"/g, "")}</h3>
             <Divider />
             <small>
               {subTitleName !== "null" && subTitleName.replace(/\"/g, "")}
@@ -70,8 +70,13 @@ const FlexChild = styled.li`
     color: ${props => props.theme.navigator.colors.postsListItemLinkHover};
   }
 
-  h1 {
+  h3 {
     margin: 0;
+    font-weight: 700;
+  }
+
+  small {
+    font-weight: 400;
   }
 `;
 
