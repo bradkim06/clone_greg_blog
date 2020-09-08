@@ -54,7 +54,7 @@ function TopLayout({
 }
 
 const getWidth = (): number => {
-  let width: number = 0;
+  let width = 0;
 
   if (typeof window !== "undefined") {
     width =
@@ -80,7 +80,7 @@ const useCurrentWidth = (ThemeContext: ThemeContextProps): boolean => {
   // it does not have any dependencies.
   useEffect(() => {
     // timeoutId for debounce mechanism
-    let timeoutId: number = null;
+    let timeoutId = 0;
     const resizeListener = () => {
       // prevent execution of previous setTimeout
       clearTimeout(timeoutId);
@@ -112,10 +112,10 @@ interface CategoryProps {
 }
 
 const category = (posts: CategoryProps): string[] => {
-  let categoryArray: string[] = posts.edges.reduce((list, edge) => {
-    const category = edge.node.frontmatter.category;
+  let categoryArray = posts.edges.reduce((list: string[], edge: object) => {
+    const category = (edge as any).node.frontmatter.category;
     if (category && !~list.indexOf(category)) {
-      return list.concat(edge.node.frontmatter.category);
+      return list.concat((edge as any).node.frontmatter.category);
     } else {
       return list;
     }

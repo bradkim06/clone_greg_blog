@@ -80,7 +80,7 @@ class SpringScrollbars extends Component {
 
   renderThumb({ style, ...props }) {
     const thumbStyle = {
-      backgroundColor: this.props.theme.base.colors.lines
+      backgroundColor: this.props.theme.bars.colors.icon
     };
     return <div style={{ ...style, ...thumbStyle }} {...props} />;
   }

@@ -21,7 +21,6 @@ module.exports = {
         name: "pages"
       }
     },
-    `gatsby-plugin-emotion`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {

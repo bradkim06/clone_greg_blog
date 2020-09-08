@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Provider as ReduxProvider, useSelector } from "react-redux";
 import { ThemeProvider as MaterialProvider } from "@material-ui/core/styles";
 import { ThemeProvider as EmotionProvider } from "emotion-theming";
@@ -8,7 +8,7 @@ import { darkTheme } from "../../src/styles/darkTheme";
 import { GlobalStyle } from "../../src/styles/globals";
 import { createMuiTheme } from "@material-ui/core/styles";
 
-import createStore from "../../src/state/store";
+import createStore, { ReduxState } from "../../src/state/store";
 
 const store = createStore();
 
@@ -26,19 +26,17 @@ function wrapRootElement({ element }: any) {
 }
 
 const Initialize = ({ children }: any) => {
-  const stateTheme = useSelector(state => state.themeToggle);
+  const stateTheme = useSelector<ReduxState>(state => state.themeToggle);
   const theme = stateTheme ? darkTheme : lightTheme;
-  const materialTheme = createMuiTheme(theme);
+  const materialTheme = (createMuiTheme as any)(theme);
 
   return (
     <StyledProvider theme={theme}>
-      <EmotionProvider theme={theme}>
-        <MaterialProvider theme={materialTheme}>
-          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-          <GlobalStyle />
-          {children}
-        </MaterialProvider>
-      </EmotionProvider>
+      <MaterialProvider theme={materialTheme}>
+        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+        <GlobalStyle />
+        {children}
+      </MaterialProvider>
     </StyledProvider>
   );
 };

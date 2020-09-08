@@ -90,20 +90,20 @@ class ActionsBar extends React.Component<ActionsBarProps> {
             <FontSetter increaseFont={this.fontSetterOnClick} />
           )}
           <IconButton
-            aria-label="Back to top"
-            onClick={this.arrowUpOnClick}
-            title="Scroll to top"
-            className="iconButton"
-          >
-            <ArrowUpwardIcon />
-          </IconButton>
-          <IconButton
             aria-label="Theme Toggle"
             onClick={this.themeToggleClick}
             title="Theme Change"
             className="iconButton"
           >
             {this.props.themeToggle ? <WbSunnyIcon /> : <Brightness2 />}
+          </IconButton>
+          <IconButton
+            aria-label="Back to top"
+            onClick={this.arrowUpOnClick}
+            title="Scroll to top"
+            className="iconButton"
+          >
+            <ArrowUpwardIcon />
           </IconButton>
         </Group>
       </StyleActionsBar>

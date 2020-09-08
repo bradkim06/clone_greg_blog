@@ -1,15 +1,15 @@
 import React from "react";
-import styled from "@emotion/styled";
+import styled from "styled-components";
 
 export default function Article(props) {
   return <StyleArticle>{props.children}</StyleArticle>;
 }
 
 const StyleArticle = styled.article`
-  background: ${(props) => props.theme.main.colors.background};
-  max-width: ${(props) => props.theme.main.sizes.articleMaxWidth};
+  background: ${props => props.theme.main.colors.background};
+  max-width: ${props => props.theme.main.sizes.articleMaxWidth};
   margin: 0 auto;
-  padding: calc(${(props) => props.theme.bars.sizes.infoBar}px + 1.5rem) 1.5rem
+  padding: calc(${props => props.theme.bars.sizes.infoBar}px + 1.5rem) 1.5rem
     1.5rem 1.5rem;
   & strong,
   & b {
@@ -23,16 +23,16 @@ const StyleArticle = styled.article`
     transition: 0.3s;
 
     &:hover {
-      color: ${(props) => props.theme.base.colors.linkHover};
+      color: ${props => props.theme.base.colors.linkHover};
     }
   }
 
-  @media (min-width: ${(props) => props.theme.mediaQueryTresholds.M}px) {
-    padding: calc(2.5rem + ${(props) => props.theme.bars.sizes.infoBar}px)
-      3.5rem 2.5rem;
+  @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
+    padding: calc(2.5rem + ${props => props.theme.bars.sizes.infoBar}px) 3.5rem
+      2.5rem;
   }
 
-  @media (min-width: ${(props) => props.theme.mediaQueryTresholds.L}px) {
+  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
     padding: 3.5rem;
   }
 `;

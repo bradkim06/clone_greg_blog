@@ -1,14 +1,9 @@
 import React, { useEffect } from "react";
 import { useStaticQuery, graphql } from "gatsby";
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { useSelector } from "react-redux";
 
-const StyledComments = styled.div`
-  margin: 3em 0 0;
-  padding: 3em 0 0;
-`;
-
-const PostComments = () => {
+function PostComments() {
   const { mdx } = useCommentData();
   const stateTheme = useSelector(state => state.themeToggle);
   const themeSelect = stateTheme ? "photon-dark" : "github-light";
@@ -33,7 +28,14 @@ const PostComments = () => {
       <section id="inject-comments-for-uterances"></section>
     </StyledComments>
   );
-};
+}
+
+const StyledComments = styled.div`
+  margin: 3em 0 0;
+  padding: 3em 0 0;
+`;
+
+export default PostComments;
 
 const useCommentData = () => {
   let commentData = useStaticQuery(
@@ -53,5 +55,3 @@ const useCommentData = () => {
   );
   return commentData;
 };
-
-export default PostComments;
