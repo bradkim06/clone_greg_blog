@@ -44,6 +44,7 @@ module.exports = {
         ]
       }
     },
+    `gatsby-plugin-preload-fonts`,
     {
       resolve: `gatsby-plugin-prefetch-google-fonts`,
       options: {
@@ -98,6 +99,14 @@ module.exports = {
       }
     },
     `gatsby-plugin-sharp`,
-    `gatsby-plugin-sitemap`
+    `gatsby-plugin-sitemap`,
+    {
+      resolve: 'gatsby-plugin-robots-txt',
+      options: {
+        host: 'https://bradkim06.github.io',
+        sitemap: 'https://bradkim06.github.io/sitemap.xml',
+        policy: [{ userAgent: '*', allow: '/' }]
+      }
+    },
   ]
 };
