@@ -68,14 +68,13 @@ class ActionsBar extends React.Component<ActionsBarProps> {
     return (
       <StyleActionsBar>
         <Group>
-          <IconButton
+          <StyledIconButton
             aria-label="Back to list"
             onClick={this.homeOnClick}
             title="Back to the list"
-            className="iconButton"
           >
             <HomeIcon />
-          </IconButton>
+          </StyledIconButton>
           <Search />
           {((isWideScreen && navigatorShape === "open") ||
             navigatorPosition !== "is-aside") && (
@@ -89,22 +88,20 @@ class ActionsBar extends React.Component<ActionsBarProps> {
           {navigatorPosition === "is-aside" && (
             <FontSetter increaseFont={this.fontSetterOnClick} />
           )}
-          <IconButton
+          <StyledIconButton
             aria-label="Theme Toggle"
             onClick={this.themeToggleClick}
             title="Theme Change"
-            className="iconButton"
           >
             {this.props.themeToggle ? <WbSunnyIcon /> : <Brightness2 />}
-          </IconButton>
-          <IconButton
+          </StyledIconButton>
+          <StyledIconButton
             aria-label="Back to top"
             onClick={this.arrowUpOnClick}
             title="Scroll to top"
-            className="iconButton"
           >
             <ArrowUpwardIcon />
-          </IconButton>
+          </StyledIconButton>
         </Group>
       </StyleActionsBar>
     );
@@ -185,10 +182,10 @@ const Group = styled.div`
   @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
     flex-direction: column;
   }
+`;
 
-  .iconButton {
-    color: ${props => props.theme.bars.colors.icon};
-  }
+const StyledIconButton = styled(IconButton)`
+  color: ${props => props.theme.bars.colors.icon};
 `;
 
 export default connect(mapStateToProps, mapDispatchToProps)(ActionsBar);

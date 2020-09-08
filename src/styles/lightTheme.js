@@ -63,7 +63,7 @@ export const lightTheme = {
       content: lightColors.dark,
       footer: lightColors.gray,
       contentHeading: lightColors.gray,
-      blockquoteFrame: lightColors.lightGray,
+      blockquoteFrame: lightColors.accent,
       link: lightColors.accent,
       linkHover: lightColors.dark,
       fbCommentslightColorscheme: "light"

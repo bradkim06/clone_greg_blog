@@ -67,7 +67,7 @@ export const darkTheme = {
       content: darkColors.bright,
       footer: darkColors.bright,
       contentHeading: darkColors.bright,
-      blockquoteFrame: darkColors.dark,
+      blockquoteFrame: darkColors.accent,
       link: darkColors.accent,
       linkHover: darkColors.dark,
       fbCommentsColorscheme: "dark"
