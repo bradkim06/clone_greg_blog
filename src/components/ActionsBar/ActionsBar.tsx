@@ -103,7 +103,7 @@ class ActionsBar extends React.Component<ActionsBarProps> {
             title="Theme Change"
             className="iconButton"
           >
-            {this.props.themeToggle ? <Brightness2 /> : <WbSunnyIcon />}
+            {this.props.themeToggle ? <WbSunnyIcon /> : <Brightness2 />}
           </IconButton>
         </Group>
       </StyleActionsBar>

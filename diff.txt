@@ -1,764 +1,874 @@
-diff --git a/content/meta/config.js b/content/meta/config.js
-index 752a71d..e7d779a 100644
---- a/content/meta/config.js
-+++ b/content/meta/config.js
-@@ -1,4 +1,4 @@
--const colors = require("../../src/styles/colors");
-+const lightColors = require("../../src/styles/lightColors");
- 
- module.exports = {
-   siteTitle: "bradkim06", // <title>
-@@ -17,11 +17,11 @@ module.exports = {
-   manifestName: "bradkim06",
-   manifestShortName: "Personal Blog", // max 12 characters
-   manifestStartUrl: "/",
--  manifestBackgroundColor: colors.background,
--  manifestThemeColor: colors.accent,
-+  manifestBackgroundColor: lightColors.background,
-+  manifestThemeColor: lightColors.accent,
-   manifestDisplay: "standalone",
-   // contact
-   contactEmail: "bradkim06@gmail.com",
-   // Google Search
--  googleSiteVerification: "87GTb3Xk9fFlW-c1OLlIX3JinPcgE7GNTSbInlWdbB0",
-+  googleSiteVerification: "87GTb3Xk9fFlW-c1OLlIX3JinPcgE7GNTSbInlWdbB0"
- };
-diff --git a/gatsby-config.js b/gatsby-config.js
-index c455127..78479d0 100644
---- a/gatsby-config.js
-+++ b/gatsby-config.js
-@@ -3,7 +3,7 @@ const config = require("./content/meta/config");
- module.exports = {
-   siteMetadata: {
-     title: "bradkim06",
--    siteUrl: `https://bradkim06.github.io`,
-+    siteUrl: `https://bradkim06.github.io`
-   },
-   plugins: [
-     "gatsby-plugin-top-layout",
-@@ -11,15 +11,15 @@ module.exports = {
-       resolve: `gatsby-source-filesystem`,
-       options: {
-         path: `${__dirname}/content/posts/`,
--        name: "posts",
--      },
-+        name: "posts"
-+      }
-     },
-     {
-       resolve: `gatsby-source-filesystem`,
-       options: {
-         path: `${__dirname}/content/pages/`,
--        name: "pages",
--      },
-+        name: "pages"
-+      }
-     },
-     `gatsby-plugin-emotion`,
-     {
-@@ -30,8 +30,8 @@ module.exports = {
-         start_url: config.manifestStartUrl,
-         background_color: config.manifestBackgroundColor,
-         theme_color: config.manifestThemeColor,
--        display: config.manifestDisplay,
--      },
-+        display: config.manifestDisplay
-+      }
-     },
-     `gatsby-plugin-offline`,
-     {
-@@ -40,10 +40,10 @@ module.exports = {
-         fonts: [
-           {
-             family: `Open Sans`,
--            variants: [`300`, `400`, `600`],
--          },
--        ],
--      },
-+            variants: [`300`, `400`, `600`]
-+          }
-+        ]
-+      }
-     },
-     {
-       resolve: "gatsby-plugin-material-ui",
-@@ -52,7 +52,7 @@ module.exports = {
-         // stylesProvider: {
-         //   injectFirst: true,
-         // },
--      },
-+      }
-     },
-     // If you want to use styled components you should add the plugin here.
-     // 'gatsby-plugin-styled-components',
-@@ -67,23 +67,23 @@ module.exports = {
-             resolve: `gatsby-remark-images`,
-             options: {
-               maxWidth: 800,
--              backgroundColor: "transparent",
--            },
-+              backgroundColor: "transparent"
-+            }
-           },
-           {
-             resolve: `gatsby-remark-responsive-iframe`,
-             options: {
--              wrapperStyle: `margin-bottom: 2em`,
--            },
-+              wrapperStyle: `margin-bottom: 2em`
-+            }
-           },
-           "gatsby-remark-grid-tables",
-           `gatsby-remark-prismjs`,
-           `gatsby-remark-copy-linked-files`,
--          `gatsby-remark-smartypants`,
--        ],
--      },
-+          `gatsby-remark-smartypants`
-+        ]
-+      }
-     },
-     `gatsby-plugin-sharp`,
--    `gatsby-plugin-sitemap`,
--  ],
-+    `gatsby-plugin-sitemap`
-+  ]
- };
+diff --git a/diff.txt b/diff.txt
+index b18bed4..e69de29 100644
+--- a/diff.txt
++++ b/diff.txt
+@@ -1,764 +0,0 @@
+-diff --git a/content/meta/config.js b/content/meta/config.js
+-index 752a71d..e7d779a 100644
+---- a/content/meta/config.js
+-+++ b/content/meta/config.js
+-@@ -1,4 +1,4 @@
+--const colors = require("../../src/styles/colors");
+-+const lightColors = require("../../src/styles/lightColors");
+- 
+- module.exports = {
+-   siteTitle: "bradkim06", // <title>
+-@@ -17,11 +17,11 @@ module.exports = {
+-   manifestName: "bradkim06",
+-   manifestShortName: "Personal Blog", // max 12 characters
+-   manifestStartUrl: "/",
+--  manifestBackgroundColor: colors.background,
+--  manifestThemeColor: colors.accent,
+-+  manifestBackgroundColor: lightColors.background,
+-+  manifestThemeColor: lightColors.accent,
+-   manifestDisplay: "standalone",
+-   // contact
+-   contactEmail: "bradkim06@gmail.com",
+-   // Google Search
+--  googleSiteVerification: "87GTb3Xk9fFlW-c1OLlIX3JinPcgE7GNTSbInlWdbB0",
+-+  googleSiteVerification: "87GTb3Xk9fFlW-c1OLlIX3JinPcgE7GNTSbInlWdbB0"
+- };
+-diff --git a/gatsby-config.js b/gatsby-config.js
+-index c455127..78479d0 100644
+---- a/gatsby-config.js
+-+++ b/gatsby-config.js
+-@@ -3,7 +3,7 @@ const config = require("./content/meta/config");
+- module.exports = {
+-   siteMetadata: {
+-     title: "bradkim06",
+--    siteUrl: `https://bradkim06.github.io`,
+-+    siteUrl: `https://bradkim06.github.io`
+-   },
+-   plugins: [
+-     "gatsby-plugin-top-layout",
+-@@ -11,15 +11,15 @@ module.exports = {
+-       resolve: `gatsby-source-filesystem`,
+-       options: {
+-         path: `${__dirname}/content/posts/`,
+--        name: "posts",
+--      },
+-+        name: "posts"
+-+      }
+-     },
+-     {
+-       resolve: `gatsby-source-filesystem`,
+-       options: {
+-         path: `${__dirname}/content/pages/`,
+--        name: "pages",
+--      },
+-+        name: "pages"
+-+      }
+-     },
+-     `gatsby-plugin-emotion`,
+-     {
+-@@ -30,8 +30,8 @@ module.exports = {
+-         start_url: config.manifestStartUrl,
+-         background_color: config.manifestBackgroundColor,
+-         theme_color: config.manifestThemeColor,
+--        display: config.manifestDisplay,
+--      },
+-+        display: config.manifestDisplay
+-+      }
+-     },
+-     `gatsby-plugin-offline`,
+-     {
+-@@ -40,10 +40,10 @@ module.exports = {
+-         fonts: [
+-           {
+-             family: `Open Sans`,
+--            variants: [`300`, `400`, `600`],
+--          },
+--        ],
+--      },
+-+            variants: [`300`, `400`, `600`]
+-+          }
+-+        ]
+-+      }
+-     },
+-     {
+-       resolve: "gatsby-plugin-material-ui",
+-@@ -52,7 +52,7 @@ module.exports = {
+-         // stylesProvider: {
+-         //   injectFirst: true,
+-         // },
+--      },
+-+      }
+-     },
+-     // If you want to use styled components you should add the plugin here.
+-     // 'gatsby-plugin-styled-components',
+-@@ -67,23 +67,23 @@ module.exports = {
+-             resolve: `gatsby-remark-images`,
+-             options: {
+-               maxWidth: 800,
+--              backgroundColor: "transparent",
+--            },
+-+              backgroundColor: "transparent"
+-+            }
+-           },
+-           {
+-             resolve: `gatsby-remark-responsive-iframe`,
+-             options: {
+--              wrapperStyle: `margin-bottom: 2em`,
+--            },
+-+              wrapperStyle: `margin-bottom: 2em`
+-+            }
+-           },
+-           "gatsby-remark-grid-tables",
+-           `gatsby-remark-prismjs`,
+-           `gatsby-remark-copy-linked-files`,
+--          `gatsby-remark-smartypants`,
+--        ],
+--      },
+-+          `gatsby-remark-smartypants`
+-+        ]
+-+      }
+-     },
+-     `gatsby-plugin-sharp`,
+--    `gatsby-plugin-sitemap`,
+--  ],
+-+    `gatsby-plugin-sitemap`
+-+  ]
+- };
+-diff --git a/plugins/gatsby-plugin-top-layout/wrapRootElement.tsx b/plugins/gatsby-plugin-top-layout/wrapRootElement.tsx
+-index 51a448d..e3f1cd9 100644
+---- a/plugins/gatsby-plugin-top-layout/wrapRootElement.tsx
+-+++ b/plugins/gatsby-plugin-top-layout/wrapRootElement.tsx
+-@@ -1,32 +1,47 @@
+--import React from "react";
+-+import React, { useEffect, useState } from "react";
+- import { Provider as ReduxProvider } from "react-redux";
+- import { ThemeProvider as MaterialProvider } from "@material-ui/core/styles";
+- import { ThemeProvider as EmotionProvider } from "emotion-theming";
+- import { ThemeProvider as StyledProvider } from "styled-components";
+--import theme from "../../src/styles/theme";
+--import CssBaseline from "@material-ui/core/CssBaseline";
+-+import { lightTheme } from "../../src/styles/lightTheme";
+-+import { darkTheme } from "../../src/styles/darkTheme";
+- import { GlobalStyle } from "../../src/styles/globals";
+-+import { createMuiTheme } from "@material-ui/core/styles";
+-+import { useSelector } from "react-redux";
+- 
+--import createStore from "../../src/state/store";
+-+import createStore, { ReduxState, setThemeToggle } from "../../src/state/store";
+-+
+-+const store = createStore();
+- 
+- // eslint-disable-next-line react/display-name,react/prop-types
+--export default ({ element }) => {
+-+function wrapRootElement({ element }: any) {
+-   // Instantiating store in `wrapRootElement` handler ensures:
+-   //  - there is fresh store for each SSR page
+-   //  - it will be called only once in browser, when React mounts
+--  const store = createStore();
+-+
+-   return (
+-     <ReduxProvider store={store}>
+--      <StyledProvider theme={theme}>
+--        <EmotionProvider theme={theme}>
+--          <MaterialProvider theme={theme}>
+--            {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+--            <CssBaseline />
+--            <GlobalStyle />
+--            {element}
+--          </MaterialProvider>
+--        </EmotionProvider>
+--      </StyledProvider>
+-+      <Initialize>{element}</Initialize>{" "}
+-     </ReduxProvider>
+-   );
+-+}
+-+
+-+const Initialize = ({ children }: any) => {
+-+  const stateTheme = useSelector(state => state.themeToggle);
+-+  const theme = stateTheme ? lightTheme : darkTheme;
+-+  const materialTheme = createMuiTheme(theme);
+-+
+-+  return (
+-+    <StyledProvider theme={theme}>
+-+      <EmotionProvider theme={theme}>
+-+        <MaterialProvider theme={materialTheme}>
+-+          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+-+          <GlobalStyle />
+-+          {children}
+-+        </MaterialProvider>
+-+      </EmotionProvider>
+-+    </StyledProvider>
+-+  );
+- };
+-+
+-+export default wrapRootElement;
+-diff --git a/src/components/ActionsBar/ActionsBar.tsx b/src/components/ActionsBar/ActionsBar.tsx
+-index e113cc0..4fe3f2f 100644
+---- a/src/components/ActionsBar/ActionsBar.tsx
+-+++ b/src/components/ActionsBar/ActionsBar.tsx
+-@@ -5,6 +5,8 @@ import { connect } from "react-redux";
+- import HomeIcon from "@material-ui/icons/Home";
+- import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
+- import Search from "./Search";
+-+import FullscreenIcon from "@material-ui/icons/Fullscreen";
+-+import WbSunnyIcon from "@material-ui/icons/WbSunny";
+- 
+- import {
+-   setNavigatorPosition,
+-@@ -12,6 +14,7 @@ import {
+-   setScrollToTop,
+-   setFontSizeIncrease,
+-   setCategoryFilter,
+-+  setThemeToggle,
+-   ReduxState
+- } from "../../state/store";
+- import { featureNavigator } from "../../utils/shared";
+-@@ -23,9 +26,11 @@ interface ActionsBarProps {
+-   navigatorShape: string;
+-   isWideScreen: boolean;
+-   categories: string[];
+-+  themeToggle: boolean;
+-   setScrollToTop: (val: boolean) => void;
+-   setFontSizeIncrease: (val: number) => void;
+-   setCategoryFilter: (val: string) => void;
+-+  setThemeToggle: () => void;
+- }
+- 
+- class ActionsBar extends React.Component<ActionsBarProps> {
+-@@ -47,6 +52,10 @@ class ActionsBar extends React.Component<ActionsBarProps> {
+-     this.props.setCategoryFilter(val);
+-   };
+- 
+-+  themeToggleClick = () => {
+-+    this.props.setThemeToggle();
+-+  };
+-+
+-   render() {
+-     const {
+-       navigatorPosition,
+-@@ -87,6 +96,14 @@ class ActionsBar extends React.Component<ActionsBarProps> {
+-           >
+-             <ArrowUpwardIcon />
+-           </IconButton>
+-+          <IconButton
+-+            aria-label="Theme Toggle"
+-+            onClick={this.themeToggleClick}
+-+            title="Theme Change"
+-+            className="iconButton"
+-+          >
+-+            <WbSunnyIcon />
+-+          </IconButton>
+-         </Group>
+-       </StyleActionsBar>
+-     );
+-@@ -98,7 +115,8 @@ const mapStateToProps = (state: ReduxState) => {
+-     navigatorPosition: state.navigatorPosition,
+-     navigatorShape: state.navigatorShape,
+-     isWideScreen: state.isWideScreen,
+--    categoryFilter: state.categoryFilter
+-+    categoryFilter: state.categoryFilter,
+-+    themeToggle: state.themeToggle
+-   };
+- };
+- 
+-@@ -107,7 +125,8 @@ const mapDispatchToProps = {
+-   setNavigatorShape,
+-   setScrollToTop,
+-   setFontSizeIncrease,
+--  setCategoryFilter
+-+  setCategoryFilter,
+-+  setThemeToggle
+- };
+- 
+- const StyleActionsBar = styled.div`
+-diff --git a/src/components/Main/Content.js b/src/components/Main/Content.js
+-index b2175f6..f5c4806 100644
+---- a/src/components/Main/Content.js
+-+++ b/src/components/Main/Content.js
+-@@ -1,45 +1,44 @@
+- import React from "react";
+- import PropTypes from "prop-types";
+--import styled from "@emotion/styled";
+--import { css } from "@emotion/core";
+-+import styled from "styled-components";
+- import { connect } from "react-redux";
+--import theme from "../../styles/theme";
+- 
+- import { setFontSizeIncrease } from "../../state/store";
+- 
+- const propTypes = {
+-   children: PropTypes.node,
+-   setFontSizeIncrease: PropTypes.func.isRequired,
+--  fontSizeIncrease: PropTypes.number.isRequired,
+-+  fontSizeIncrease: PropTypes.number.isRequired
+- };
+- 
+- const Content = ({ children, fontSizeIncrease }) => {
+--  return (
+--    <PageContent theme={theme} fontSize={fontSizeIncrease}>
+--      {children}
+--    </PageContent>
+--  );
+-+  return <PageContent fontIncrease={fontSizeIncrease}>{children}</PageContent>;
+- };
+- 
+--const fontSize = ({ theme, fontSize }) => css`
+--  font-size: calc(${theme.main.fonts.content.size}em * ${fontSize});
+-+const PageContent = styled.div`
+-+  color: ${props => props.theme.main.colors.content};
+-+  font-size: calc(
+-+    ${props => props.theme.main.fonts.content.size}em *
+-+      ${props => props.fontIncrease}
+-+  );
+- 
+--  @media (min-width: ${theme.mediaQueryTresholds.M}px) {
+--    font-size: calc(${theme.main.fonts.content.sizeM}em * ${fontSize});
+-+  @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
+-+    font-size: calc(
+-+      ${props => props.theme.main.fonts.content.sizeM}em *
+-+        ${props => props.fontIncrease}
+-+    );
+-   }
+- 
+--  @media (min-width: ${theme.mediaQueryTresholds.L}px) {
+--    font-size: calc(${theme.main.fonts.content.sizeL}em * ${fontSize});
+-+  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
+-+    font-size: calc(
+-+      ${props => props.theme.main.fonts.content.sizeL}em *
+-+        ${props => props.fontIncrease}
+-+    );
+-   }
+--`;
+--
+--const PageContent = styled.div`
+--  color: ${(props) => props.theme.main.colors.content};
+--  ${fontSize};
+--  line-height: ${(props) => props.theme.main.fonts.content.lineHeight};
+-+  line-height: ${props => props.theme.main.fonts.content.lineHeight};
+- 
+-   & a {
+--    color: ${(props) => props.theme.base.colors.link};
+-+    color: ${props => props.theme.base.colors.link};
+-   }
+- 
+-   & .gatsby-highlight {
+-@@ -53,7 +52,7 @@ const PageContent = styled.div`
+-   & .gatsby-resp-image-link {
+-     margin: 2em -1.5rem;
+-     border: none;
+--    @media (min-width: ${(props) => props.theme.mediaQueryTresholds.M}px) {
+-+    @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
+-       margin: 2.5em -3.5rem;
+-     }
+-   }
+-@@ -61,14 +60,14 @@ const PageContent = styled.div`
+-   & h1,
+-   & h2,
+-   & h3 {
+--    color: ${(props) => props.theme.main.colors.contentHeading};
+--    font-weight: ${(props) => props.theme.main.fonts.contentHeading.weight};
+--    line-height: ${(props) => props.theme.main.fonts.contentHeading.lineHeight};
+-+    color: ${props => props.theme.main.colors.contentHeading};
+-+    font-weight: ${props => props.theme.main.fonts.contentHeading.weight};
+-+    line-height: ${props => props.theme.main.fonts.contentHeading.lineHeight};
+-     margin: 2em 0 1em;
+-     letter-spacing: -0.02em;
+-   }
+-   & h3 {
+--    font-size: ${(props) => props.theme.main.fonts.contentHeading.h3Size}em;
+-+    font-size: ${props => props.theme.main.fonts.contentHeading.h3Size}em;
+-   }
+-   & p {
+-     margin: 0 0 1.5em 0;
+-@@ -77,7 +76,7 @@ const PageContent = styled.div`
+-   & ul {
+-     list-style: circle;
+-     padding: 0 0 0 1.3em;
+--    @media (min-width: ${(props) => props.theme.mediaQueryTresholds.M}px) {
+-+    @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
+-       padding: 0 0 0 2em;
+-     }
+-   }
+-@@ -85,7 +84,7 @@ const PageContent = styled.div`
+-     margin: 0 0 0.5em 0;
+-   }
+-   & blockquote {
+--    border: 5px solid ${(props) => props.theme.main.colors.blockquoteFrame};
+-+    border: 5px solid ${props => props.theme.main.colors.blockquoteFrame};
+-     font-style: italic;
+-     margin: 2.5em 0;
+-     padding: 1em 1.1em 1em 1.3em;
+-@@ -95,7 +94,7 @@ const PageContent = styled.div`
+-     }
+-     &::before,
+-     &::after {
+--      background: ${(props) => props.theme.main.colors.background};
+-+      background: ${props => props.theme.main.colors.background};
+-       content: "";
+-       height: 5px;
+-       left: 50%;
+-@@ -123,30 +122,30 @@ const PageContent = styled.div`
+-   }
+- 
+-   & table th {
+--    // color: ${(props) => props.theme.base.colors.text};
+-+    // color: ${props => props.theme.base.colors.text};
+-     font-size: 1.2rem;
+-     font-weight: 700;
+-     letter-spacing: 0.2px;
+-     text-align: left;
+-     text-transform: uppercase;
+--    background-color: ${(props) => props.theme.base.colors.lines};
+-+    background-color: ${props => props.theme.base.colors.lines};
+-   }
+- 
+-   & table th,
+-   & table td {
+-     padding: 6px 12px;
+--    border: 1px solid ${(props) => props.theme.base.colors.text};
+-+    border: 1px solid ${props => props.theme.base.colors.text};
+-   }
+- `;
+- 
+- const mapStateToProps = (state, ownProps) => {
+-   return {
+--    fontSizeIncrease: state.fontSizeIncrease,
+-+    fontSizeIncrease: state.fontSizeIncrease
+-   };
+- };
+- 
+- const mapDispatchToProps = {
+--  setFontSizeIncrease,
+-+  setFontSizeIncrease
+- };
+- 
+- Content.propTypes = propTypes;
+-diff --git a/src/components/SpringScrollbars/SpringScrollbars.js b/src/components/SpringScrollbars/SpringScrollbars.js
+-index 57df6d2..db27a96 100644
+---- a/src/components/SpringScrollbars/SpringScrollbars.js
+-+++ b/src/components/SpringScrollbars/SpringScrollbars.js
+-@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
+- import { SpringSystem, MathUtil } from "rebound";
+- import { forceCheck } from "react-lazyload";
+- import { connect } from "react-redux";
+--import colors from "../../styles/colors";
+- 
+- import { setScrollToTop } from "../../state/store";
+- 
+-@@ -80,7 +79,7 @@ class SpringScrollbars extends Component {
+- 
+-   renderThumb({ style, ...props }) {
+-     const thumbStyle = {
+--      backgroundColor: colors.lightGray
+-+      backgroundColor: "#777"
+-     };
+-     return <div style={{ ...style, ...thumbStyle }} {...props} />;
+-   }
+-diff --git a/src/state/store.tsx b/src/state/store.tsx
+-index 8157dc3..7176e25 100644
+---- a/src/state/store.tsx
+-+++ b/src/state/store.tsx
+-@@ -12,43 +12,48 @@ const SET_IS_WIDE_SCREEN = "SET_IS_WIDE_SCREEN";
+- const SET_SCROLL_TO_TOP = "SET_SCROLL_TO_TOP";
+- const SET_FONT_SIZE_INCREASE = "SET_FONT_SIZE_INCREASE";
+- const SET_CATEGORY_FILTER = "SET_CATEGORY_FILTER";
+-+const SET_THEME_TOGGLE = "SET_THEME_TOGGLE";
+- 
+- /*
+-  * action creators
+-  */
+- 
+--export function setNavigatorPosition(val) {
+-+export function setNavigatorPosition(val: string) {
+-   return { type: SET_NAVIGATOR_POSITION, val };
+- }
+- 
+--export function setNavigatorShape(val) {
+-+export function setNavigatorShape(val: string) {
+-   return { type: SET_NAVIGATOR_SHAPE, val };
+- }
+- 
+--export function setNavigatorFilter(val) {
+-+export function setNavigatorFilter(val: string) {
+-   return { type: SET_NAVIGATOR_FILTER, val };
+- }
+- 
+--export function setIsWideScreen(val) {
+-+export function setIsWideScreen(val: boolean) {
+-   return { type: SET_IS_WIDE_SCREEN, val };
+- }
+- 
+--export function setScrollToTop(val) {
+-+export function setScrollToTop(val: boolean) {
+-   return { type: SET_SCROLL_TO_TOP, val };
+- }
+- 
+--export function setFontSizeIncrease(val) {
+-+export function setFontSizeIncrease(val: boolean) {
+-   return { type: SET_FONT_SIZE_INCREASE, val };
+- }
+- 
+--export function setCategoryFilter(val) {
+-+export function setCategoryFilter(val: string) {
+-   return { type: SET_CATEGORY_FILTER, val };
+- }
+- 
+-+export function setThemeToggle() {
+-+  return { type: SET_THEME_TOGGLE };
+-+}
+-+
+- /*
+-  * reducer
+-  */
+--const reducer = (state, action) => {
+-+const reducer = (state: any, action: any) => {
+-   switch (action.type) {
+-     case SET_NAVIGATOR_POSITION:
+-       return {
+-@@ -92,6 +97,12 @@ const reducer = (state, action) => {
+-         categoryFilter: action.val
+-       };
+- 
+-+    case SET_THEME_TOGGLE:
+-+      return {
+-+        ...state,
+-+        themeToggle: !state.themeToggle
+-+      };
+-+
+-     default:
+-       return state;
+-   }
+-@@ -105,6 +116,7 @@ export interface ReduxState {
+-   scrollToTop: boolean;
+-   fontSizeIncrease: number;
+-   categoryFilter: string;
+-+  themeToggle: boolean;
+- }
+- 
+- const initialState: ReduxState = {
+-@@ -114,7 +126,8 @@ const initialState: ReduxState = {
+-   isWideScreen: false,
+-   scrollToTop: false,
+-   fontSizeIncrease: 1,
+--  categoryFilter: "all posts"
+-+  categoryFilter: "all posts",
+-+  themeToggle: false
+- };
+- 
+- const createStore = () =>
+-diff --git a/src/styles/colors.js b/src/styles/colors.js
+-deleted file mode 100644
+-index 65c3eb4..0000000
+---- a/src/styles/colors.js
+-+++ /dev/null
+-@@ -1,12 +0,0 @@
+--module.exports = {
+--  // background: "#222222",
+--  background: "#121212",
+--  white: "#dddddd",
+--  accent: "#5ac18e",
+--  // accent: "#00b200",
+--  bright: "#bbbbbb",
+--  dark: "#333333",
+--  gray: "#555555",
+--  lightGray: "#bbbbbb",
+--  superLightGray: "#dedede",
+--};
+-diff --git a/src/styles/globals.js b/src/styles/globals.js
+-index 34b3dc4..b28d75d 100644
+---- a/src/styles/globals.js
+-+++ b/src/styles/globals.js
+-@@ -1,7 +1,6 @@
+- import React from "react";
+- import { Global, css } from "@emotion/core";
+- import normalize from "normalize.css";
+--import theme from "../styles/theme";
+- 
+- export const GlobalStyle = () => (
+-   <Global
+-@@ -29,13 +28,13 @@ export const GlobalStyle = () => (
+-         -webkit-text-size-adjust: 100%;
+-         -moz-text-size-adjust: none;
+-         -ms-text-size-adjust: 100%;
+--        font-family: ${theme.base.fonts.styledFamily};
+-+        font-family: ${props => props.theme.base.fonts.styledFamily};
+-         line-height: 1.15;
+-         text-size-adjust: 100%;
+-       }
+- 
+-       html.wf-active {
+--        font-family: ${theme.base.fonts.unstyledFamily};
+-+        font-family: ${props => props.theme.base.fonts.unstyledFamily};
+-       }
+- 
+-       *,
+-@@ -60,7 +59,7 @@ export const GlobalStyle = () => (
+- 
+-       body {
+-         margin: 0;
+--        background: ${(props) => props.theme.base.colors.background};
+-+        background: ${props => props.theme.base.colors.background};
+-         -webkit-tap-highlight-color: rgba(0, 0, 0, 0.05);
+-       }
+- 
+-diff --git a/src/styles/theme.js b/src/styles/theme.js
+-deleted file mode 100644
+-index 808c018..0000000
+---- a/src/styles/theme.js
+-+++ /dev/null
+-@@ -1,155 +0,0 @@
+--import { createMuiTheme } from "@material-ui/core/styles";
+--import Color from "color";
+--import colors from "./colors";
+--
+--const theme = createMuiTheme({
+--  base: {
+--    colors: {
+--      background: colors.background,
+--      text: colors.bright,
+--      link: colors.accent,
+--      linkHover: Color(colors.accent).darken(0.3).string(),
+--      accent: colors.accent,
+--      lines: colors.gray,
+--    },
+--    sizes: {
+--      linesMargin: "20px",
+--    },
+--    fonts: {
+--      unstyledFamily: `Arial`,
+--      styledFamily: "Fira Code",
+--      styledFonts: "300,400,600",
+--    },
+--  },
+--  info: {
+--    colors: {
+--      text: colors.white,
+--      background: colors.background,
+--      socialIcons: colors.lightGray,
+--      socialIconsHover: colors.accent,
+--      menuLink: colors.accent,
+--      menuLinkHover: Color(colors.accent).darken(0.3).string(),
+--    },
+--    sizes: {
+--      width: 320,
+--      headerHeight: 170,
+--    },
+--    fonts: {
+--      boxTitleSize: 1.3,
+--      boxTitleSizeM: 1.5,
+--      boxTitleSizeL: 1.7,
+--    },
+--  },
+--  navigator: {
+--    colors: {
+--      background: colors.background,
+--      postsListItemLink: colors.white,
+--      postsListItemLinkHover: colors.accent,
+--      postsHeader: colors.bright,
+--    },
+--    sizes: {
+--      closedHeight: 80,
+--      postsListItemH1Font: 1.3,
+--      postsListItemH2Font: 1.1,
+--      fontIncraseForM: 1.15,
+--      fontIncraseForL: 1.3,
+--    },
+--  },
+--  main: {
+--    colors: {
+--      background: colors.background,
+--      title: colors.white,
+--      subTitle: colors.bright,
+--      meta: colors.bright,
+--      content: colors.bright,
+--      footer: colors.bright,
+--      contentHeading: colors.white,
+--      blockquoteFrame: colors.accent,
+--      link: colors.accent,
+--      linkHover: colors.dark,
+--      fbCommentsColorscheme: "dark",
+--    },
+--    sizes: {
+--      articleMaxWidth: "70em",
+--    },
+--    fonts: {
+--      title: {
+--        size: 1.9,
+--        sizeM: 2.5,
+--        sizeL: 2.7,
+--        weight: 600,
+--        lineHeight: 1.1,
+--      },
+--      subTitle: {
+--        size: 1.5,
+--        sizeM: 1.8,
+--        sizeL: 1.95,
+--        weight: 300,
+--        lineHeight: 1.1,
+--      },
+--      meta: {
+--        size: 0.9,
+--        weight: 600,
+--      },
+--      content: {
+--        size: 1.0,
+--        sizeM: 1.15,
+--        sizeL: 1.1,
+--        lineHeight: 1.6,
+--      },
+--      contentHeading: {
+--        h2Size: 1.5,
+--        h3Size: 1.3,
+--        weight: 600,
+--        lineHeight: 1.3,
+--      },
+--      footer: {
+--        size: 1,
+--        lineHeight: 1.4,
+--      },
+--    },
+--  },
+--  footer: {
+--    colors: {
+--      text: Color(colors.gray).lighten(0.5).string(),
+--      link: colors.accent,
+--      linkHover: Color(colors.accent).darken(0.3).string(),
+--    },
+--    fonts: {
+--      footnote: {
+--        size: 0.8,
+--        lineHeight: 1.4,
+--      },
+--    },
+--  },
+--  bars: {
+--    colors: {
+--      background: colors.background,
+--      icon: colors.bright,
+--      text: colors.bright,
+--    },
+--    sizes: {
+--      actionsBar: 60,
+--      infoBar: 60,
+--    },
+--  },
+--  mediaQueryTresholds: {
+--    M: 600,
+--    L: 1024,
+--  },
+--  palette: {
+--    primary: {
+--      main: colors.accent,
+--    },
+--    type: "dark",
+--    action: {
+--      hover: "rgba(0, 0, 0, 0.01)",
+--    },
+--  },
+--  typography: {
+--    fontFamily: `Arial, sans-serif`,
+--    fontSize: 16,
+--  },
+--});
+--
+--export default theme;
 diff --git a/plugins/gatsby-plugin-top-layout/wrapRootElement.tsx b/plugins/gatsby-plugin-top-layout/wrapRootElement.tsx
-index 51a448d..e3f1cd9 100644
+index 8e3ef5a..4e24f17 100644
 --- a/plugins/gatsby-plugin-top-layout/wrapRootElement.tsx
 +++ b/plugins/gatsby-plugin-top-layout/wrapRootElement.tsx
-@@ -1,32 +1,47 @@
--import React from "react";
-+import React, { useEffect, useState } from "react";
- import { Provider as ReduxProvider } from "react-redux";
+@@ -1,5 +1,5 @@
+ import React, { useEffect, useState } from "react";
+-import { Provider as ReduxProvider } from "react-redux";
++import { Provider as ReduxProvider, useSelector } from "react-redux";
  import { ThemeProvider as MaterialProvider } from "@material-ui/core/styles";
  import { ThemeProvider as EmotionProvider } from "emotion-theming";
  import { ThemeProvider as StyledProvider } from "styled-components";
--import theme from "../../src/styles/theme";
--import CssBaseline from "@material-ui/core/CssBaseline";
-+import { lightTheme } from "../../src/styles/lightTheme";
-+import { darkTheme } from "../../src/styles/darkTheme";
+@@ -7,12 +7,8 @@ import { lightTheme } from "../../src/styles/lightTheme";
+ import { darkTheme } from "../../src/styles/darkTheme";
  import { GlobalStyle } from "../../src/styles/globals";
-+import { createMuiTheme } from "@material-ui/core/styles";
-+import { useSelector } from "react-redux";
+ import { createMuiTheme } from "@material-ui/core/styles";
+-import { useSelector } from "react-redux";
  
--import createStore from "../../src/state/store";
-+import createStore, { ReduxState, setThemeToggle } from "../../src/state/store";
-+
-+const store = createStore();
+-import createStore, {
+-  ReduxState,
+-  setThemeToggle
+-} from "../../src/state/store";
++import createStore from "../../src/state/store";
  
- // eslint-disable-next-line react/display-name,react/prop-types
--export default ({ element }) => {
-+function wrapRootElement({ element }: any) {
-   // Instantiating store in `wrapRootElement` handler ensures:
-   //  - there is fresh store for each SSR page
-   //  - it will be called only once in browser, when React mounts
--  const store = createStore();
-+
+ const store = createStore();
+ 
+@@ -31,7 +27,7 @@ function wrapRootElement({ element }: any) {
+ 
+ const Initialize = ({ children }: any) => {
+   const stateTheme = useSelector(state => state.themeToggle);
+-  const theme = stateTheme ? lightTheme : darkTheme;
++  const theme = stateTheme ? darkTheme : lightTheme;
+   const materialTheme = createMuiTheme(theme);
+ 
    return (
-     <ReduxProvider store={store}>
--      <StyledProvider theme={theme}>
--        <EmotionProvider theme={theme}>
--          <MaterialProvider theme={theme}>
--            {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
--            <CssBaseline />
--            <GlobalStyle />
--            {element}
--          </MaterialProvider>
--        </EmotionProvider>
--      </StyledProvider>
-+      <Initialize>{element}</Initialize>{" "}
-     </ReduxProvider>
-   );
-+}
-+
-+const Initialize = ({ children }: any) => {
-+  const stateTheme = useSelector(state => state.themeToggle);
-+  const theme = stateTheme ? lightTheme : darkTheme;
-+  const materialTheme = createMuiTheme(theme);
-+
-+  return (
-+    <StyledProvider theme={theme}>
-+      <EmotionProvider theme={theme}>
-+        <MaterialProvider theme={materialTheme}>
-+          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-+          <GlobalStyle />
-+          {children}
-+        </MaterialProvider>
-+      </EmotionProvider>
-+    </StyledProvider>
-+  );
- };
-+
-+export default wrapRootElement;
 diff --git a/src/components/ActionsBar/ActionsBar.tsx b/src/components/ActionsBar/ActionsBar.tsx
-index e113cc0..4fe3f2f 100644
+index fb9daa8..69d475e 100644
 --- a/src/components/ActionsBar/ActionsBar.tsx
 +++ b/src/components/ActionsBar/ActionsBar.tsx
-@@ -5,6 +5,8 @@ import { connect } from "react-redux";
- import HomeIcon from "@material-ui/icons/Home";
- import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
- import Search from "./Search";
-+import FullscreenIcon from "@material-ui/icons/Fullscreen";
-+import WbSunnyIcon from "@material-ui/icons/WbSunny";
- 
- import {
-   setNavigatorPosition,
-@@ -12,6 +14,7 @@ import {
-   setScrollToTop,
-   setFontSizeIncrease,
-   setCategoryFilter,
-+  setThemeToggle,
-   ReduxState
- } from "../../state/store";
- import { featureNavigator } from "../../utils/shared";
-@@ -23,9 +26,11 @@ interface ActionsBarProps {
-   navigatorShape: string;
-   isWideScreen: boolean;
-   categories: string[];
-+  themeToggle: boolean;
-   setScrollToTop: (val: boolean) => void;
-   setFontSizeIncrease: (val: number) => void;
-   setCategoryFilter: (val: string) => void;
-+  setThemeToggle: () => void;
- }
- 
- class ActionsBar extends React.Component<ActionsBarProps> {
-@@ -47,6 +52,10 @@ class ActionsBar extends React.Component<ActionsBarProps> {
-     this.props.setCategoryFilter(val);
-   };
- 
-+  themeToggleClick = () => {
-+    this.props.setThemeToggle();
-+  };
-+
-   render() {
-     const {
-       navigatorPosition,
-@@ -87,6 +96,14 @@ class ActionsBar extends React.Component<ActionsBarProps> {
+@@ -103,7 +103,7 @@ class ActionsBar extends React.Component<ActionsBarProps> {
+             title="Theme Change"
+             className="iconButton"
            >
-             <ArrowUpwardIcon />
+-            {this.props.themeToggle ? <Brightness2 /> : <WbSunnyIcon />}
++            {this.props.themeToggle ? <WbSunnyIcon /> : <Brightness2 />}
            </IconButton>
-+          <IconButton
-+            aria-label="Theme Toggle"
-+            onClick={this.themeToggleClick}
-+            title="Theme Change"
-+            className="iconButton"
-+          >
-+            <WbSunnyIcon />
-+          </IconButton>
          </Group>
        </StyleActionsBar>
-     );
-@@ -98,7 +115,8 @@ const mapStateToProps = (state: ReduxState) => {
-     navigatorPosition: state.navigatorPosition,
-     navigatorShape: state.navigatorShape,
-     isWideScreen: state.isWideScreen,
--    categoryFilter: state.categoryFilter
-+    categoryFilter: state.categoryFilter,
-+    themeToggle: state.themeToggle
-   };
+diff --git a/src/components/Post/PostComments.js b/src/components/Post/PostComments.js
+index b77aa0e..e4dfaa8 100644
+--- a/src/components/Post/PostComments.js
++++ b/src/components/Post/PostComments.js
+@@ -1,6 +1,7 @@
+ import React, { useEffect } from "react";
+ import { useStaticQuery, graphql } from "gatsby";
+ import styled from "@emotion/styled";
++import { useSelector } from "react-redux";
+ 
+ const StyledComments = styled.div`
+   margin: 3em 0 0;
+@@ -9,22 +10,27 @@ const StyledComments = styled.div`
+ 
+ const PostComments = () => {
+   const { mdx } = useCommentData();
++  const stateTheme = useSelector(state => state.themeToggle);
++  const themeSelect = stateTheme ? "photon-dark" : "github-light";
+ 
+   useEffect(() => {
+-    let script = document.createElement("script");
+-    let anchor = document.getElementById("inject-comments-for-uterances");
++    const script = document.createElement("script");
++    const anchor = document.getElementById("inject-comments-for-uterances");
+     script.setAttribute("src", "https://utteranc.es/client.js");
+     script.setAttribute("crossorigin", "anonymous");
+     script.setAttribute("async", true);
+     script.setAttribute("repo", "bradkim06/utterances");
+     script.setAttribute("issue-term", "pathname");
+-    script.setAttribute("theme", "photon-dark");
++    script.setAttribute("theme", themeSelect);
++    if (anchor.hasChildNodes()) {
++      anchor.removeChild(anchor.firstChild);
++    }
+     anchor.appendChild(script);
+-  }, []);
++  }, [themeSelect]);
+ 
+   return (
+     <StyledComments>
+-      <div id="inject-comments-for-uterances"></div>
++      <section id="inject-comments-for-uterances"></section>
+     </StyledComments>
+   );
  };
- 
-@@ -107,7 +125,8 @@ const mapDispatchToProps = {
-   setNavigatorShape,
-   setScrollToTop,
-   setFontSizeIncrease,
--  setCategoryFilter
-+  setCategoryFilter,
-+  setThemeToggle
- };
- 
- const StyleActionsBar = styled.div`
-diff --git a/src/components/Main/Content.js b/src/components/Main/Content.js
-index b2175f6..f5c4806 100644
---- a/src/components/Main/Content.js
-+++ b/src/components/Main/Content.js
-@@ -1,45 +1,44 @@
- import React from "react";
- import PropTypes from "prop-types";
--import styled from "@emotion/styled";
--import { css } from "@emotion/core";
-+import styled from "styled-components";
- import { connect } from "react-redux";
--import theme from "../../styles/theme";
- 
- import { setFontSizeIncrease } from "../../state/store";
- 
- const propTypes = {
-   children: PropTypes.node,
-   setFontSizeIncrease: PropTypes.func.isRequired,
--  fontSizeIncrease: PropTypes.number.isRequired,
-+  fontSizeIncrease: PropTypes.number.isRequired
- };
- 
- const Content = ({ children, fontSizeIncrease }) => {
--  return (
--    <PageContent theme={theme} fontSize={fontSizeIncrease}>
--      {children}
--    </PageContent>
--  );
-+  return <PageContent fontIncrease={fontSizeIncrease}>{children}</PageContent>;
- };
- 
--const fontSize = ({ theme, fontSize }) => css`
--  font-size: calc(${theme.main.fonts.content.size}em * ${fontSize});
-+const PageContent = styled.div`
-+  color: ${props => props.theme.main.colors.content};
-+  font-size: calc(
-+    ${props => props.theme.main.fonts.content.size}em *
-+      ${props => props.fontIncrease}
-+  );
- 
--  @media (min-width: ${theme.mediaQueryTresholds.M}px) {
--    font-size: calc(${theme.main.fonts.content.sizeM}em * ${fontSize});
-+  @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
-+    font-size: calc(
-+      ${props => props.theme.main.fonts.content.sizeM}em *
-+        ${props => props.fontIncrease}
-+    );
-   }
- 
--  @media (min-width: ${theme.mediaQueryTresholds.L}px) {
--    font-size: calc(${theme.main.fonts.content.sizeL}em * ${fontSize});
-+  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
-+    font-size: calc(
-+      ${props => props.theme.main.fonts.content.sizeL}em *
-+        ${props => props.fontIncrease}
-+    );
-   }
--`;
--
--const PageContent = styled.div`
--  color: ${(props) => props.theme.main.colors.content};
--  ${fontSize};
--  line-height: ${(props) => props.theme.main.fonts.content.lineHeight};
-+  line-height: ${props => props.theme.main.fonts.content.lineHeight};
- 
-   & a {
--    color: ${(props) => props.theme.base.colors.link};
-+    color: ${props => props.theme.base.colors.link};
-   }
- 
-   & .gatsby-highlight {
-@@ -53,7 +52,7 @@ const PageContent = styled.div`
-   & .gatsby-resp-image-link {
-     margin: 2em -1.5rem;
-     border: none;
--    @media (min-width: ${(props) => props.theme.mediaQueryTresholds.M}px) {
-+    @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
-       margin: 2.5em -3.5rem;
-     }
-   }
-@@ -61,14 +60,14 @@ const PageContent = styled.div`
-   & h1,
-   & h2,
-   & h3 {
--    color: ${(props) => props.theme.main.colors.contentHeading};
--    font-weight: ${(props) => props.theme.main.fonts.contentHeading.weight};
--    line-height: ${(props) => props.theme.main.fonts.contentHeading.lineHeight};
-+    color: ${props => props.theme.main.colors.contentHeading};
-+    font-weight: ${props => props.theme.main.fonts.contentHeading.weight};
-+    line-height: ${props => props.theme.main.fonts.contentHeading.lineHeight};
-     margin: 2em 0 1em;
-     letter-spacing: -0.02em;
-   }
-   & h3 {
--    font-size: ${(props) => props.theme.main.fonts.contentHeading.h3Size}em;
-+    font-size: ${props => props.theme.main.fonts.contentHeading.h3Size}em;
-   }
-   & p {
-     margin: 0 0 1.5em 0;
-@@ -77,7 +76,7 @@ const PageContent = styled.div`
-   & ul {
-     list-style: circle;
-     padding: 0 0 0 1.3em;
--    @media (min-width: ${(props) => props.theme.mediaQueryTresholds.M}px) {
-+    @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
-       padding: 0 0 0 2em;
-     }
-   }
-@@ -85,7 +84,7 @@ const PageContent = styled.div`
-     margin: 0 0 0.5em 0;
-   }
-   & blockquote {
--    border: 5px solid ${(props) => props.theme.main.colors.blockquoteFrame};
-+    border: 5px solid ${props => props.theme.main.colors.blockquoteFrame};
-     font-style: italic;
-     margin: 2.5em 0;
-     padding: 1em 1.1em 1em 1.3em;
-@@ -95,7 +94,7 @@ const PageContent = styled.div`
-     }
-     &::before,
-     &::after {
--      background: ${(props) => props.theme.main.colors.background};
-+      background: ${props => props.theme.main.colors.background};
-       content: "";
-       height: 5px;
-       left: 50%;
-@@ -123,30 +122,30 @@ const PageContent = styled.div`
-   }
- 
-   & table th {
--    // color: ${(props) => props.theme.base.colors.text};
-+    // color: ${props => props.theme.base.colors.text};
-     font-size: 1.2rem;
-     font-weight: 700;
-     letter-spacing: 0.2px;
-     text-align: left;
-     text-transform: uppercase;
--    background-color: ${(props) => props.theme.base.colors.lines};
-+    background-color: ${props => props.theme.base.colors.lines};
-   }
- 
-   & table th,
-   & table td {
-     padding: 6px 12px;
--    border: 1px solid ${(props) => props.theme.base.colors.text};
-+    border: 1px solid ${props => props.theme.base.colors.text};
-   }
- `;
- 
- const mapStateToProps = (state, ownProps) => {
-   return {
--    fontSizeIncrease: state.fontSizeIncrease,
-+    fontSizeIncrease: state.fontSizeIncrease
-   };
- };
- 
- const mapDispatchToProps = {
--  setFontSizeIncrease,
-+  setFontSizeIncrease
- };
- 
- Content.propTypes = propTypes;
-diff --git a/src/components/SpringScrollbars/SpringScrollbars.js b/src/components/SpringScrollbars/SpringScrollbars.js
-index 57df6d2..db27a96 100644
---- a/src/components/SpringScrollbars/SpringScrollbars.js
-+++ b/src/components/SpringScrollbars/SpringScrollbars.js
-@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
- import { SpringSystem, MathUtil } from "rebound";
- import { forceCheck } from "react-lazyload";
- import { connect } from "react-redux";
--import colors from "../../styles/colors";
- 
- import { setScrollToTop } from "../../state/store";
- 
-@@ -80,7 +79,7 @@ class SpringScrollbars extends Component {
- 
-   renderThumb({ style, ...props }) {
-     const thumbStyle = {
--      backgroundColor: colors.lightGray
-+      backgroundColor: "#777"
-     };
-     return <div style={{ ...style, ...thumbStyle }} {...props} />;
-   }
 diff --git a/src/state/store.tsx b/src/state/store.tsx
-index 8157dc3..7176e25 100644
+index e026faa..7176e25 100644
 --- a/src/state/store.tsx
 +++ b/src/state/store.tsx
-@@ -12,43 +12,48 @@ const SET_IS_WIDE_SCREEN = "SET_IS_WIDE_SCREEN";
- const SET_SCROLL_TO_TOP = "SET_SCROLL_TO_TOP";
- const SET_FONT_SIZE_INCREASE = "SET_FONT_SIZE_INCREASE";
- const SET_CATEGORY_FILTER = "SET_CATEGORY_FILTER";
-+const SET_THEME_TOGGLE = "SET_THEME_TOGGLE";
- 
- /*
-  * action creators
-  */
- 
--export function setNavigatorPosition(val) {
-+export function setNavigatorPosition(val: string) {
-   return { type: SET_NAVIGATOR_POSITION, val };
- }
- 
--export function setNavigatorShape(val) {
-+export function setNavigatorShape(val: string) {
-   return { type: SET_NAVIGATOR_SHAPE, val };
- }
- 
--export function setNavigatorFilter(val) {
-+export function setNavigatorFilter(val: string) {
-   return { type: SET_NAVIGATOR_FILTER, val };
- }
- 
--export function setIsWideScreen(val) {
-+export function setIsWideScreen(val: boolean) {
-   return { type: SET_IS_WIDE_SCREEN, val };
- }
- 
--export function setScrollToTop(val) {
-+export function setScrollToTop(val: boolean) {
-   return { type: SET_SCROLL_TO_TOP, val };
- }
- 
--export function setFontSizeIncrease(val) {
-+export function setFontSizeIncrease(val: boolean) {
-   return { type: SET_FONT_SIZE_INCREASE, val };
- }
- 
--export function setCategoryFilter(val) {
-+export function setCategoryFilter(val: string) {
-   return { type: SET_CATEGORY_FILTER, val };
- }
- 
-+export function setThemeToggle() {
-+  return { type: SET_THEME_TOGGLE };
-+}
-+
- /*
-  * reducer
-  */
--const reducer = (state, action) => {
-+const reducer = (state: any, action: any) => {
-   switch (action.type) {
-     case SET_NAVIGATOR_POSITION:
-       return {
-@@ -92,6 +97,12 @@ const reducer = (state, action) => {
-         categoryFilter: action.val
-       };
- 
-+    case SET_THEME_TOGGLE:
-+      return {
-+        ...state,
-+        themeToggle: !state.themeToggle
-+      };
-+
-     default:
-       return state;
-   }
-@@ -105,6 +116,7 @@ export interface ReduxState {
-   scrollToTop: boolean;
-   fontSizeIncrease: number;
-   categoryFilter: string;
-+  themeToggle: boolean;
- }
- 
- const initialState: ReduxState = {
-@@ -114,7 +126,8 @@ const initialState: ReduxState = {
-   isWideScreen: false,
+@@ -127,7 +127,7 @@ const initialState: ReduxState = {
    scrollToTop: false,
    fontSizeIncrease: 1,
--  categoryFilter: "all posts"
-+  categoryFilter: "all posts",
+   categoryFilter: "all posts",
+-  themeToggle: true
 +  themeToggle: false
  };
  
  const createStore = () =>
-diff --git a/src/styles/colors.js b/src/styles/colors.js
-deleted file mode 100644
-index 65c3eb4..0000000
---- a/src/styles/colors.js
-+++ /dev/null
-@@ -1,12 +0,0 @@
--module.exports = {
--  // background: "#222222",
--  background: "#121212",
--  white: "#dddddd",
--  accent: "#5ac18e",
--  // accent: "#00b200",
--  bright: "#bbbbbb",
--  dark: "#333333",
--  gray: "#555555",
--  lightGray: "#bbbbbb",
--  superLightGray: "#dedede",
--};
-diff --git a/src/styles/globals.js b/src/styles/globals.js
-index 34b3dc4..b28d75d 100644
---- a/src/styles/globals.js
-+++ b/src/styles/globals.js
-@@ -1,7 +1,6 @@
- import React from "react";
- import { Global, css } from "@emotion/core";
- import normalize from "normalize.css";
--import theme from "../styles/theme";
- 
- export const GlobalStyle = () => (
-   <Global
-@@ -29,13 +28,13 @@ export const GlobalStyle = () => (
-         -webkit-text-size-adjust: 100%;
-         -moz-text-size-adjust: none;
-         -ms-text-size-adjust: 100%;
--        font-family: ${theme.base.fonts.styledFamily};
-+        font-family: ${props => props.theme.base.fonts.styledFamily};
-         line-height: 1.15;
-         text-size-adjust: 100%;
-       }
- 
-       html.wf-active {
--        font-family: ${theme.base.fonts.unstyledFamily};
-+        font-family: ${props => props.theme.base.fonts.unstyledFamily};
-       }
- 
-       *,
-@@ -60,7 +59,7 @@ export const GlobalStyle = () => (
- 
-       body {
-         margin: 0;
--        background: ${(props) => props.theme.base.colors.background};
-+        background: ${props => props.theme.base.colors.background};
-         -webkit-tap-highlight-color: rgba(0, 0, 0, 0.05);
-       }
- 
-diff --git a/src/styles/theme.js b/src/styles/theme.js
-deleted file mode 100644
-index 808c018..0000000
---- a/src/styles/theme.js
-+++ /dev/null
-@@ -1,155 +0,0 @@
--import { createMuiTheme } from "@material-ui/core/styles";
--import Color from "color";
--import colors from "./colors";
--
--const theme = createMuiTheme({
--  base: {
--    colors: {
--      background: colors.background,
--      text: colors.bright,
--      link: colors.accent,
--      linkHover: Color(colors.accent).darken(0.3).string(),
--      accent: colors.accent,
--      lines: colors.gray,
--    },
--    sizes: {
--      linesMargin: "20px",
--    },
--    fonts: {
--      unstyledFamily: `Arial`,
--      styledFamily: "Fira Code",
--      styledFonts: "300,400,600",
--    },
--  },
--  info: {
--    colors: {
--      text: colors.white,
--      background: colors.background,
--      socialIcons: colors.lightGray,
--      socialIconsHover: colors.accent,
--      menuLink: colors.accent,
--      menuLinkHover: Color(colors.accent).darken(0.3).string(),
--    },
--    sizes: {
--      width: 320,
--      headerHeight: 170,
--    },
--    fonts: {
--      boxTitleSize: 1.3,
--      boxTitleSizeM: 1.5,
--      boxTitleSizeL: 1.7,
--    },
--  },
--  navigator: {
--    colors: {
--      background: colors.background,
--      postsListItemLink: colors.white,
--      postsListItemLinkHover: colors.accent,
--      postsHeader: colors.bright,
--    },
--    sizes: {
--      closedHeight: 80,
--      postsListItemH1Font: 1.3,
--      postsListItemH2Font: 1.1,
--      fontIncraseForM: 1.15,
--      fontIncraseForL: 1.3,
--    },
--  },
--  main: {
--    colors: {
--      background: colors.background,
--      title: colors.white,
--      subTitle: colors.bright,
--      meta: colors.bright,
--      content: colors.bright,
--      footer: colors.bright,
--      contentHeading: colors.white,
--      blockquoteFrame: colors.accent,
--      link: colors.accent,
--      linkHover: colors.dark,
--      fbCommentsColorscheme: "dark",
--    },
--    sizes: {
--      articleMaxWidth: "70em",
--    },
--    fonts: {
--      title: {
--        size: 1.9,
--        sizeM: 2.5,
--        sizeL: 2.7,
--        weight: 600,
--        lineHeight: 1.1,
--      },
--      subTitle: {
--        size: 1.5,
--        sizeM: 1.8,
--        sizeL: 1.95,
--        weight: 300,
--        lineHeight: 1.1,
--      },
--      meta: {
--        size: 0.9,
--        weight: 600,
--      },
--      content: {
--        size: 1.0,
--        sizeM: 1.15,
--        sizeL: 1.1,
--        lineHeight: 1.6,
--      },
--      contentHeading: {
--        h2Size: 1.5,
--        h3Size: 1.3,
--        weight: 600,
--        lineHeight: 1.3,
--      },
--      footer: {
--        size: 1,
--        lineHeight: 1.4,
--      },
--    },
--  },
--  footer: {
--    colors: {
--      text: Color(colors.gray).lighten(0.5).string(),
--      link: colors.accent,
--      linkHover: Color(colors.accent).darken(0.3).string(),
--    },
--    fonts: {
--      footnote: {
--        size: 0.8,
--        lineHeight: 1.4,
--      },
--    },
--  },
--  bars: {
--    colors: {
--      background: colors.background,
--      icon: colors.bright,
--      text: colors.bright,
--    },
--    sizes: {
--      actionsBar: 60,
--      infoBar: 60,
--    },
--  },
--  mediaQueryTresholds: {
--    M: 600,
--    L: 1024,
--  },
--  palette: {
--    primary: {
--      main: colors.accent,
--    },
--    type: "dark",
--    action: {
--      hover: "rgba(0, 0, 0, 0.01)",
--    },
--  },
--  typography: {
--    fontFamily: `Arial, sans-serif`,
--    fontSize: 16,
--  },
--});
--
--export default theme;

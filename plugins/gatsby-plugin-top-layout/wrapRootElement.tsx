@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Provider as ReduxProvider } from "react-redux";
+import { Provider as ReduxProvider, useSelector } from "react-redux";
 import { ThemeProvider as MaterialProvider } from "@material-ui/core/styles";
 import { ThemeProvider as EmotionProvider } from "emotion-theming";
 import { ThemeProvider as StyledProvider } from "styled-components";
@@ -7,12 +7,8 @@ import { lightTheme } from "../../src/styles/lightTheme";
 import { darkTheme } from "../../src/styles/darkTheme";
 import { GlobalStyle } from "../../src/styles/globals";
 import { createMuiTheme } from "@material-ui/core/styles";
-import { useSelector } from "react-redux";
 
-import createStore, {
-  ReduxState,
-  setThemeToggle
-} from "../../src/state/store";
+import createStore from "../../src/state/store";
 
 const store = createStore();
 
@@ -31,7 +27,7 @@ function wrapRootElement({ element }: any) {
 
 const Initialize = ({ children }: any) => {
   const stateTheme = useSelector(state => state.themeToggle);
-  const theme = stateTheme ? lightTheme : darkTheme;
+  const theme = stateTheme ? darkTheme : lightTheme;
   const materialTheme = createMuiTheme(theme);
 
   return (
