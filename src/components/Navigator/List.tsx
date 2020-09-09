@@ -6,7 +6,7 @@ import ListHeader from "./ListHeader";
 import ListItem from "./ListItem";
 import SpringScrollbars from "../SpringScrollbars";
 
-interface ListProps {
+type ListProps = {
   posts: PostsProps;
   linkOnClick: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
   expandOnClick(event: React.MouseEvent<HTMLButtonElement>): void;
@@ -14,45 +14,41 @@ interface ListProps {
   navigatorPosition: string;
   navigatorShape: string;
   categoryFilter: string;
-}
+};
 
-class List extends React.Component<ListProps> {
-  render() {
-    const {
-      posts,
-      linkOnClick,
-      expandOnClick,
-      removeFilter,
-      categoryFilter,
-      navigatorShape
-    } = this.props;
-
-    return (
-      <Posts>
-        <SpringScrollbars forceCheckOnScroll={true} isNavigator={true}>
-          <Inner>
-            <ListHeader
-              expandOnClick={expandOnClick}
-              categoryFilter={categoryFilter}
-              navigatorShape={navigatorShape}
-              removeFilter={removeFilter}
-            />
-            <PostList>
-              {posts.edges &&
-                posts.edges.map((post, i) => (
-                  <ListItem
-                    key={i}
-                    post={post}
-                    linkOnClick={linkOnClick}
-                    categoryFilter={categoryFilter}
-                  />
-                ))}
-            </PostList>
-          </Inner>
-        </SpringScrollbars>
-      </Posts>
-    );
-  }
+function List({
+  posts,
+  linkOnClick,
+  expandOnClick,
+  removeFilter,
+  categoryFilter,
+  navigatorShape
+}: ListProps) {
+  return (
+    <Posts>
+      <SpringScrollbars forceCheckOnScroll={true} isNavigator={true}>
+        <Inner>
+          <ListHeader
+            expandOnClick={expandOnClick}
+            categoryFilter={categoryFilter}
+            navigatorShape={navigatorShape}
+            removeFilter={removeFilter}
+          />
+          <PostList>
+            {posts.edges &&
+              posts.edges.map((post, i) => (
+                <ListItem
+                  key={i}
+                  post={post}
+                  linkOnClick={linkOnClick}
+                  categoryFilter={categoryFilter}
+                />
+              ))}
+          </PostList>
+        </Inner>
+      </SpringScrollbars>
+    </Posts>
+  );
 }
 
 const Posts = styled.div`

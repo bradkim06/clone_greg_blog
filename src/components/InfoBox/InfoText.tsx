@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import config from "../../../content/meta/config";
 
 export default function InfoHeader() {
-  return <Text>software developer.</Text>;
+  return <Text>{config.infoText}</Text>;
 }
 
 const Text = styled.div`

@@ -13,6 +13,7 @@ module.exports = {
   // info
   infoTitle: "bradkim06",
   infoTitleNote: "personal blog",
+  infoText: "software developer",
   // manifest.json
   manifestName: "bradkim06",
   manifestShortName: "Personal Blog", // max 12 characters

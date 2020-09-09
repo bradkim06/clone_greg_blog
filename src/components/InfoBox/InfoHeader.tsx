@@ -8,12 +8,12 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import avatar from "../../images/jpg/test.png";
 import config from "../../../content/meta/config";
 
-interface InfoHeaderProps {
+type InfoHeaderProps = {
   avatarOnClick: (
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => void;
   expandOnClick: () => void;
-}
+};
 
 function InfoHeader({ avatarOnClick, expandOnClick }: InfoHeaderProps) {
   return (

@@ -1,81 +1,63 @@
 import React from "react";
-import { connect } from "react-redux";
+import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import { PostsProps } from "../query/LayoutQuery";
 import styled from "styled-components";
 import {
-  setNavigatorPosition,
   setNavigatorShape,
   setCategoryFilter,
   ReduxState
 } from "../../state/store";
-import { moveNavigatorAside } from "../../utils/shared";
+import { moveNavigatorAsideFunc } from "../../utils/shared";
 import List from "./List";
 
-interface NavigatorProps {
+type NavigatorProps = {
   posts: PostsProps;
-  navigatorPosition: string;
-  navigatorShape: string;
-  categoryFilter: string;
-  setNavigatorPosition: (val: string) => void;
-  setNavigatorShape: (val: string) => void;
-  setCategoryFilter: (val: string) => void;
-}
+};
 
-class Navigator extends React.Component<NavigatorProps> {
-  linkOnClick = moveNavigatorAside.bind(this);
+function Navigator({ posts }: NavigatorProps) {
+  const state: any = useSelector<ReduxState>(
+    state => ({
+      navigatorShape: state.navigatorShape,
+      navigatorPosition: state.navigatorPosition,
+      categoryFilter: state.categoryFilter
+    }),
+    shallowEqual
+  );
+  const dispatch = useDispatch();
 
-  expandOnClick = () => {
-    this.props.setNavigatorShape("open");
+  function expandOnClick() {
+    dispatch(setNavigatorShape("open"));
     // setTimeout(forceCheck, 600);
-  };
-
-  removefilterOnClick = () => {
-    this.props.setCategoryFilter("all posts");
-  };
-
-  render() {
-    const {
-      posts,
-      navigatorPosition,
-      navigatorShape,
-      categoryFilter
-    } = this.props;
-
-    return (
-      <StyleNavigator
-        className={`${navigatorPosition ? navigatorPosition : ""} ${
-          navigatorShape ? navigatorShape : ""
-        } `}
-      >
-        {posts.totalCount && (
-          <List
-            posts={posts}
-            navigatorPosition={navigatorPosition}
-            navigatorShape={navigatorShape}
-            linkOnClick={this.linkOnClick}
-            expandOnClick={this.expandOnClick}
-            categoryFilter={categoryFilter}
-            removeFilter={this.removefilterOnClick}
-          />
-        )}
-      </StyleNavigator>
-    );
   }
+
+  function linkOnClick(e: any) {
+    moveNavigatorAsideFunc(e, state, dispatch);
+  }
+
+  function removefilterOnClick() {
+    dispatch(setCategoryFilter("all posts"));
+  }
+
+  return (
+    <StyleNavigator
+      className={`${state.navigatorPosition ? state.navigatorPosition : ""} ${
+        state.navigatorShape ? state.navigatorShape : ""
+      } `}
+    >
+      {posts.totalCount && (
+        <List
+          posts={posts}
+          navigatorPosition={state.navigatorPosition}
+          navigatorShape={state.navigatorShape}
+          linkOnClick={linkOnClick}
+          expandOnClick={expandOnClick}
+          categoryFilter={state.categoryFilter}
+          removeFilter={removefilterOnClick}
+        />
+      )}
+    </StyleNavigator>
+  );
 }
-
-const mapStateToProps = (state: ReduxState) => {
-  return {
-    navigatorPosition: state.navigatorPosition,
-    navigatorShape: state.navigatorShape,
-    categoryFilter: state.categoryFilter
-  };
-};
-
-const mapDispatchToProps = {
-  setNavigatorPosition,
-  setNavigatorShape,
-  setCategoryFilter
-};
 
 const StyleNavigator = styled.nav`
   transform: translate3d(0, 0, 0);
@@ -183,4 +165,4 @@ const StyleNavigator = styled.nav`
   }
 `;
 
-export default connect(mapStateToProps, mapDispatchToProps)(Navigator);
+export default Navigator;

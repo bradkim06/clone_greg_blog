@@ -1,131 +1,96 @@
 import React from "react";
 import styled from "styled-components";
 import IconButton from "@material-ui/core/IconButton";
-import { connect } from "react-redux";
+import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import HomeIcon from "@material-ui/icons/Home";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import Search from "./Search";
-import FullscreenIcon from "@material-ui/icons/Fullscreen";
 import WbSunnyIcon from "@material-ui/icons/WbSunny";
 import Brightness2 from "@material-ui/icons/Brightness2";
 
 import {
-  setNavigatorPosition,
-  setNavigatorShape,
   setScrollToTop,
   setFontSizeIncrease,
   setCategoryFilter,
   setThemeToggle,
   ReduxState
 } from "../../state/store";
-import { featureNavigator } from "../../utils/shared";
+import { featureNavigatorFunc } from "../../utils/shared";
 import FontSetter from "./FontSetter";
 import CategoryFilter from "./CategoryFilter";
 
-interface ActionsBarProps {
-  navigatorPosition: string;
-  navigatorShape: string;
-  isWideScreen: boolean;
-  categories: string[];
-  themeToggle: boolean;
-  setScrollToTop: (val: boolean) => void;
-  setFontSizeIncrease: (val: number) => void;
-  setCategoryFilter: (val: string) => void;
-  setThemeToggle: () => void;
-}
+function ActionsBar({ categories }: { categories: string[] }) {
+  const state: any = useSelector<ReduxState>(
+    state => ({
+      navigatorShape: state.navigatorShape,
+      navigatorPosition: state.navigatorPosition,
+      isWideScreen: state.isWideScreen
+    }),
+    shallowEqual
+  );
+  const dispatch = useDispatch();
 
-class ActionsBar extends React.Component<ActionsBarProps> {
-  state = {
-    fullscreen: false
-  };
-
-  homeOnClick = featureNavigator.bind(this);
-
-  arrowUpOnClick = () => {
-    this.props.setScrollToTop(true);
-  };
-
-  fontSetterOnClick = (val: number) => {
-    this.props.setFontSizeIncrease(val);
-  };
-
-  categoryFilterOnClick = (val: string) => {
-    this.props.setCategoryFilter(val);
-  };
-
-  themeToggleClick = () => {
-    this.props.setThemeToggle();
-  };
-
-  render() {
-    const {
-      navigatorPosition,
-      navigatorShape,
-      isWideScreen,
-      categories
-    } = this.props;
-
-    return (
-      <StyleActionsBar>
-        <Group>
-          <StyledIconButton
-            aria-label="Back to list"
-            onClick={this.homeOnClick}
-            title="Back to the list"
-          >
-            <HomeIcon />
-          </StyledIconButton>
-          <Search />
-          {((isWideScreen && navigatorShape === "open") ||
-            navigatorPosition !== "is-aside") && (
-            <CategoryFilter
-              categories={categories}
-              filterCategory={this.categoryFilterOnClick}
-            />
-          )}
-        </Group>
-        <Group>
-          {navigatorPosition === "is-aside" && (
-            <FontSetter increaseFont={this.fontSetterOnClick} />
-          )}
-          <StyledIconButton
-            aria-label="Theme Toggle"
-            onClick={this.themeToggleClick}
-            title="Theme Change"
-          >
-            {this.props.themeToggle ? <WbSunnyIcon /> : <Brightness2 />}
-          </StyledIconButton>
-          <StyledIconButton
-            aria-label="Back to top"
-            onClick={this.arrowUpOnClick}
-            title="Scroll to top"
-          >
-            <ArrowUpwardIcon />
-          </StyledIconButton>
-        </Group>
-      </StyleActionsBar>
-    );
+  function homeOnClick(e: any) {
+    featureNavigatorFunc(e, state, dispatch);
   }
+
+  function arrowUpOnClick() {
+    dispatch(setScrollToTop(true));
+  }
+
+  function fontSetterOnClick(val: number) {
+    dispatch(setFontSizeIncrease(val));
+  }
+
+  function categoryFilterOnClick(val: string) {
+    dispatch(setCategoryFilter(val));
+  }
+
+  function themeToggleClick() {
+    dispatch(setThemeToggle());
+  }
+
+  return (
+    <StyleActionsBar>
+      <Group>
+        <StyledIconButton
+          aria-label="Back to list"
+          onClick={homeOnClick}
+          title="Back to the list"
+        >
+          <HomeIcon />
+        </StyledIconButton>
+        <Search />
+        {((state.isWideScreen && state.navigatorShape === "open") ||
+          state.navigatorPosition !== "is-aside") && (
+          <CategoryFilter
+            categories={categories}
+            filterCategory={categoryFilterOnClick}
+          />
+        )}
+      </Group>
+      <Group>
+        {state.navigatorPosition === "is-aside" && (
+          <FontSetter increaseFont={fontSetterOnClick} />
+        )}
+        <StyledIconButton
+          aria-label="Theme Toggle"
+          onClick={themeToggleClick}
+          title="Theme Change"
+        >
+          {state.themeToggle ? <WbSunnyIcon /> : <Brightness2 />}
+        </StyledIconButton>
+        <StyledIconButton
+          aria-label="Back to top"
+          onClick={arrowUpOnClick}
+          title="Scroll to top"
+        >
+          <ArrowUpwardIcon />
+        </StyledIconButton>
+      </Group>
+    </StyleActionsBar>
+  );
 }
-
-const mapStateToProps = (state: ReduxState) => {
-  return {
-    navigatorPosition: state.navigatorPosition,
-    navigatorShape: state.navigatorShape,
-    isWideScreen: state.isWideScreen,
-    categoryFilter: state.categoryFilter,
-    themeToggle: state.themeToggle
-  };
-};
-
-const mapDispatchToProps = {
-  setNavigatorPosition,
-  setNavigatorShape,
-  setScrollToTop,
-  setFontSizeIncrease,
-  setCategoryFilter,
-  setThemeToggle
-};
 
 const StyleActionsBar = styled.div`
   position: absolute;
@@ -188,4 +153,4 @@ const StyledIconButton = styled(IconButton)`
   color: ${props => props.theme.bars.colors.icon};
 `;
 
-export default connect(mapStateToProps, mapDispatchToProps)(ActionsBar);
+export default ActionsBar;

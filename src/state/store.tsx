@@ -38,7 +38,7 @@ export function setScrollToTop(val: boolean) {
   return { type: SET_SCROLL_TO_TOP, val };
 }
 
-export function setFontSizeIncrease(val: boolean) {
+export function setFontSizeIncrease(val: number) {
   return { type: SET_FONT_SIZE_INCREASE, val };
 }
 

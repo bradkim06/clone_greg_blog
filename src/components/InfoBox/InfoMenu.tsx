@@ -1,15 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import PropTypes from "prop-types";
 import { Link } from "gatsby";
 
-InfoMenu.propTypes = {
-  linkOnClick: PropTypes.func.isRequired
-};
-
-interface InfoMenuProps {
+type InfoMenuProps = {
   linkOnClick: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
-}
+};
 
 function InfoMenu({ linkOnClick }: InfoMenuProps) {
   return (

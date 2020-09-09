@@ -134,7 +134,9 @@ export const lightTheme = {
   },
   search: {
     colors: {
-      listBackground: Color(lightColors.background).darken(0.05).string()
+      background: lightColors.background,
+      listBackground: Color(lightColors.background).darken(0.02).string(),
+      hoverBackground: lightColors.background
     }
   },
   mediaQueryTresholds: {

@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "gatsby";
+import SearchListItem from "../ActionsBar/SearchListItem";
 
 import styled from "styled-components";
 
@@ -23,54 +24,38 @@ interface ListItemProps {
   linkOnClick: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
 }
 
-class ListItem extends React.Component<ListItemProps> {
-  state = {
-    hidden: false
-  };
+function ListItem({ post, categoryFilter, linkOnClick }: ListItemProps) {
+  const [hidden, setHidden] = useState(false);
+  const category = post.node.frontmatter.category;
 
-  componentDidUpdate(prevProps: ListItemProps) {
-    if (prevProps.categoryFilter !== this.props.categoryFilter) {
-      const category = this.props.post.node.frontmatter.category;
-      const categoryFilter = this.props.categoryFilter;
-
-      if (categoryFilter === "all posts") {
-        this.setState({ hidden: false });
-      } else if (category !== categoryFilter) {
-        this.setState({ hidden: true });
-      } else if (category === categoryFilter) {
-        this.setState({ hidden: false });
-      }
+  useEffect(() => {
+    if (categoryFilter === "all posts") {
+      setHidden(false);
+    } else if (category !== categoryFilter) {
+      setHidden(true);
+    } else if (category === categoryFilter) {
+      setHidden(false);
     }
-  }
+  }, [categoryFilter]);
 
-  render() {
-    const { post, linkOnClick } = this.props;
-    return (
-      <StyledListItem>
-        <ul>
-          <li
-            className={`${post.node.frontmatter.category}`}
-            style={{ display: `${this.state.hidden ? "none" : "block"}` }}
-            key={post.node.fields.slug}
-          >
-            <StyledLink
-              activeClassName="active"
-              to={post.node.fields.slug}
-              onClick={linkOnClick}
-            >
-              <ListItemText>
-                <h1>{post.node.frontmatter.title} </h1>
-
-                {post.node.frontmatter.subTitle && (
-                  <h2>{post.node.frontmatter.subTitle}</h2>
-                )}
-              </ListItemText>
-            </StyledLink>
-          </li>
-        </ul>
-      </StyledListItem>
-    );
-  }
+  return (
+    <StyledListItem>
+      <div
+        className={`${post.node.frontmatter.category}`}
+        style={{ display: `${hidden ? "none" : "block"}` }}
+        key={post.node.fields.slug}
+      >
+        <SearchListItem
+          title={post.node.frontmatter.title}
+          subTitle={
+            post.node.frontmatter.subTitle && post.node.frontmatter.subTitle
+          }
+          slug={post.node.fields.slug}
+          linkOnClick={linkOnClick}
+        />
+      </div>
+    </StyledListItem>
+  );
 }
 
 const StyledListItem = styled.div`
@@ -80,39 +65,43 @@ const StyledListItem = styled.div`
   }
   & li {
     margin: 0 0 0.7em 0;
-    transition: height 1s;
-
-    @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
-      margin: 0 0 1.5rem 0;
-    }
 
     @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
       .moving-featured &,
       .is-aside & {
-        margin: 0 0 0 0;
+        padding: 0.8rem 0.5rem 0 0.5rem;
+        text-align: center;
+
+        h2 {
+          font-size: 16px;
+        }
+
+        small {
+          display: none;
+        }
       }
     }
   }
 `;
 
-const StyledLink = styled(Link)`
-  display: flex;
-  align-content: center;
-  align-items: center;
-  justify-content: flex-start;
-  flex-direction: row;
-  padding: 0.7em 1em 0.7em 1em;
-  color: ${props => props.theme.navigator.colors.postsListItemLink};
-
-  @media (hover: hover) {
-    &:hover {
-      color: ${props => props.theme.navigator.colors.postsListItemLinkHover};
-      & .pointer {
-        border-radius: 65% 75%;
-      }
-    }
-  }
-`;
+// const StyledLink = styled(Link)`
+//   display: flex;
+//   align-content: center;
+//   align-items: center;
+//   justify-content: flex-start;
+//   flex-direction: row;
+//   padding: 0.7em 1em 0.7em 1em;
+//   color: ${props => props.theme.navigator.colors.postsListItemLink};
+//
+//   @media (hover: hover) {
+//     &:hover {
+//       color: ${props => props.theme.navigator.colors.postsListItemLinkHover};
+//       & .pointer {
+//         border-radius: 65% 75%;
+//       }
+//     }
+//   }
+// `;
 
 // const ListItemPointer = styled.div`
 //   position: relative;
@@ -149,68 +138,68 @@ const StyledLink = styled(Link)`
 //   }
 // `;
 
-const ListItemText = styled.div`
-  margin: 0 0 0 1.5em;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  text-align: center;
-
-  & h1 {
-    line-height: 1.15;
-    font-weight: 600;
-    letter-spacing: -0.03em;
-    margin: 0;
-    font-size: ${props => props.theme.navigator.sizes.postsListItemH1Font}em;
-
-    @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
-      font-size: ${props =>
-        props.theme.navigator.sizes.postsListItemH1Font *
-        props.theme.navigator.sizes.fontIncraseForM}em;
-    }
-
-    @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
-      font-size: ${props =>
-        props.theme.navigator.sizes.postsListItemH1Font *
-        props.theme.navigator.sizes.fontIncraseForL}em;
-      .moving-featured &,
-      .is-aside & {
-        font-size: 1em;
-        font-weight: 400;
-      }
-    }
-  }
-
-  & h2 {
-    line-height: 1.2;
-    display: block;
-    font-size: ${props => props.theme.navigator.sizes.postsListItemH2Font}em;
-    margin: 0.3em 0 0 0;
-
-    @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
-      font-size: ${props =>
-        props.theme.navigator.sizes.postsListItemH2Font *
-        props.theme.navigator.sizes.fontIncraseForM}em;
-    }
-
-    @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
-      font-size: ${props =>
-        props.theme.navigator.sizes.postsListItemH2Font *
-        props.theme.navigator.sizes.fontIncraseForL}em;
-      .moving-featured &,
-      .is-aside & {
-        display: none;
-      }
-    }
-  }
-
-  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
-    .moving-featured &,
-    .is-aside & {
-      margin: 0 0 0 0.5em;
-    }
-  }
-`;
+// const ListItemText = styled.div`
+//   margin: 0 0 0 1.5em;
+//   flex-grow: 1;
+//   display: flex;
+//   flex-direction: column;
+//   width: 100%;
+//   text-align: center;
+//
+//   & h1 {
+//     line-height: 1.15;
+//     font-weight: 600;
+//     letter-spacing: -0.03em;
+//     margin: 0;
+//     font-size: ${props => props.theme.navigator.sizes.postsListItemH1Font}em;
+//
+//     @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
+//       font-size: ${props =>
+//         props.theme.navigator.sizes.postsListItemH1Font *
+//         props.theme.navigator.sizes.fontIncraseForM}em;
+//     }
+//
+//     @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
+//       font-size: ${props =>
+//         props.theme.navigator.sizes.postsListItemH1Font *
+//         props.theme.navigator.sizes.fontIncraseForL}em;
+//       .moving-featured &,
+//       .is-aside & {
+//         font-size: 1em;
+//         font-weight: 400;
+//       }
+//     }
+//   }
+//
+//   & h2 {
+//     line-height: 1.2;
+//     display: block;
+//     font-size: ${props => props.theme.navigator.sizes.postsListItemH2Font}em;
+//     margin: 0.3em 0 0 0;
+//
+//     @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
+//       font-size: ${props =>
+//         props.theme.navigator.sizes.postsListItemH2Font *
+//         props.theme.navigator.sizes.fontIncraseForM}em;
+//     }
+//
+//     @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
+//       font-size: ${props =>
+//         props.theme.navigator.sizes.postsListItemH2Font *
+//         props.theme.navigator.sizes.fontIncraseForL}em;
+//       .moving-featured &,
+//       .is-aside & {
+//         display: none;
+//       }
+//     }
+//   }
+//
+//   @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
+//     .moving-featured &,
+//     .is-aside & {
+//       margin: 0 0 0 0.5em;
+//     }
+//   }
+// `;
 
 export default ListItem;

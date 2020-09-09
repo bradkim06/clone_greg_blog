@@ -138,7 +138,9 @@ export const darkTheme = {
   },
   search: {
     colors: {
-      listBackground: Color(darkColors.background).lighten(0.7).string()
+      background: darkColors.background,
+      listBackground: Color(darkColors.background).lighten(0.5).string(),
+      hoverBackground: Color(darkColors.background).lighten(1).string()
     }
   },
   mediaQueryTresholds: {

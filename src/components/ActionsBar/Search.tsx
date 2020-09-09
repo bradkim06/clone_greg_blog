@@ -11,8 +11,9 @@ import IconButton from "@material-ui/core/IconButton";
 import TextField from "@material-ui/core/TextField";
 import Fuse from "fuse.js";
 import SearchListItem from "./SearchListItem";
+import styled from "styled-components";
 
-interface allMdxProps {
+type allMdxProps = {
   allMdx: {
     edges: Array<{
       node: {
@@ -27,7 +28,7 @@ interface allMdxProps {
       };
     }>;
   };
-}
+};
 
 function SearchDialog() {
   const data: allMdxProps = useSearchData();
@@ -75,7 +76,7 @@ function SearchDialog() {
       >
         <SearchIcon />
       </IconButton>
-      <Dialog
+      <StyledDialog
         open={open}
         onClose={handleClose}
         scroll={scroll}
@@ -119,7 +120,7 @@ function SearchDialog() {
             Cancel
           </Button>
         </DialogActions>
-      </Dialog>
+      </StyledDialog>
     </div>
   );
 }
@@ -143,6 +144,12 @@ const options = {
     "node.frontmatter.category"
   ]
 };
+
+const StyledDialog = styled(Dialog)`
+  .MuiDialog-paperFullWidth {
+    background-color: ${props => props.theme.search.colors.background};
+  }
+`;
 
 export default SearchDialog;
 

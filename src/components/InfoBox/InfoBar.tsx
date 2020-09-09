@@ -2,36 +2,51 @@ import React from "react";
 import Avatar from "@material-ui/core/Avatar";
 import { Link } from "gatsby";
 import styled from "styled-components";
-import { connect } from "react-redux";
+import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import { PagesProps } from "../query/LayoutQuery";
 import avatar from "../../images/jpg/test.png";
-import { setNavigatorPosition, ReduxState } from "../../state/store";
-import { featureNavigator, moveNavigatorAside } from "./../../utils/shared";
+import { ReduxState } from "../../state/store";
+import {
+  featureNavigatorFunc,
+  moveNavigatorAsideFunc
+} from "./../../utils/shared";
 import config from "../../../content/meta/config";
 
-interface InfoBarProps {
+type InfoBarProps = {
   pages: PagesProps;
-}
+};
 
-class InfoBar extends React.Component<InfoBarProps> {
-  homeLinkOnClick = featureNavigator.bind(this);
-  pageLinkOnClick = moveNavigatorAside.bind(this);
+function InfoBar({ pages }: InfoBarProps) {
+  const state: any = useSelector<ReduxState>(
+    state => ({
+      navigatorShape: state.navigatorShape,
+      navigatorPosition: state.navigatorPosition
+    }),
+    shallowEqual
+  );
+  const dispatch = useDispatch();
 
-  render() {
-    return (
-      <InfoBarStyle>
-        <AvatarLinkBar>
-          <Link to="/" onClick={this.homeLinkOnClick} title="back to Home">
-            <Avatar src={avatar} alt="infoBar avatar" />
-          </Link>
-        </AvatarLinkBar>
-        <BarTitle>
-          {config.infoTitle}
-          <small>{config.infoTitleNote}</small>
-        </BarTitle>
-      </InfoBarStyle>
-    );
+  function homeLinkOnClick(e: any) {
+    featureNavigatorFunc(e, state, dispatch);
   }
+
+  function pageLinkOnClick(e: any) {
+    moveNavigatorAsideFunc(e, state, dispatch);
+  }
+
+  return (
+    <InfoBarStyle>
+      <AvatarLinkBar>
+        <Link to="/" onClick={homeLinkOnClick} title="back to Home">
+          <Avatar src={avatar} alt="infoBar avatar" />
+        </Link>
+      </AvatarLinkBar>
+      <BarTitle>
+        {config.infoTitle}
+        <small>{config.infoTitleNote}</small>
+      </BarTitle>
+    </InfoBarStyle>
+  );
 }
 
 const InfoBarStyle = styled.aside`
@@ -75,15 +90,4 @@ const BarTitle = styled.div`
   }
 `;
 
-const mapStateToProps = (state: ReduxState) => {
-  return {
-    navigatorPosition: state.navigatorPosition,
-    navigatorShape: state.navigatorShape
-  };
-};
-
-const mapDispatchToProps = {
-  setNavigatorPosition
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(InfoBar);
+export default InfoBar;

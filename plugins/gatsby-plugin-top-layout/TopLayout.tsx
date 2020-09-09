@@ -28,7 +28,7 @@ type TopLayoutProps = {
 function TopLayout({ children }: React.PropsWithChildren<TopLayoutProps>) {
   const { posts, pages } = useLayoutQuery();
   const themeContext = useContext(ThemeContext);
-  const categories: string[] = category(posts);
+  const categories = category(posts);
 
   const isWideState = useCurrentWidth(themeContext);
   const dispatch = useDispatch();
@@ -105,7 +105,7 @@ type CategoryProps = {
 };
 
 const category = (posts: CategoryProps): string[] => {
-  let categoryArray = posts.edges.reduce((list: string[], edge: object) => {
+  const categoryArray = posts.edges.reduce((list: string[], edge: object) => {
     const category = (edge as any).node.frontmatter.category;
     if (category && !~list.indexOf(category)) {
       return list.concat((edge as any).node.frontmatter.category);

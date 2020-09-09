@@ -3,12 +3,12 @@ import Grow from "@material-ui/core/Grow";
 import styled from "styled-components";
 import Link from "gatsby-link";
 
-interface SearchResultProps {
+type SearchResultProps = {
   title: string;
   subTitle?: string;
   slug: string;
-  linkOnClick: () => void;
-}
+  linkOnClick: Function;
+};
 
 function SearchListItem({
   title,
@@ -29,7 +29,7 @@ function SearchListItem({
       <Grow in={true} timeout={500}>
         <SearchWrapper>
           <FlexChild>
-            <h3>{titleName.replace(/\"/g, "")}</h3>
+            <h2>{titleName.replace(/\"/g, "")}</h2>
             <Divider />
             <small>
               {subTitleName !== "null" && subTitleName.replace(/\"/g, "")}
@@ -60,19 +60,19 @@ const FlexChild = styled.li`
   flex-direction: column;
   padding: 1rem;
   color: ${props => props.theme.navigator.colors.postsListItemLink};
-  border-radius: 20px;
+  border-radius: 30px;
   background-color: ${props => props.theme.search.colors.listBackground};
 
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: all 1s cubic-bezier(0.25, 0.8, 0.25, 1);
 
   &:hover {
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
-      0 10px 10px rgba(0, 0, 0, 0.22);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
     color: ${props => props.theme.navigator.colors.postsListItemLinkHover};
+    background-color: ${props => props.theme.search.colors.hoverBackground};
   }
 
-  h3 {
+  h2 {
     margin: 0;
     font-weight: 700;
   }

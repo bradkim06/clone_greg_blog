@@ -5,12 +5,12 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 
-interface ListHeaderProps {
+type ListHeaderProps = {
   expandOnClick(event: React.MouseEvent<HTMLButtonElement>): void;
   removeFilter(event: React.MouseEvent<HTMLButtonElement>): void;
   categoryFilter: string;
   navigatorShape: string;
-}
+};
 
 function ListHeader({
   expandOnClick,

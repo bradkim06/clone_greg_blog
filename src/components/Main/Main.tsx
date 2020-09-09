@@ -2,10 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import SpringScrollbars from "../SpringScrollbars";
 
-const Main = (props: { children: React.ReactNode }) => {
+const Main = ({ children }: { children: React.ReactNode }) => {
   return (
     <StyleMain>
-      <SpringScrollbars>{props.children}</SpringScrollbars>
+      <SpringScrollbars>{children}</SpringScrollbars>
     </StyleMain>
   );
 };
