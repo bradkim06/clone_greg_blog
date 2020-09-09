@@ -6,7 +6,7 @@ type InfoMenuProps = {
   linkOnClick: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
 };
 
-function InfoMenu({ linkOnClick }: InfoMenuProps) {
+const InfoMenu = ({ linkOnClick }: InfoMenuProps) => {
   return (
     <StyleInfoMenu>
       <StyledLink
@@ -19,7 +19,7 @@ function InfoMenu({ linkOnClick }: InfoMenuProps) {
       </StyledLink>
     </StyleInfoMenu>
   );
-}
+};
 
 const StyleInfoMenu = styled.nav`
   display: flex;

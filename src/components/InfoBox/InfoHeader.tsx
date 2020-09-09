@@ -15,7 +15,7 @@ type InfoHeaderProps = {
   expandOnClick: () => void;
 };
 
-function InfoHeader({ avatarOnClick, expandOnClick }: InfoHeaderProps) {
+const InfoHeader = ({ avatarOnClick, expandOnClick }: InfoHeaderProps) => {
   return (
     <Header>
       <HeaderAvatarLink>
@@ -39,7 +39,7 @@ function InfoHeader({ avatarOnClick, expandOnClick }: InfoHeaderProps) {
       </IconButton>
     </Header>
   );
-}
+};
 
 const Header = styled.header`
   line-height: 1;

@@ -25,7 +25,7 @@ type TopLayoutProps = {
   setIsWideScreen: (val: boolean) => void;
 };
 
-function TopLayout({ children }: React.PropsWithChildren<TopLayoutProps>) {
+const TopLayout = ({ children }: React.PropsWithChildren<TopLayoutProps>) => {
   const { posts, pages } = useLayoutQuery();
   const themeContext = useContext(ThemeContext);
   const categories = category(posts);
@@ -48,7 +48,7 @@ function TopLayout({ children }: React.PropsWithChildren<TopLayoutProps>) {
       </LayoutWrapper>
     </React.Fragment>
   );
-}
+};
 
 const getWidth = (): number => {
   let width = 0;

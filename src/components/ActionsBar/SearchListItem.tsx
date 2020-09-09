@@ -10,19 +10,19 @@ type SearchResultProps = {
   linkOnClick: Function;
 };
 
-function SearchListItem({
+const SearchListItem = ({
   title,
   subTitle,
   slug,
   linkOnClick
-}: SearchResultProps) {
+}: SearchResultProps) => {
   const titleName = JSON.stringify(title, null, 4);
   const subTitleName = JSON.stringify(subTitle, null, 4);
   const path = JSON.stringify(slug, null, 4);
 
-  const movePage = () => {
+  function movePage() {
     linkOnClick();
-  };
+  }
 
   return (
     <Link onClick={movePage} to={path.replace(/\"/g, "")}>
@@ -39,7 +39,7 @@ function SearchListItem({
       </Grow>
     </Link>
   );
-}
+};
 
 const Divider = styled.div`
   aspect-ratio: 16/9;
@@ -55,16 +55,18 @@ const SearchWrapper = styled.ul`
 `;
 
 const FlexChild = styled.li`
-  width: 90%;
+  width: 80%;
   display: flex;
+  word-break: break-all;
   flex-direction: column;
   padding: 1rem;
   color: ${props => props.theme.navigator.colors.postsListItemLink};
   border-radius: 30px;
   background-color: ${props => props.theme.search.colors.listBackground};
+  text-align: center;
 
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  transition: all 1s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: all 1.2s cubic-bezier(0.25, 0.8, 0.25, 1);
 
   &:hover {
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);

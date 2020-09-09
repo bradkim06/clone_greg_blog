@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import config from "../../../content/meta/config";
 
-export default function InfoHeader() {
+const InfoText = () => {
   return <Text>{config.infoText}</Text>;
-}
+};
 
 const Text = styled.div`
   display: block;
@@ -27,3 +27,5 @@ const Text = styled.div`
   //   display: none;
   // }
 `;
+
+export default InfoText;

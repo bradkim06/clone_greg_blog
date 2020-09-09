@@ -14,7 +14,7 @@ type NavigatorProps = {
   posts: PostsProps;
 };
 
-function Navigator({ posts }: NavigatorProps) {
+const Navigator = ({ posts }: NavigatorProps) => {
   const state: any = useSelector<ReduxState>(
     state => ({
       navigatorShape: state.navigatorShape,
@@ -57,7 +57,7 @@ function Navigator({ posts }: NavigatorProps) {
       )}
     </StyleNavigator>
   );
-}
+};
 
 const StyleNavigator = styled.nav`
   transform: translate3d(0, 0, 0);

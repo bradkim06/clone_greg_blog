@@ -9,27 +9,27 @@ import IconButton from "@material-ui/core/IconButton";
 import FormatSizeIcon from "@material-ui/icons/FormatSize";
 import styled from "styled-components";
 
-interface FontSetterProps {
+type FontSetterProps = {
   increaseFont: (val: number) => void;
-}
+};
 
-function FontSetter({ increaseFont }: FontSetterProps) {
+const FontSetter = ({ increaseFont }: FontSetterProps) => {
   const [open, setOpen] = React.useState(false);
   const anchorRef: any = React.useRef(null);
 
-  const handleToggle = () => {
+  function handleToggle() {
     setOpen(prevOpen => !prevOpen);
-  };
+  }
 
-  const handleClose = (event: React.MouseEvent<Document>) => {
+  function handleClose(event: React.MouseEvent<Document>) {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
     }
 
     setOpen(false);
-  };
+  }
 
-  const handleSetting = (event: React.MouseEvent<HTMLElement>) => {
+  function handleSetting(event: React.MouseEvent<HTMLElement>) {
     const val = (event.target as any).innerText.replace("%", "");
     const factor = +val / 100;
     increaseFont(factor);
@@ -39,7 +39,7 @@ function FontSetter({ increaseFont }: FontSetterProps) {
     }
 
     setOpen(false);
-  };
+  }
 
   // return focus to the button when we transitioned from !open -> open
   const prevOpen = React.useRef(open);
@@ -93,7 +93,7 @@ function FontSetter({ increaseFont }: FontSetterProps) {
       </Popper>
     </FontSizeSetter>
   );
-}
+};
 
 const FontSizeSetter = styled.nav`
   @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {

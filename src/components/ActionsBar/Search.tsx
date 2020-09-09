@@ -30,7 +30,7 @@ type allMdxProps = {
   };
 };
 
-function SearchDialog() {
+const SearchDialog = () => {
   const data: allMdxProps = useSearchData();
   const fuse = new Fuse(data.allMdx.edges, options);
 
@@ -43,14 +43,14 @@ function SearchDialog() {
     setScroll(scrollType);
   };
 
-  const handleClose = () => {
+  function handleClose() {
     setOpen(false);
     updateQuery("");
-  };
+  }
 
-  const onSearch = (event: any) => {
+  function onSearch(event: any) {
     updateQuery(event.currentTarget.value);
-  };
+  }
 
   const descriptionElementRef = React.useRef(null);
 
@@ -123,7 +123,7 @@ function SearchDialog() {
       </StyledDialog>
     </div>
   );
-}
+};
 
 const options = {
   // isCaseSensitive: false,
@@ -151,8 +151,6 @@ const StyledDialog = styled(Dialog)`
   }
 `;
 
-export default SearchDialog;
-
 const useSearchData = () => {
   let searchData = useStaticQuery(
     graphql`
@@ -176,3 +174,5 @@ const useSearchData = () => {
   );
   return searchData;
 };
+
+export default SearchDialog;

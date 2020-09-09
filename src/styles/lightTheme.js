@@ -135,8 +135,8 @@ export const lightTheme = {
   search: {
     colors: {
       background: lightColors.background,
-      listBackground: Color(lightColors.background).darken(0.02).string(),
-      hoverBackground: lightColors.background
+      listBackground: Color(lightColors.background).darken(0.04).string(),
+      hoverBackground: Color(lightColors.background).darken(0.02).string()
     }
   },
   mediaQueryTresholds: {

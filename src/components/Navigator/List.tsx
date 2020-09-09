@@ -16,14 +16,14 @@ type ListProps = {
   categoryFilter: string;
 };
 
-function List({
+const List = ({
   posts,
   linkOnClick,
   expandOnClick,
   removeFilter,
   categoryFilter,
   navigatorShape
-}: ListProps) {
+}: ListProps) => {
   return (
     <Posts>
       <SpringScrollbars forceCheckOnScroll={true} isNavigator={true}>
@@ -49,7 +49,7 @@ function List({
       </SpringScrollbars>
     </Posts>
   );
-}
+};
 
 const Posts = styled.div`
   position: absolute;

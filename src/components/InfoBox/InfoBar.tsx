@@ -16,7 +16,7 @@ type InfoBarProps = {
   pages: PagesProps;
 };
 
-function InfoBar({ pages }: InfoBarProps) {
+const InfoBar = ({ pages }: InfoBarProps) => {
   const state: any = useSelector<ReduxState>(
     state => ({
       navigatorShape: state.navigatorShape,
@@ -47,7 +47,7 @@ function InfoBar({ pages }: InfoBarProps) {
       </BarTitle>
     </InfoBarStyle>
   );
-}
+};
 
 const InfoBarStyle = styled.aside`
   position: absolute;

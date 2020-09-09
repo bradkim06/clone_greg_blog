@@ -19,7 +19,7 @@ import { featureNavigatorFunc } from "../../utils/shared";
 import FontSetter from "./FontSetter";
 import CategoryFilter from "./CategoryFilter";
 
-function ActionsBar({ categories }: { categories: string[] }) {
+const ActionsBar = ({ categories }: { categories: string[] }) => {
   const state: any = useSelector<ReduxState>(
     state => ({
       navigatorShape: state.navigatorShape,
@@ -90,7 +90,7 @@ function ActionsBar({ categories }: { categories: string[] }) {
       </Group>
     </StyleActionsBar>
   );
-}
+};
 
 const StyleActionsBar = styled.div`
   position: absolute;

@@ -24,7 +24,7 @@ interface ListItemProps {
   linkOnClick: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
 }
 
-function ListItem({ post, categoryFilter, linkOnClick }: ListItemProps) {
+const ListItem = ({ post, categoryFilter, linkOnClick }: ListItemProps) => {
   const [hidden, setHidden] = useState(false);
   const category = post.node.frontmatter.category;
 
@@ -56,7 +56,7 @@ function ListItem({ post, categoryFilter, linkOnClick }: ListItemProps) {
       </div>
     </StyledListItem>
   );
-}
+};
 
 const StyledListItem = styled.div`
   & ul {

@@ -12,7 +12,7 @@ import {
 } from "./../../utils/shared";
 import { setNavigatorShape, ReduxState } from "../../state/store";
 
-function InfoBox() {
+const InfoBox = () => {
   const state: any = useSelector<ReduxState>(
     state => ({
       navigatorShape: state.navigatorShape,
@@ -46,7 +46,7 @@ function InfoBox() {
       </InfoContent>
     </StyleInfoBox>
   );
-}
+};
 
 const StyleInfoBox = styled.aside`
   display: none;

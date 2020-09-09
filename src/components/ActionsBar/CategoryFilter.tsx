@@ -9,27 +9,30 @@ import IconButton from "@material-ui/core/IconButton";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import styled from "styled-components";
 
-interface CategoryFilterProps {
+type CategoryFilterProps = {
   categories: string[];
   filterCategory: (val: string) => void;
-}
+};
 
-function CategoryFilter({ categories, filterCategory }: CategoryFilterProps) {
+const CategoryFilter = ({
+  categories,
+  filterCategory
+}: CategoryFilterProps) => {
   const [open, setOpen] = useState(false);
   const anchorRef: any = useRef(null);
 
-  const handleToggle = () => {
+  function handleToggle() {
     setOpen(prevOpen => !prevOpen);
-  };
+  }
 
-  const handleClose = (event: React.MouseEvent<Document>) => {
+  function handleClose(event: React.MouseEvent<Document>) {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
     }
     setOpen(false);
-  };
+  }
 
-  const handleSetting = (event: React.MouseEvent<HTMLElement>) => {
+  function handleSetting(event: React.MouseEvent<HTMLElement>) {
     const category: string = (event.target as any).innerText.trim();
     filterCategory(category);
 
@@ -38,12 +41,14 @@ function CategoryFilter({ categories, filterCategory }: CategoryFilterProps) {
     }
 
     setOpen(false);
-  };
+  }
 
   // return focus to the button when we transitioned from !open -> open
   const prevOpen = useRef(open);
 
   useEffect(() => {
+    console.log("prevOpen:" + prevOpen.current);
+    console.log("open:" + open);
     if (prevOpen.current === true && open === false) {
       anchorRef.current.focus();
     }
@@ -97,7 +102,7 @@ function CategoryFilter({ categories, filterCategory }: CategoryFilterProps) {
       </Popper>
     </FilterWrapper>
   );
-}
+};
 
 const FilterWrapper = styled.nav`
   @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
