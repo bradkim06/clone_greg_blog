@@ -25,8 +25,8 @@ function wrapRootElement({ element }: any) {
 }
 
 const Initialize = ({ children }: any) => {
-  const stateTheme = useSelector<ReduxState>(state => state.themeToggle);
-  const theme = stateTheme ? darkTheme : lightTheme;
+  const isThemeState = useSelector<ReduxState>(state => state.themeToggle);
+  const theme = isThemeState ? darkTheme : lightTheme;
   const materialTheme = (createMuiTheme as any)(theme);
 
   return (

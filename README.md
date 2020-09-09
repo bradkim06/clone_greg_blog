@@ -6,15 +6,19 @@ This blog is not my pure creation, but was created with reference to <a href="ht
 
 ## The difference between Original and Custom
 
+This does not mean that the changes are superior to the original version. it is just a change that reflects my taste. choose one of the two.
+
 |                         | Original  |      Custom      |
 | :---------------------: | :-------: | :--------------: |
 |   **Gatsby Version**    |    V1     |        V2        |
 |      **Markdown**       |    .md    |    .md & .mdx    |
 |        **style**        | react-jss | styled component |
 | **component file type** |    js     |    TypeScript    |
-|     **SearchTool**      |  Algoria  |     fuse.js      |
+|     **Search Tool**     |  Algoria  |     fuse.js      |
+|     **Search Page**     | URL Page  | Material Dialog  |
 |  **FullScreen Button**  |     O     |        X         |
 |    **Theme Toggle**     |     X     |        O         |
+|    **Post Comment**     | Facebook  |    Utterance     |
 
 ## Quick Start
 
@@ -46,9 +50,9 @@ gatsby develop
 You can write post both _.md, _.mdx
 
 ```bash
-[NEW_SITE_DIRECTORY_NAME]/content/posts/[postName].md
+[NEW_SITE_DIRECTORY_NAME]/content/posts/*.md
 # or
-[NEW_SITE_DIRECTORY_NAME]/content/posts/[postName].mdx
+[NEW_SITE_DIRECTORY_NAME]/content/posts/*.mdx
 ```
 
 ## Demo
@@ -63,4 +67,10 @@ You can write post both _.md, _.mdx
 
 ![demoImg](./static/demo-img.png)
 
-[Custom Demo Site](https://bradkim06.github.io/)
+[Custom Demo Site](https://build-0e47e961-1c3c-4034-a39c-4eeda9705420.gtsb.io/)
+
+[My Blog](https://bradkim06.github.io)
+
+### LightHouse Score
+
+![LightHouse Score](./static/lightHoust.png)

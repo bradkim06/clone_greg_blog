@@ -15,12 +15,12 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
     createNodeField({
       node,
       name: `slug`,
-      value: `${separtorIndex ? "/" : ""}${slug.substring(shortSlugStart)}`,
+      value: `${separtorIndex ? "/" : ""}${slug.substring(shortSlugStart)}`
     });
     createNodeField({
       node,
       name: `prefix`,
-      value: separtorIndex ? slug.substring(1, separtorIndex) : "",
+      value: separtorIndex ? slug.substring(1, separtorIndex) : ""
     });
   }
 };
@@ -29,8 +29,7 @@ exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
 
   return new Promise((resolve, reject) => {
-    const postTemplate = path.resolve("./src/templates/PostTemplate.js");
-    const pageTemplate = path.resolve("./src/templates/PageTemplate.js");
+    const postTemplate = path.resolve("./src/templates/PostTemplate.tsx");
     resolve(
       graphql(
         `
@@ -50,23 +49,22 @@ exports.createPages = ({ graphql, actions }) => {
             }
           }
         `
-      ).then((result) => {
+      ).then(result => {
         if (result.errors) {
-          console.log(bradkim06);
           console.log(result.errors);
           reject(result.errors);
         }
 
         // Create posts and pages.
-        _.each(result.data.allMdx.edges, (edge) => {
+        _.each(result.data.allMdx.edges, edge => {
           const slug = edge.node.fields.slug;
 
           createPage({
             path: slug,
             component: postTemplate,
             context: {
-              slug: slug,
-            },
+              slug: slug
+            }
           });
         });
       })
@@ -109,6 +107,6 @@ exports.createPages = ({ graphql, actions }) => {
 exports.onCreateBabelConfig = ({ actions }) => {
   actions.setBabelPlugin({
     name: `@babel/plugin-syntax-dynamic-import`,
-    name: `babel-plugin-dynamic-import-webpack`,
+    name: `babel-plugin-dynamic-import-webpack`
   });
 };

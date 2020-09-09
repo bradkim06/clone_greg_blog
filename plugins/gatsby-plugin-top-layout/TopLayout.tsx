@@ -19,24 +19,23 @@ const ActionsBar = loadable(
 );
 const InfoBar = loadable(() => import("../../src/components/InfoBox/InfoBar"));
 
-interface TopLayoutProps {
-  children?: any;
-  setIsWideScreen: (val: boolean) => void;
+type TopLayoutProps = {
   posts: PostsProps[];
   pages: PagesProps[];
-}
+  setIsWideScreen: (val: boolean) => void;
+};
 
-function TopLayout({ children }: TopLayoutProps) {
+function TopLayout({ children }: React.PropsWithChildren<TopLayoutProps>) {
   const { posts, pages } = useLayoutQuery();
   const themeContext = useContext(ThemeContext);
-  const dispatch = useDispatch();
-
   const categories: string[] = category(posts);
 
-  const isWide = useCurrentWidth(themeContext);
+  const isWideState = useCurrentWidth(themeContext);
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    dispatch(setIsWideScreen(isWide));
-  }, [isWide]);
+    dispatch(setIsWideScreen(isWideState));
+  }, [isWideState]);
 
   return (
     <React.Fragment>
@@ -44,8 +43,8 @@ function TopLayout({ children }: TopLayoutProps) {
         {children}
         <Navigator posts={posts} />
         <ActionsBar categories={categories} />
-        {isWide || <InfoBar pages={pages} />}
-        {isWide && <InfoBox />}
+        {isWideState || <InfoBar pages={pages} />}
+        {isWideState && <InfoBox />}
       </LayoutWrapper>
     </React.Fragment>
   );
@@ -95,7 +94,7 @@ const useCurrentWidth = (ThemeContext: {
   return width >= mediaQueryL;
 };
 
-interface CategoryProps {
+type CategoryProps = {
   edges: Array<{
     node: {
       frontmatter: {
@@ -103,7 +102,7 @@ interface CategoryProps {
       };
     };
   }>;
-}
+};
 
 const category = (posts: CategoryProps): string[] => {
   let categoryArray = posts.edges.reduce((list: string[], edge: object) => {

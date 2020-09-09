@@ -1,38 +1,34 @@
 import React from "react";
-import PropTypes from "prop-types";
 import styled from "styled-components";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
+import { ReduxState } from "../../state/store";
 
-import { setFontSizeIncrease } from "../../state/store";
+function Content({ children }: React.PropsWithChildren<null>) {
+  const fontSizeState = useSelector<ReduxState, number>(
+    state => state.fontSizeIncrease
+  );
 
-const propTypes = {
-  children: PropTypes.node,
-  setFontSizeIncrease: PropTypes.func.isRequired,
-  fontSizeIncrease: PropTypes.number.isRequired
-};
+  return <PageContent fontSize={fontSizeState}>{children}</PageContent>;
+}
 
-const Content = ({ children, fontSizeIncrease }) => {
-  return <PageContent fontIncrease={fontSizeIncrease}>{children}</PageContent>;
-};
-
-const PageContent = styled.div`
+const PageContent = styled.div<{ fontSize: number }>`
   color: ${props => props.theme.main.colors.content};
   font-size: calc(
     ${props => props.theme.main.fonts.content.size}em *
-      ${props => props.fontIncrease}
+      ${props => props.fontSize}
   );
 
   @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
     font-size: calc(
       ${props => props.theme.main.fonts.content.sizeM}em *
-        ${props => props.fontIncrease}
+        ${props => props.fontSize}
     );
   }
 
   @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
     font-size: calc(
       ${props => props.theme.main.fonts.content.sizeL}em *
-        ${props => props.fontIncrease}
+        ${props => props.fontSize}
     );
   }
   line-height: ${props => props.theme.main.fonts.content.lineHeight};
@@ -144,9 +140,4 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-const mapDispatchToProps = {
-  setFontSizeIncrease
-};
-
-Content.propTypes = propTypes;
-export default connect(mapStateToProps, mapDispatchToProps)(Content);
+export default Content;

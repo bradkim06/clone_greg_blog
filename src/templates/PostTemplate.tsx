@@ -1,27 +1,44 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Main from "../components/Main/Main";
 import Post from "../components/Post/Post";
 import { connect } from "react-redux";
 import { graphql } from "gatsby";
 import Seo from "../components/seo/Seo";
 
-import { setNavigatorPosition, setNavigatorShape } from "../state/store";
+import {
+  setNavigatorPosition,
+  setNavigatorShape,
+  ReduxState
+} from "../state/store";
 import { moveNavigatorAside } from "../utils/shared";
 
 require("prismjs/themes/prism-okaidia.css");
 
-const propTypes = {
-  data: PropTypes.object.isRequired,
-  navigatorPosition: PropTypes.string.isRequired,
+type PostTemplateProps = {
+  data: {
+    mdx: {
+      id: string;
+      body: string;
+      fields: {
+        slug: string;
+        prefix: string;
+      };
+      frontmatter: {
+        title: string;
+        subTitle: string;
+      };
+    };
+  };
+  navigatorPosition: string;
+  moveNavigatorAside: (e: any) => void;
 };
 
-class PostTemplate extends React.Component {
+class PostTemplate extends React.Component<PostTemplateProps> {
   moveNavigatorAside = moveNavigatorAside.bind(this);
 
   componentDidMount() {
     if (this.props.navigatorPosition === "is-featured") {
-      this.moveNavigatorAside();
+      this.moveNavigatorAside(null);
     }
   }
 
@@ -30,22 +47,23 @@ class PostTemplate extends React.Component {
     return (
       <Main>
         <Seo data={mdx} />
+        {this.props.children}
         <Post post={mdx} />
       </Main>
     );
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state: ReduxState) => {
   return {
     navigatorPosition: state.navigatorPosition,
-    isWideScreen: state.isWideScreen,
+    isWideScreen: state.isWideScreen
   };
 };
 
 const mapDispatchToProps = {
   setNavigatorPosition,
-  setNavigatorShape,
+  setNavigatorShape
 };
 
 export const postQuery = graphql`
@@ -65,5 +83,4 @@ export const postQuery = graphql`
   }
 `;
 
-PostTemplate.propTypes = propTypes;
 export default connect(mapStateToProps, mapDispatchToProps)(PostTemplate);

@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { PostsProps } from "../query/LayoutQuery";
 import styled from "styled-components";
-import { forceCheck } from "react-lazyload";
 import {
   setNavigatorPosition,
   setNavigatorShape,

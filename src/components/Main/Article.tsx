@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-export default function Article(props) {
-  return <StyleArticle>{props.children}</StyleArticle>;
+function Article({ children }: React.PropsWithChildren<null>) {
+  return <StyleArticle>{children}</StyleArticle>;
 }
 
 const StyleArticle = styled.article`
@@ -36,3 +36,5 @@ const StyleArticle = styled.article`
     padding: 3.5rem;
   }
 `;
+
+export default Article;

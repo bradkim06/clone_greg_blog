@@ -2,13 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import SpringScrollbars from "../SpringScrollbars";
 
-function Main({ children }) {
+const Main = (props: { children: React.ReactNode }) => {
   return (
     <StyleMain>
-      <SpringScrollbars>{children}</SpringScrollbars>
+      <SpringScrollbars>{props.children}</SpringScrollbars>
     </StyleMain>
   );
-}
+};
 
 const StyleMain = styled.main`
   position: absolute;

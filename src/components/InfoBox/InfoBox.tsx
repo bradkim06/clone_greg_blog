@@ -1,64 +1,52 @@
 import React from "react";
 import styled from "styled-components";
-import { connect } from "react-redux";
+import { useSelector, useDispatch, shallowEqual } from "react-redux";
 
 import InfoHeader from "./InfoHeader";
 import InfoText from "./InfoText";
 import InfoMenu from "./InfoMenu";
 
-import { featureNavigator, moveNavigatorAside } from "./../../utils/shared";
 import {
-  setNavigatorPosition,
-  setNavigatorShape,
-  ReduxState
-} from "../../state/store";
+  featureNavigatorFunc,
+  moveNavigatorAsideFunc
+} from "./../../utils/shared";
+import { setNavigatorShape, ReduxState } from "../../state/store";
 
-interface InfoBoxProps {
-  navigatorPosition: string;
-  navigatorShape: string;
-  setNavigatorShape: (val: string) => void;
-}
+function InfoBox() {
+  const state: any = useSelector<ReduxState>(
+    state => ({
+      navigatorShape: state.navigatorShape,
+      navigatorPosition: state.navigatorPosition
+    }),
+    shallowEqual
+  );
+  const dispatch = useDispatch();
 
-class InfoBox extends React.Component<InfoBoxProps> {
-  avatarOnClick = featureNavigator.bind(this);
-  menulinkOnClick = moveNavigatorAside.bind(this);
-
-  expandOnClick = () => {
-    this.props.setNavigatorShape("closed");
-  };
-
-  render() {
-    const { navigatorPosition, navigatorShape } = this.props;
-
-    return (
-      <StyleInfoBox
-        className={`${navigatorPosition ? navigatorPosition : ""} 
-         ${navigatorShape ? navigatorShape : ""}`}
-      >
-        <InfoHeader
-          avatarOnClick={this.avatarOnClick}
-          expandOnClick={this.expandOnClick}
-        />
-        <InfoContent>
-          <InfoText />
-          <InfoMenu linkOnClick={this.menulinkOnClick} />
-        </InfoContent>
-      </StyleInfoBox>
-    );
+  function expandOnClick() {
+    dispatch(setNavigatorShape("closed"));
   }
+
+  function avatarOnClick(e: any) {
+    featureNavigatorFunc(e, state, dispatch);
+  }
+
+  function menulinkOnClick(e: any) {
+    moveNavigatorAsideFunc(e, state, dispatch);
+  }
+
+  return (
+    <StyleInfoBox
+      className={`${state.navigatorPosition ? state.navigatorPosition : ""} 
+         ${state.navigatorShape ? state.navigatorShape : ""}`}
+    >
+      <InfoHeader avatarOnClick={avatarOnClick} expandOnClick={expandOnClick} />
+      <InfoContent>
+        <InfoText />
+        <InfoMenu linkOnClick={menulinkOnClick} />
+      </InfoContent>
+    </StyleInfoBox>
+  );
 }
-
-const mapStateToProps = (state: ReduxState) => {
-  return {
-    navigatorPosition: state.navigatorPosition,
-    navigatorShape: state.navigatorShape
-  };
-};
-
-const mapDispatchToProps = {
-  setNavigatorPosition,
-  setNavigatorShape
-};
 
 const StyleInfoBox = styled.aside`
   display: none;
@@ -109,4 +97,4 @@ const InfoContent = styled.div`
   }
 `;
 
-export default connect(mapStateToProps, mapDispatchToProps)(InfoBox);
+export default InfoBox;

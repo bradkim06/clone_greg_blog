@@ -74,7 +74,6 @@ const reducer = (state: any, action: any) => {
       };
 
     case SET_IS_WIDE_SCREEN:
-      console.log("test");
       return {
         ...state,
         isWideScreen: action.val
@@ -109,7 +108,7 @@ const reducer = (state: any, action: any) => {
   }
 };
 
-export interface ReduxState {
+export type ReduxState = {
   navigatorPosition: string;
   navigatorShape: string;
   navigatorFilter: string;
@@ -118,7 +117,7 @@ export interface ReduxState {
   fontSizeIncrease: number;
   categoryFilter: string;
   themeToggle: boolean;
-}
+};
 
 const initialState: ReduxState = {
   navigatorPosition: "is-aside",
