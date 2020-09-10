@@ -24,11 +24,11 @@ export const lightTheme = {
   },
   info: {
     colors: {
-      text: lightColors.gray,
+      text: lightColors.dark,
       background: lightColors.background,
       socialIcons: lightColors.lightGray,
       socialIconsHover: lightColors.accent,
-      menuLink: lightColors.gray,
+      menuLink: lightColors.dark,
       menuLinkHover: lightColors.accent
     },
     sizes: {
