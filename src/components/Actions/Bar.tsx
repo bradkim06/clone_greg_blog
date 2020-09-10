@@ -140,13 +140,15 @@ const Group = styled.div`
   flex-direction: row;
   align-items: center;
 
+  .MuiIconButton-root {
+    color: ${props => props.theme.bars.colors.icon};
+  }
+
   @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
     flex-direction: column;
   }
 `;
 
-const StyledIconButton = styled(IconButton)`
-  color: ${props => props.theme.bars.colors.icon};
-`;
+const StyledIconButton = styled(IconButton)``;
 
 export default ActionsBar;

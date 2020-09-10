@@ -47,6 +47,7 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: inherit;
   }
 
+
   noscript {
     background: #d00;
     color: #fff;
@@ -60,7 +61,6 @@ export const GlobalStyle = createGlobalStyle`
     border-radius: 2px;
     box-shadow: 0 0 10px 52px rgba(255, 255, 255, 0.8);
   }
-
 
   wrapper: {
   }
@@ -87,11 +87,20 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   :not(pre) > code[class*="language-"] {
-    background: ${props => props.theme.base.colors.accent};
+    background-color: ${props => props.theme.base.colors.accent};
     color: ${props => props.theme.base.colors.brightText};
     text-shadow: none;
     padding: 1px 5px;
     border-radius: 2px;
+  }
+
+  strong {
+    color: ${props => props.theme.main.colors.contentHeading};
+  }
+
+  ::selection {
+    background-color: ${props => props.theme.base.colors.accent};
+    color: ${props => props.theme.base.colors.brightText};
   }
 
 `;

@@ -7,7 +7,6 @@ import MenuItem from "@material-ui/core/MenuItem";
 import MenuList from "@material-ui/core/MenuList";
 import IconButton from "@material-ui/core/IconButton";
 import FormatSizeIcon from "@material-ui/icons/FormatSize";
-import styled from "styled-components";
 
 type FontSetterProps = {
   increaseFont: (val: number) => void;
@@ -53,7 +52,7 @@ const FontSetter = ({ increaseFont }: FontSetterProps) => {
   }, [open]);
 
   return (
-    <FontSizeSetter>
+    <React.Fragment>
       <IconButton
         ref={anchorRef}
         aria-controls={open ? "menu-list-grow" : undefined}
@@ -91,16 +90,8 @@ const FontSetter = ({ increaseFont }: FontSetterProps) => {
           </Grow>
         )}
       </Popper>
-    </FontSizeSetter>
+    </React.Fragment>
   );
 };
-
-const FontSizeSetter = styled.nav`
-  @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
-  }
-  .fontOpen {
-    color: ${props => props.theme.bars.colors.icon};
-  }
-`;
 
 export default FontSetter;

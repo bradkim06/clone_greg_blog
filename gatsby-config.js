@@ -101,12 +101,12 @@ module.exports = {
     `gatsby-plugin-sharp`,
     `gatsby-plugin-sitemap`,
     {
-      resolve: 'gatsby-plugin-robots-txt',
+      resolve: "gatsby-plugin-robots-txt",
       options: {
-        host: 'https://bradkim06.github.io',
-        sitemap: 'https://bradkim06.github.io/sitemap.xml',
-        policy: [{ userAgent: '*', allow: '/' }]
+        host: "https://bradkim06.github.io",
+        sitemap: "https://bradkim06.github.io/sitemap.xml",
+        policy: [{ userAgent: "*", allow: "/" }]
       }
-    },
+    }
   ]
 };

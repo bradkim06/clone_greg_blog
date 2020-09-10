@@ -78,7 +78,6 @@ class SpringScrollbars extends Component<ScrollType> {
   }
 
   getHeight() {
-    console.log(this.scrollbars.getHeight);
     return this.scrollbars.getHeight();
   }
 

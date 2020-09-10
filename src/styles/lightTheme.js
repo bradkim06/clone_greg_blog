@@ -59,12 +59,12 @@ export const lightTheme = {
   main: {
     colors: {
       background: lightColors.background,
-      title: lightColors.dark,
-      subTitle: lightColors.gray,
-      meta: lightColors.gray,
+      title: lightColors.deepDark,
+      subTitle: lightColors.dark,
+      meta: lightColors.dark,
       content: lightColors.dark,
       footer: lightColors.gray,
-      contentHeading: lightColors.dark,
+      contentHeading: lightColors.deepDark,
       blockquoteFrame: lightColors.accent,
       link: lightColors.accent,
       linkHover: lightColors.dark,

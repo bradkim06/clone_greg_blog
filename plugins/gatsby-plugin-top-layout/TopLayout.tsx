@@ -4,24 +4,14 @@ import LayoutWrapper from "./LayoutWrapper";
 import { ThemeContext } from "styled-components";
 import loadable from "@loadable/component";
 import { setIsWideScreen } from "../../src/state/store";
-import {
-  useLayoutQuery,
-  PostsProps,
-  PagesProps
-} from "../../src/components/Query/LayoutQuery";
+import { useLayoutQuery } from "../../src/components/Query/LayoutQuery";
 
 const InfoBox = loadable(() => import("../../src/components/Info/Box"));
 const Navigator = loadable(() => import("../../src/components/Navigator"));
 const ActionsBar = loadable(() => import("../../src/components/Actions/Bar"));
 const InfoBar = loadable(() => import("../../src/components/Info/Bar"));
 
-type TopLayoutProps = {
-  posts: PostsProps[];
-  pages: PagesProps[];
-  setIsWideScreen: (val: boolean) => void;
-};
-
-const TopLayout = ({ children }: React.PropsWithChildren<TopLayoutProps>) => {
+const TopLayout = ({ children }: React.PropsWithChildren<null>) => {
   const { posts, pages } = useLayoutQuery();
   const themeContext = useContext(ThemeContext);
   const categories = category(posts);
