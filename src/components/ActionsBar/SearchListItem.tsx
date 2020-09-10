@@ -43,8 +43,11 @@ const SearchListItem = ({
 
 const Divider = styled.div`
   aspect-ratio: 16/9;
-  background: red;
   margin: 0.5rem 0;
+
+  @media (max-width: ${props => props.theme.mediaQueryTresholds.M}px) {
+    margin: 0.25rem 0;
+  }
 `;
 
 const SearchWrapper = styled.ul`
@@ -81,6 +84,16 @@ const FlexChild = styled.li`
 
   small {
     font-weight: 400;
+  }
+
+  @media (max-width: ${props => props.theme.mediaQueryTresholds.M}px) {
+    h2 {
+      font-size: 16px;
+    }
+
+    small {
+      font-size: 12px;
+    }
   }
 `;
 
