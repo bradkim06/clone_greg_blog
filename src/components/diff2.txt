@@ -1,0 +1,2109 @@
+diff --git a/package.json b/package.json
+index f409737..158535b 100644
+--- a/package.json
++++ b/package.json
+@@ -67,9 +67,11 @@
+     "@types/node": "^14.6.4",
+     "@types/react": "^16.9.49",
+     "@types/react-custom-scrollbars": "^4.0.7",
++    "@types/react-helmet": "^6.1.0",
+     "@types/react-lazyload": "^2.6.0",
+     "@types/react-redux": "^7.1.9",
+     "@types/styled-components": "^5.1.3",
++    "@types/mdx-js__react": "^1.5.2",
+     "eslint": "^7.8.1",
+     "eslint-plugin-react": "^7.20.6",
+     "typescript": "^4.0.2"
+diff --git a/plugins/gatsby-plugin-top-layout/TopLayout.tsx b/plugins/gatsby-plugin-top-layout/TopLayout.tsx
+index 591b609..172367f 100644
+--- a/plugins/gatsby-plugin-top-layout/TopLayout.tsx
++++ b/plugins/gatsby-plugin-top-layout/TopLayout.tsx
+@@ -8,16 +8,12 @@ import {
+   useLayoutQuery,
+   PostsProps,
+   PagesProps
+-} from "../../src/components/query/LayoutQuery";
+-
+-const InfoBox = loadable(() => import("../../src/components/InfoBox/InfoBox"));
+-const Navigator = loadable(
+-  () => import("../../src/components/Navigator/Navigator")
+-);
+-const ActionsBar = loadable(
+-  () => import("../../src/components/ActionsBar/ActionsBar")
+-);
+-const InfoBar = loadable(() => import("../../src/components/InfoBox/InfoBar"));
++} from "../../src/components/Query/LayoutQuery";
++
++const InfoBox = loadable(() => import("../../src/components/Info/Box"));
++const Navigator = loadable(() => import("../../src/components/Navigator"));
++const ActionsBar = loadable(() => import("../../src/components/Actions/Bar"));
++const InfoBar = loadable(() => import("../../src/components/Info/Bar"));
+ 
+ type TopLayoutProps = {
+   posts: PostsProps[];
+diff --git a/plugins/gatsby-plugin-top-layout/wrapRootElement.tsx b/plugins/gatsby-plugin-top-layout/wrapRootElement.tsx
+index a8f61ef..6dd4baa 100644
+--- a/plugins/gatsby-plugin-top-layout/wrapRootElement.tsx
++++ b/plugins/gatsby-plugin-top-layout/wrapRootElement.tsx
+@@ -25,7 +25,9 @@ function wrapRootElement({ element }: any) {
+ }
+ 
+ const Initialize = ({ children }: any) => {
+-  const isThemeState = useSelector<ReduxState>(state => state.themeToggle);
++  const isThemeState = useSelector<ReduxState, boolean>(
++    state => state.themeToggle
++  );
+   const theme = isThemeState ? darkTheme : lightTheme;
+   const materialTheme = (createMuiTheme as any)(theme);
+ 
+diff --git a/src/components/ActionsBar/ActionsBar.tsx b/src/components/ActionsBar/ActionsBar.tsx
+deleted file mode 100644
+index c0fcfd5..0000000
+--- a/src/components/ActionsBar/ActionsBar.tsx
++++ /dev/null
+@@ -1,156 +0,0 @@
+-import React from "react";
+-import styled from "styled-components";
+-import IconButton from "@material-ui/core/IconButton";
+-import { useSelector, useDispatch, shallowEqual } from "react-redux";
+-import HomeIcon from "@material-ui/icons/Home";
+-import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
+-import Search from "./Search";
+-import WbSunnyIcon from "@material-ui/icons/WbSunny";
+-import Brightness2 from "@material-ui/icons/Brightness2";
+-
+-import {
+-  setScrollToTop,
+-  setFontSizeIncrease,
+-  setCategoryFilter,
+-  setThemeToggle,
+-  ReduxState
+-} from "../../state/store";
+-import { featureNavigatorFunc } from "../../utils/shared";
+-import FontSetter from "./FontSetter";
+-import CategoryFilter from "./CategoryFilter";
+-
+-const ActionsBar = ({ categories }: { categories: string[] }) => {
+-  const state: any = useSelector<ReduxState>(
+-    state => ({
+-      navigatorShape: state.navigatorShape,
+-      navigatorPosition: state.navigatorPosition,
+-      isWideScreen: state.isWideScreen
+-    }),
+-    shallowEqual
+-  );
+-  const dispatch = useDispatch();
+-
+-  function homeOnClick(e: any) {
+-    featureNavigatorFunc(e, state, dispatch);
+-  }
+-
+-  function arrowUpOnClick() {
+-    dispatch(setScrollToTop(true));
+-  }
+-
+-  function fontSetterOnClick(val: number) {
+-    dispatch(setFontSizeIncrease(val));
+-  }
+-
+-  function categoryFilterOnClick(val: string) {
+-    dispatch(setCategoryFilter(val));
+-  }
+-
+-  function themeToggleClick() {
+-    dispatch(setThemeToggle());
+-  }
+-
+-  return (
+-    <StyleActionsBar>
+-      <Group>
+-        <StyledIconButton
+-          aria-label="Back to list"
+-          onClick={homeOnClick}
+-          title="Back to the list"
+-        >
+-          <HomeIcon />
+-        </StyledIconButton>
+-        <Search />
+-        {((state.isWideScreen && state.navigatorShape === "open") ||
+-          state.navigatorPosition !== "is-aside") && (
+-          <CategoryFilter
+-            categories={categories}
+-            filterCategory={categoryFilterOnClick}
+-          />
+-        )}
+-      </Group>
+-      <Group>
+-        {state.navigatorPosition === "is-aside" && (
+-          <FontSetter increaseFont={fontSetterOnClick} />
+-        )}
+-        <StyledIconButton
+-          aria-label="Theme Toggle"
+-          onClick={themeToggleClick}
+-          title="Theme Change"
+-        >
+-          {state.themeToggle ? <WbSunnyIcon /> : <Brightness2 />}
+-        </StyledIconButton>
+-        <StyledIconButton
+-          aria-label="Back to top"
+-          onClick={arrowUpOnClick}
+-          title="Scroll to top"
+-        >
+-          <ArrowUpwardIcon />
+-        </StyledIconButton>
+-      </Group>
+-    </StyleActionsBar>
+-  );
+-};
+-
+-const StyleActionsBar = styled.div`
+-  position: absolute;
+-  background: ${props => props.theme.bars.colors.background};
+-  left: 0;
+-  bottom: 0;
+-  display: flex;
+-  flex-direction: row;
+-  padding: 0 ${props => props.theme.bars.sizes.actionsBar}px;
+-  justify-content: space-between;
+-  height: ${props => props.theme.bars.sizes.actionsBar}px;
+-  width: 100%;
+-
+-  &::before {
+-    content: "";
+-    position: absolute;
+-    left: ${props => props.theme.base.sizes.linesMargin};
+-    right: ${props => props.theme.base.sizes.linesMargin};
+-    height: 0;
+-    top: 0;
+-    border-top: 1px solid ${props => props.theme.base.colors.lines};
+-  }
+-
+-  @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
+-    padding: 0 calc(${props => props.theme.base.sizes.linesMargin} * 1.5);
+-  }
+-
+-  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
+-    flex-direction: column;
+-    top: 0;
+-    right: 0;
+-    left: auto;
+-    height: 100%;
+-    padding: ${props => props.theme.base.sizes.linesMargin} 0;
+-    width: ${props => props.theme.bars.sizes.actionsBar}px;
+-
+-    &::before {
+-      top: ${props => props.theme.base.sizes.linesMargin};
+-      bottom: ${props => props.theme.base.sizes.linesMargin};
+-      left: 0;
+-      right: auto;
+-      width: 0;
+-      height: auto;
+-      border-left: 1px solid ${props => props.theme.base.colors.lines};
+-    }
+-  }
+-`;
+-
+-const Group = styled.div`
+-  display: flex;
+-  flex-direction: row;
+-  align-items: center;
+-
+-  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
+-    flex-direction: column;
+-  }
+-`;
+-
+-const StyledIconButton = styled(IconButton)`
+-  color: ${props => props.theme.bars.colors.icon};
+-`;
+-
+-export default ActionsBar;
+diff --git a/src/components/ActionsBar/CategoryFilter.tsx b/src/components/ActionsBar/CategoryFilter.tsx
+deleted file mode 100644
+index cd37038..0000000
+--- a/src/components/ActionsBar/CategoryFilter.tsx
++++ /dev/null
+@@ -1,115 +0,0 @@
+-import React, { useEffect, useRef, useState } from "react";
+-import ClickAwayListener from "@material-ui/core/ClickAwayListener";
+-import Grow from "@material-ui/core/Grow";
+-import Paper from "@material-ui/core/Paper";
+-import Popper from "@material-ui/core/Popper";
+-import MenuItem from "@material-ui/core/MenuItem";
+-import MenuList from "@material-ui/core/MenuList";
+-import IconButton from "@material-ui/core/IconButton";
+-import FilterListIcon from "@material-ui/icons/FilterList";
+-import styled from "styled-components";
+-
+-type CategoryFilterProps = {
+-  categories: string[];
+-  filterCategory: (val: string) => void;
+-};
+-
+-const CategoryFilter = ({
+-  categories,
+-  filterCategory
+-}: CategoryFilterProps) => {
+-  const [open, setOpen] = useState(false);
+-  const anchorRef: any = useRef(null);
+-
+-  function handleToggle() {
+-    setOpen(prevOpen => !prevOpen);
+-  }
+-
+-  function handleClose(event: React.MouseEvent<Document>) {
+-    if (anchorRef.current && anchorRef.current.contains(event.target)) {
+-      return;
+-    }
+-    setOpen(false);
+-  }
+-
+-  function handleSetting(event: React.MouseEvent<HTMLElement>) {
+-    const category: string = (event.target as any).innerText.trim();
+-    filterCategory(category);
+-
+-    if (anchorRef.current && anchorRef.current.contains(event.target)) {
+-      return;
+-    }
+-
+-    setOpen(false);
+-  }
+-
+-  // return focus to the button when we transitioned from !open -> open
+-  const prevOpen = useRef(open);
+-
+-  useEffect(() => {
+-    console.log("prevOpen:" + prevOpen.current);
+-    console.log("open:" + open);
+-    if (prevOpen.current === true && open === false) {
+-      anchorRef.current.focus();
+-    }
+-
+-    prevOpen.current = open;
+-  }, [open]);
+-
+-  return (
+-    <FilterWrapper>
+-      <IconButton
+-        ref={anchorRef}
+-        aria-controls={open ? "menu-list-grow" : undefined}
+-        aria-haspopup="true"
+-        onClick={handleToggle}
+-        aria-label="categoryOpen"
+-        className="categoryOpen"
+-      >
+-        <FilterListIcon />
+-      </IconButton>
+-      <Popper
+-        open={open}
+-        anchorEl={anchorRef.current}
+-        role={undefined}
+-        transition
+-        disablePortal
+-      >
+-        {({ TransitionProps, placement }) => (
+-          <Grow
+-            {...TransitionProps}
+-            style={{
+-              transformOrigin:
+-                placement === "bottom" ? "center top" : "center bottom"
+-            }}
+-          >
+-            <Paper>
+-              <ClickAwayListener onClickAway={handleClose}>
+-                <MenuList autoFocusItem={open} id="menu-list-grow">
+-                  <MenuItem key="all" onClick={handleSetting}>
+-                    all posts
+-                  </MenuItem>
+-                  {categories.map(category => (
+-                    <MenuItem key={category} onClick={handleSetting}>
+-                      {category}
+-                    </MenuItem>
+-                  ))}
+-                </MenuList>
+-              </ClickAwayListener>
+-            </Paper>
+-          </Grow>
+-        )}
+-      </Popper>
+-    </FilterWrapper>
+-  );
+-};
+-
+-const FilterWrapper = styled.nav`
+-  @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
+-  }
+-  .categoryOpen {
+-    color: ${props => props.theme.bars.colors.icon};
+-  }
+-`;
+-
+-export default CategoryFilter;
+diff --git a/src/components/ActionsBar/FontSetter.tsx b/src/components/ActionsBar/FontSetter.tsx
+deleted file mode 100644
+index 3e80fd5..0000000
+--- a/src/components/ActionsBar/FontSetter.tsx
++++ /dev/null
+@@ -1,106 +0,0 @@
+-import React, { useEffect } from "react";
+-import ClickAwayListener from "@material-ui/core/ClickAwayListener";
+-import Grow from "@material-ui/core/Grow";
+-import Paper from "@material-ui/core/Paper";
+-import Popper from "@material-ui/core/Popper";
+-import MenuItem from "@material-ui/core/MenuItem";
+-import MenuList from "@material-ui/core/MenuList";
+-import IconButton from "@material-ui/core/IconButton";
+-import FormatSizeIcon from "@material-ui/icons/FormatSize";
+-import styled from "styled-components";
+-
+-type FontSetterProps = {
+-  increaseFont: (val: number) => void;
+-};
+-
+-const FontSetter = ({ increaseFont }: FontSetterProps) => {
+-  const [open, setOpen] = React.useState(false);
+-  const anchorRef: any = React.useRef(null);
+-
+-  function handleToggle() {
+-    setOpen(prevOpen => !prevOpen);
+-  }
+-
+-  function handleClose(event: React.MouseEvent<Document>) {
+-    if (anchorRef.current && anchorRef.current.contains(event.target)) {
+-      return;
+-    }
+-
+-    setOpen(false);
+-  }
+-
+-  function handleSetting(event: React.MouseEvent<HTMLElement>) {
+-    const val = (event.target as any).innerText.replace("%", "");
+-    const factor = +val / 100;
+-    increaseFont(factor);
+-
+-    if (anchorRef.current && anchorRef.current.contains(event.target)) {
+-      return;
+-    }
+-
+-    setOpen(false);
+-  }
+-
+-  // return focus to the button when we transitioned from !open -> open
+-  const prevOpen = React.useRef(open);
+-
+-  useEffect(() => {
+-    if (prevOpen.current === true && open === false) {
+-      anchorRef.current.focus();
+-    }
+-
+-    prevOpen.current = open;
+-  }, [open]);
+-
+-  return (
+-    <FontSizeSetter>
+-      <IconButton
+-        ref={anchorRef}
+-        aria-controls={open ? "menu-list-grow" : undefined}
+-        aria-haspopup="true"
+-        onClick={handleToggle}
+-        aria-label="fontOpen"
+-        className="fontOpen"
+-      >
+-        <FormatSizeIcon />
+-      </IconButton>
+-      <Popper
+-        open={open}
+-        anchorEl={anchorRef.current}
+-        role={undefined}
+-        transition
+-        disablePortal
+-      >
+-        {({ TransitionProps, placement }) => (
+-          <Grow
+-            {...TransitionProps}
+-            style={{
+-              transformOrigin:
+-                placement === "bottom" ? "center top" : "center bottom"
+-            }}
+-          >
+-            <Paper>
+-              <ClickAwayListener onClickAway={handleClose}>
+-                <MenuList autoFocusItem={open} id="menu-list-grow">
+-                  <MenuItem onClick={handleSetting}>150%</MenuItem>
+-                  <MenuItem onClick={handleSetting}>125%</MenuItem>
+-                  <MenuItem onClick={handleSetting}>100%</MenuItem>
+-                </MenuList>
+-              </ClickAwayListener>
+-            </Paper>
+-          </Grow>
+-        )}
+-      </Popper>
+-    </FontSizeSetter>
+-  );
+-};
+-
+-const FontSizeSetter = styled.nav`
+-  @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
+-  }
+-  .fontOpen {
+-    color: ${props => props.theme.bars.colors.icon};
+-  }
+-`;
+-
+-export default FontSetter;
+diff --git a/src/components/ActionsBar/Search.tsx b/src/components/ActionsBar/Search.tsx
+deleted file mode 100644
+index 592bae7..0000000
+--- a/src/components/ActionsBar/Search.tsx
++++ /dev/null
+@@ -1,178 +0,0 @@
+-import React, { useState, useEffect } from "react";
+-import { useStaticQuery, graphql } from "gatsby";
+-import Button from "@material-ui/core/Button";
+-import Dialog from "@material-ui/core/Dialog";
+-import DialogActions from "@material-ui/core/DialogActions";
+-import DialogContent from "@material-ui/core/DialogContent";
+-import DialogContentText from "@material-ui/core/DialogContentText";
+-import DialogTitle from "@material-ui/core/DialogTitle";
+-import SearchIcon from "@material-ui/icons/Search";
+-import IconButton from "@material-ui/core/IconButton";
+-import TextField from "@material-ui/core/TextField";
+-import Fuse from "fuse.js";
+-import SearchListItem from "./SearchListItem";
+-import styled from "styled-components";
+-
+-type allMdxProps = {
+-  allMdx: {
+-    edges: Array<{
+-      node: {
+-        fields: {
+-          slug: string;
+-        };
+-        frontmatter: {
+-          title: string;
+-          subTitle?: string;
+-          category?: string;
+-        };
+-      };
+-    }>;
+-  };
+-};
+-
+-const SearchDialog = () => {
+-  const data: allMdxProps = useSearchData();
+-  const fuse = new Fuse(data.allMdx.edges, options);
+-
+-  const [open, setOpen] = useState(false);
+-  const [scroll, setScroll] = useState<"paper" | "body" | undefined>("paper");
+-  const [query, updateQuery] = useState("");
+-
+-  const handleClickOpen = (scrollType: "paper" | "body" | undefined) => () => {
+-    setOpen(true);
+-    setScroll(scrollType);
+-  };
+-
+-  function handleClose() {
+-    setOpen(false);
+-    updateQuery("");
+-  }
+-
+-  function onSearch(event: any) {
+-    updateQuery(event.currentTarget.value);
+-  }
+-
+-  const descriptionElementRef = React.useRef(null);
+-
+-  useEffect(() => {
+-    if (open) {
+-      const { current: descriptionElement }: any = descriptionElementRef;
+-      if (descriptionElement !== null) {
+-        descriptionElement.focus();
+-      }
+-    }
+-  }, [open]);
+-
+-  const results = fuse.search(query);
+-
+-  return (
+-    <div>
+-      <IconButton
+-        aria-label="Search"
+-        onClick={handleClickOpen("paper")}
+-        data-shape="closed"
+-        title="Search"
+-        className="iconButton"
+-      >
+-        <SearchIcon />
+-      </IconButton>
+-      <StyledDialog
+-        open={open}
+-        onClose={handleClose}
+-        scroll={scroll}
+-        aria-labelledby="scroll-dialog-title"
+-        aria-describedby="scroll-dialog-description"
+-        maxWidth="lg"
+-        fullWidth
+-      >
+-        <DialogTitle id="scroll-dialog-title">Search by fuse.js</DialogTitle>
+-        <DialogContent dividers={scroll === "paper"}>
+-          <DialogContentText
+-            id="scroll-dialog-description"
+-            ref={descriptionElementRef}
+-            tabIndex={-1}
+-          >
+-            <TextField
+-              id="outlined-search"
+-              label="Search field"
+-              type="search"
+-              variant="outlined"
+-              fullWidth
+-              autoFocus={true}
+-              helperText="fuzzy searching"
+-              value={query}
+-              onChange={onSearch}
+-              autoComplete="off"
+-            />
+-            {results &&
+-              results.map((post: any) => (
+-                <SearchListItem
+-                  title={post.item.node.frontmatter.title}
+-                  subTitle={post.item.node.frontmatter.subTitle}
+-                  slug={post.item.node.fields.slug}
+-                  linkOnClick={handleClose}
+-                />
+-              ))}
+-          </DialogContentText>
+-        </DialogContent>
+-        <DialogActions>
+-          <Button onClick={handleClose} color="primary">
+-            Cancel
+-          </Button>
+-        </DialogActions>
+-      </StyledDialog>
+-    </div>
+-  );
+-};
+-
+-const options = {
+-  // isCaseSensitive: false,
+-  // includeScore: true,
+-  shouldSort: true,
+-  // includeMatches: false,
+-  // findAllMatches: false,
+-  // minMatchCharLength: 1,
+-  // location: 0,
+-  threshold: 0.5,
+-  // distance: 100,
+-  // useExtendedSearch: false,
+-  // ignoreLocation: false,
+-  // ignoreFieldNorm: false,
+-  keys: [
+-    "node.frontmatter.title",
+-    "node.frontmatter.subTitle",
+-    "node.frontmatter.category"
+-  ]
+-};
+-
+-const StyledDialog = styled(Dialog)`
+-  .MuiDialog-paperFullWidth {
+-    background-color: ${props => props.theme.search.colors.background};
+-  }
+-`;
+-
+-const useSearchData = () => {
+-  let searchData = useStaticQuery(
+-    graphql`
+-      query SearchData {
+-        allMdx {
+-          edges {
+-            node {
+-              fields {
+-                slug
+-              }
+-              frontmatter {
+-                title
+-                subTitle
+-                category
+-              }
+-            }
+-          }
+-        }
+-      }
+-    `
+-  );
+-  return searchData;
+-};
+-
+-export default SearchDialog;
+diff --git a/src/components/ActionsBar/SearchListItem.tsx b/src/components/ActionsBar/SearchListItem.tsx
+deleted file mode 100644
+index f867d7e..0000000
+--- a/src/components/ActionsBar/SearchListItem.tsx
++++ /dev/null
+@@ -1,100 +0,0 @@
+-import React from "react";
+-import Grow from "@material-ui/core/Grow";
+-import styled from "styled-components";
+-import Link from "gatsby-link";
+-
+-type SearchResultProps = {
+-  title: string;
+-  subTitle?: string;
+-  slug: string;
+-  linkOnClick: Function;
+-};
+-
+-const SearchListItem = ({
+-  title,
+-  subTitle,
+-  slug,
+-  linkOnClick
+-}: SearchResultProps) => {
+-  const titleName = JSON.stringify(title, null, 4);
+-  const subTitleName = JSON.stringify(subTitle, null, 4);
+-  const path = JSON.stringify(slug, null, 4);
+-
+-  function movePage() {
+-    linkOnClick();
+-  }
+-
+-  return (
+-    <Link onClick={movePage} to={path.replace(/\"/g, "")}>
+-      <Grow in={true} timeout={500}>
+-        <SearchWrapper>
+-          <FlexChild>
+-            <h2>{titleName.replace(/\"/g, "")}</h2>
+-            <Divider />
+-            <small>
+-              {subTitleName !== "null" && subTitleName.replace(/\"/g, "")}
+-            </small>
+-          </FlexChild>
+-        </SearchWrapper>
+-      </Grow>
+-    </Link>
+-  );
+-};
+-
+-const Divider = styled.div`
+-  aspect-ratio: 16/9;
+-  margin: 0.5rem 0;
+-
+-  @media (max-width: ${props => props.theme.mediaQueryTresholds.M}px) {
+-    margin: 0.25rem 0;
+-  }
+-`;
+-
+-const SearchWrapper = styled.ul`
+-  list-style: none;
+-  padding: 0;
+-  display: grid;
+-  place-items: center;
+-`;
+-
+-const FlexChild = styled.li`
+-  width: 80%;
+-  display: flex;
+-  word-break: break-all;
+-  flex-direction: column;
+-  padding: 1rem;
+-  color: ${props => props.theme.navigator.colors.postsListItemLink};
+-  border-radius: 30px;
+-  background-color: ${props => props.theme.search.colors.listBackground};
+-  text-align: center;
+-
+-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+-  transition: all 1.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+-
+-  &:hover {
+-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+-    color: ${props => props.theme.navigator.colors.postsListItemLinkHover};
+-    background-color: ${props => props.theme.search.colors.hoverBackground};
+-  }
+-
+-  h2 {
+-    margin: 0;
+-    font-weight: 700;
+-  }
+-
+-  small {
+-    font-weight: 400;
+-  }
+-
+-  @media (max-width: ${props => props.theme.mediaQueryTresholds.M}px) {
+-    h2 {
+-      font-size: 16px;
+-    }
+-
+-    small {
+-      font-size: 12px;
+-    }
+-  }
+-`;
+-
+-export default SearchListItem;
+diff --git a/src/components/InfoBox/InfoBar.tsx b/src/components/InfoBox/InfoBar.tsx
+deleted file mode 100644
+index db5a0d0..0000000
+--- a/src/components/InfoBox/InfoBar.tsx
++++ /dev/null
+@@ -1,93 +0,0 @@
+-import React from "react";
+-import Avatar from "@material-ui/core/Avatar";
+-import { Link } from "gatsby";
+-import styled from "styled-components";
+-import { useSelector, useDispatch, shallowEqual } from "react-redux";
+-import { PagesProps } from "../query/LayoutQuery";
+-import avatar from "../../images/jpg/test.png";
+-import { ReduxState } from "../../state/store";
+-import {
+-  featureNavigatorFunc,
+-  moveNavigatorAsideFunc
+-} from "./../../utils/shared";
+-import config from "../../../content/meta/config";
+-
+-type InfoBarProps = {
+-  pages: PagesProps;
+-};
+-
+-const InfoBar = ({ pages }: InfoBarProps) => {
+-  const state: any = useSelector<ReduxState>(
+-    state => ({
+-      navigatorShape: state.navigatorShape,
+-      navigatorPosition: state.navigatorPosition
+-    }),
+-    shallowEqual
+-  );
+-  const dispatch = useDispatch();
+-
+-  function homeLinkOnClick(e: any) {
+-    featureNavigatorFunc(e, state, dispatch);
+-  }
+-
+-  function pageLinkOnClick(e: any) {
+-    moveNavigatorAsideFunc(e, state, dispatch);
+-  }
+-
+-  return (
+-    <InfoBarStyle>
+-      <AvatarLinkBar>
+-        <Link to="/" onClick={homeLinkOnClick} title="back to Home">
+-          <Avatar src={avatar} alt="infoBar avatar" />
+-        </Link>
+-      </AvatarLinkBar>
+-      <BarTitle>
+-        {config.infoTitle}
+-        <small>{config.infoTitleNote}</small>
+-      </BarTitle>
+-    </InfoBarStyle>
+-  );
+-};
+-
+-const InfoBarStyle = styled.aside`
+-  position: absolute;
+-  background: ${props => props.theme.bars.colors.background};
+-  top: 0;
+-  left: 0;
+-  width: 100%;
+-  height: ${props => props.theme.bars.sizes.infoBar}px;
+-  &::before {
+-    content: "";
+-    position: absolute;
+-    left: ${props => props.theme.base.sizes.linesMargin};
+-    right: ${props => props.theme.base.sizes.linesMargin};
+-    height: 0;
+-    bottom: 0;
+-    border-top: 1px solid ${props => props.theme.base.colors.lines};
+-  }
+-
+-  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
+-    display: none;
+-  }
+-`;
+-
+-const AvatarLinkBar = styled.div`
+-  display: block;
+-  float: left;
+-  margin: 13px 0 0 30px;
+-`;
+-
+-const BarTitle = styled.div`
+-  float: left;
+-  margin: 10px 0 0 15px;
+-  font-size: 1.1em;
+-  color: ${props => props.theme.bars.colors.text};
+-
+-  & small {
+-    display: block;
+-    font-size: 0.65em;
+-    margin: 2px 0 0 0;
+-  }
+-`;
+-
+-export default InfoBar;
+diff --git a/src/components/InfoBox/InfoBox.tsx b/src/components/InfoBox/InfoBox.tsx
+deleted file mode 100644
+index 6461dda..0000000
+--- a/src/components/InfoBox/InfoBox.tsx
++++ /dev/null
+@@ -1,100 +0,0 @@
+-import React from "react";
+-import styled from "styled-components";
+-import { useSelector, useDispatch, shallowEqual } from "react-redux";
+-
+-import InfoHeader from "./InfoHeader";
+-import InfoText from "./InfoText";
+-import InfoMenu from "./InfoMenu";
+-
+-import {
+-  featureNavigatorFunc,
+-  moveNavigatorAsideFunc
+-} from "./../../utils/shared";
+-import { setNavigatorShape, ReduxState } from "../../state/store";
+-
+-const InfoBox = () => {
+-  const state: any = useSelector<ReduxState>(
+-    state => ({
+-      navigatorShape: state.navigatorShape,
+-      navigatorPosition: state.navigatorPosition
+-    }),
+-    shallowEqual
+-  );
+-  const dispatch = useDispatch();
+-
+-  function expandOnClick() {
+-    dispatch(setNavigatorShape("closed"));
+-  }
+-
+-  function avatarOnClick(e: any) {
+-    featureNavigatorFunc(e, state, dispatch);
+-  }
+-
+-  function menulinkOnClick(e: any) {
+-    moveNavigatorAsideFunc(e, state, dispatch);
+-  }
+-
+-  return (
+-    <StyleInfoBox
+-      className={`${state.navigatorPosition ? state.navigatorPosition : ""} 
+-         ${state.navigatorShape ? state.navigatorShape : ""}`}
+-    >
+-      <InfoHeader avatarOnClick={avatarOnClick} expandOnClick={expandOnClick} />
+-      <InfoContent>
+-        <InfoText />
+-        <InfoMenu linkOnClick={menulinkOnClick} />
+-      </InfoContent>
+-    </StyleInfoBox>
+-  );
+-};
+-
+-const StyleInfoBox = styled.aside`
+-  display: none;
+-  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
+-    display: block;
+-    color: ${props => props.theme.info.colors.text};
+-    background: ${props => props.theme.info.colors.background};
+-    position: absolute;
+-    left: 0;
+-    top: 0;
+-    width: ${props => props.theme.info.sizes.width}px;
+-    height: 100%;
+-    padding: 20px 40px;
+-    &::after {
+-      content: "";
+-      position: absolute;
+-      right: 0;
+-      top: 20px;
+-      bottom: 20px;
+-      width: 1px;
+-      border-right: 1px solid ${props => props.theme.base.colors.lines};
+-    }
+-  }
+-`;
+-
+-const InfoContent = styled.div`
+-  position: absolute;
+-  top: ${props => props.theme.info.sizes.headerHeight}px;
+-  bottom: 0;
+-  left: 0;
+-  width: 100%;
+-  padding: 0 40px 0;
+-  will-change: opacity, bottom;
+-  transition: bottom 0.5s 0s;
+-  opacity: 1;
+-  transition-timing-function: ease;
+-
+-  .is-aside.closed & {
+-    bottom: ${props => props.theme.navigator.sizes.closedHeight}px;
+-  }
+-
+-  .moving-featured & {
+-    bottom: 0;
+-  }
+-
+-  .is-aside.open & {
+-    display: none;
+-  }
+-`;
+-
+-export default InfoBox;
+diff --git a/src/components/InfoBox/InfoHeader.tsx b/src/components/InfoBox/InfoHeader.tsx
+deleted file mode 100644
+index 57268b5..0000000
+--- a/src/components/InfoBox/InfoHeader.tsx
++++ /dev/null
+@@ -1,154 +0,0 @@
+-import React from "react";
+-import { Link } from "gatsby";
+-import styled from "styled-components";
+-
+-import IconButton from "@material-ui/core/IconButton";
+-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+-
+-import avatar from "../../images/jpg/test.png";
+-import config from "../../../content/meta/config";
+-
+-type InfoHeaderProps = {
+-  avatarOnClick: (
+-    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+-  ) => void;
+-  expandOnClick: () => void;
+-};
+-
+-const InfoHeader = ({ avatarOnClick, expandOnClick }: InfoHeaderProps) => {
+-  return (
+-    <Header>
+-      <HeaderAvatarLink>
+-        <Link to="/" onClick={avatarOnClick} title="back to Home">
+-          <HeaderAvatar>
+-            <img src={avatar} alt="avatar" />
+-          </HeaderAvatar>
+-        </Link>
+-      </HeaderAvatarLink>
+-      <HeaderTitle>
+-        {config.infoTitle.replace(/ /g, "\u00a0")}
+-        <small>{config.infoTitleNote}</small>
+-      </HeaderTitle>
+-      <IconButton
+-        aria-label="Expand the box"
+-        className="expand"
+-        onClick={expandOnClick}
+-        title="Expand the box"
+-      >
+-        <ExpandMoreIcon />
+-      </IconButton>
+-    </Header>
+-  );
+-};
+-
+-const Header = styled.header`
+-  line-height: 1;
+-  position: relative;
+-
+-  .expand {
+-    position: absolute;
+-    top: 30px;
+-    right: -25px;
+-    display: none;
+-    color: ${props => props.theme.info.colors.socialIcons};
+-
+-    .is-aside.open & {
+-      display: block;
+-    }
+-  }
+-`;
+-
+-const HeaderAvatarLink = styled.div`
+-  will-change: left, top;
+-  float: left;
+-  display: block;
+-  position: relative;
+-  margin: 0 12px 0 0;
+-
+-  @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
+-    margin: 0 20px 0 0;
+-  }
+-
+-  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
+-    position: absolute;
+-    top: 10px;
+-    left: 50%;
+-    margin-left: -30px;
+-    transition: all 0.5s;
+-    transition-timing-function: ease;
+-
+-    .navigator-in-transition-from.navigator-is-opened & {
+-      left: 50%;
+-    }
+-
+-    .is-aside.open & {
+-      left: 8%;
+-      top: 0;
+-    }
+-  }
+-`;
+-
+-const HeaderAvatar = styled.div`
+-  ${({ theme }) => ` 
+-    width: 36px;
+-    height: 36px;
+-    transition: all .3s;
+-    transition-timing-function: ease;
+-    display: inline-block;
+-    overflow: hidden;
+-    & img{
+-      max-width: 100%;
+-    }
+-    @media (min-width: ${theme.mediaQueryTresholds.M}px) {
+-      width: 44px;
+-      height: 44px;
+-    }
+-
+-    @media (min-width: ${theme.mediaQueryTresholds.L}px) {
+-      width: 60px;
+-      height: 60px;
+-    }
+-
+-    // @media (hover: hover) {
+-    //   &:hover {
+-    //     border-radius: 75% 65%;
+-    //   }
+-    // }
+-  `}
+-`;
+-
+-const HeaderTitle = styled.h1`
+-  will-change: transform, left, top;
+-  font-size: ${props => props.theme.info.fonts.boxTitleSize}em;
+-  margin: 0;
+-  float: left;
+-  transition-timing-function: ease;
+-
+-  & small {
+-    display: block;
+-    font-size: 0.6em;
+-    margin-top: 0.3em;
+-  }
+-
+-  @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
+-    font-size: ${props => props.theme.info.fonts.boxTitleSizeM}em;
+-  }
+-
+-  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
+-    font-size: ${props => props.theme.info.fonts.boxTitleSizeL}em;
+-    position: absolute;
+-    top: 85px;
+-    text-align: center;
+-    left: 50%;
+-    transform: translate(-50%);
+-    transition: all 0.5s;
+-
+-    .is-aside.open & {
+-      left: 60%;
+-      top: 0.15em;
+-      text-align: left;
+-    }
+-  }
+-`;
+-
+-export default InfoHeader;
+diff --git a/src/components/InfoBox/InfoMenu.tsx b/src/components/InfoBox/InfoMenu.tsx
+deleted file mode 100644
+index f2f02da..0000000
+--- a/src/components/InfoBox/InfoMenu.tsx
++++ /dev/null
+@@ -1,44 +0,0 @@
+-import React from "react";
+-import styled from "styled-components";
+-import { Link } from "gatsby";
+-
+-type InfoMenuProps = {
+-  linkOnClick: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
+-};
+-
+-const InfoMenu = ({ linkOnClick }: InfoMenuProps) => {
+-  return (
+-    <StyleInfoMenu>
+-      <StyledLink
+-        key="/about/"
+-        to="/about/"
+-        onClick={linkOnClick}
+-        data-shape="closed"
+-      >
+-        About
+-      </StyledLink>
+-    </StyleInfoMenu>
+-  );
+-};
+-
+-const StyleInfoMenu = styled.nav`
+-  display: flex;
+-  flex-direction: column;
+-  align-items: center;
+-  list-style: none;
+-  margin: 0;
+-  width: 100%;
+-`;
+-
+-const StyledLink = styled(Link)`
+-  padding: 0.5em;
+-  font-weight: 300;
+-  text-transform: lowercase;
+-  color: ${props => props.theme.info.colors.menuLink};
+-
+-  &:hover {
+-    color: ${props => props.theme.info.colors.menuLinkHover};
+-  }
+-`;
+-
+-export default InfoMenu;
+diff --git a/src/components/InfoBox/InfoText.tsx b/src/components/InfoBox/InfoText.tsx
+deleted file mode 100644
+index 0cd371b..0000000
+--- a/src/components/InfoBox/InfoText.tsx
++++ /dev/null
+@@ -1,31 +0,0 @@
+-import React from "react";
+-import styled from "styled-components";
+-import config from "../../../content/meta/config";
+-
+-const InfoText = () => {
+-  return <Text>{config.infoText}</Text>;
+-};
+-
+-const Text = styled.div`
+-  display: block;
+-  font-weight: 300;
+-  line-height: 1.5;
+-  font-size: 0.95em;
+-  text-align: center;
+-  margin-bottom: 0.8em;
+-  word-break: break-word;
+-
+-  & p::first-of-type {
+-    margin-top: 0;
+-  }
+-
+-  & p::last-child {
+-    margin-bottom: 0;
+-  }
+-
+-  // .is-aside.open & {
+-  //   display: none;
+-  // }
+-`;
+-
+-export default InfoText;
+diff --git a/src/components/Main/Article.tsx b/src/components/Main/Article.tsx
+index a69379e..69b816a 100644
+--- a/src/components/Main/Article.tsx
++++ b/src/components/Main/Article.tsx
+@@ -1,7 +1,7 @@
+ import React from "react";
+ import styled from "styled-components";
+ 
+-function Article({ children }: React.PropsWithChildren<null>) {
++function Article({ children }: { children: React.ReactNode }) {
+   return <StyleArticle>{children}</StyleArticle>;
+ }
+ 
+diff --git a/src/components/Main/Content.tsx b/src/components/Main/Content.tsx
+index 52a37df..4eaed48 100644
+--- a/src/components/Main/Content.tsx
++++ b/src/components/Main/Content.tsx
+@@ -3,7 +3,7 @@ import styled from "styled-components";
+ import { useSelector } from "react-redux";
+ import { ReduxState } from "../../state/store";
+ 
+-function Content({ children }: React.PropsWithChildren<null>) {
++function Content({ children }: { children: React.ReactNode }) {
+   const fontSizeState = useSelector<ReduxState, number>(
+     state => state.fontSizeIncrease
+   );
+diff --git a/src/components/Main/Main.tsx b/src/components/Main/Main.tsx
+index 3db41e9..278c49e 100644
+--- a/src/components/Main/Main.tsx
++++ b/src/components/Main/Main.tsx
+@@ -1,6 +1,6 @@
+ import React from "react";
+ import styled from "styled-components";
+-import SpringScrollbars from "../SpringScrollbars";
++import SpringScrollbars from "../Scroll";
+ 
+ const Main = ({ children }: { children: React.ReactNode }) => {
+   return (
+diff --git a/src/components/Navigator/List.tsx b/src/components/Navigator/List.tsx
+index 3001c62..26ff508 100644
+--- a/src/components/Navigator/List.tsx
++++ b/src/components/Navigator/List.tsx
+@@ -1,10 +1,10 @@
+ import React from "react";
+ import styled from "styled-components";
+-import { PostsProps } from "../query/LayoutQuery";
++import { PostsProps } from "../Query/LayoutQuery";
+ 
+ import ListHeader from "./ListHeader";
+ import ListItem from "./ListItem";
+-import SpringScrollbars from "../SpringScrollbars";
++import SpringScrollbars from "../Scroll";
+ 
+ type ListProps = {
+   posts: PostsProps;
+diff --git a/src/components/Navigator/ListItem.tsx b/src/components/Navigator/ListItem.tsx
+index 67aa681..27015b2 100644
+--- a/src/components/Navigator/ListItem.tsx
++++ b/src/components/Navigator/ListItem.tsx
+@@ -1,6 +1,5 @@
+ import React, { useState, useEffect } from "react";
+-import { Link } from "gatsby";
+-import SearchListItem from "../ActionsBar/SearchListItem";
++import SearchListItem from "../Actions/SearchListItem";
+ 
+ import styled from "styled-components";
+ 
+diff --git a/src/components/Navigator/Navigator.tsx b/src/components/Navigator/Navigator.tsx
+index 025289f..4864d5b 100644
+--- a/src/components/Navigator/Navigator.tsx
++++ b/src/components/Navigator/Navigator.tsx
+@@ -1,13 +1,13 @@
+ import React from "react";
+ import { useSelector, useDispatch, shallowEqual } from "react-redux";
+-import { PostsProps } from "../query/LayoutQuery";
++import { PostsProps } from "../Query/LayoutQuery";
+ import styled from "styled-components";
+ import {
+   setNavigatorShape,
+   setCategoryFilter,
+   ReduxState
+ } from "../../state/store";
+-import { moveNavigatorAsideFunc } from "../../utils/shared";
++import { moveNavAside, moveNavAsideState } from "../../utils/shared";
+ import List from "./List";
+ 
+ type NavigatorProps = {
+@@ -15,23 +15,25 @@ type NavigatorProps = {
+ };
+ 
+ const Navigator = ({ posts }: NavigatorProps) => {
+-  const state: any = useSelector<ReduxState>(
++  const state: moveNavAsideState = useSelector<ReduxState, moveNavAsideState>(
+     state => ({
+       navigatorShape: state.navigatorShape,
+       navigatorPosition: state.navigatorPosition,
+-      categoryFilter: state.categoryFilter
++      isWideScreen: state.isWideScreen
+     }),
+     shallowEqual
+   );
++  const stateFilter = useSelector<ReduxState, string>(
++    state => state.categoryFilter
++  );
+   const dispatch = useDispatch();
+ 
+   function expandOnClick() {
+     dispatch(setNavigatorShape("open"));
+-    // setTimeout(forceCheck, 600);
+   }
+ 
+   function linkOnClick(e: any) {
+-    moveNavigatorAsideFunc(e, state, dispatch);
++    moveNavAside(e, state, dispatch);
+   }
+ 
+   function removefilterOnClick() {
+@@ -51,7 +53,7 @@ const Navigator = ({ posts }: NavigatorProps) => {
+           navigatorShape={state.navigatorShape}
+           linkOnClick={linkOnClick}
+           expandOnClick={expandOnClick}
+-          categoryFilter={state.categoryFilter}
++          categoryFilter={stateFilter}
+           removeFilter={removefilterOnClick}
+         />
+       )}
+diff --git a/src/components/Page/PageHeader.js b/src/components/Page/PageHeader.js
+deleted file mode 100644
+index e3fb88d..0000000
+--- a/src/components/Page/PageHeader.js
++++ /dev/null
+@@ -1,37 +0,0 @@
+-import React from "react";
+-import styled from "@emotion/styled";
+-
+-export default function PageHeader(props) {
+-  const { title } = props;
+-  return (
+-    <StyleHeader>
+-      <PageHeaderTitle>{title}</PageHeaderTitle>
+-    </StyleHeader>
+-  );
+-}
+-
+-const StyleHeader = styled.header`
+-  margin: 0 0 3em;
+-  display: flex;
+-  flex-direction: row;
+-  justify-content: flex-start;
+-  align-content: center;
+-`;
+-
+-const PageHeaderTitle = styled.h1`
+-  color: ${(props) => props.theme.main.colors.title};
+-  font-size: ${(props) => props.theme.main.fonts.title.size}em;
+-  letter-spacing: -0.04em;
+-  font-weight: ${(props) => props.theme.main.fonts.title.weight};
+-  line-height: ${(props) => props.theme.main.fonts.title.lineHeight};
+-  margin: 0 0 0.4em;
+-
+-  @media (min-width: ${(props) => props.theme.mediaQueryTresholds.M}px) {
+-    font-size: ${(props) => props.theme.main.fonts.title.sizeM}em;
+-  }
+-
+-  @media (min-width: ${(props) => props.theme.mediaQueryTresholds.L}px) {
+-    font-size: ${(props) => props.theme.main.fonts.title.sizeL}em;
+-    letter-spacing: -0.05em;
+-  }
+-`;
+diff --git a/src/components/Post/Post.js b/src/components/Post/Post.js
+deleted file mode 100644
+index e6dd9ce..0000000
+--- a/src/components/Post/Post.js
++++ /dev/null
+@@ -1,36 +0,0 @@
+-import React from "react";
+-import PropTypes from "prop-types";
+-import Article from "../Main/Article";
+-import PostHeader from "./PostHeader";
+-import PostFooter from "./PostFooter";
+-import Content from "../Main/Content";
+-import { MDXProvider } from "@mdx-js/react";
+-import { MDXRenderer } from "gatsby-plugin-mdx";
+-import { Link } from "gatsby";
+-
+-const postPropTypes = {
+-  post: PropTypes.object.isRequired,
+-};
+-
+-function Post({ post }) {
+-  const { title, subTitle } = post.frontmatter;
+-  const { prefix } = post.fields;
+-  const { body } = post;
+-
+-  return (
+-    <Article>
+-      <PostHeader title={title} subTitle={subTitle} date={prefix} />
+-      <Content>
+-        <MDXProvider components={shortcodes}>
+-          <MDXRenderer>{body}</MDXRenderer>
+-        </MDXProvider>
+-      </Content>
+-      <PostFooter />
+-    </Article>
+-  );
+-}
+-
+-const shortcodes = { Link }; // Provide common components here
+-
+-Post.propTypes = postPropTypes;
+-export default Post;
+diff --git a/src/components/Post/PostComments.js b/src/components/Post/PostComments.js
+deleted file mode 100644
+index 9b6509d..0000000
+--- a/src/components/Post/PostComments.js
++++ /dev/null
+@@ -1,57 +0,0 @@
+-import React, { useEffect } from "react";
+-import { useStaticQuery, graphql } from "gatsby";
+-import styled from "styled-components";
+-import { useSelector } from "react-redux";
+-
+-function PostComments() {
+-  const { mdx } = useCommentData();
+-  const stateTheme = useSelector(state => state.themeToggle);
+-  const themeSelect = stateTheme ? "photon-dark" : "github-light";
+-
+-  useEffect(() => {
+-    const script = document.createElement("script");
+-    const anchor = document.getElementById("inject-comments-for-uterances");
+-    script.setAttribute("src", "https://utteranc.es/client.js");
+-    script.setAttribute("crossorigin", "anonymous");
+-    script.setAttribute("async", true);
+-    script.setAttribute("repo", "bradkim06/utterances");
+-    script.setAttribute("issue-term", "pathname");
+-    script.setAttribute("theme", themeSelect);
+-    if (anchor.hasChildNodes()) {
+-      anchor.removeChild(anchor.firstChild);
+-    }
+-    anchor.appendChild(script);
+-  }, [themeSelect]);
+-
+-  return (
+-    <StyledComments>
+-      <section id="inject-comments-for-uterances"></section>
+-    </StyledComments>
+-  );
+-}
+-
+-const StyledComments = styled.div`
+-  margin: 3em 0 0;
+-  padding: 3em 0 0;
+-`;
+-
+-export default PostComments;
+-
+-const useCommentData = () => {
+-  let commentData = useStaticQuery(
+-    graphql`
+-      query CommentData($slug: String) {
+-        mdx(fields: { slug: { eq: $slug } }) {
+-          id
+-          fields {
+-            slug
+-          }
+-          frontmatter {
+-            title
+-          }
+-        }
+-      }
+-    `
+-  );
+-  return commentData;
+-};
+diff --git a/src/components/Post/PostFooter.js b/src/components/Post/PostFooter.js
+deleted file mode 100644
+index 65bc95d..0000000
+--- a/src/components/Post/PostFooter.js
++++ /dev/null
+@@ -1,23 +0,0 @@
+-import React from "react";
+-import styled from "styled-components";
+-import PostComments from "./PostComments";
+-
+-const PostFooter = () => {
+-  return (
+-    <StyledPostFooter>
+-      <PostComments />
+-    </StyledPostFooter>
+-  );
+-};
+-
+-const StyledPostFooter = styled.footer`
+-  color: ${props => props.theme.main.colors.footer};
+-  font-size: ${props => props.theme.main.fonts.footer.size}em;
+-  line-height: ${props => props.theme.main.fonts.footer.lineHeight};
+-
+-  & p {
+-    margin: 0;
+-  }
+-`;
+-
+-export default PostFooter;
+diff --git a/src/components/Post/PostHeader.js b/src/components/Post/PostHeader.js
+deleted file mode 100644
+index f9fd16c..0000000
+--- a/src/components/Post/PostHeader.js
++++ /dev/null
+@@ -1,74 +0,0 @@
+-import React from "react";
+-import PropTypes from "prop-types";
+-import styled from "styled-components";
+-
+-const propTypes = {
+-  title: PropTypes.string.isRequired,
+-  subTitle: PropTypes.string,
+-  date: PropTypes.string.isRequired
+-};
+-
+-const PostHeader = ({ title, subTitle, date }) => {
+-  return (
+-    <PostHead>
+-      <PostTitle>{title}</PostTitle>
+-      <PostSubTitle>{subTitle}</PostSubTitle>
+-      <PostDate>{myDate(date)}</PostDate>
+-    </PostHead>
+-  );
+-};
+-
+-function myDate(dateString) {
+-  const dateObj = new Date(dateString).toUTCString();
+-  const dateToShow = dateObj.split(" ").slice(0, 4).join(" ");
+-
+-  if (dateToShow !== "Invalid Date") {
+-    return dateToShow;
+-  }
+-}
+-
+-const PostHead = styled.div`
+-  margin: 0 0 3em;
+-`;
+-
+-const PostTitle = styled.h1`
+-  color: ${props => props.theme.main.colors.title};
+-  font-size: ${props => props.theme.main.fonts.title.size}em;
+-  letter-spacing: -0.04em;
+-  font-weight: ${props => props.theme.main.fonts.title.weight};
+-  line-height: ${props => props.theme.main.fonts.title.lineHeight};
+-  margin: 0 0 0.4em;
+-
+-  @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
+-    font-size: ${props => props.theme.main.fonts.title.sizeM}em;
+-  }
+-
+-  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
+-    font-size: ${props => props.theme.main.fonts.title.sizeL}em;
+-    letter-spacing: -0.05em;
+-  }
+-`;
+-
+-const PostSubTitle = styled.h2`
+-  color: ${props => props.theme.main.colors.subTitle};
+-  font-size: ${props => props.theme.main.fonts.subTitle.size}em;
+-  line-height: ${props => props.theme.main.fonts.subTitle.lineHeight};
+-  font-weight: ${props => props.theme.main.fonts.subTitle.weight};
+-
+-  @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
+-    font-size: ${props => props.theme.main.fonts.subTitle.sizeM}em;
+-  }
+-
+-  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
+-    font-size: ${props => props.theme.main.fonts.subTitle.sizeL}em;
+-  }
+-`;
+-
+-const PostDate = styled.div`
+-  font-size: ${props => props.theme.main.fonts.meta.size}em;
+-  font-weight: ${props => props.theme.main.fonts.meta.weight};
+-  color: ${props => props.theme.main.colors.meta};
+-`;
+-
+-PostHeader.propTypes = propTypes;
+-export default PostHeader;
+diff --git a/src/components/SpringScrollbars/SpringScrollbars.js b/src/components/SpringScrollbars/SpringScrollbars.js
+deleted file mode 100644
+index eddef1f..0000000
+--- a/src/components/SpringScrollbars/SpringScrollbars.js
++++ /dev/null
+@@ -1,132 +0,0 @@
+-import React, { Component } from "react";
+-import { Scrollbars } from "react-custom-scrollbars";
+-import PropTypes from "prop-types";
+-import { SpringSystem, MathUtil } from "rebound";
+-import { forceCheck } from "react-lazyload";
+-import { connect } from "react-redux";
+-import { withTheme } from "styled-components";
+-
+-import { setScrollToTop } from "../../state/store";
+-
+-class SpringScrollbars extends Component {
+-  constructor(props, ...rest) {
+-    super(props, ...rest);
+-    this.handleSpringUpdate = this.handleSpringUpdate.bind(this);
+-    this.renderThumb = this.renderThumb.bind(this);
+-  }
+-
+-  componentDidUpdate(prevProps) {
+-    if (
+-      this.props.isNavigator &&
+-      this.props.navigatorPosition !== "is-featured"
+-    ) {
+-      return;
+-    }
+-
+-    if (
+-      this.props.scrollToTop &&
+-      this.props.scrollToTop !== prevProps.scrollToTop
+-    ) {
+-      this.scrollTop(0);
+-      this.props.setScrollToTop(false);
+-    }
+-  }
+-  componentDidMount() {
+-    this.springSystem = new SpringSystem();
+-    this.spring = this.springSystem.createSpring();
+-    this.spring.addListener({ onSpringUpdate: this.handleSpringUpdate });
+-  }
+-
+-  componentWillUnmount() {
+-    this.springSystem.deregisterSpring(this.spring);
+-    this.springSystem.removeAllListeners();
+-    this.springSystem = undefined;
+-    this.spring.destroy();
+-    this.spring = undefined;
+-  }
+-
+-  getScrollTop() {
+-    return this.scrollbars.getScrollTop();
+-  }
+-
+-  getScrollHeight() {
+-    return this.scrollbars.getScrollHeight();
+-  }
+-
+-  getHeight() {
+-    return this.scrollbars.getHeight();
+-  }
+-
+-  scrollTop(top) {
+-    const scrollTop = this.scrollbars.getScrollTop();
+-    const scrollHeight = this.scrollbars.getScrollHeight();
+-    const val = MathUtil.mapValueInRange(
+-      top,
+-      0,
+-      scrollHeight,
+-      scrollHeight * 0.01,
+-      scrollHeight * 0.99
+-    );
+-    this.spring.setCurrentValue(scrollTop).setAtRest();
+-    this.spring.setEndValue(val);
+-  }
+-
+-  handleSpringUpdate(spring) {
+-    window.requestAnimationFrame(() => {
+-      const val = spring.getCurrentValue();
+-      this.scrollbars.scrollTop(val);
+-    });
+-  }
+-
+-  renderThumb({ style, ...props }) {
+-    const thumbStyle = {
+-      backgroundColor: this.props.theme.bars.colors.icon
+-    };
+-    return <div style={{ ...style, ...thumbStyle }} {...props} />;
+-  }
+-
+-  render() {
+-    const { children, forceCheckOnScroll } = this.props;
+-
+-    return (
+-      <Scrollbars
+-        autoHide
+-        universal={true}
+-        onScroll={forceCheckOnScroll && forceCheck}
+-        ref={comp => {
+-          this.scrollbars = comp;
+-        }}
+-        renderThumbHorizontal={this.renderThumb}
+-        renderThumbVertical={this.renderThumb}
+-        onUpdate={this.handleUpdate}
+-      >
+-        {children}
+-      </Scrollbars>
+-    );
+-  }
+-}
+-
+-SpringScrollbars.propTypes = {
+-  children: PropTypes.node.isRequired,
+-  scrollToTop: PropTypes.bool.isRequired,
+-  setScrollToTop: PropTypes.func.isRequired,
+-  forceCheckOnScroll: PropTypes.bool,
+-  navigatorPosition: PropTypes.string.isRequired,
+-  isNavigator: PropTypes.bool
+-};
+-
+-const mapStateToProps = state => {
+-  return {
+-    scrollToTop: state.scrollToTop,
+-    navigatorPosition: state.navigatorPosition
+-  };
+-};
+-
+-const mapDispatchToProps = {
+-  setScrollToTop
+-};
+-
+-export default connect(
+-  mapStateToProps,
+-  mapDispatchToProps
+-)(withTheme(SpringScrollbars));
+diff --git a/src/components/SpringScrollbars/index.js b/src/components/SpringScrollbars/index.js
+deleted file mode 100644
+index 787afe7..0000000
+--- a/src/components/SpringScrollbars/index.js
++++ /dev/null
+@@ -1 +0,0 @@
+-export { default } from "./SpringScrollbars";
+diff --git a/src/components/footer/Footer.js b/src/components/footer/Footer.js
+deleted file mode 100644
+index 8b13789..0000000
+--- a/src/components/footer/Footer.js
++++ /dev/null
+@@ -1 +0,0 @@
+-
+diff --git a/src/components/query/LayoutQuery.tsx b/src/components/query/LayoutQuery.tsx
+deleted file mode 100644
+index dc6e0e6..0000000
+--- a/src/components/query/LayoutQuery.tsx
++++ /dev/null
+@@ -1,67 +0,0 @@
+-import { useStaticQuery, graphql } from "gatsby";
+-
+-export interface PostsProps {
+-  totalCount: number;
+-  edges: Array<{
+-    node: {
+-      excerpt: string;
+-      slug: string;
+-      fields: {
+-        slug: string;
+-        prefix: string;
+-      };
+-      frontmatter: {
+-        title: string;
+-        subTitle: string;
+-        category: string;
+-      };
+-    };
+-  }>;
+-}
+-
+-export interface PagesProps {
+-  edges: Array<{
+-    node: {
+-      frontmatter: {
+-        title: string;
+-      };
+-    };
+-  }>;
+-}
+-
+-export const useLayoutQuery = () => {
+-  const layoutData = useStaticQuery(
+-    graphql`
+-      query LayoutData {
+-        posts: allMdx(filter: { fileAbsolutePath: { regex: "//posts//" } }) {
+-          totalCount
+-          edges {
+-            node {
+-              excerpt
+-              slug
+-              fields {
+-                slug
+-                prefix
+-              }
+-              frontmatter {
+-                title
+-                subTitle
+-                category
+-              }
+-            }
+-          }
+-        }
+-        pages: allMdx(filter: { fileAbsolutePath: { regex: "//posts//" } }) {
+-          edges {
+-            node {
+-              frontmatter {
+-                title
+-              }
+-            }
+-          }
+-        }
+-      }
+-    `
+-  );
+-  return layoutData;
+-};
+diff --git a/src/components/seo/Seo.js b/src/components/seo/Seo.js
+deleted file mode 100644
+index dc68127..0000000
+--- a/src/components/seo/Seo.js
++++ /dev/null
+@@ -1,62 +0,0 @@
+-import React from "react";
+-import PropTypes from "prop-types";
+-import Helmet from "react-helmet";
+-import config from "../../../content/meta/config";
+-
+-const propTypes = {
+-  data: PropTypes.object,
+-};
+-
+-const Seo = (props) => {
+-  const { data } = props;
+-  const postTitle = ((data || {}).frontmatter || {}).title;
+-  const postDescription = ((data || {}).frontmatter || {}).description;
+-  const postCover = ((data || {}).frontmatter || {}).cover;
+-  const postSlug = ((data || {}).fields || {}).slug;
+-
+-  const title = postTitle
+-    ? `${postTitle} - ${config.shortSiteTitle}`
+-    : config.siteTitle;
+-  const description = postDescription
+-    ? postDescription
+-    : config.siteDescription;
+-  const image = postCover
+-    ? postCover.childImageSharp.resize.src
+-    : config.siteImage;
+-  const url = config.siteUrl + config.pathPrefix + postSlug;
+-
+-  return (
+-    <Helmet
+-      htmlAttributes={{
+-        lang: config.siteLanguage,
+-        prefix: "og: http://ogp.me/ns#",
+-      }}
+-    >
+-      {/* General tags */}
+-      <title>{title}</title>
+-      <meta name="description" content={description} />
+-      {/* OpenGraph tags */}
+-      <meta property="og:url" content={url} />
+-      <meta property="og:title" content={title} />
+-      <meta property="og:description" content={description} />
+-      <meta property="og:image" content={image} />
+-      <meta property="og:type" content="website" />
+-      {/* Twitter Card tags */}
+-      <meta name="twitter:card" content="summary" />
+-      <meta
+-        name="twitter:creator"
+-        content={config.authorTwitterAccount ? config.authorTwitterAccount : ""}
+-      />
+-      {config.googleSiteVerification && (
+-        <meta
+-          name="google-site-verification"
+-          content={config.googleSiteVerification}
+-        />
+-      )}
+-      >
+-    </Helmet>
+-  );
+-};
+-
+-Seo.propTypes = propTypes;
+-export default Seo;
+diff --git a/src/pages/index.js b/src/pages/index.js
+index 10e9594..ae9d419 100644
+--- a/src/pages/index.js
++++ b/src/pages/index.js
+@@ -1,7 +1,7 @@
+ import React from "react";
+ import { connect } from "react-redux";
+ import PropTypes from "prop-types";
+-import Seo from "../components/seo/Seo";
++import Seo from "../components/Seo";
+ 
+ import { setNavigatorPosition, setNavigatorShape } from "../state/store";
+ import { featureNavigator } from "../utils/shared";
+@@ -25,7 +25,6 @@ class Home extends React.Component {
+   render() {
+     return (
+       <div>
+-        {" "}
+         <Seo />
+       </div>
+     );
+diff --git a/src/state/store.tsx b/src/state/store.tsx
+index 0f34a11..bdda5ee 100644
+--- a/src/state/store.tsx
++++ b/src/state/store.tsx
+@@ -127,7 +127,7 @@ const initialState: ReduxState = {
+   scrollToTop: false,
+   fontSizeIncrease: 1,
+   categoryFilter: "all posts",
+-  themeToggle: true
++  themeToggle: false
+ };
+ 
+ const createStore = () =>
+diff --git a/src/styles/lightTheme.js b/src/styles/lightTheme.js
+index 9c784c7..09ee9c3 100644
+--- a/src/styles/lightTheme.js
++++ b/src/styles/lightTheme.js
+@@ -59,7 +59,7 @@ export const lightTheme = {
+   main: {
+     colors: {
+       background: lightColors.background,
+-      title: lightColors.deepDark,
++      title: lightColors.dark,
+       subTitle: lightColors.gray,
+       meta: lightColors.gray,
+       content: lightColors.dark,
+diff --git a/src/templates/PostTemplate.tsx b/src/templates/PostTemplate.tsx
+index 9e73111..bf03dd4 100644
+--- a/src/templates/PostTemplate.tsx
++++ b/src/templates/PostTemplate.tsx
+@@ -1,23 +1,18 @@
+-import React from "react";
+-import Main from "../components/Main/Main";
+-import Post from "../components/Post/Post";
+-import { connect } from "react-redux";
++import React, { useEffect } from "react";
++import Main from "../components/Main";
++import Post from "../components/Post";
++import { useSelector, useDispatch, shallowEqual } from "react-redux";
+ import { graphql } from "gatsby";
+-import Seo from "../components/seo/Seo";
++import Seo from "../components/Seo";
+ 
+-import {
+-  setNavigatorPosition,
+-  setNavigatorShape,
+-  ReduxState
+-} from "../state/store";
+-import { moveNavigatorAside } from "../utils/shared";
++import { ReduxState } from "../state/store";
++import { moveNavAside, moveNavAsideState } from "../utils/shared";
+ 
+ require("prismjs/themes/prism-okaidia.css");
+ 
+ type PostTemplateProps = {
+   data: {
+     mdx: {
+-      id: string;
+       body: string;
+       fields: {
+         slug: string;
+@@ -30,45 +25,37 @@ type PostTemplateProps = {
+     };
+   };
+   navigatorPosition: string;
+-  moveNavigatorAside: (e: any) => void;
++  moveNavigatorAsideFunc: (e: any) => void;
+ };
+ 
+-class PostTemplate extends React.Component<PostTemplateProps> {
+-  moveNavigatorAside = moveNavigatorAside.bind(this);
++const PostTemplate = ({ data }: PostTemplateProps) => {
++  const state: moveNavAsideState = useSelector<ReduxState, moveNavAsideState>(
++    state => ({
++      navigatorShape: state.navigatorShape,
++      navigatorPosition: state.navigatorPosition,
++      isWideScreen: state.isWideScreen
++    }),
++    shallowEqual
++  );
++  const dispatch = useDispatch();
+ 
+-  componentDidMount() {
+-    if (this.props.navigatorPosition === "is-featured") {
+-      this.moveNavigatorAside(null);
++  useEffect(() => {
++    if (state.navigatorPosition === "is-featured") {
++      moveNavAside(null, state, dispatch);
+     }
+-  }
+-
+-  render() {
+-    const { mdx } = this.props.data;
+-    return (
+-      <Main>
+-        <Seo data={mdx} />
+-        <Post post={mdx} />
+-      </Main>
+-    );
+-  }
+-}
+-
+-const mapStateToProps = (state: ReduxState) => {
+-  return {
+-    navigatorPosition: state.navigatorPosition,
+-    isWideScreen: state.isWideScreen
+-  };
+-};
++  }, []);
+ 
+-const mapDispatchToProps = {
+-  setNavigatorPosition,
+-  setNavigatorShape
++  return (
++    <Main>
++      <Seo data={data.mdx} />
++      <Post post={data.mdx} />
++    </Main>
++  );
+ };
+ 
+ export const postQuery = graphql`
+   query BlogPostQuery($slug: String) {
+     mdx(fields: { slug: { eq: $slug } }) {
+-      id
+       body
+       fields {
+         slug
+@@ -82,4 +69,4 @@ export const postQuery = graphql`
+   }
+ `;
+ 
+-export default connect(mapStateToProps, mapDispatchToProps)(PostTemplate);
++export default PostTemplate;
+diff --git a/src/utils/shared.tsx b/src/utils/shared.tsx
+index 371d37a..68f7b9e 100644
+--- a/src/utils/shared.tsx
++++ b/src/utils/shared.tsx
+@@ -1,10 +1,6 @@
+ import { forceCheck } from "react-lazyload";
+ import { navigate } from "@reach/router";
+-import {
+-  setNavigatorShape,
+-  setNavigatorPosition,
+-  ReduxState
+-} from "../state/store";
++import { setNavigatorShape, setNavigatorPosition } from "../state/store";
+ 
+ export function featureNavigator(e) {
+   e && e.preventDefault();
+@@ -61,9 +57,14 @@ export function moveNavigatorAside(e) {
+   }
+ }
+ 
+-export function featureNavigatorFunc(
++export type moveNavFeatureType = {
++  navigatorPosition: string;
++  isWideScreen: boolean;
++};
++
++export function moveNavFeature(
+   e: any,
+-  state: ReduxState,
++  state: moveNavFeatureType,
+   dispatch: any
+ ): void {
+   e && e.preventDefault();
+@@ -92,9 +93,15 @@ export function featureNavigatorFunc(
+   }, 500);
+ }
+ 
+-export function moveNavigatorAsideFunc(
++export type moveNavAsideState = {
++  navigatorPosition: string;
++  navigatorShape: string;
++  isWideScreen: boolean;
++};
++
++export function moveNavAside(
+   e: any,
+-  state: ReduxState,
++  state: moveNavAsideState,
+   dispatch: any
+ ): void {
+   const target = e ? e.currentTarget : null;
+diff --git a/yarn.lock b/yarn.lock
+index 2b8925e..95b2890 100644
+--- a/yarn.lock
++++ b/yarn.lock
+@@ -2120,6 +2120,13 @@
+   dependencies:
+     "@types/unist" "*"
+ 
++"@types/mdx-js__react@^1.5.2":
++  version "1.5.2"
++  resolved "https://registry.yarnpkg.com/@types/mdx-js__react/-/mdx-js__react-1.5.2.tgz#eb87df0ac135a685cc9bb01075a9036c7b395b0d"
++  integrity sha512-M/z869+SVti16ZGqMwg46XTNsBKj5/PNcId9NpjEUVPI2V8wzXpbkkhmhZy1n16nQvMAC6HJuh+Dogn8vPLV6w==
++  dependencies:
++    "@types/react" "*"
++
+ "@types/minimatch@*":
+   version "3.0.3"
+   resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-3.0.3.tgz#3dca0e3f33b200fc7d1139c0cd96c1268cadfd9d"
+@@ -2200,6 +2207,13 @@
+   dependencies:
+     "@types/react" "*"
+ 
++"@types/react-helmet@^6.1.0":
++  version "6.1.0"
++  resolved "https://registry.yarnpkg.com/@types/react-helmet/-/react-helmet-6.1.0.tgz#af586ed685f4905e2adc7462d1d65ace52beee7a"
++  integrity sha512-PYRoU1XJFOzQ3BHvWL1T8iDNbRjdMDJMT5hFmZKGbsq09kbSqJy61uwEpTrbTNWDopVphUT34zUSVLK9pjsgYQ==
++  dependencies:
++    "@types/react" "*"
++
+ "@types/react-lazyload@^2.6.0":
+   version "2.6.0"
+   resolved "https://registry.yarnpkg.com/@types/react-lazyload/-/react-lazyload-2.6.0.tgz#41cd9cbb2c03dd810377518d4837794469a521d1"

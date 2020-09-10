@@ -1,14 +1,13 @@
 import React from "react";
-import PropTypes from "prop-types";
 import styled from "styled-components";
 
-const propTypes = {
-  title: PropTypes.string.isRequired,
-  subTitle: PropTypes.string,
-  date: PropTypes.string.isRequired
+type PostHeaderProps = {
+  title: string;
+  subTitle: string;
+  date: string;
 };
 
-const PostHeader = ({ title, subTitle, date }) => {
+const PostHeader = ({ title, subTitle, date }: PostHeaderProps) => {
   return (
     <PostHead>
       <PostTitle>{title}</PostTitle>
@@ -18,8 +17,8 @@ const PostHeader = ({ title, subTitle, date }) => {
   );
 };
 
-function myDate(dateString) {
-  const dateObj = new Date(dateString).toUTCString();
+function myDate(date: string) {
+  const dateObj = new Date(date).toUTCString();
   const dateToShow = dateObj.split(" ").slice(0, 4).join(" ");
 
   if (dateToShow !== "Invalid Date") {
@@ -70,5 +69,4 @@ const PostDate = styled.div`
   color: ${props => props.theme.main.colors.meta};
 `;
 
-PostHeader.propTypes = propTypes;
 export default PostHeader;

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import PostComments from "./PostComments";
+import PostComments from "./Comments";
 
 const PostFooter = () => {
   return (

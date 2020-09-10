@@ -1,18 +1,27 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Article from "../Main/Article";
-import PostHeader from "./PostHeader";
-import PostFooter from "./PostFooter";
+import PostHeader from "./Header";
+import PostFooter from "./Footer";
 import Content from "../Main/Content";
 import { MDXProvider } from "@mdx-js/react";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 import { Link } from "gatsby";
 
-const postPropTypes = {
-  post: PropTypes.object.isRequired,
+type PostProps = {
+  post: {
+    body: string;
+    fields: {
+      slug: string;
+      prefix: string;
+    };
+    frontmatter: {
+      title: string;
+      subTitle: string;
+    };
+  };
 };
 
-function Post({ post }) {
+const Post = ({ post }: PostProps) => {
   const { title, subTitle } = post.frontmatter;
   const { prefix } = post.fields;
   const { body } = post;
@@ -28,9 +37,8 @@ function Post({ post }) {
       <PostFooter />
     </Article>
   );
-}
+};
 
 const shortcodes = { Link }; // Provide common components here
 
-Post.propTypes = postPropTypes;
 export default Post;

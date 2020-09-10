@@ -1,14 +1,25 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Helmet from "react-helmet";
 import config from "../../../content/meta/config";
 
-const propTypes = {
-  data: PropTypes.object,
+type SeoProps = {
+  data?: {
+    body: string;
+    fields: {
+      slug: string;
+      prefix: string;
+    };
+    frontmatter: {
+      title: string;
+      subTitle: string;
+      // Todo
+      // description: any;
+      // cover: any;
+    };
+  };
 };
 
-const Seo = (props) => {
-  const { data } = props;
+const Seo = ({ data }: SeoProps) => {
   const postTitle = ((data || {}).frontmatter || {}).title;
   const postDescription = ((data || {}).frontmatter || {}).description;
   const postCover = ((data || {}).frontmatter || {}).cover;
@@ -29,7 +40,7 @@ const Seo = (props) => {
     <Helmet
       htmlAttributes={{
         lang: config.siteLanguage,
-        prefix: "og: http://ogp.me/ns#",
+        prefix: "og: http://ogp.me/ns#"
       }}
     >
       {/* General tags */}
@@ -43,20 +54,14 @@ const Seo = (props) => {
       <meta property="og:type" content="website" />
       {/* Twitter Card tags */}
       <meta name="twitter:card" content="summary" />
-      <meta
-        name="twitter:creator"
-        content={config.authorTwitterAccount ? config.authorTwitterAccount : ""}
-      />
       {config.googleSiteVerification && (
         <meta
           name="google-site-verification"
           content={config.googleSiteVerification}
         />
       )}
-      >
     </Helmet>
   );
 };
 
-Seo.propTypes = propTypes;
 export default Seo;

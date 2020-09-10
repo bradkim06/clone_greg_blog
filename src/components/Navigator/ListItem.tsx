@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "gatsby";
-import SearchListItem from "../ActionsBar/SearchListItem";
+import SearchListItem from "../Actions/SearchListItem";
 
 import styled from "styled-components";
 

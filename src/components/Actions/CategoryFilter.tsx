@@ -47,8 +47,6 @@ const CategoryFilter = ({
   const prevOpen = useRef(open);
 
   useEffect(() => {
-    console.log("prevOpen:" + prevOpen.current);
-    console.log("open:" + open);
     if (prevOpen.current === true && open === false) {
       anchorRef.current.focus();
     }

@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
-import { useStaticQuery, graphql } from "gatsby";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
+import { ReduxState } from "../../state/store";
 
-function PostComments() {
-  const { mdx } = useCommentData();
-  const stateTheme = useSelector(state => state.themeToggle);
+const PostComments = () => {
+  const stateTheme = useSelector<ReduxState>(state => state.themeToggle);
   const themeSelect = stateTheme ? "photon-dark" : "github-light";
 
   useEffect(() => {
@@ -13,14 +12,14 @@ function PostComments() {
     const anchor = document.getElementById("inject-comments-for-uterances");
     script.setAttribute("src", "https://utteranc.es/client.js");
     script.setAttribute("crossorigin", "anonymous");
-    script.setAttribute("async", true);
+    script.setAttribute("async", "true");
     script.setAttribute("repo", "bradkim06/utterances");
     script.setAttribute("issue-term", "pathname");
     script.setAttribute("theme", themeSelect);
-    if (anchor.hasChildNodes()) {
-      anchor.removeChild(anchor.firstChild);
+    if ((anchor as any).hasChildNodes()) {
+      (anchor as any).removeChild((anchor as any).firstChild);
     }
-    anchor.appendChild(script);
+    (anchor as any).appendChild(script);
   }, [themeSelect]);
 
   return (
@@ -28,7 +27,7 @@ function PostComments() {
       <section id="inject-comments-for-uterances"></section>
     </StyledComments>
   );
-}
+};
 
 const StyledComments = styled.div`
   margin: 3em 0 0;
@@ -36,22 +35,3 @@ const StyledComments = styled.div`
 `;
 
 export default PostComments;
-
-const useCommentData = () => {
-  let commentData = useStaticQuery(
-    graphql`
-      query CommentData($slug: String) {
-        mdx(fields: { slug: { eq: $slug } }) {
-          id
-          fields {
-            slug
-          }
-          frontmatter {
-            title
-          }
-        }
-      }
-    `
-  );
-  return commentData;
-};

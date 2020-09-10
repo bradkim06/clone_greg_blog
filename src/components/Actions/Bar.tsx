@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import IconButton from "@material-ui/core/IconButton";
-import { useSelector, useDispatch, shallowEqual } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import HomeIcon from "@material-ui/icons/Home";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import Search from "./Search";
@@ -15,23 +15,19 @@ import {
   setThemeToggle,
   ReduxState
 } from "../../state/store";
-import { featureNavigatorFunc } from "../../utils/shared";
+import { moveNavFeature, moveNavData } from "../../utils/shared";
 import FontSetter from "./FontSetter";
 import CategoryFilter from "./CategoryFilter";
 
 const ActionsBar = ({ categories }: { categories: string[] }) => {
-  const state: any = useSelector<ReduxState>(
-    state => ({
-      navigatorShape: state.navigatorShape,
-      navigatorPosition: state.navigatorPosition,
-      isWideScreen: state.isWideScreen
-    }),
-    shallowEqual
+  const isThemeState = useSelector<ReduxState, boolean>(
+    state => state.themeToggle
   );
+  const state = moveNavData();
   const dispatch = useDispatch();
 
   function homeOnClick(e: any) {
-    featureNavigatorFunc(e, state, dispatch);
+    moveNavFeature(e, state, dispatch);
   }
 
   function arrowUpOnClick() {
@@ -78,7 +74,7 @@ const ActionsBar = ({ categories }: { categories: string[] }) => {
           onClick={themeToggleClick}
           title="Theme Change"
         >
-          {state.themeToggle ? <WbSunnyIcon /> : <Brightness2 />}
+          {isThemeState ? <WbSunnyIcon /> : <Brightness2 />}
         </StyledIconButton>
         <StyledIconButton
           aria-label="Back to top"

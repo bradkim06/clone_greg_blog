@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import { PostsProps } from "../query/LayoutQuery";
+import { PostsProps } from "../Query/LayoutQuery";
 
 import ListHeader from "./ListHeader";
 import ListItem from "./ListItem";
-import SpringScrollbars from "../SpringScrollbars";
+import SpringScrollbars from "../Scroll";
 
 type ListProps = {
   posts: PostsProps;

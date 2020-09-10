@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-function Article({ children }: React.PropsWithChildren<null>) {
+function Article({ children }: { children: React.ReactNode }) {
   return <StyleArticle>{children}</StyleArticle>;
 }
 

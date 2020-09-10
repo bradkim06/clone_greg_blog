@@ -8,16 +8,12 @@ import {
   useLayoutQuery,
   PostsProps,
   PagesProps
-} from "../../src/components/query/LayoutQuery";
+} from "../../src/components/Query/LayoutQuery";
 
-const InfoBox = loadable(() => import("../../src/components/InfoBox/InfoBox"));
-const Navigator = loadable(
-  () => import("../../src/components/Navigator/Navigator")
-);
-const ActionsBar = loadable(
-  () => import("../../src/components/ActionsBar/ActionsBar")
-);
-const InfoBar = loadable(() => import("../../src/components/InfoBox/InfoBar"));
+const InfoBox = loadable(() => import("../../src/components/Info/Box"));
+const Navigator = loadable(() => import("../../src/components/Navigator"));
+const ActionsBar = loadable(() => import("../../src/components/Actions/Bar"));
+const InfoBar = loadable(() => import("../../src/components/Info/Bar"));
 
 type TopLayoutProps = {
   posts: PostsProps[];

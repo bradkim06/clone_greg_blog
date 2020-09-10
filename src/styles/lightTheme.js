@@ -59,7 +59,7 @@ export const lightTheme = {
   main: {
     colors: {
       background: lightColors.background,
-      title: lightColors.deepDark,
+      title: lightColors.dark,
       subTitle: lightColors.gray,
       meta: lightColors.gray,
       content: lightColors.dark,

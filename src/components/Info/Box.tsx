@@ -1,25 +1,20 @@
 import React from "react";
 import styled from "styled-components";
-import { useSelector, useDispatch, shallowEqual } from "react-redux";
+import { useDispatch } from "react-redux";
 
-import InfoHeader from "./InfoHeader";
-import InfoText from "./InfoText";
-import InfoMenu from "./InfoMenu";
+import InfoHeader from "./Header";
+import InfoText from "./Text";
+import InfoMenu from "./Menu";
 
 import {
-  featureNavigatorFunc,
-  moveNavigatorAsideFunc
+  moveNavFeature,
+  moveNavAside,
+  moveNavData
 } from "./../../utils/shared";
-import { setNavigatorShape, ReduxState } from "../../state/store";
+import { setNavigatorShape } from "../../state/store";
 
 const InfoBox = () => {
-  const state: any = useSelector<ReduxState>(
-    state => ({
-      navigatorShape: state.navigatorShape,
-      navigatorPosition: state.navigatorPosition
-    }),
-    shallowEqual
-  );
+  const state = moveNavData();
   const dispatch = useDispatch();
 
   function expandOnClick() {
@@ -27,11 +22,12 @@ const InfoBox = () => {
   }
 
   function avatarOnClick(e: any) {
-    featureNavigatorFunc(e, state, dispatch);
+    moveNavFeature(e, state, dispatch);
   }
 
-  function menulinkOnClick(e: any) {
-    moveNavigatorAsideFunc(e, state, dispatch);
+  function menulinkOnClick() {
+    dispatch(setNavigatorShape("closed"));
+    moveNavAside(state, dispatch);
   }
 
   return (

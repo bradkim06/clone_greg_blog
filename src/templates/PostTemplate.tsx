@@ -1,23 +1,17 @@
-import React from "react";
-import Main from "../components/Main/Main";
-import Post from "../components/Post/Post";
-import { connect } from "react-redux";
+import React, { useEffect } from "react";
+import Main from "../components/Main";
+import Post from "../components/Post";
+import { useDispatch } from "react-redux";
 import { graphql } from "gatsby";
-import Seo from "../components/seo/Seo";
+import Seo from "../components/Seo";
 
-import {
-  setNavigatorPosition,
-  setNavigatorShape,
-  ReduxState
-} from "../state/store";
-import { moveNavigatorAside } from "../utils/shared";
+import { moveNavAside, moveNavData } from "../utils/shared";
 
 require("prismjs/themes/prism-okaidia.css");
 
 type PostTemplateProps = {
   data: {
     mdx: {
-      id: string;
       body: string;
       fields: {
         slug: string;
@@ -29,46 +23,31 @@ type PostTemplateProps = {
       };
     };
   };
-  navigatorPosition: string;
-  moveNavigatorAside: (e: any) => void;
 };
 
-class PostTemplate extends React.Component<PostTemplateProps> {
-  moveNavigatorAside = moveNavigatorAside.bind(this);
+const PostTemplate = ({ data }: PostTemplateProps) => {
+  const state = moveNavData();
+  const dispatch = useDispatch();
 
-  componentDidMount() {
-    if (this.props.navigatorPosition === "is-featured") {
-      this.moveNavigatorAside(null);
-    }
-  }
+  useEffect(() => {
+    return () => {
+      if (state.navigatorPosition === "is-featured") {
+        moveNavAside(state, dispatch);
+      }
+    };
+  });
 
-  render() {
-    const { mdx } = this.props.data;
-    return (
-      <Main>
-        <Seo data={mdx} />
-        <Post post={mdx} />
-      </Main>
-    );
-  }
-}
-
-const mapStateToProps = (state: ReduxState) => {
-  return {
-    navigatorPosition: state.navigatorPosition,
-    isWideScreen: state.isWideScreen
-  };
-};
-
-const mapDispatchToProps = {
-  setNavigatorPosition,
-  setNavigatorShape
+  return (
+    <Main>
+      <Seo data={data.mdx} />
+      <Post post={data.mdx} />
+    </Main>
+  );
 };
 
 export const postQuery = graphql`
   query BlogPostQuery($slug: String) {
     mdx(fields: { slug: { eq: $slug } }) {
-      id
       body
       fields {
         slug
@@ -82,4 +61,4 @@ export const postQuery = graphql`
   }
 `;
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostTemplate);
+export default PostTemplate;

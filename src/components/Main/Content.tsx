@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { ReduxState } from "../../state/store";
 
-function Content({ children }: React.PropsWithChildren<null>) {
+function Content({ children }: { children: React.ReactNode }) {
   const fontSizeState = useSelector<ReduxState, number>(
     state => state.fontSizeIncrease
   );

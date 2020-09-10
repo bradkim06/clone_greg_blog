@@ -2,13 +2,13 @@ import React from "react";
 import Avatar from "@material-ui/core/Avatar";
 import { Link } from "gatsby";
 import styled from "styled-components";
-import { useSelector, useDispatch, shallowEqual } from "react-redux";
-import { PagesProps } from "../query/LayoutQuery";
+import { useDispatch } from "react-redux";
+import { PagesProps } from "../Query/LayoutQuery";
 import avatar from "../../images/jpg/test.png";
-import { ReduxState } from "../../state/store";
 import {
-  featureNavigatorFunc,
-  moveNavigatorAsideFunc
+  moveNavFeature,
+  moveNavAside,
+  moveNavData
 } from "./../../utils/shared";
 import config from "../../../content/meta/config";
 
@@ -17,21 +17,15 @@ type InfoBarProps = {
 };
 
 const InfoBar = ({ pages }: InfoBarProps) => {
-  const state: any = useSelector<ReduxState>(
-    state => ({
-      navigatorShape: state.navigatorShape,
-      navigatorPosition: state.navigatorPosition
-    }),
-    shallowEqual
-  );
+  const state = moveNavData();
   const dispatch = useDispatch();
 
   function homeLinkOnClick(e: any) {
-    featureNavigatorFunc(e, state, dispatch);
+    moveNavFeature(e, state, dispatch);
   }
 
-  function pageLinkOnClick(e: any) {
-    moveNavigatorAsideFunc(e, state, dispatch);
+  function pageLinkOnClick() {
+    moveNavAside(state, dispatch);
   }
 
   return (

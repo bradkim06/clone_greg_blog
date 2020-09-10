@@ -1,13 +1,13 @@
 import React from "react";
-import { useSelector, useDispatch, shallowEqual } from "react-redux";
-import { PostsProps } from "../query/LayoutQuery";
+import { useSelector, useDispatch } from "react-redux";
+import { PostsProps } from "../Query/LayoutQuery";
 import styled from "styled-components";
 import {
   setNavigatorShape,
   setCategoryFilter,
   ReduxState
 } from "../../state/store";
-import { moveNavigatorAsideFunc } from "../../utils/shared";
+import { moveNavAside, moveNavData } from "../../utils/shared";
 import List from "./List";
 
 type NavigatorProps = {
@@ -15,23 +15,18 @@ type NavigatorProps = {
 };
 
 const Navigator = ({ posts }: NavigatorProps) => {
-  const state: any = useSelector<ReduxState>(
-    state => ({
-      navigatorShape: state.navigatorShape,
-      navigatorPosition: state.navigatorPosition,
-      categoryFilter: state.categoryFilter
-    }),
-    shallowEqual
+  const stateFilter = useSelector<ReduxState, string>(
+    state => state.categoryFilter
   );
+  const state = moveNavData();
   const dispatch = useDispatch();
 
   function expandOnClick() {
     dispatch(setNavigatorShape("open"));
-    // setTimeout(forceCheck, 600);
   }
 
-  function linkOnClick(e: any) {
-    moveNavigatorAsideFunc(e, state, dispatch);
+  function linkOnClick() {
+    moveNavAside(state, dispatch);
   }
 
   function removefilterOnClick() {
@@ -51,7 +46,7 @@ const Navigator = ({ posts }: NavigatorProps) => {
           navigatorShape={state.navigatorShape}
           linkOnClick={linkOnClick}
           expandOnClick={expandOnClick}
-          categoryFilter={state.categoryFilter}
+          categoryFilter={stateFilter}
           removeFilter={removefilterOnClick}
         />
       )}

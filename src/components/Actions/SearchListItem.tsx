@@ -64,7 +64,7 @@ const FlexChild = styled.li`
   flex-direction: column;
   padding: 1rem;
   color: ${props => props.theme.navigator.colors.postsListItemLink};
-  border-radius: 30px;
+  border-radius: 50px;
   background-color: ${props => props.theme.search.colors.listBackground};
   text-align: center;
 
