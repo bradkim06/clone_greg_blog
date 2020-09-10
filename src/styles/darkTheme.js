@@ -11,7 +11,7 @@ export const darkTheme = {
       background: darkColors.background,
       text: darkColors.bright,
       link: darkColors.accent,
-      linkHover: Color(darkColors.accent).lighten(0.1).string(),
+      linkHover: Color(darkColors.accent).lighten(0.3).string(),
       accent: darkColors.accent,
       lines: darkColors.gray
     },

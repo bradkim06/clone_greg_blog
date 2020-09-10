@@ -7,7 +7,7 @@ export const lightTheme = {
       background: lightColors.background,
       text: lightColors.dark,
       link: lightColors.accent,
-      linkHover: Color(lightColors.accent).lighten(0.1).string(),
+      linkHover: Color(lightColors.accent).darken(0.3).string(),
       accent: lightColors.accent,
       lines: lightColors.superLightGray
     },
