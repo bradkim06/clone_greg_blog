@@ -86,8 +86,8 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   :not(pre) > code[class*="language-"] {
-    background: #eee;
-    color: #666;
+    background: ${props => props.theme.base.colors.accent};
+    color: ${props => props.theme.base.colors.brightText};
     text-shadow: none;
     padding: 1px 5px;
     border-radius: 2px;

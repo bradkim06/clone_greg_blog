@@ -47,7 +47,6 @@ class PostTemplate extends React.Component<PostTemplateProps> {
     return (
       <Main>
         <Seo data={mdx} />
-        {this.props.children}
         <Post post={mdx} />
       </Main>
     );

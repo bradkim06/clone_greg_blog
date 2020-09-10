@@ -127,7 +127,7 @@ const initialState: ReduxState = {
   scrollToTop: false,
   fontSizeIncrease: 1,
   categoryFilter: "all posts",
-  themeToggle: false
+  themeToggle: true
 };
 
 const createStore = () =>

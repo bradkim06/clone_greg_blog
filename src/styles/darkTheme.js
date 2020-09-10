@@ -13,7 +13,8 @@ export const darkTheme = {
       link: darkColors.accent,
       linkHover: Color(darkColors.accent).lighten(0.3).string(),
       accent: darkColors.accent,
-      lines: darkColors.gray
+      lines: darkColors.gray,
+      brightText: darkColors.superLightGray
     },
     sizes: {
       linesMargin: "20px"

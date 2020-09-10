@@ -9,7 +9,9 @@ export const lightTheme = {
       link: lightColors.accent,
       linkHover: Color(lightColors.accent).darken(0.3).string(),
       accent: lightColors.accent,
-      lines: lightColors.superLightGray
+      lines: lightColors.superLightGray,
+      brightText: lightColors.bright,
+      palette: lightColors.palette
     },
     sizes: {
       linesMargin: "20px"
@@ -44,7 +46,7 @@ export const lightTheme = {
       background: lightColors.background,
       postsListItemLink: lightColors.gray,
       postsListItemLinkHover: lightColors.accent,
-      postsHeader: lightColors.gray
+      postsHeader: lightColors.dark
     },
     sizes: {
       closedHeight: 80,
@@ -57,12 +59,12 @@ export const lightTheme = {
   main: {
     colors: {
       background: lightColors.background,
-      title: lightColors.gray,
+      title: lightColors.deepDark,
       subTitle: lightColors.gray,
       meta: lightColors.gray,
       content: lightColors.dark,
       footer: lightColors.gray,
-      contentHeading: lightColors.gray,
+      contentHeading: lightColors.dark,
       blockquoteFrame: lightColors.accent,
       link: lightColors.accent,
       linkHover: lightColors.dark,
@@ -135,8 +137,8 @@ export const lightTheme = {
   search: {
     colors: {
       background: lightColors.background,
-      listBackground: Color(lightColors.background).darken(0.04).string(),
-      hoverBackground: Color(lightColors.background).darken(0.02).string()
+      listBackground: Color(lightColors.background).darken(0.02).string(),
+      hoverBackground: lightColors.background
     }
   },
   mediaQueryTresholds: {
