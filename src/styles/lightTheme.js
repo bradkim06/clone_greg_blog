@@ -44,7 +44,7 @@ export const lightTheme = {
   navigator: {
     colors: {
       background: lightColors.background,
-      postsListItemLink: lightColors.gray,
+      postsListItemLink: lightColors.dark,
       postsListItemLinkHover: lightColors.accent,
       postsHeader: lightColors.dark
     },

@@ -47,7 +47,7 @@ export const darkTheme = {
   navigator: {
     colors: {
       background: darkColors.background,
-      postsListItemLink: darkColors.bright,
+      postsListItemLink: darkColors.superLightGray,
       postsListItemLinkHover: darkColors.accent,
       postsHeader: darkColors.bright
     },
@@ -62,12 +62,12 @@ export const darkTheme = {
   main: {
     colors: {
       background: darkColors.background,
-      title: darkColors.bright,
+      title: darkColors.superLightGray,
       subTitle: darkColors.bright,
       meta: darkColors.bright,
       content: darkColors.bright,
       footer: darkColors.bright,
-      contentHeading: darkColors.bright,
+      contentHeading: darkColors.superLightGray,
       blockquoteFrame: darkColors.accent,
       link: darkColors.accent,
       linkHover: darkColors.dark,
