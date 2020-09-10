@@ -101,10 +101,10 @@ type CategoryProps = {
 };
 
 const category = (posts: CategoryProps): string[] => {
-  const categoryArray = posts.edges.reduce((list: string[], edge: object) => {
-    const category = (edge as any).node.frontmatter.category;
+  const categoryArray = posts.edges.reduce((list: (string | any)[], edge) => {
+    const category = edge.node.frontmatter.category;
     if (category && !~list.indexOf(category)) {
-      return list.concat((edge as any).node.frontmatter.category);
+      return list.concat(edge.node.frontmatter.category);
     } else {
       return list;
     }

@@ -84,6 +84,17 @@ const FlexChild = styled.li`
 
   small {
     font-weight: 400;
+    font-size: 18px;
+  }
+
+  @media (max-width: ${props => props.theme.mediaQueryTresholds.L}px) {
+    h2 {
+      font-size: 20px;
+    }
+
+    small {
+      font-size: 14px;
+    }
   }
 
   @media (max-width: ${props => props.theme.mediaQueryTresholds.M}px) {

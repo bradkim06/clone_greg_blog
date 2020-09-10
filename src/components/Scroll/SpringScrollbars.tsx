@@ -78,6 +78,7 @@ class SpringScrollbars extends Component<ScrollType> {
   }
 
   getHeight() {
+    console.log(this.scrollbars.getHeight);
     return this.scrollbars.getHeight();
   }
 
@@ -144,4 +145,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withTheme(SpringScrollbars));
+)(withTheme(SpringScrollbars as any));

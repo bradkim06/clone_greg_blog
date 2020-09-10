@@ -10,7 +10,6 @@ const Home = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(stateNavPosition);
     if (stateNavPosition !== "is-featured") {
       dispatch(setNavigatorPosition("is-featured"));
     }

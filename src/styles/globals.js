@@ -31,6 +31,12 @@ export const GlobalStyle = createGlobalStyle`
     text-size-adjust: 100%;
   }
 
+  body {
+    margin: 0;
+    background: ${props => props.theme.base.colors.background};
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.05);
+  }
+
   html.wf-active {
     font-family: ${props => props.theme.base.fonts.unstyledFamily};
   }
@@ -55,11 +61,6 @@ export const GlobalStyle = createGlobalStyle`
     box-shadow: 0 0 10px 52px rgba(255, 255, 255, 0.8);
   }
 
-  body {
-    margin: 0;
-    background: ${props => props.theme.base.colors.background};
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.05);
-  }
 
   wrapper: {
   }
