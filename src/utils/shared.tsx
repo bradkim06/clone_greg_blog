@@ -20,14 +20,12 @@ export function moveNavFeature(
   if (state.navigatorPosition === "is-aside") {
     if (state.isWideScreen) {
       dispatch(setNavigatorPosition("moving-featured"));
+      dispatch(setNavigatorPosition("resizing-featured"));
 
       setTimeout(() => {
-        dispatch(setNavigatorPosition("resizing-featured"));
-        setTimeout(() => {
-          dispatch(setNavigatorPosition("is-featured"));
-        });
+        dispatch(setNavigatorPosition("is-featured"));
+        dispatch(setNavigatorShape("open"));
       }, 300);
-      dispatch(setNavigatorShape("open"));
     } else {
       setTimeout(() => {
         dispatch(setNavigatorPosition("is-featured"));

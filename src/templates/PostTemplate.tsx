@@ -30,12 +30,10 @@ const PostTemplate = ({ data }: PostTemplateProps) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    return () => {
-      if (state.navigatorPosition === "is-featured") {
-        moveNavAside(state, dispatch);
-      }
-    };
-  });
+    if (state.navigatorPosition === "is-featured") {
+      moveNavAside(state, dispatch);
+    }
+  }, []);
 
   return (
     <Main>
