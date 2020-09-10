@@ -1,21 +1,45 @@
 import React, { Component } from "react";
 import { Scrollbars } from "react-custom-scrollbars";
-import PropTypes from "prop-types";
-import { SpringSystem, MathUtil } from "rebound";
+import { SpringSystem, util, Spring } from "rebound";
 import { forceCheck } from "react-lazyload";
 import { connect } from "react-redux";
 import { withTheme } from "styled-components";
 
-import { setScrollToTop } from "../../state/store";
+import { setScrollToTop, ReduxState } from "../../state/store";
 
-class SpringScrollbars extends Component {
-  constructor(props, ...rest) {
-    super(props, ...rest);
+type ScrollType = {
+  forceCheckOnScroll: any;
+  isNavigator: boolean;
+  navigatorPosition: string;
+  scrollToTop: boolean;
+  setScrollToTop: Function;
+  theme: {
+    bars: {
+      colors: {
+        icon: number;
+      };
+    };
+  };
+};
+
+type scrollbarsType = {
+  getScrollTop: () => number;
+  getScrollHeight: () => number;
+  getHeight: () => number;
+  scrollTop: (top: number) => void;
+};
+
+class SpringScrollbars extends Component<ScrollType> {
+  constructor(props: never) {
+    super(props);
     this.handleSpringUpdate = this.handleSpringUpdate.bind(this);
     this.renderThumb = this.renderThumb.bind(this);
   }
+  springSystem!: SpringSystem;
+  spring!: Spring;
+  scrollbars!: scrollbarsType;
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: any) {
     if (
       this.props.isNavigator &&
       this.props.navigatorPosition !== "is-featured"
@@ -40,9 +64,9 @@ class SpringScrollbars extends Component {
   componentWillUnmount() {
     this.springSystem.deregisterSpring(this.spring);
     this.springSystem.removeAllListeners();
-    this.springSystem = undefined;
+    this.springSystem = undefined!;
     this.spring.destroy();
-    this.spring = undefined;
+    this.spring = undefined!;
   }
 
   getScrollTop() {
@@ -57,10 +81,10 @@ class SpringScrollbars extends Component {
     return this.scrollbars.getHeight();
   }
 
-  scrollTop(top) {
+  scrollTop(top: number) {
     const scrollTop = this.scrollbars.getScrollTop();
     const scrollHeight = this.scrollbars.getScrollHeight();
-    const val = MathUtil.mapValueInRange(
+    const val = util.mapValueInRange(
       top,
       0,
       scrollHeight,
@@ -71,14 +95,14 @@ class SpringScrollbars extends Component {
     this.spring.setEndValue(val);
   }
 
-  handleSpringUpdate(spring) {
+  handleSpringUpdate(spring: Spring) {
     window.requestAnimationFrame(() => {
       const val = spring.getCurrentValue();
       this.scrollbars.scrollTop(val);
     });
   }
 
-  renderThumb({ style, ...props }) {
+  renderThumb({ style, ...props }: any) {
     const thumbStyle = {
       backgroundColor: this.props.theme.bars.colors.icon
     };
@@ -94,11 +118,11 @@ class SpringScrollbars extends Component {
         universal={true}
         onScroll={forceCheckOnScroll && forceCheck}
         ref={comp => {
-          this.scrollbars = comp;
+          (this as any).scrollbars = comp;
         }}
         renderThumbHorizontal={this.renderThumb}
         renderThumbVertical={this.renderThumb}
-        onUpdate={this.handleUpdate}
+        onUpdate={(this as any).handleUpdate}
       >
         {children}
       </Scrollbars>
@@ -106,16 +130,7 @@ class SpringScrollbars extends Component {
   }
 }
 
-SpringScrollbars.propTypes = {
-  children: PropTypes.node.isRequired,
-  scrollToTop: PropTypes.bool.isRequired,
-  setScrollToTop: PropTypes.func.isRequired,
-  forceCheckOnScroll: PropTypes.bool,
-  navigatorPosition: PropTypes.string.isRequired,
-  isNavigator: PropTypes.bool
-};
-
-const mapStateToProps = state => {
+const mapStateToProps = (state: ReduxState) => {
   return {
     scrollToTop: state.scrollToTop,
     navigatorPosition: state.navigatorPosition
