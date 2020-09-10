@@ -37,22 +37,6 @@ const PageContent = styled.div<{ fontSize: number }>`
     color: ${props => props.theme.base.colors.link};
   }
 
-  & .gatsby-highlight {
-    margin: 2em 0;
-  }
-
-  & .gatsby-resp-iframe-wrapper {
-    margin: 2em 0;
-  }
-
-  & .gatsby-resp-image-link {
-    margin: 2em -1.5rem;
-    border: none;
-    @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
-      margin: 2.5em -3.5rem;
-    }
-  }
-
   & h1,
   & h2,
   & h3 {
