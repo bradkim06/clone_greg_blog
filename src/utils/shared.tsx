@@ -15,17 +15,17 @@ export function moveNavFeature(
   e && e.preventDefault();
   // uncomment following lines if you want to count featuring Navigator as a visit
   // to index page ('/'), you have to also uncomment import { navigateTo }...
-  navigate("/");
+  // navigate("/");
 
   if (state.navigatorPosition === "is-aside") {
     if (state.isWideScreen) {
       dispatch(setNavigatorPosition("moving-featured"));
-      dispatch(setNavigatorPosition("resizing-featured"));
 
       setTimeout(() => {
+        dispatch(setNavigatorPosition("resizing-featured"));
         dispatch(setNavigatorPosition("is-featured"));
         dispatch(setNavigatorShape("open"));
-      }, 300);
+      }, 500);
     } else {
       setTimeout(() => {
         dispatch(setNavigatorPosition("is-featured"));
