@@ -75,7 +75,7 @@ const FlexChild = styled.li`
   h1 {
     margin: 0;
     font-weight: 700;
-    font-size: 1.8em;
+    font-size: 1.6em;
   }
 
   small {
@@ -85,21 +85,21 @@ const FlexChild = styled.li`
 
   @media (max-width: ${props => props.theme.mediaQueryTresholds.L}px) {
     h1 {
-      font-size: 1.5em;
+      font-size: 1.3em;
     }
 
     small {
-      font-size: 0.9em;
+      font-size: 0.8em;
     }
   }
 
   @media (max-width: ${props => props.theme.mediaQueryTresholds.M}px) {
     h1 {
-      font-size: 1.2em;
+      font-size: 1em;
     }
 
     small {
-      font-size: 0.8em;
+      font-size: 0.6em;
     }
   }
 `;
