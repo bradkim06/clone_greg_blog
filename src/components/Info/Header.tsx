@@ -15,7 +15,7 @@ type InfoHeaderProps = {
   expandOnClick: () => void;
 };
 
-const InfoHeader = ({ avatarOnClick, expandOnClick }: InfoHeaderProps) => {
+export default ({ avatarOnClick, expandOnClick }: InfoHeaderProps) => {
   return (
     <Header>
       <HeaderAvatarLink>
@@ -150,5 +150,3 @@ const HeaderTitle = styled.h1`
     }
   }
 `;
-
-export default InfoHeader;

@@ -7,7 +7,7 @@ type PostHeaderProps = {
   date: string;
 };
 
-const PostHeader = ({ title, subTitle, date }: PostHeaderProps) => {
+export default ({ title, subTitle, date }: PostHeaderProps) => {
   return (
     <PostHead>
       <PostTitle>{title}</PostTitle>
@@ -68,5 +68,3 @@ const PostDate = styled.div`
   font-weight: ${props => props.theme.main.fonts.meta.weight};
   color: ${props => props.theme.main.colors.meta};
 `;
-
-export default PostHeader;

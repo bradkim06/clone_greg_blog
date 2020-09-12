@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-export default function LayoutWrapper(props) {
-  return <Wrapper>{props.children}</Wrapper>;
-}
+export default ({ children }) => {
+  return <Wrapper>{children}</Wrapper>;
+};
 
 const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.bars.colors.background};

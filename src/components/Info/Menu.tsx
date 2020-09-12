@@ -6,7 +6,7 @@ type InfoMenuProps = {
   linkOnClick: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
 };
 
-const InfoMenu = ({ linkOnClick }: InfoMenuProps) => {
+export default ({ linkOnClick }: InfoMenuProps) => {
   return (
     <StyleInfoMenu>
       <StyledLink
@@ -40,5 +40,3 @@ const StyledLink = styled(Link)`
     color: ${props => props.theme.info.colors.menuLinkHover};
   }
 `;
-
-export default InfoMenu;

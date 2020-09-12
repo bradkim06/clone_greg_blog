@@ -1,8 +1,8 @@
 import React from "react";
-import Article from "../Main/Article";
+import PostWrapper from "../Main/Wrapper";
 import PostHeader from "./Header";
 import PostFooter from "./Footer";
-import Content from "../Main/Content";
+import Article from "../Main/Article";
 import { MDXProvider } from "@mdx-js/react";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 import { Link } from "gatsby";
@@ -21,24 +21,22 @@ type PostProps = {
   };
 };
 
-const Post = ({ post }: PostProps) => {
+export default ({ post }: PostProps) => {
   const { title, subTitle } = post.frontmatter;
   const { prefix } = post.fields;
   const { body } = post;
 
   return (
-    <Article>
+    <PostWrapper>
       <PostHeader title={title} subTitle={subTitle} date={prefix} />
-      <Content>
+      <Article>
         <MDXProvider components={shortcodes}>
           <MDXRenderer>{body}</MDXRenderer>
         </MDXProvider>
-      </Content>
+      </Article>
       <PostFooter />
-    </Article>
+    </PostWrapper>
   );
 };
 
 const shortcodes = { Link }; // Provide common components here
-
-export default Post;

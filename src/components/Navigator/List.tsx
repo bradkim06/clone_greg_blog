@@ -16,7 +16,7 @@ type ListProps = {
   categoryFilter: string;
 };
 
-const List = ({
+export default ({
   posts,
   linkOnClick,
   expandOnClick,
@@ -87,5 +87,3 @@ const PostList = styled.ul`
     display: none;
   }
 `;
-
-export default List;

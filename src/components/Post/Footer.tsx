@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import PostComments from "./Comments";
 
-const PostFooter = () => {
+export default () => {
   return (
     <StyledPostFooter>
       <PostComments />
@@ -19,5 +19,3 @@ const StyledPostFooter = styled.footer`
     margin: 0;
   }
 `;
-
-export default PostFooter;

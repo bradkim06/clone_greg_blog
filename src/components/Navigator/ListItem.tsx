@@ -23,7 +23,7 @@ interface ListItemProps {
   linkOnClick: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
 }
 
-const ListItem = ({ post, categoryFilter, linkOnClick }: ListItemProps) => {
+export default ({ post, categoryFilter, linkOnClick }: ListItemProps) => {
   const [hidden, setHidden] = useState(false);
   const category = post.node.frontmatter.category;
 
@@ -200,5 +200,3 @@ const StyledListItem = styled.div`
 //     }
 //   }
 // `;
-
-export default ListItem;

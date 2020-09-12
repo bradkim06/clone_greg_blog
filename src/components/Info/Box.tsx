@@ -13,7 +13,7 @@ import {
 } from "./../../utils/shared";
 import { setNavigatorShape } from "../../state/store";
 
-const InfoBox = () => {
+export default () => {
   const state = moveNavData();
   const dispatch = useDispatch();
 
@@ -92,5 +92,3 @@ const InfoContent = styled.div`
     display: none;
   }
 `;
-
-export default InfoBox;

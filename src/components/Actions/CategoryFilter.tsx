@@ -14,10 +14,7 @@ type CategoryFilterProps = {
   filterCategory: (val: string) => void;
 };
 
-const CategoryFilter = ({
-  categories,
-  filterCategory
-}: CategoryFilterProps) => {
+export default ({ categories, filterCategory }: CategoryFilterProps) => {
   const [open, setOpen] = useState(false);
   const anchorRef: any = useRef(null);
 
@@ -109,5 +106,3 @@ const FilterWrapper = styled.nav`
     color: ${props => props.theme.bars.colors.icon};
   }
 `;
-
-export default CategoryFilter;

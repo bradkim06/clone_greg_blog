@@ -10,12 +10,7 @@ type SearchResultProps = {
   linkOnClick: Function;
 };
 
-const SearchListItem = ({
-  title,
-  subTitle,
-  slug,
-  linkOnClick
-}: SearchResultProps) => {
+export default ({ title, subTitle, slug, linkOnClick }: SearchResultProps) => {
   const titleName = JSON.stringify(title, null, 4);
   const subTitleName = JSON.stringify(subTitle, null, 4);
   const path = JSON.stringify(slug, null, 4);
@@ -107,5 +102,3 @@ const FlexChild = styled.li`
     }
   }
 `;
-
-export default SearchListItem;

@@ -11,7 +11,7 @@ const Navigator = loadable(() => import("../../src/components/Navigator"));
 const ActionsBar = loadable(() => import("../../src/components/Actions/Bar"));
 const InfoBar = loadable(() => import("../../src/components/Info/Bar"));
 
-const TopLayout = ({ children }: React.PropsWithChildren<null>) => {
+export default ({ children }: { children: React.ReactNode }) => {
   const { posts, pages } = useLayoutQuery();
   const themeContext = useContext(ThemeContext);
   const categories = category(posts);
@@ -101,5 +101,3 @@ const category = (posts: CategoryProps): string[] => {
   }, []);
   return categoryArray;
 };
-
-export default TopLayout;

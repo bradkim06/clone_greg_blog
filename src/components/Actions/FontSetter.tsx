@@ -12,7 +12,7 @@ type FontSetterProps = {
   increaseFont: (val: number) => void;
 };
 
-const FontSetter = ({ increaseFont }: FontSetterProps) => {
+export default ({ increaseFont }: FontSetterProps) => {
   const [open, setOpen] = React.useState(false);
   const anchorRef: any = React.useRef(null);
 
@@ -93,5 +93,3 @@ const FontSetter = ({ increaseFont }: FontSetterProps) => {
     </React.Fragment>
   );
 };
-
-export default FontSetter;

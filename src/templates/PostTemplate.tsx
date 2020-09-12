@@ -25,7 +25,7 @@ type PostTemplateProps = {
   };
 };
 
-const PostTemplate = ({ data }: PostTemplateProps) => {
+export default ({ data }: PostTemplateProps) => {
   const state = moveNavData();
   const dispatch = useDispatch();
 
@@ -58,5 +58,3 @@ export const postQuery = graphql`
     }
   }
 `;
-
-export default PostTemplate;

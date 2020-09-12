@@ -14,7 +14,7 @@ type NavigatorProps = {
   posts: PostsProps;
 };
 
-const Navigator = ({ posts }: NavigatorProps) => {
+export default ({ posts }: NavigatorProps) => {
   const stateFilter = useSelector<ReduxState, string>(
     state => state.categoryFilter
   );
@@ -159,5 +159,3 @@ const StyleNavigator = styled.nav`
     }
   }
 `;
-
-export default Navigator;

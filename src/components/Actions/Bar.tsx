@@ -19,7 +19,7 @@ import { moveNavFeature, moveNavData } from "../../utils/shared";
 import FontSetter from "./FontSetter";
 import CategoryFilter from "./CategoryFilter";
 
-const ActionsBar = ({ categories }: { categories: string[] }) => {
+export default ({ categories }: { categories: string[] }) => {
   const isThemeState = useSelector<ReduxState, boolean>(
     state => state.themeToggle
   );
@@ -150,5 +150,3 @@ const Group = styled.div`
 `;
 
 const StyledIconButton = styled(IconButton)``;
-
-export default ActionsBar;

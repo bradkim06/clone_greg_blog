@@ -19,7 +19,7 @@ type SeoProps = {
   };
 };
 
-const Seo = ({ data }: SeoProps) => {
+export default ({ data }: SeoProps) => {
   const postTitle = ((data || {}).frontmatter || {}).title;
   const postDescription = ((data || {}).frontmatter || {}).description;
   const postCover = ((data || {}).frontmatter || {}).cover;
@@ -63,5 +63,3 @@ const Seo = ({ data }: SeoProps) => {
     </Helmet>
   );
 };
-
-export default Seo;

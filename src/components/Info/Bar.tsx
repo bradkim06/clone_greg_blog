@@ -16,7 +16,7 @@ type InfoBarProps = {
   pages: PagesProps;
 };
 
-const InfoBar = ({ pages }: InfoBarProps) => {
+export default ({ pages }: InfoBarProps) => {
   const state = moveNavData();
   const dispatch = useDispatch();
 
@@ -83,5 +83,3 @@ const BarTitle = styled.div`
     margin: 2px 0 0 0;
   }
 `;
-
-export default InfoBar;

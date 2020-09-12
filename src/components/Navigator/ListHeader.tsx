@@ -12,17 +12,17 @@ type ListHeaderProps = {
   navigatorShape: string;
 };
 
-function ListHeader({
+export default ({
   expandOnClick,
   categoryFilter,
   navigatorShape,
   removeFilter
-}: ListHeaderProps) {
+}: ListHeaderProps) => {
   return (
     <header>
       {navigatorShape === "closed" && (
         <Closed>
-          <h3>List of posts</h3>
+          <h1>List of posts</h1>
           <IconButton
             aria-label="Expand the list"
             onClick={expandOnClick}
@@ -49,7 +49,7 @@ function ListHeader({
       )}
     </header>
   );
-}
+};
 
 const Closed = styled.div`
   display: none;
@@ -69,7 +69,7 @@ const Closed = styled.div`
     padding: 0 30px 0 40px;
   }
 
-  & h3 {
+  & h1 {
     font-size: 1.1em;
     color: ${props => props.theme.navigator.colors.postsHeader};
     font-weight: 600;
@@ -122,5 +122,3 @@ const Filter = styled.div`
     }
   }
 `;
-
-export default ListHeader;

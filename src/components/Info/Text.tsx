@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import config from "../../../content/meta/config";
 
-const InfoText = () => {
+export default () => {
   return <Text>{config.infoText}</Text>;
 };
 
@@ -27,5 +27,3 @@ const Text = styled.div`
   //   display: none;
   // }
 `;
-
-export default InfoText;
