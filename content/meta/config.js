@@ -26,7 +26,7 @@ module.exports = {
   // App Background Color in using, loading state
   manifestBackgroundColor: lightColors.background,
   // UI[address, task switcher etc...] Color
-  // manifestThemeColor: lightColors.accent,
+  manifestThemeColor: lightColors.accent,
   // option[browser, standalone, fullscreen]
   manifestDisplay: "standalone",
   manifestCrossOrigin: "anonymous",

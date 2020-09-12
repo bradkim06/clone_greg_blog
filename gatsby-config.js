@@ -31,6 +31,7 @@ module.exports = {
         icon: `static/icon.png`,
         // cache_busting_mode: "none",
         background_color: config.manifestBackgroundColor,
+        theme_color: config.manifestThemeColor,
         theme_color_in_head: false, // This will avoid adding theme-color meta tag.
         display: config.manifestDisplay,
         description: config.manifestDescription,
