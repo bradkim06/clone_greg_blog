@@ -1,5 +1,3 @@
-const lightColors = require("../../src/styles/lightColors");
-
 module.exports = {
   siteTitle: "bradkim06", // <title>
   shortSiteTitle: "bradkim06", // <title> ending for posts and pages
@@ -24,9 +22,9 @@ module.exports = {
   // PWA App start url
   manifestStartUrl: "/",
   // App Background Color in using, loading state
-  manifestBackgroundColor: lightColors.background,
+  manifestBackgroundColor: "#baffc9",
   // UI[address, task switcher etc...] Color
-  manifestThemeColor: lightColors.accent,
+  manifestThemeColor: "#bae1ff",
   // option[browser, standalone, fullscreen]
   manifestDisplay: "standalone",
   manifestCrossOrigin: "anonymous",
