@@ -72,7 +72,7 @@ const StyledListItem = styled.div`
         text-align: center;
 
         h1 {
-          font-size: 1em;
+          font-size: 0.9em;
         }
 
         small {
