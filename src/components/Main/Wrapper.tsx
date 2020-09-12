@@ -13,7 +13,7 @@ export default ({ children }: { children: React.ReactNode }) => {
 
 const StyleArticle = styled.div<{ fontSize: number }>`
   font-size: calc(
-    ${props => props.theme.main.fonts.content.size}vmin *
+    ${props => props.theme.main.fonts.content.size}em *
       ${props => props.fontSize}
   );
 
