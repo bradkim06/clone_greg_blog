@@ -24,7 +24,7 @@ export default ({ title, subTitle, slug, linkOnClick }: SearchResultProps) => {
       <Grow in={true} timeout={500}>
         <SearchWrapper>
           <FlexChild>
-            <h2>{titleName.replace(/\"/g, "")}</h2>
+            <h1>{titleName.replace(/\"/g, "")}</h1>
             <Divider />
             <small>
               {subTitleName !== "null" && subTitleName.replace(/\"/g, "")}
@@ -72,33 +72,34 @@ const FlexChild = styled.li`
     background-color: ${props => props.theme.search.colors.hoverBackground};
   }
 
-  h2 {
+  h1 {
     margin: 0;
     font-weight: 700;
+    font-size: 1.8em;
   }
 
   small {
     font-weight: 400;
-    font-size: 18px;
+    font-size: 1em;
   }
 
   @media (max-width: ${props => props.theme.mediaQueryTresholds.L}px) {
-    h2 {
-      font-size: 20px;
+    h1 {
+      font-size: 1.5em;
     }
 
     small {
-      font-size: 14px;
+      font-size: 0.9em;
     }
   }
 
   @media (max-width: ${props => props.theme.mediaQueryTresholds.M}px) {
-    h2 {
-      font-size: 16px;
+    h1 {
+      font-size: 1.2em;
     }
 
     small {
-      font-size: 12px;
+      font-size: 0.8em;
     }
   }
 `;

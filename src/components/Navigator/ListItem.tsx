@@ -71,8 +71,8 @@ const StyledListItem = styled.div`
         padding: 0.8rem 0.5rem 0 0.5rem;
         text-align: center;
 
-        h2 {
-          font-size: 16px;
+        h1 {
+          font-size: 1em;
         }
 
         small {
