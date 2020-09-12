@@ -35,7 +35,7 @@ export default ({
       )}
       {navigatorShape === "open" && categoryFilter !== "all posts" && (
         <Filter>
-          <small>Category Filter:</small>
+          <small>Active Category Filter:</small>
           <strong>{categoryFilter}</strong>
           <IconButton
             aria-label="Remove filtering"
@@ -103,6 +103,7 @@ const Filter = styled.div`
     position: absolute;
     top: 0;
     right: 0;
+    color: ${props => props.theme.navigator.colors.postsHeader};
   }
   & strong {
     font-weight: 600;
