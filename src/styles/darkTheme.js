@@ -74,7 +74,7 @@ export const darkTheme = {
       fbCommentsColorscheme: "dark"
     },
     sizes: {
-      articleMaxWidth: "60rem"
+      articleMaxWidth: "65rem"
     },
     fonts: {
       title: {

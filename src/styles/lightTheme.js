@@ -71,7 +71,7 @@ export const lightTheme = {
       fbCommentslightColorscheme: "light"
     },
     sizes: {
-      articleMaxWidth: "60rem"
+      articleMaxWidth: "65rem"
     },
     fonts: {
       title: {
@@ -79,14 +79,14 @@ export const lightTheme = {
         sizeM: 2.5,
         sizeL: 2.7,
         weight: 600,
-        lineHeight: 1.1
+        lineHeight: 1.5
       },
       subTitle: {
         size: 1.5,
         sizeM: 1.8,
         sizeL: 1.95,
         weight: 300,
-        lineHeight: 1.1
+        lineHeight: 1.5
       },
       meta: {
         size: 0.9,
@@ -102,7 +102,7 @@ export const lightTheme = {
         h2Size: 1.5,
         h3Size: 1.3,
         weight: 600,
-        lineHeight: 1.3
+        lineHeight: 1.5
       },
       footer: {
         size: 1,

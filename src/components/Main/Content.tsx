@@ -1,36 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
-import { ReduxState } from "../../state/store";
 
 function Content({ children }: { children: React.ReactNode }) {
-  const fontSizeState = useSelector<ReduxState, number>(
-    state => state.fontSizeIncrease
-  );
 
-  return <PageContent fontSize={fontSizeState}>{children}</PageContent>;
+  return <PageContent >{children}</PageContent>;
 }
 
-const PageContent = styled.div<{ fontSize: number }>`
+const PageContent = styled.div`
   color: ${props => props.theme.main.colors.content};
-  font-size: calc(
-    ${props => props.theme.main.fonts.content.size}em *
-      ${props => props.fontSize}
-  );
-
-  @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
-    font-size: calc(
-      ${props => props.theme.main.fonts.content.sizeM}em *
-        ${props => props.fontSize}
-    );
-  }
-
-  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
-    font-size: calc(
-      ${props => props.theme.main.fonts.content.sizeL}em *
-        ${props => props.fontSize}
-    );
-  }
   line-height: ${props => props.theme.main.fonts.content.lineHeight};
 
   & a {

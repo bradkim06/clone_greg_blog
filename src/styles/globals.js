@@ -27,7 +27,7 @@ export const GlobalStyle = createGlobalStyle`
     -moz-text-size-adjust: none;
     -ms-text-size-adjust: 100%;
     font-family: ${props => props.theme.base.fonts.styledFamily};
-    line-height: 1.15;
+    line-height: 1.5;
     text-size-adjust: 100%;
   }
 

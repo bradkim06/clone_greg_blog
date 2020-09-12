@@ -1,11 +1,35 @@
 import React from "react";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
+import { ReduxState } from "../../state/store";
 
 function Article({ children }: { children: React.ReactNode }) {
-  return <StyleArticle>{children}</StyleArticle>;
+  const fontSizeState = useSelector<ReduxState, number>(
+    state => state.fontSizeIncrease
+  );
+
+  return <StyleArticle fontSize={fontSizeState}>{children}</StyleArticle>;
 }
 
-const StyleArticle = styled.article`
+const StyleArticle = styled.article<{ fontSize: number }>`
+  font-size: calc(
+    ${props => props.theme.main.fonts.content.size}vmin *
+      ${props => props.fontSize}
+  );
+
+  @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
+    font-size: calc(
+      ${props => props.theme.main.fonts.content.sizeM}em *
+        ${props => props.fontSize}
+    );
+  }
+
+  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
+    font-size: calc(
+      ${props => props.theme.main.fonts.content.sizeL}em *
+        ${props => props.fontSize}
+    );
+  }
   background: ${props => props.theme.main.colors.background};
   max-width: ${props => props.theme.main.sizes.articleMaxWidth};
   margin: 0 auto;
