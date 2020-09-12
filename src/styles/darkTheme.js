@@ -21,7 +21,7 @@ export const darkTheme = {
     },
     fonts: {
       unstyledFamily: `Arial`,
-      styledFamily: "IBM Plex Serif",
+      styledFamily: "Fira Code",
       styledFonts: "300,400,600"
     }
   },
@@ -74,7 +74,7 @@ export const darkTheme = {
       fbCommentsColorscheme: "dark"
     },
     sizes: {
-      articleMaxWidth: "70em"
+      articleMaxWidth: "60rem"
     },
     fonts: {
       title: {
