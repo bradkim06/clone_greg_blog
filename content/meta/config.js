@@ -2,11 +2,11 @@ const lightColors = require("../../src/styles/lightColors");
 
 module.exports = {
   siteTitle: "bradkim06", // <title>
-  shortSiteTitle: "Personal Blog", // <title> ending for posts and pages
+  shortSiteTitle: "bradkim06", // <title> ending for posts and pages
   siteDescription: "made with GatsbyJS",
   siteUrl: "https://bradkim06.github.io",
   pathPrefix: "",
-  siteImage: "preview.jpg",
+  siteImage: "icon.jpg",
   siteLanguage: "en",
   // author
   authorName: "bradkim06",

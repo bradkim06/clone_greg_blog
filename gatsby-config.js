@@ -29,8 +29,7 @@ module.exports = {
         start_url: config.manifestStartUrl,
         lang: config.manifestLang,
         icon: `static/icon.png`,
-        // icon: `icon.svg`,
-        cache_busting_mode: "none",
+        // cache_busting_mode: "none",
         background_color: config.manifestBackgroundColor,
         theme_color_in_head: false, // This will avoid adding theme-color meta tag.
         display: config.manifestDisplay,
@@ -38,14 +37,7 @@ module.exports = {
         crossOrigin: config.manifestCrossOrigin
       }
     },
-    {
-      resolve: "gatsby-plugin-offline",
-      options: {
-        workboxConfig: {
-          globPatterns: ["static/icon.png"]
-        }
-      }
-    },
+    "gatsby-plugin-offline",
     {
       resolve: `gatsby-plugin-prefetch-google-fonts`,
       options: {
