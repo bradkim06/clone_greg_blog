@@ -11,7 +11,7 @@ const Navigator = loadable(() => import("../../src/components/Navigator"));
 const ActionsBar = loadable(() => import("../../src/components/Actions/Bar"));
 const InfoBar = loadable(() => import("../../src/components/Info/Bar"));
 
-export default ({ children }: { children: React.ReactNode }) => {
+const TopLayout = ({ children }: { children: React.ReactNode }) => {
   const { posts, pages } = useLayoutQuery();
   const themeContext = useContext(ThemeContext);
   const categories = category(posts);
@@ -36,7 +36,7 @@ export default ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-const getWidth = (): number => {
+function getWidth(): number {
   let width = 0;
 
   if (typeof window !== "undefined") {
@@ -47,11 +47,11 @@ const getWidth = (): number => {
   }
 
   return width;
-};
+}
 
-const useCurrentWidth = (ThemeContext: {
+function useCurrentWidth(ThemeContext: {
   mediaQueryTresholds: { L: number };
-}): boolean => {
+}): boolean {
   // save current window width in the state object
   const [width, setWidth] = useState(getWidth());
 
@@ -78,7 +78,7 @@ const useCurrentWidth = (ThemeContext: {
 
   const mediaQueryL = ThemeContext.mediaQueryTresholds.L;
   return width >= mediaQueryL;
-};
+}
 
 type CategoryProps = {
   edges: Array<{
@@ -90,7 +90,7 @@ type CategoryProps = {
   }>;
 };
 
-const category = (posts: CategoryProps): string[] => {
+function category(posts: CategoryProps): string[] {
   const categoryArray = posts.edges.reduce((list: (string | any)[], edge) => {
     const category = edge.node.frontmatter.category;
     if (category && !~list.indexOf(category)) {
@@ -100,4 +100,6 @@ const category = (posts: CategoryProps): string[] => {
     }
   }, []);
   return categoryArray;
-};
+}
+
+export default TopLayout;
