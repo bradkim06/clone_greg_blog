@@ -27,12 +27,25 @@ module.exports = {
         name: config.manifestName,
         short_name: config.manifestShortName,
         start_url: config.manifestStartUrl,
+        lang: config.manifestLang,
+        icon: `static/icon.png`,
+        // icon: `icon.svg`,
+        cache_busting_mode: "none",
         background_color: config.manifestBackgroundColor,
-        theme_color: config.manifestThemeColor,
-        display: config.manifestDisplay
+        theme_color_in_head: false, // This will avoid adding theme-color meta tag.
+        display: config.manifestDisplay,
+        description: config.manifestDescription,
+        crossOrigin: config.manifestCrossOrigin
       }
     },
-    `gatsby-plugin-offline`,
+    {
+      resolve: "gatsby-plugin-offline",
+      options: {
+        workboxConfig: {
+          globPatterns: ["static/icon.png"]
+        }
+      }
+    },
     {
       resolve: `gatsby-plugin-prefetch-google-fonts`,
       options: {

@@ -15,12 +15,22 @@ module.exports = {
   infoTitleNote: "personal blog",
   infoText: "software developer",
   // manifest.json
-  manifestName: "bradkim06",
-  manifestShortName: "Personal Blog", // max 12 characters
+  // PWA App Name
+  manifestName: "bradkim06 blog",
+  // max 12 characters, If name is too long to display, ShortName display instead of name
+  manifestShortName: "bradkim06",
+  manifestDescription:
+    "manifest is part of the PWA specification, allows users to add your site to their home screen",
+  // PWA App start url
   manifestStartUrl: "/",
+  // App Background Color in using, loading state
   manifestBackgroundColor: lightColors.background,
-  manifestThemeColor: lightColors.accent,
+  // UI[address, task switcher etc...] Color
+  // manifestThemeColor: lightColors.accent,
+  // option[browser, standalone, fullscreen]
   manifestDisplay: "standalone",
+  manifestCrossOrigin: "anonymous",
+  manifestLang: "en",
   // contact
   contactEmail: "bradkim06@gmail.com",
   // Google Search

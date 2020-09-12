@@ -32,6 +32,9 @@ export function moveNavFeature(
       }, 0);
     }
   }
+  setTimeout(() => {
+    navigate("/");
+  }, 500);
 }
 
 export type moveNavAsideState = {
