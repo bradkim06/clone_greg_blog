@@ -44,6 +44,9 @@ export default ({ categories }: { categories: string[] }) => {
 
   function themeToggleClick() {
     dispatch(setThemeToggle());
+
+    const theme = isThemeState ? "lightTheme" : "darkTheme";
+    localStorage.setItem("theme", theme);
   }
 
   return (

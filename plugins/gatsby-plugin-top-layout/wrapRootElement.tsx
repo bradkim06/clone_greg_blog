@@ -1,5 +1,9 @@
-import React from "react";
-import { Provider as ReduxProvider, useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import {
+  Provider as ReduxProvider,
+  useSelector,
+  useDispatch
+} from "react-redux";
 import { ThemeProvider as MaterialProvider } from "@material-ui/core/styles";
 import { ThemeProvider as StyledProvider } from "styled-components";
 import { lightTheme } from "../../src/styles/lightTheme";
@@ -7,7 +11,7 @@ import { darkTheme } from "../../src/styles/darkTheme";
 import { GlobalStyle } from "../../src/styles/globals";
 import { createMuiTheme } from "@material-ui/core/styles";
 
-import createStore, { ReduxState } from "../../src/state/store";
+import createStore, { ReduxState, setThemeToggle } from "../../src/state/store";
 
 const store = createStore();
 
@@ -28,8 +32,15 @@ const Initialize = ({ children }: any) => {
   const isThemeState = useSelector<ReduxState, boolean>(
     state => state.themeToggle
   );
+  const dispatch = useDispatch();
   const theme = isThemeState ? darkTheme : lightTheme;
   const materialTheme = (createMuiTheme as any)(theme);
+
+  useEffect(() => {
+    if (localStorage.getItem("theme") === "darkTheme") {
+      dispatch(setThemeToggle());
+    }
+  }, []);
 
   return (
     <StyledProvider theme={theme}>
