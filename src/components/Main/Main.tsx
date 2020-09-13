@@ -15,7 +15,7 @@ const StyleMain = styled.main`
   top: 0;
   left: 0;
   bottom: 0;
-  width: 80%;
+  width: 100%;
   animation-name: main-entry;
   animation-duration: 0.5s;
   @media (min-width: ${({ theme }) => theme.mediaQueryTresholds.L}px) {
