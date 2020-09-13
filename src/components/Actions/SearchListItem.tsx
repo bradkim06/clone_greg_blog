@@ -11,24 +11,22 @@ type SearchResultProps = {
 };
 
 export default ({ title, subTitle, slug, linkOnClick }: SearchResultProps) => {
-  const titleName = JSON.stringify(title, null, 4);
-  const subTitleName = JSON.stringify(subTitle, null, 4);
-  const path = JSON.stringify(slug, null, 4);
+  const titleName = JSON.stringify(title, null, 4).replace(/\"/g, "");
+  const subTitleName = JSON.stringify(subTitle, null, 4).replace(/\"/g, "");
+  const path = JSON.stringify(slug, null, 4).replace(/\"/g, "");
 
   function movePage() {
     linkOnClick();
   }
 
   return (
-    <Link onClick={movePage} to={path.replace(/\"/g, "")}>
+    <Link onClick={movePage} to={path}>
       <Grow in={true} timeout={500}>
         <SearchWrapper>
           <FlexChild>
-            <h1>{titleName.replace(/\"/g, "")}</h1>
+            <h1>{titleName}</h1>
             <Divider />
-            <small>
-              {subTitleName !== "null" && subTitleName.replace(/\"/g, "")}
-            </small>
+            <small>{subTitleName !== "null" && subTitleName}</small>
           </FlexChild>
         </SearchWrapper>
       </Grow>

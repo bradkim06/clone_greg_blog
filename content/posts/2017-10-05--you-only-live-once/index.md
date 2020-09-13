@@ -1,6 +1,7 @@
 ---
 title: You only live once
 subTitle: But if you do it right, once is enough
+date: 2020-09-13 Sun 12:33
 category: "sayings"
 cover: photo-1456518563096-0ff5ee08204e-cover.jpg
 ---

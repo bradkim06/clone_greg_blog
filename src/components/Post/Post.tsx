@@ -6,29 +6,20 @@ import Article from "../Main/Article";
 import { MDXProvider } from "@mdx-js/react";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 import { Link } from "gatsby";
+import { MdxType } from "../../templates/PostTemplate";
 
 type PostProps = {
-  post: {
-    body: string;
-    fields: {
-      slug: string;
-      prefix: string;
-    };
-    frontmatter: {
-      title: string;
-      subTitle: string;
-    };
-  };
+  post: MdxType;
 };
 
 export default ({ post }: PostProps) => {
   const { title, subTitle } = post.frontmatter;
-  const { prefix } = post.fields;
+  const { date } = post.frontmatter;
   const { body } = post;
 
   return (
     <PostWrapper>
-      <PostHeader title={title} subTitle={subTitle} date={prefix} />
+      <PostHeader title={title} subTitle={subTitle} date={date} />
       <Article>
         <MDXProvider components={shortcodes}>
           <MDXRenderer>{body}</MDXRenderer>

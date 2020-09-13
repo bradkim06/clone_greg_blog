@@ -7,10 +7,8 @@ interface ListItemProps {
   post: {
     node: {
       excerpt: string;
-      slug: string;
       fields: {
         slug: string;
-        prefix: string;
       };
       frontmatter: {
         title: string;

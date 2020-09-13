@@ -4,11 +4,10 @@ export interface PostsProps {
   totalCount: number;
   edges: Array<{
     node: {
+      id: string;
       excerpt: string;
-      slug: string;
       fields: {
         slug: string;
-        prefix: string;
       };
       frontmatter: {
         title: string;
@@ -37,11 +36,10 @@ export const useLayoutQuery = () => {
           totalCount
           edges {
             node {
+              id
               excerpt
-              slug
               fields {
                 slug
-                prefix
               }
               frontmatter {
                 title

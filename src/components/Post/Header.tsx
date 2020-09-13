@@ -12,19 +12,19 @@ export default ({ title, subTitle, date }: PostHeaderProps) => {
     <PostHead>
       <PostTitle>{title}</PostTitle>
       <PostSubTitle>{subTitle}</PostSubTitle>
-      <PostDate>{myDate(date)}</PostDate>
+      <PostDate>{date}</PostDate>
     </PostHead>
   );
 };
 
-function myDate(date: string) {
-  const dateObj = new Date(date).toUTCString();
-  const dateToShow = dateObj.split(" ").slice(0, 4).join(" ");
-
-  if (dateToShow !== "Invalid Date") {
-    return dateToShow;
-  }
-}
+// function myDate(date: string) {
+//   const dateObj = new Date(date).toUTCString();
+//   const dateToShow = dateObj.split(" ").slice(0, 4).join(" ");
+//
+//   if (dateToShow !== "Invalid Date") {
+//     return dateToShow;
+//   }
+// }
 
 const PostHead = styled.div`
   margin: 0 0 3em;

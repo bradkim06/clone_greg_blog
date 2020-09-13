@@ -9,19 +9,23 @@ import { moveNavAside, moveNavData } from "../utils/shared";
 
 require("prismjs/themes/prism-okaidia.css");
 
+export type MdxType = {
+  id: string;
+  body: string;
+  excerpt: string;
+  fields: {
+    slug: string;
+  };
+  frontmatter: {
+    title: string;
+    subTitle: string;
+    date: string;
+  };
+};
+
 type PostTemplateProps = {
   data: {
-    mdx: {
-      body: string;
-      fields: {
-        slug: string;
-        prefix: string;
-      };
-      frontmatter: {
-        title: string;
-        subTitle: string;
-      };
-    };
+    mdx: MdxType;
   };
 };
 
@@ -37,23 +41,25 @@ export default ({ data }: PostTemplateProps) => {
 
   return (
     <Main>
-      <Seo data={data.mdx} />
+      <Seo post={data.mdx} />
       <Post post={data.mdx} />
     </Main>
   );
 };
 
 export const postQuery = graphql`
-  query BlogPostQuery($slug: String) {
-    mdx(fields: { slug: { eq: $slug } }) {
+  query BlogPostQuery($id: String) {
+    mdx(id: { eq: $id }) {
+      id
       body
+      excerpt
       fields {
         slug
-        prefix
       }
       frontmatter {
         title
         subTitle
+        date
       }
     }
   }

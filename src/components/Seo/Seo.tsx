@@ -1,29 +1,17 @@
 import React from "react";
 import Helmet from "react-helmet";
 import config from "../../../content/meta/config";
+import { MdxType } from "../../templates/PostTemplate";
 
 type SeoProps = {
-  data?: {
-    body: string;
-    fields: {
-      slug: string;
-      prefix: string;
-    };
-    frontmatter: {
-      title: string;
-      subTitle: string;
-      // Todo
-      // description: any;
-      // cover: any;
-    };
-  };
+  post: MdxType;
 };
 
-export default ({ data }: SeoProps) => {
-  const postTitle = ((data || {}).frontmatter || {}).title;
-  const postDescription = ((data || {}).frontmatter || {}).description;
-  const postCover = ((data || {}).frontmatter || {}).cover;
-  const postSlug = ((data || {}).fields || {}).slug;
+export default ({ post }: SeoProps) => {
+  const postTitle = ((post || {}).frontmatter || {}).title;
+  const postDescription = (post || {}).excerpt;
+  const postCover = ((post || {}).frontmatter || {}).cover;
+  const postSlug = ((post || {}).fields || {}).slug;
 
   const title = postTitle
     ? `${postTitle} - ${config.shortSiteTitle}`
