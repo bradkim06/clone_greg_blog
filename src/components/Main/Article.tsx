@@ -6,24 +6,24 @@ export default ({ children }: { children: React.ReactNode }) => {
 };
 
 const PageContent = styled.article`
-  color: ${props => props.theme.main.colors.content};
-  line-height: ${props => props.theme.main.fonts.content.lineHeight};
+  color: ${({ theme }) => theme.main.colors.content};
+  line-height: ${({ theme }) => theme.main.fonts.content.lineHeight};
 
   & a {
-    color: ${props => props.theme.base.colors.link};
+    color: ${({ theme }) => theme.base.colors.link};
   }
 
   & h1,
   & h2,
   & h3 {
-    color: ${props => props.theme.main.colors.contentHeading};
-    font-weight: ${props => props.theme.main.fonts.contentHeading.weight};
-    line-height: ${props => props.theme.main.fonts.contentHeading.lineHeight};
+    color: ${({ theme }) => theme.main.colors.contentHeading};
+    font-weight: ${({ theme }) => theme.main.fonts.contentHeading.weight};
+    line-height: ${({ theme }) => theme.main.fonts.contentHeading.lineHeight};
     margin: 2em 0 1em;
     letter-spacing: -0.02em;
   }
   & h3 {
-    font-size: ${props => props.theme.main.fonts.contentHeading.h3Size}em;
+    font-size: ${({ theme }) => theme.main.fonts.contentHeading.h3Size}em;
   }
   & p {
     margin: 0 0 1.5em 0;
@@ -32,7 +32,7 @@ const PageContent = styled.article`
   & ul {
     list-style: circle;
     padding: 0 0 0 1.3em;
-    @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
+    @media (min-width: ${({ theme }) => theme.mediaQueryTresholds.M}px) {
       padding: 0 0 0 2em;
     }
   }
@@ -40,7 +40,7 @@ const PageContent = styled.article`
     margin: 0 0 0.5em 0;
   }
   & blockquote {
-    border: 5px solid ${props => props.theme.main.colors.blockquoteFrame};
+    border: 5px solid ${({ theme }) => theme.main.colors.blockquoteFrame};
     font-style: italic;
     margin: 2.5em 0;
     padding: 1em 1.1em 1em 1.3em;
@@ -50,7 +50,7 @@ const PageContent = styled.article`
     }
     &::before,
     &::after {
-      background: ${props => props.theme.main.colors.background};
+      background: ${({ theme }) => theme.main.colors.background};
       content: "";
       height: 5px;
       left: 50%;
@@ -78,18 +78,18 @@ const PageContent = styled.article`
   }
 
   & table th {
-    // color: ${props => props.theme.base.colors.text};
+    // color: ${({ theme }) => theme.base.colors.text};
     font-size: 1.2rem;
     font-weight: 700;
     letter-spacing: 0.2px;
     text-align: left;
     text-transform: uppercase;
-    background-color: ${props => props.theme.base.colors.lines};
+    background-color: ${({ theme }) => theme.base.colors.lines};
   }
 
   & table th,
   & table td {
     padding: 6px 12px;
-    border: 1px solid ${props => props.theme.base.colors.text};
+    border: 1px solid ${({ theme }) => theme.base.colors.text};
   }
 `;

@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import HomeIcon from "@material-ui/icons/Home";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import Search from "./Search";
+import Toc from "./Toc";
 import WbSunnyIcon from "@material-ui/icons/WbSunny";
 import Brightness2 from "@material-ui/icons/Brightness2";
 
@@ -69,6 +70,7 @@ export default ({ categories }: { categories: string[] }) => {
         )}
       </Group>
       <Group>
+        <Toc />
         {state.navigatorPosition === "is-aside" && (
           <FontSetter increaseFont={fontSetterOnClick} />
         )}

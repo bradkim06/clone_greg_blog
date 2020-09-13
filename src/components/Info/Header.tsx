@@ -16,6 +16,7 @@ type InfoHeaderProps = {
 };
 
 export default ({ avatarOnClick, expandOnClick }: InfoHeaderProps) => {
+  const infoTitle = config.infoTitle.replace(/ /g, "\u00a0");
   return (
     <Header>
       <HeaderAvatarLink>
@@ -26,7 +27,7 @@ export default ({ avatarOnClick, expandOnClick }: InfoHeaderProps) => {
         </Link>
       </HeaderAvatarLink>
       <HeaderTitle>
-        {config.infoTitle.replace(/ /g, "\u00a0")}
+        {infoTitle}
         <small>{config.infoTitleNote}</small>
       </HeaderTitle>
       <IconButton
@@ -89,32 +90,30 @@ const HeaderAvatarLink = styled.div`
 `;
 
 const HeaderAvatar = styled.div`
-  ${({ theme }) => ` 
-    width: 36px;
-    height: 36px;
-    transition: all .3s;
-    transition-timing-function: ease;
-    display: inline-block;
-    overflow: hidden;
-    & img{
-      max-width: 100%;
-    }
-    @media (min-width: ${theme.mediaQueryTresholds.M}px) {
-      width: 44px;
-      height: 44px;
-    }
+  width: 36px;
+  height: 36px;
+  transition: all 0.3s;
+  transition-timing-function: ease;
+  display: inline-block;
+  overflow: hidden;
+  & img {
+    max-width: 100%;
+  }
+  @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
+    width: 44px;
+    height: 44px;
+  }
 
-    @media (min-width: ${theme.mediaQueryTresholds.L}px) {
-      width: 60px;
-      height: 60px;
-    }
+  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
+    width: 60px;
+    height: 60px;
+  }
 
-    // @media (hover: hover) {
-    //   &:hover {
-    //     border-radius: 75% 65%;
-    //   }
-    // }
-  `}
+  // @media (hover: hover) {
+  //   &:hover {
+  //     border-radius: 75% 65%;
+  //   }
+  // }
 `;
 
 const HeaderTitle = styled.h1`

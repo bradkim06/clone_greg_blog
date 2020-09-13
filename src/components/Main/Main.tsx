@@ -15,15 +15,15 @@ const StyleMain = styled.main`
   top: 0;
   left: 0;
   bottom: 0;
-  width: 100%;
+  width: 80%;
   animation-name: main-entry;
   animation-duration: 0.5s;
-  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
+  @media (min-width: ${({ theme }) => theme.mediaQueryTresholds.L}px) {
     width: calc(
-      100vw - ${props => props.theme.info.sizes.width}px -
-        ${props => props.theme.bars.sizes.actionsBar}px
+      100vw - ${({ theme }) => theme.info.sizes.width}px -
+        ${({ theme }) => theme.bars.sizes.actionsBar}px
     );
-    left: ${props => props.theme.info.sizes.width}px;
+    left: ${({ theme }) => theme.info.sizes.width}px;
   }
 
   @media print {

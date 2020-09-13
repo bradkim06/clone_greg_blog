@@ -13,6 +13,7 @@ interface ListItemProps {
       frontmatter: {
         title: string;
         subTitle?: string;
+        date?: string;
         category?: string;
       };
     };
@@ -22,8 +23,12 @@ interface ListItemProps {
 }
 
 export default ({ post, categoryFilter, linkOnClick }: ListItemProps) => {
+  const {
+    frontmatter: { category, title, subTitle, date },
+    fields: { slug }
+  } = post.node;
+
   const [hidden, setHidden] = useState(false);
-  const category = post.node.frontmatter.category;
 
   useEffect(() => {
     if (categoryFilter === "all posts") {
@@ -38,16 +43,14 @@ export default ({ post, categoryFilter, linkOnClick }: ListItemProps) => {
   return (
     <StyledListItem>
       <div
-        className={`${post.node.frontmatter.category}`}
+        className={`${category}`}
         style={{ display: `${hidden ? "none" : "block"}` }}
-        key={post.node.fields.slug}
+        key={slug}
       >
         <SearchListItem
-          title={post.node.frontmatter.title}
-          subTitle={
-            post.node.frontmatter.subTitle && post.node.frontmatter.subTitle
-          }
-          slug={post.node.fields.slug}
+          title={title}
+          subTitle={subTitle}
+          slug={slug}
           linkOnClick={linkOnClick}
         />
       </div>

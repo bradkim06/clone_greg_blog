@@ -20,8 +20,8 @@ export default ({ title, subTitle, slug, linkOnClick }: SearchResultProps) => {
   }
 
   return (
-    <Link onClick={movePage} to={path}>
-      <Grow in={true} timeout={500}>
+    <Grow in={true} timeout={500}>
+      <Link onClick={movePage} to={path}>
         <SearchWrapper>
           <FlexChild>
             <h1>{titleName}</h1>
@@ -29,8 +29,8 @@ export default ({ title, subTitle, slug, linkOnClick }: SearchResultProps) => {
             <small>{subTitleName !== "null" && subTitleName}</small>
           </FlexChild>
         </SearchWrapper>
-      </Grow>
-    </Link>
+      </Link>
+    </Grow>
   );
 };
 

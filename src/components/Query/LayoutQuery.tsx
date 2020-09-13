@@ -11,8 +11,9 @@ export interface PostsProps {
       };
       frontmatter: {
         title: string;
-        subTitle: string;
-        category: string;
+        subTitle?: string;
+        date?: string;
+        category?: string;
       };
     };
   }>;
@@ -44,6 +45,7 @@ export const useLayoutQuery = () => {
               frontmatter {
                 title
                 subTitle
+                date
                 category
               }
             }

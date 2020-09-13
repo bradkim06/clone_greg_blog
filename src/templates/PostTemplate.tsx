@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { graphql } from "gatsby";
 import Seo from "../components/Seo";
 
+import { setTableOfContents } from "../state/store";
 import { moveNavAside, moveNavData } from "../utils/shared";
 
 require("prismjs/themes/prism-okaidia.css");
@@ -13,6 +14,9 @@ export type MdxType = {
   id: string;
   body: string;
   excerpt: string;
+  tableOfContents: {
+    items: object[];
+  };
   fields: {
     slug: string;
   };
@@ -30,6 +34,8 @@ type PostTemplateProps = {
 };
 
 export default ({ data }: PostTemplateProps) => {
+  const toc = data.mdx.tableOfContents;
+
   const state = moveNavData();
   const dispatch = useDispatch();
 
@@ -37,6 +43,8 @@ export default ({ data }: PostTemplateProps) => {
     if (state.navigatorPosition === "is-featured") {
       moveNavAside(state, dispatch);
     }
+
+    dispatch(setTableOfContents(toc));
   }, []);
 
   return (
@@ -53,6 +61,7 @@ export const postQuery = graphql`
       id
       body
       excerpt
+      tableOfContents(maxDepth: 3)
       fields {
         slug
       }

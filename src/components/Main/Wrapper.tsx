@@ -13,27 +13,27 @@ export default ({ children }: { children: React.ReactNode }) => {
 
 const StyleArticle = styled.div<{ fontSize: number }>`
   font-size: calc(
-    ${props => props.theme.main.fonts.content.size}em *
-      ${props => props.fontSize}
+    ${({ theme }) => theme.main.fonts.content.size}em *
+      ${({ fontSize }) => fontSize}
   );
 
-  @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
+  @media (min-width: ${({ theme }) => theme.mediaQueryTresholds.M}px) {
     font-size: calc(
-      ${props => props.theme.main.fonts.content.sizeM}em *
-        ${props => props.fontSize}
+      ${({ theme }) => theme.main.fonts.content.sizeM}em *
+        ${({ fontSize }) => fontSize}
     );
   }
 
-  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
+  @media (min-width: ${({ theme }) => theme.mediaQueryTresholds.L}px) {
     font-size: calc(
-      ${props => props.theme.main.fonts.content.sizeL}em *
-        ${props => props.fontSize}
+      ${({ theme }) => theme.main.fonts.content.sizeL}em *
+        ${({ fontSize }) => fontSize}
     );
   }
-  background: ${props => props.theme.main.colors.background};
-  max-width: ${props => props.theme.main.sizes.articleMaxWidth};
+  background: ${({ theme }) => theme.main.colors.background};
+  max-width: ${({ theme }) => theme.main.sizes.articleMaxWidth};
   margin: 0 auto;
-  padding: calc(${props => props.theme.bars.sizes.infoBar}px + 1.5rem) 1.5rem
+  padding: calc(${({ theme }) => theme.bars.sizes.infoBar}px + 1.5rem) 1.5rem
     1.5rem 1.5rem;
   & strong,
   & b {
@@ -47,16 +47,16 @@ const StyleArticle = styled.div<{ fontSize: number }>`
     transition: 0.3s;
 
     &:hover {
-      color: ${props => props.theme.base.colors.linkHover};
+      color: ${({ theme }) => theme.base.colors.linkHover};
     }
   }
 
-  @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
-    padding: calc(2.5rem + ${props => props.theme.bars.sizes.infoBar}px) 3.5rem
+  @media (min-width: ${({ theme }) => theme.mediaQueryTresholds.M}px) {
+    padding: calc(2.5rem + ${({ theme }) => theme.bars.sizes.infoBar}px) 3.5rem
       2.5rem;
   }
 
-  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
+  @media (min-width: ${({ theme }) => theme.mediaQueryTresholds.L}px) {
     padding: 3.5rem;
   }
 `;

@@ -18,16 +18,18 @@ export default ({ post }: PostProps) => {
   const { body } = post;
 
   return (
-    <PostWrapper>
-      <PostHeader title={title} subTitle={subTitle} date={date} />
-      <Article>
-        <MDXProvider components={shortcodes}>
-          <MDXRenderer>{body}</MDXRenderer>
-        </MDXProvider>
-      </Article>
-      <PostFooter />
-    </PostWrapper>
+    <React.Fragment>
+      <PostWrapper>
+        <PostHeader title={title} subTitle={subTitle} date={date} />
+        <Article>
+          <MDXProvider components={components}>
+            <MDXRenderer>{body}</MDXRenderer>
+          </MDXProvider>
+        </Article>
+        <PostFooter />
+      </PostWrapper>
+    </React.Fragment>
   );
 };
 
-const shortcodes = { Link }; // Provide common components here
+const components = { Link }; // Provide common components here

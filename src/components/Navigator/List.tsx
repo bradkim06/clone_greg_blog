@@ -9,8 +9,8 @@ import SpringScrollbars from "../Scroll";
 type ListProps = {
   posts: PostsProps;
   linkOnClick: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
-  expandOnClick(event: React.MouseEvent<HTMLButtonElement>): void;
-  removeFilter(event: React.MouseEvent<HTMLButtonElement>): void;
+  expandOnClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  removeFilter: (event: React.MouseEvent<HTMLButtonElement>) => void;
   navigatorPosition: string;
   navigatorShape: string;
   categoryFilter: string;
