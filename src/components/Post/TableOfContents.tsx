@@ -47,6 +47,8 @@ export default ({ toc, linkOnClick }: TocProps) => {
 };
 
 const TocWrapper = styled.div`
+  font-size: 1.5em;
+
   a {
     color: ${({ theme }) => theme.base.colors.text};
     text-decoration: none;
@@ -58,9 +60,9 @@ const H1 = styled.li`
 `;
 const H2 = styled.li`
   list-style: none;
-  padding-left: 1em;
+  padding-left: 2em;
 `;
 const H3 = styled.li`
   list-style: none;
-  padding-left: 2em;
+  padding-left: 4em;
 `;

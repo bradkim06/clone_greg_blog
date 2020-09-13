@@ -14,6 +14,7 @@ const SET_FONT_SIZE_INCREASE = "SET_FONT_SIZE_INCREASE";
 const SET_CATEGORY_FILTER = "SET_CATEGORY_FILTER";
 const SET_THEME_TOGGLE = "SET_THEME_TOGGLE";
 const SET_TABLE_OF_CONTESNTS = "SET_TABLE_OF_CONTESNTS";
+const SET_POST_TITLE = "SET_POST_TITLE";
 
 /*
  * action creators
@@ -53,6 +54,10 @@ export function setThemeToggle() {
 
 export function setTableOfContents(val: any) {
   return { type: SET_TABLE_OF_CONTESNTS, val };
+}
+
+export function setPostTitle(val: any) {
+  return { type: SET_POST_TITLE, val };
 }
 
 /*
@@ -114,6 +119,12 @@ const reducer = (state: any, action: any) => {
         tableOfContents: action.val
       };
 
+    case SET_POST_TITLE:
+      return {
+        ...state,
+        postTitle: action.val
+      };
+
     default:
       return state;
   }
@@ -131,6 +142,7 @@ export type ReduxState = {
   tableOfContents: {
     items?: object[];
   };
+  postTitle: string;
 };
 
 const initialState: ReduxState = {
@@ -142,7 +154,8 @@ const initialState: ReduxState = {
   fontSizeIncrease: 1,
   categoryFilter: "all posts",
   themeToggle: false,
-  tableOfContents: {}
+  tableOfContents: {},
+  postTitle: ""
 };
 
 const createStore = () =>

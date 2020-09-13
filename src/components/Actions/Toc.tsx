@@ -13,7 +13,9 @@ import TableOfContents from "../Post/TableOfContents";
 import { ReduxState } from "../../state/store";
 
 const SearchDialog = () => {
-  const toc = useSelector<ReduxState, {} | any>(state => state.tableOfContents);
+  const toc = useSelector<ReduxState, any>(state => state.tableOfContents);
+  const postTitle = useSelector<ReduxState, string>(state => state.postTitle);
+
   const [open, setOpen] = useState(false);
   const [scroll, setScroll] = useState<"paper" | "body" | undefined>("paper");
 
@@ -57,7 +59,7 @@ const SearchDialog = () => {
         maxWidth="sm"
         fullWidth
       >
-        <DialogTitle id="scroll-dialog-title">Title </DialogTitle>
+        <DialogTitle id="scroll-dialog-title">{postTitle}</DialogTitle>
         <DialogContent dividers={scroll === "paper"}>
           <DialogContentText
             id="scroll-dialog-description"

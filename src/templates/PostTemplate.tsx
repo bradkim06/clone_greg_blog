@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { graphql } from "gatsby";
 import Seo from "../components/Seo";
 
-import { setTableOfContents } from "../state/store";
+import { setTableOfContents, setPostTitle } from "../state/store";
 import { moveNavAside, moveNavData } from "../utils/shared";
 
 require("prismjs/themes/prism-okaidia.css");
@@ -35,6 +35,7 @@ type PostTemplateProps = {
 
 export default ({ data }: PostTemplateProps) => {
   const toc = data.mdx.tableOfContents;
+  const postTitle = data.mdx.frontmatter.title;
 
   const state = moveNavData();
   const dispatch = useDispatch();
@@ -45,6 +46,7 @@ export default ({ data }: PostTemplateProps) => {
     }
 
     dispatch(setTableOfContents(toc));
+    dispatch(setPostTitle(postTitle));
   }, []);
 
   return (
