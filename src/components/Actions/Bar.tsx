@@ -70,9 +70,11 @@ export default ({ categories }: { categories: string[] }) => {
         )}
       </Group>
       <Group>
-        <Toc />
         {state.navigatorPosition === "is-aside" && (
-          <FontSetter increaseFont={fontSetterOnClick} />
+          <React.Fragment>
+            <Toc />
+            <FontSetter increaseFont={fontSetterOnClick} />
+          </React.Fragment>
         )}
         <StyledIconButton
           aria-label="Theme Toggle"

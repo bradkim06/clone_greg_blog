@@ -12,7 +12,7 @@ type TocProps = {
 export default ({ toc, linkOnClick }: TocProps) => {
   return (
     <TocWrapper>
-      <h2>Table of contents</h2>
+      <h1>Table of contents</h1>
       {toc &&
         toc.items &&
         toc.items.map((h1: any) => (
@@ -47,22 +47,57 @@ export default ({ toc, linkOnClick }: TocProps) => {
 };
 
 const TocWrapper = styled.div`
-  font-size: 1.5em;
-
   a {
     color: ${({ theme }) => theme.base.colors.text};
     text-decoration: none;
+  }
+
+  h1 {
+    color: ${({ theme }) => theme.base.colors.accent};
   }
 `;
 
 const H1 = styled.li`
   list-style: none;
+  font-size: 1.2em;
+  margin-bottom: 1em;
+
+  @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
+    font-size: 1.4em;
+  }
+
+  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
+    font-size: 1.6em;
+  }
 `;
 const H2 = styled.li`
   list-style: none;
-  padding-left: 2em;
+  padding-left: 1em;
+  font-size: 1em;
+  margin-bottom: 0.7em;
+
+  @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
+    padding-left: 2em;
+    font-size: 1.2em;
+  }
+  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
+    padding-left: 3em;
+    font-size: 1.4em;
+  }
 `;
 const H3 = styled.li`
   list-style: none;
-  padding-left: 4em;
+  padding-left: 2em;
+  font-size: 0.8em;
+  margin-bottom: 0.4em;
+
+  @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
+    padding-left: 4em;
+    font-size: 1em;
+  }
+
+  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
+    padding-left: 6em;
+    font-size: 1.2em;
+  }
 `;
