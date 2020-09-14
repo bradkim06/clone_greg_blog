@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import SearchListItem from "../Actions/SearchListItem";
 
-import styled from "styled-components";
-
 interface ListItemProps {
   post: {
     node: {
@@ -41,48 +39,20 @@ export default ({ post, categoryFilter, linkOnClick }: ListItemProps) => {
   }, [categoryFilter]);
 
   return (
-    <StyledListItem>
-      <div
-        className={`${category}`}
-        style={{ display: `${hidden ? "none" : "block"}` }}
-        key={slug}
-      >
-        <SearchListItem
-          title={title}
-          subTitle={subTitle}
-          slug={slug}
-          linkOnClick={linkOnClick}
-        />
-      </div>
-    </StyledListItem>
+    <div
+      className={`${category}`}
+      style={{ display: `${hidden ? "none" : "block"}` }}
+      key={slug}
+    >
+      <SearchListItem
+        title={title}
+        subTitle={subTitle}
+        slug={slug}
+        linkOnClick={linkOnClick}
+      />
+    </div>
   );
 };
-
-const StyledListItem = styled.div`
-  & ul {
-    padding: 0;
-    list-style: none;
-  }
-  & li {
-    margin: 0 0 0.7em 0;
-
-    @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
-      .moving-featured &,
-      .is-aside & {
-        // padding: 0.8rem 0.5rem 0 0.5rem;
-        // text-align: center;
-
-        h1 {
-          font-size: 1em;
-        }
-
-        small {
-          display: none;
-        }
-      }
-    }
-  }
-`;
 
 // const StyledLink = styled(Link)`
 //   display: flex;

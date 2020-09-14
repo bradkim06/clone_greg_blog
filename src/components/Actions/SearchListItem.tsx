@@ -51,24 +51,24 @@ const Divider = styled.div`
 
 const ImgSource = styled.img`
   overflow: hidden;
-  width: 60px;
-  height: 60px;
+  width: 80%;
+  height: 80%;
 
-  @media (min-width: ${({ theme }) => theme.mediaQueryTresholds.M}px) {
-    width: 80px;
-    height: 80px;
-  }
-
-  @media (min-width: ${({ theme }) => theme.mediaQueryTresholds.L}px) {
-    width: 90px;
-    height: 90px;
-
-    .moving-featured &,
-    .is-aside & {
-      width: 30px;
-      height: 30px;
-    }
-  }
+  // @media (min-width: ${({ theme }) => theme.mediaQueryTresholds.M}px) {
+  //   width: 80px;
+  //   height: 80px;
+  // }
+  //
+  // @media (min-width: ${({ theme }) => theme.mediaQueryTresholds.L}px) {
+  //   width: 90px;
+  //   height: 90px;
+  //
+  //   .moving-featured &,
+  //   .is-aside & {
+  //     width: 30px;
+  //     height: 30px;
+  //   }
+  // }
 `;
 
 const SearchWrapper = styled.ul`
@@ -79,20 +79,24 @@ const SearchWrapper = styled.ul`
 `;
 
 const ImgFlex = styled.div`
-  margin-left: 5%;
-  margin-right: 5%;
+  margin-left: 3%;
+  width: 20%;
 `;
 
-const TextFlex = styled.div``;
+const TextFlex = styled.div`
+  width: 80%;
+`;
 
 const FlexChild = styled.li`
-  justify-content: left;
+  justify-content: center;
   width: 90%;
   flex: auto;
   display: flex;
   word-break: break-all;
   padding: 1rem;
   place-items: center;
+
+  margin: 0 0 0.7em 0;
 
   color: ${({ theme }) => theme.navigator.colors.postsListItemLink};
   border-radius: 30px;
@@ -142,6 +146,14 @@ const FlexChild = styled.li`
     .moving-featured &,
     .is-aside & {
       padding: 0.7rem 0.5rem 0.5rem 0.5rem;
+
+      h1 {
+        font-size: 1em;
+      }
+
+      small {
+        display: none;
+      }
     }
   }
 `;
