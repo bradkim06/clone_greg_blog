@@ -9,12 +9,17 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import TocIcon from "@material-ui/icons/Toc";
 import IconButton from "@material-ui/core/IconButton";
 import styled from "styled-components";
-import TableOfContents from "../Post/TableOfContents";
+import TocLists from "./TocLists";
 import { ReduxState } from "../../state/store";
+import { PostTemplateProps } from "../../templates/PostTemplate";
 
-const SearchDialog = () => {
-  const toc = useSelector<ReduxState, any>(state => state.tableOfContents);
-  const postTitle = useSelector<ReduxState, string>(state => state.postTitle);
+export default () => {
+  const {
+    mdx: {
+      tableOfContents,
+      frontmatter: { title }
+    }
+  } = useSelector<ReduxState, PostTemplateProps>(state => state.currentPost);
 
   const [open, setOpen] = useState(false);
   const [scroll, setScroll] = useState<"paper" | "body" | undefined>("paper");
@@ -59,14 +64,14 @@ const SearchDialog = () => {
         maxWidth="sm"
         fullWidth
       >
-        <DialogTitle id="scroll-dialog-title">{postTitle}</DialogTitle>
+        <DialogTitle id="scroll-dialog-title">{title}</DialogTitle>
         <DialogContent dividers={scroll === "paper"}>
           <DialogContentText
             id="scroll-dialog-description"
             ref={descriptionElementRef}
             tabIndex={-1}
           >
-            <TableOfContents toc={toc} linkOnClick={handleClose} />
+            <TocLists toc={tableOfContents} linkOnClick={handleClose} />
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -84,5 +89,3 @@ const StyledDialog = styled(Dialog)`
     background-color: ${props => props.theme.search.colors.background};
   }
 `;
-
-export default SearchDialog;

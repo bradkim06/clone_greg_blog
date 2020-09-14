@@ -1,5 +1,6 @@
 import { createStore as reduxCreateStore, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
+import { PostTemplateProps, MdxType } from "../templates/PostTemplate";
 
 /*
  * action types
@@ -13,8 +14,7 @@ const SET_SCROLL_TO_TOP = "SET_SCROLL_TO_TOP";
 const SET_FONT_SIZE_INCREASE = "SET_FONT_SIZE_INCREASE";
 const SET_CATEGORY_FILTER = "SET_CATEGORY_FILTER";
 const SET_THEME_TOGGLE = "SET_THEME_TOGGLE";
-const SET_TABLE_OF_CONTESNTS = "SET_TABLE_OF_CONTESNTS";
-const SET_POST_TITLE = "SET_POST_TITLE";
+const SET_CURRENT_POST = "SET_CURRENT_POST";
 
 /*
  * action creators
@@ -52,12 +52,8 @@ export function setThemeToggle() {
   return { type: SET_THEME_TOGGLE };
 }
 
-export function setTableOfContents(val: any) {
-  return { type: SET_TABLE_OF_CONTESNTS, val };
-}
-
-export function setPostTitle(val: any) {
-  return { type: SET_POST_TITLE, val };
+export function setCurrentPost(val: PostTemplateProps) {
+  return { type: SET_CURRENT_POST, val };
 }
 
 /*
@@ -113,16 +109,10 @@ const reducer = (state: any, action: any) => {
         themeToggle: !state.themeToggle
       };
 
-    case SET_TABLE_OF_CONTESNTS:
+    case SET_CURRENT_POST:
       return {
         ...state,
-        tableOfContents: action.val
-      };
-
-    case SET_POST_TITLE:
-      return {
-        ...state,
-        postTitle: action.val
+        currentPost: action.val
       };
 
     default:
@@ -139,10 +129,7 @@ export type ReduxState = {
   fontSizeIncrease: number;
   categoryFilter: string;
   themeToggle: boolean;
-  tableOfContents: {
-    items?: object[];
-  };
-  postTitle: string;
+  currentPost: PostTemplateProps;
 };
 
 const initialState: ReduxState = {
@@ -154,8 +141,7 @@ const initialState: ReduxState = {
   fontSizeIncrease: 1,
   categoryFilter: "all posts",
   themeToggle: false,
-  tableOfContents: {},
-  postTitle: ""
+  currentPost: null
 };
 
 const createStore = () =>

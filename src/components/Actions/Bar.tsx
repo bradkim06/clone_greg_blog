@@ -102,8 +102,7 @@ const StyleActionsBar = styled.div`
   bottom: 0;
   display: flex;
   flex-direction: row;
-  // padding: 0 ${props => props.theme.bars.sizes.actionsBar}px;
-  padding: 0;
+  padding: 0 10px;
   justify-content: space-between;
   height: ${props => props.theme.bars.sizes.actionsBar}px;
   width: 100%;

@@ -69,11 +69,11 @@ const StyledListItem = styled.div`
     @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
       .moving-featured &,
       .is-aside & {
-        padding: 0.8rem 0.5rem 0 0.5rem;
-        text-align: center;
+        // padding: 0.8rem 0.5rem 0 0.5rem;
+        // text-align: center;
 
         h1 {
-          font-size: 0.9em;
+          font-size: 1em;
         }
 
         small {
