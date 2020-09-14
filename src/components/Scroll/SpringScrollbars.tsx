@@ -124,7 +124,9 @@ class SpringScrollbars extends Component<ScrollType> {
         renderThumbVertical={this.renderThumb}
         onUpdate={(this as any).handleUpdate}
       >
+        <div tabIndex="0">
         {children}
+        </div>
       </Scrollbars>
     );
   }
