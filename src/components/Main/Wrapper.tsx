@@ -30,11 +30,13 @@ const StyleArticle = styled.div<{ fontSize: number }>`
         ${({ fontSize }) => fontSize}
     );
   }
+
   background: ${({ theme }) => theme.main.colors.background};
   max-width: ${({ theme }) => theme.main.sizes.articleMaxWidth};
   margin: 0 auto;
   padding: calc(${({ theme }) => theme.bars.sizes.infoBar}px + 1.5rem) 1.5rem
     1.5rem 1.5rem;
+
   & strong,
   & b {
     letter-spacing: -0.02em;

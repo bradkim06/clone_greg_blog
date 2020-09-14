@@ -48,6 +48,7 @@ export default ({ post }: SeoProps) => {
           content={config.googleSiteVerification}
         />
       )}
+      <meta name="theme-color" content="#bae1ff" />
     </Helmet>
   );
 };
