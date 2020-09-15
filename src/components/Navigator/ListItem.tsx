@@ -13,6 +13,7 @@ interface ListItemProps {
         subTitle?: string;
         date?: string;
         category?: string;
+        cover?: any;
       };
     };
   };
@@ -23,7 +24,7 @@ interface ListItemProps {
 export default ({ post, categoryFilter, linkOnClick }: ListItemProps) => {
   const {
     excerpt,
-    frontmatter: { category, title, subTitle, date },
+    frontmatter: { category, title, subTitle, date, cover },
     fields: { slug }
   } = post.node;
 
@@ -47,6 +48,7 @@ export default ({ post, categoryFilter, linkOnClick }: ListItemProps) => {
           subTitle={subTitle}
           excerpt={excerpt}
           slug={slug}
+          cover={cover}
           linkOnClick={linkOnClick}
         />
       )}

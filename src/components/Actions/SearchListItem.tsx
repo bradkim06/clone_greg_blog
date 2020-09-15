@@ -1,13 +1,15 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import Link from "gatsby-link";
-import avatar from "../../../static/preview.png";
+import Img from "gatsby-image";
+import { useLogoQuery } from "../Query/LogoQuery";
 
 type SearchResultProps = {
   title: string;
   subTitle?: string;
   excerpt: string;
   slug: string;
+  cover: any;
   linkOnClick: Function;
 };
 
@@ -16,8 +18,11 @@ export default ({
   subTitle,
   excerpt,
   slug,
+  cover,
   linkOnClick
 }: SearchResultProps) => {
+  const { logo } = useLogoQuery();
+
   const titleName = JSON.stringify(title, null, 4).replace(/\"/g, "");
   const subTitleName = JSON.stringify(subTitle, null, 4).replace(/\"/g, "");
   const excerptData = JSON.stringify(excerpt, null, 4).replace(/\"/g, "");
@@ -30,7 +35,11 @@ export default ({
   return (
     <Link onClick={movePage} to={path}>
       <FlexChild>
-        <ImgSource src={avatar} />
+        {cover ? (
+          <ImgSource sizes={cover.childImageSharp.sizes} alt={title} />
+        ) : (
+          <ImgSource fluid={logo.childImageSharp.fluid} alt="Logo image" />
+        )}
         <TextFlex>
           <h1>{titleName}</h1>
           <Divider />
@@ -50,15 +59,15 @@ const Divider = styled.div`
   }
 `;
 
-const ImgSource = styled.img`
+const ImgSource = styled(Img)`
   max-width: 100%;
   max-height: 250px;
   border-radius: 20px;
 
   .moving-featured &,
   .is-aside & {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     margin-left: 1em;
   }
 `;

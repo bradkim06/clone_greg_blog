@@ -22,6 +22,13 @@ module.exports = {
       }
     },
     {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/content/images/`,
+        name: "images"
+      }
+    },
+    {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: config.manifestName,
@@ -56,12 +63,12 @@ module.exports = {
       options: {
         fonts: [
           {
-            family: `Open Sans`,
-            subsets: ["korean"]
+            family: `Open Sans`
+            // subsets: ["korean"]
           },
           {
-            family: `IBM Plex Serif`,
-            subsets: ["korean"]
+            family: `IBM Plex Serif`
+            // subsets: ["korean"]
           }
         ]
       }
@@ -88,8 +95,10 @@ module.exports = {
           {
             resolve: `gatsby-remark-images`,
             options: {
-              // maxWidth: 700,
-              backgroundColor: "transparent"
+              maxWidth: 1000,
+              backgroundColor: "transparent",
+              quality: 100,
+              loading: "auto"
             }
           },
           {
@@ -102,9 +111,21 @@ module.exports = {
           `gatsby-remark-prismjs`,
           `gatsby-remark-copy-linked-files`,
           `gatsby-remark-smartypants`
+        ],
+        plugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 1000,
+              backgroundColor: "transparent",
+              quality: 100,
+              loading: "auto"
+            }
+          }
         ]
       }
     },
+    `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-sitemap`,
     {

@@ -47,6 +47,14 @@ export const useLayoutQuery = () => {
                 subTitle
                 date
                 category
+                cover {
+                  publicURL
+                  childImageSharp {
+                    sizes(maxWidth: 300) {
+                      ...GatsbyImageSharpSizes
+                    }
+                  }
+                }
               }
             }
           }

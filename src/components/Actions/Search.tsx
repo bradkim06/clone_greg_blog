@@ -24,6 +24,7 @@ type allMdxProps = {
           title: string;
           subTitle?: string;
           category?: string;
+          cover?: any;
         };
       };
     }>;
@@ -112,6 +113,7 @@ const SearchDialog = () => {
                     subTitle={post.item.node.frontmatter.subTitle}
                     excerpt={post.item.node.excerpt}
                     slug={post.item.node.fields.slug}
+                    cover={post.item.node.frontmatter.cover}
                     linkOnClick={handleClose}
                   />
                 ))}
@@ -179,6 +181,14 @@ const useSearchData = () => {
                 title
                 subTitle
                 category
+                cover {
+                  publicURL
+                  childImageSharp {
+                    sizes(maxWidth: 300) {
+                      ...GatsbyImageSharpSizes
+                    }
+                  }
+                }
               }
             }
           }
