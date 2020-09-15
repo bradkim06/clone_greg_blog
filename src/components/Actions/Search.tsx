@@ -153,7 +153,7 @@ const GridWrapper = styled.ul`
   padding: 0;
   display: grid;
   align-items: stretch;
-  justify-items: stretch; /* adjusted */
+  justify-items: center; /* adjusted */
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-gap: 20px;
 `;

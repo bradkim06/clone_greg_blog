@@ -40,19 +40,17 @@ export default ({ post, categoryFilter, linkOnClick }: ListItemProps) => {
   }, [categoryFilter]);
 
   return (
-    <div
-      className={`${category}`}
-      style={{ display: `${hidden ? "none" : "block"}` }}
-      key={slug}
-    >
-      <SearchListItem
-        title={title}
-        subTitle={subTitle}
-        excerpt={excerpt}
-        slug={slug}
-        linkOnClick={linkOnClick}
-      />
-    </div>
+    <React.Fragment>
+      {hidden || (
+        <SearchListItem
+          title={title}
+          subTitle={subTitle}
+          excerpt={excerpt}
+          slug={slug}
+          linkOnClick={linkOnClick}
+        />
+      )}
+    </React.Fragment>
   );
 };
 

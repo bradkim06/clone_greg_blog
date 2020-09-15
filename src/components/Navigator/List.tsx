@@ -35,21 +35,19 @@ export default ({
             navigatorShape={navigatorShape}
             removeFilter={removeFilter}
           />
-          <PostList>
-            <Grow in={true} timeout={1500}>
-              <GridWrapper>
-                {posts.edges &&
-                  posts.edges.map((post, i) => (
-                    <ListItem
-                      key={i}
-                      post={post}
-                      linkOnClick={linkOnClick}
-                      categoryFilter={categoryFilter}
-                    />
-                  ))}
-              </GridWrapper>
-            </Grow>
-          </PostList>
+          <Grow in={true} timeout={1500}>
+            <GridWrapper>
+              {posts.edges &&
+                posts.edges.map((post, i) => (
+                  <ListItem
+                    key={i}
+                    post={post}
+                    linkOnClick={linkOnClick}
+                    categoryFilter={categoryFilter}
+                  />
+                ))}
+            </GridWrapper>
+          </Grow>
         </Inner>
       </SpringScrollbars>
     </Posts>
@@ -58,7 +56,8 @@ export default ({
 
 const GridWrapper = styled.ul`
   list-style: none;
-  padding: 0;
+  margin: 0;
+  padding: 1rem;
   display: grid;
   align-items: stretch;
   justify-items: stretch; /* adjusted */
@@ -101,15 +100,5 @@ const Inner = styled.div`
     .is-aside & {
       padding: 1rem 0.5rem 1rem 0.5rem;
     }
-  }
-`;
-
-const PostList = styled.ul`
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  .is-aside.closed &,
-  .moving-featured.closed & {
-    display: none;
   }
 `;
