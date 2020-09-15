@@ -110,6 +110,7 @@ const SearchDialog = () => {
                   <SearchListItem
                     title={post.item.node.frontmatter.title}
                     subTitle={post.item.node.frontmatter.subTitle}
+                    excerpt={post.item.node.excerpt}
                     slug={post.item.node.fields.slug}
                     linkOnClick={handleClose}
                   />
@@ -153,19 +154,8 @@ const GridWrapper = styled.ul`
   display: grid;
   align-items: stretch;
   justify-items: stretch; /* adjusted */
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-gap: 20px;
-
-  .moving-featured &,
-  .is-aside & {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    h1 {
-      font-size: 1em;
-    }
-    small {
-      font-size: 0.8em;
-    }
-  }
 `;
 
 const StyledDialog = styled(Dialog)`
@@ -181,6 +171,7 @@ const useSearchData = () => {
         allMdx {
           edges {
             node {
+              excerpt
               fields {
                 slug
               }

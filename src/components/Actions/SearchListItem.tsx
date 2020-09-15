@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import Link from "gatsby-link";
 import avatar from "../../../static/preview.png";
@@ -6,13 +6,21 @@ import avatar from "../../../static/preview.png";
 type SearchResultProps = {
   title: string;
   subTitle?: string;
+  excerpt: string;
   slug: string;
   linkOnClick: Function;
 };
 
-export default ({ title, subTitle, slug, linkOnClick }: SearchResultProps) => {
+export default ({
+  title,
+  subTitle,
+  excerpt,
+  slug,
+  linkOnClick
+}: SearchResultProps) => {
   const titleName = JSON.stringify(title, null, 4).replace(/\"/g, "");
   const subTitleName = JSON.stringify(subTitle, null, 4).replace(/\"/g, "");
+  const excerptData = JSON.stringify(excerpt, null, 4).replace(/\"/g, "");
   const path = JSON.stringify(slug, null, 4).replace(/\"/g, "");
 
   function movePage() {
@@ -26,7 +34,7 @@ export default ({ title, subTitle, slug, linkOnClick }: SearchResultProps) => {
         <TextFlex>
           <h1>{titleName}</h1>
           <Divider />
-          <small>{subTitleName !== "null" && subTitleName}</small>
+          <small>{subTitleName === "null" ? excerptData : subTitleName}</small>
         </TextFlex>
       </FlexChild>
     </Link>
@@ -38,17 +46,19 @@ const Divider = styled.div`
   margin: 0.2rem 0;
   .moving-featured &,
   .is-aside & {
-    margin: 0;
+    display: none;
   }
 `;
 
 const ImgSource = styled.img`
   max-width: 100%;
-  max-height: 350px;
+  max-height: 300px;
 
   .moving-featured &,
   .is-aside & {
-    display: none;
+    width: 30px;
+    height: 30px;
+    margin-left: 1em;
   }
 `;
 
@@ -57,6 +67,15 @@ const TextFlex = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  .moving-featured &,
+  .is-aside & {
+    padding: 0 0 0 1rem;
+    text-align: center;
+    small {
+      display: none;
+    }
+  }
 `;
 
 const FlexChild = styled.li`
@@ -79,7 +98,7 @@ const FlexChild = styled.li`
   }
 
   h1 {
-    font-size: 1.4em;
+    font-size: 1.6em;
     font-weight: 700;
   }
 
@@ -91,5 +110,7 @@ const FlexChild = styled.li`
   .moving-featured &,
   .is-aside & {
     padding: 0;
+    flex-direction: row;
+    align-items: center;
   }
 `;

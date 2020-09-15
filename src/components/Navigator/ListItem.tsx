@@ -22,6 +22,7 @@ interface ListItemProps {
 
 export default ({ post, categoryFilter, linkOnClick }: ListItemProps) => {
   const {
+    excerpt,
     frontmatter: { category, title, subTitle, date },
     fields: { slug }
   } = post.node;
@@ -47,6 +48,7 @@ export default ({ post, categoryFilter, linkOnClick }: ListItemProps) => {
       <SearchListItem
         title={title}
         subTitle={subTitle}
+        excerpt={excerpt}
         slug={slug}
         linkOnClick={linkOnClick}
       />
