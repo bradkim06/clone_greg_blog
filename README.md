@@ -2,20 +2,16 @@
 
 ## Introduce
 
-This blog is not my pure creation, but was created with reference to <a href="https://github.com/greglobinski/gatsby-starter-personal-blog"> greg lobinski's starter</a>. I like this starter so I wanted to use original, but it only work on Gatsby v1. So I port this starter to gatsby v2 with some changes. Thank greg lobinski for providing a beautiful design starter as open source.
+This blog is not my pure creation, but was created with reference to <a href="https://github.com/greglobinski/gatsby-starter-personal-blog"> greg lobinski's starter</a>. I like this starter. Thank greg lobinski for providing a beautiful design starter as open source.
 
 ## The difference between Original and Custom
 
-This does not mean that the changes are superior to the original version. it is just a change that reflects my taste. choose one of the two.
-
 |                         | Original  |      Custom      |
 | :---------------------: | :-------: | :--------------: |
-|   **Gatsby Version**    |    V1     |        V2        |
 |      **Markdown**       |    .md    |    .md & .mdx    |
 |        **style**        | react-jss | styled component |
 | **component file type** |    js     |    TypeScript    |
 |     **Search Tool**     |  Algoria  |     fuse.js      |
-|     **Search Page**     | URL Page  | Material Dialog  |
 |  **FullScreen Button**  |     O     |        X         |
 |    **Theme Toggle**     |     X     |        O         |
 |    **Post Comment**     | Facebook  |    Utterance     |

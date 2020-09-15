@@ -52,7 +52,8 @@ const Divider = styled.div`
 
 const ImgSource = styled.img`
   max-width: 100%;
-  max-height: 300px;
+  max-height: 250px;
+  border-radius: 20px;
 
   .moving-featured &,
   .is-aside & {

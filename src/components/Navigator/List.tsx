@@ -57,7 +57,7 @@ export default ({
 const GridWrapper = styled.ul`
   list-style: none;
   margin: 0;
-  padding: 1rem;
+  padding: 0 1rem;
   display: grid;
   align-items: stretch;
   justify-items: stretch; /* adjusted */
