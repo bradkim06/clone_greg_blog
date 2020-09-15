@@ -68,7 +68,14 @@ const ImgFlex = styled.div`
   margin-left: 2%;
   margin-right: 2%;
   width: 20%;
-  max-width: 100px;
+  max-width: 90px;
+
+  @media (min-width: ${({ theme }) => theme.mediaQueryTresholds.L}px) {
+    .moving-featured &,
+    .is-aside & {
+      width: 30px;
+    }
+  }
 `;
 
 const TextFlex = styled.div`
@@ -78,6 +85,7 @@ const TextFlex = styled.div`
 const FlexChild = styled.li`
   justify-content: center;
   width: 90%;
+  min-height: 100px;
   flex: auto;
   display: flex;
   word-break: break-all;
@@ -111,6 +119,7 @@ const FlexChild = styled.li`
   }
 
   @media (max-width: ${({ theme }) => theme.mediaQueryTresholds.L}px) {
+    min-height: 90px;
     h1 {
       font-size: 1.3em;
     }
@@ -121,6 +130,7 @@ const FlexChild = styled.li`
   }
 
   @media (max-width: ${({ theme }) => theme.mediaQueryTresholds.M}px) {
+    min-height: 80px;
     h1 {
       font-size: 1em;
     }
@@ -130,18 +140,17 @@ const FlexChild = styled.li`
     }
   }
 
-  @media (min-width: ${({ theme }) => theme.mediaQueryTresholds.L}px) {
-    .moving-featured &,
-    .is-aside & {
-      padding: 0.7rem 0.5rem 0.5rem 0.5rem;
+  .moving-featured &,
+  .is-aside & {
+    min-height: auto;
+    padding: 0.7rem 0.5rem 0.5rem 0.5rem;
 
-      h1 {
-        font-size: 1em;
-      }
+    h1 {
+      font-size: 1em;
+    }
 
-      small {
-        display: none;
-      }
+    small {
+      display: none;
     }
   }
 `;
