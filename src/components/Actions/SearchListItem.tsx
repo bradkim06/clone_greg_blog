@@ -65,8 +65,7 @@ const SearchWrapper = styled.ul`
 `;
 
 const ImgFlex = styled.div`
-  margin-left: 2%;
-  margin-right: 2%;
+  text-align: center;
   width: 20%;
   max-width: 90px;
 
@@ -80,6 +79,7 @@ const ImgFlex = styled.div`
 
 const TextFlex = styled.div`
   width: 80%;
+  text-align: center;
 `;
 
 const FlexChild = styled.li`
