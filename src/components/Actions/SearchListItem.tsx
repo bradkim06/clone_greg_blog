@@ -1,8 +1,7 @@
 import React from "react";
-import Grow from "@material-ui/core/Grow";
 import styled from "styled-components";
 import Link from "gatsby-link";
-import avatar from "../../images/jpg/test.png";
+import avatar from "../../../static/preview.png";
 
 type SearchResultProps = {
   title: string;
@@ -21,81 +20,53 @@ export default ({ title, subTitle, slug, linkOnClick }: SearchResultProps) => {
   }
 
   return (
-    <Grow in={true} timeout={500}>
-      <Link onClick={movePage} to={path}>
-        <SearchWrapper>
-          <FlexChild>
-            <ImgFlex>
-              <ImgSource src={avatar} />
-            </ImgFlex>
-            <TextFlex>
-              <h1>{titleName}</h1>
-              <Divider />
-              <small>{subTitleName !== "null" && subTitleName}</small>
-            </TextFlex>
-          </FlexChild>
-        </SearchWrapper>
-      </Link>
-    </Grow>
+    <Link onClick={movePage} to={path}>
+      <FlexChild>
+        <ImgSource src={avatar} />
+        <TextFlex>
+          <h1>{titleName}</h1>
+          <Divider />
+          <small>{subTitleName !== "null" && subTitleName}</small>
+        </TextFlex>
+      </FlexChild>
+    </Link>
   );
 };
 
 const Divider = styled.div`
   aspect-ratio: 16/9;
-  margin: 0.5rem 0;
-
-  @media (max-width: ${({ theme }) => theme.mediaQueryTresholds.M}px) {
-    margin: 0.25rem 0;
+  margin: 0.2rem 0;
+  .moving-featured &,
+  .is-aside & {
+    margin: 0;
   }
 `;
 
 const ImgSource = styled.img`
-  overflow: hidden;
-  width: 90%;
-  height: 90%;
-  max-width: 90px;
-  max-height: 90px;
-`;
+  max-width: 100%;
+  max-height: 250px;
 
-const SearchWrapper = styled.ul`
-  list-style: none;
-  padding: 0;
-  display: grid;
-  place-items: center;
-`;
-
-const ImgFlex = styled.div`
-  text-align: center;
-  width: 20%;
-  max-width: 90px;
-
-  @media (min-width: ${({ theme }) => theme.mediaQueryTresholds.L}px) {
-    .moving-featured &,
-    .is-aside & {
-      width: 30px;
-    }
+  .moving-featured &,
+  .is-aside & {
+    display: none;
   }
 `;
 
 const TextFlex = styled.div`
-  width: 80%;
-  text-align: center;
+  padding: 0 10px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 
 const FlexChild = styled.li`
-  justify-content: center;
-  width: 90%;
-  min-height: 100px;
-  flex: auto;
+  padding: 1rem;
+  height: 100%;
+  width: 100%;
   display: flex;
-  word-break: break-all;
-  padding: 0.5rem;
-  place-items: center;
-
-  margin: 0 0 0.7em 0;
-
+  flex-direction: column;
   color: ${({ theme }) => theme.navigator.colors.postsListItemLink};
-  border-radius: 40px;
+  border-radius: 20px;
   background-color: ${({ theme }) => theme.search.colors.listBackground};
 
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
@@ -107,50 +78,8 @@ const FlexChild = styled.li`
     background-color: ${({ theme }) => theme.search.colors.hoverBackground};
   }
 
-  h1 {
-    margin: 0;
-    font-weight: 700;
-    font-size: 1.6em;
-  }
-
-  small {
-    font-weight: 400;
-    font-size: 1em;
-  }
-
-  @media (max-width: ${({ theme }) => theme.mediaQueryTresholds.L}px) {
-    min-height: 90px;
-    h1 {
-      font-size: 1.3em;
-    }
-
-    small {
-      font-size: 0.8em;
-    }
-  }
-
-  @media (max-width: ${({ theme }) => theme.mediaQueryTresholds.M}px) {
-    min-height: 80px;
-    h1 {
-      font-size: 1em;
-    }
-
-    small {
-      font-size: 0.6em;
-    }
-  }
-
   .moving-featured &,
   .is-aside & {
-    min-height: auto;
-    padding: 0.7rem 0.5rem 0.5rem 0.5rem;
-
-    h1 {
-      font-size: 1em;
-    }
-
-    small {
-      display: none;
-    }
+    padding: 0;
   }
 `;

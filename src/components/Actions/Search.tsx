@@ -104,15 +104,17 @@ const SearchDialog = () => {
               onChange={onSearch}
               autoComplete="off"
             />
-            {results &&
-              results.map((post: any) => (
-                <SearchListItem
-                  title={post.item.node.frontmatter.title}
-                  subTitle={post.item.node.frontmatter.subTitle}
-                  slug={post.item.node.fields.slug}
-                  linkOnClick={handleClose}
-                />
-              ))}
+            <GridWrapper>
+              {results &&
+                results.map((post: any) => (
+                  <SearchListItem
+                    title={post.item.node.frontmatter.title}
+                    subTitle={post.item.node.frontmatter.subTitle}
+                    slug={post.item.node.fields.slug}
+                    linkOnClick={handleClose}
+                  />
+                ))}
+            </GridWrapper>
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -144,6 +146,27 @@ const options = {
     "node.frontmatter.category"
   ]
 };
+
+const GridWrapper = styled.ul`
+  list-style: none;
+  padding: 0;
+  display: grid;
+  align-items: stretch;
+  justify-items: stretch; /* adjusted */
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-gap: 20px;
+
+  .moving-featured &,
+  .is-aside & {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    h1 {
+      font-size: 1em;
+    }
+    small {
+      font-size: 0.8em;
+    }
+  }
+`;
 
 const StyledDialog = styled(Dialog)`
   .MuiDialog-paperFullWidth {

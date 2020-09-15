@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { PostsProps } from "../Query/LayoutQuery";
+import Grow from "@material-ui/core/Grow";
 
 import ListHeader from "./ListHeader";
 import ListItem from "./ListItem";
@@ -35,21 +36,46 @@ export default ({
             removeFilter={removeFilter}
           />
           <PostList>
-            {posts.edges &&
-              posts.edges.map((post, i) => (
-                <ListItem
-                  key={i}
-                  post={post}
-                  linkOnClick={linkOnClick}
-                  categoryFilter={categoryFilter}
-                />
-              ))}
+            <Grow in={true} timeout={1500}>
+              <GridWrapper>
+                {posts.edges &&
+                  posts.edges.map((post, i) => (
+                    <ListItem
+                      key={i}
+                      post={post}
+                      linkOnClick={linkOnClick}
+                      categoryFilter={categoryFilter}
+                    />
+                  ))}
+              </GridWrapper>
+            </Grow>
           </PostList>
         </Inner>
       </SpringScrollbars>
     </Posts>
   );
 };
+
+const GridWrapper = styled.ul`
+  list-style: none;
+  padding: 0;
+  display: grid;
+  align-items: stretch;
+  justify-items: stretch; /* adjusted */
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-gap: 20px;
+
+  .moving-featured &,
+  .is-aside & {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    h1 {
+      font-size: 1em;
+    }
+    small {
+      font-size: 0.8em;
+    }
+  }
+`;
 
 const Posts = styled.div`
   position: absolute;
