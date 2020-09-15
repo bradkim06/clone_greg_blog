@@ -51,26 +51,10 @@ const Divider = styled.div`
 
 const ImgSource = styled.img`
   overflow: hidden;
-  width: 80%;
-  height: 80%;
-  // width: 60px;
-  // height: 60px;
-  //
-  // @media (min-width: ${({ theme }) => theme.mediaQueryTresholds.M}px) {
-  //   width: 70px;
-  //   height: 70px;
-  // }
-  //
-  // @media (min-width: ${({ theme }) => theme.mediaQueryTresholds.L}px) {
-  //   width: 80px;
-  //   height: 80px;
-  //
-  //   .moving-featured &,
-  //   .is-aside & {
-  //     width: 30px;
-  //     height: 30px;
-  //   }
-  // }
+  width: 90%;
+  height: 90%;
+  max-width: 90px;
+  max-height: 90px;
 `;
 
 const SearchWrapper = styled.ul`
@@ -81,34 +65,14 @@ const SearchWrapper = styled.ul`
 `;
 
 const ImgFlex = styled.div`
-  margin-left: 3%;
+  margin-left: 2%;
+  margin-right: 2%;
   width: 20%;
-  @media (min-width: ${({ theme }) => theme.mediaQueryTresholds.M}px) {
-    width: 15%;
-  }
-
-  @media (min-width: ${({ theme }) => theme.mediaQueryTresholds.L}px) {
-    width: 10%;
-    .moving-featured &,
-    .is-aside & {
-      width: 20%;
-    }
-  }
+  max-width: 100px;
 `;
 
 const TextFlex = styled.div`
   width: 80%;
-  @media (min-width: ${({ theme }) => theme.mediaQueryTresholds.M}px) {
-    width: 85%;
-  }
-
-  @media (min-width: ${({ theme }) => theme.mediaQueryTresholds.L}px) {
-    width: 90%;
-    .moving-featured &,
-    .is-aside & {
-      width: 80%;
-    }
-  }
 `;
 
 const FlexChild = styled.li`
@@ -117,13 +81,13 @@ const FlexChild = styled.li`
   flex: auto;
   display: flex;
   word-break: break-all;
-  padding: 1rem;
+  padding: 0.5rem;
   place-items: center;
 
   margin: 0 0 0.7em 0;
 
   color: ${({ theme }) => theme.navigator.colors.postsListItemLink};
-  border-radius: 30px;
+  border-radius: 40px;
   background-color: ${({ theme }) => theme.search.colors.listBackground};
 
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);

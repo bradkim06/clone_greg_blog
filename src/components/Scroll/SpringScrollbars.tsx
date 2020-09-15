@@ -3,7 +3,7 @@ import { Scrollbars } from "react-custom-scrollbars";
 import { SpringSystem, util, Spring } from "rebound";
 import { forceCheck } from "react-lazyload";
 import { connect } from "react-redux";
-import { withTheme } from "styled-components";
+import styled, { withTheme } from "styled-components";
 
 import { setScrollToTop, ReduxState } from "../../state/store";
 
@@ -124,13 +124,17 @@ class SpringScrollbars extends Component<ScrollType> {
         renderThumbVertical={this.renderThumb}
         onUpdate={(this as any).handleUpdate}
       >
-        <div tabIndex="0">
-        {children}
-        </div>
+        <Focus tabIndex="0">{children}</Focus>
       </Scrollbars>
     );
   }
 }
+
+const Focus = styled.div`
+  &:focus {
+    outline: none;
+  }
+`;
 
 const mapStateToProps = (state: ReduxState) => {
   return {
