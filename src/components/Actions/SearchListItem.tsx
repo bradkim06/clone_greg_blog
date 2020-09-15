@@ -44,7 +44,7 @@ const Divider = styled.div`
 
 const ImgSource = styled.img`
   max-width: 100%;
-  max-height: 250px;
+  max-height: 350px;
 
   .moving-featured &,
   .is-aside & {
@@ -76,6 +76,16 @@ const FlexChild = styled.li`
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
     color: ${({ theme }) => theme.navigator.colors.postsListItemLinkHover};
     background-color: ${({ theme }) => theme.search.colors.hoverBackground};
+  }
+
+  h1 {
+    font-size: 1.4em;
+    font-weight: 700;
+  }
+
+  small {
+    font-size: 1em;
+    font-weight: 400;
   }
 
   .moving-featured &,

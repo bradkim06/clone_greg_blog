@@ -82,7 +82,7 @@ const SearchDialog = () => {
         scroll={scroll}
         aria-labelledby="scroll-dialog-title"
         aria-describedby="scroll-dialog-description"
-        maxWidth="lg"
+        maxWidth="md"
         fullWidth
       >
         <DialogTitle id="scroll-dialog-title">Search by fuse.js</DialogTitle>
