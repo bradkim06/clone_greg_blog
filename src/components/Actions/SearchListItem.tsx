@@ -51,26 +51,26 @@ const Divider = styled.div`
 
 const ImgSource = styled.img`
   overflow: hidden;
-  // width: 80%;
-  // height: 80%;
-  width: 60px;
-  height: 60px;
-
-  @media (min-width: ${({ theme }) => theme.mediaQueryTresholds.M}px) {
-    width: 80px;
-    height: 80px;
-  }
-
-  @media (min-width: ${({ theme }) => theme.mediaQueryTresholds.L}px) {
-    width: 90px;
-    height: 90px;
-
-    .moving-featured &,
-    .is-aside & {
-      width: 30px;
-      height: 30px;
-    }
-  }
+  width: 80%;
+  height: 80%;
+  // width: 60px;
+  // height: 60px;
+  //
+  // @media (min-width: ${({ theme }) => theme.mediaQueryTresholds.M}px) {
+  //   width: 70px;
+  //   height: 70px;
+  // }
+  //
+  // @media (min-width: ${({ theme }) => theme.mediaQueryTresholds.L}px) {
+  //   width: 80px;
+  //   height: 80px;
+  //
+  //   .moving-featured &,
+  //   .is-aside & {
+  //     width: 30px;
+  //     height: 30px;
+  //   }
+  // }
 `;
 
 const SearchWrapper = styled.ul`
@@ -82,11 +82,33 @@ const SearchWrapper = styled.ul`
 
 const ImgFlex = styled.div`
   margin-left: 3%;
-  width: 15%;
+  width: 20%;
+  @media (min-width: ${({ theme }) => theme.mediaQueryTresholds.M}px) {
+    width: 15%;
+  }
+
+  @media (min-width: ${({ theme }) => theme.mediaQueryTresholds.L}px) {
+    width: 10%;
+    .moving-featured &,
+    .is-aside & {
+      width: 20%;
+    }
+  }
 `;
 
 const TextFlex = styled.div`
-  width: 85%;
+  width: 80%;
+  @media (min-width: ${({ theme }) => theme.mediaQueryTresholds.M}px) {
+    width: 85%;
+  }
+
+  @media (min-width: ${({ theme }) => theme.mediaQueryTresholds.L}px) {
+    width: 90%;
+    .moving-featured &,
+    .is-aside & {
+      width: 80%;
+    }
+  }
 `;
 
 const FlexChild = styled.li`
