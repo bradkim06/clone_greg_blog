@@ -61,12 +61,12 @@ const GridWrapper = styled.ul`
   display: grid;
   align-items: stretch;
   justify-items: stretch; /* adjusted */
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-gap: 20px;
 
   .moving-featured &,
   .is-aside & {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    // grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     h1 {
       font-size: 1em;
     }
