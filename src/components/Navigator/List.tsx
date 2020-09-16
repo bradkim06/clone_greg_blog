@@ -64,7 +64,7 @@ export const GridWrapper = styled.ul`
 
   @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
     padding: 0 1rem;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 
     .moving-featured &,
     .is-aside & {

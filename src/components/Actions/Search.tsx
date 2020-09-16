@@ -158,6 +158,13 @@ const StyledDialog = styled(Dialog)`
   .MuiDialog-paperFullWidth {
     background-color: ${props => props.theme.search.colors.background};
   }
+  .MuiDialogContent-root {
+    @media (max-width: 450px) {
+      img {
+        display: none;
+      }
+    }
+  }
 `;
 
 const useSearchData = () => {

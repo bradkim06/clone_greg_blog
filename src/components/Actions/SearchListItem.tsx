@@ -57,14 +57,14 @@ export default ({
 
 const Divider = styled.div`
   aspect-ratio: 16/9;
-  margin: 0.2em 0;
+  margin: 0.2rem 0;
   .moving-featured &,
   .is-aside & {
     display: none;
   }
 
   @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
-    margin: 0.2em 0;
+    margin: 0.2rem 0;
   }
 `;
 
@@ -77,7 +77,6 @@ const ImgSource = styled.img`
   .is-aside & {
     width: 30px;
     height: 30px;
-    margin: 0;
   }
 
   @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
@@ -86,20 +85,19 @@ const ImgSource = styled.img`
   }
 
   @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
-    width: 80%;
+    width: 100%;
     height: 150px;
-    margin: 1em 0;
   }
 `;
 
 const TextFlex = styled.div`
-  padding: 0 0 0 1em;
+  padding: 0 0 0 1rem;
   display: flex;
   flex-direction: column;
 
   .moving-featured &,
   .is-aside & {
-    padding: 0 0 0 1em;
+    padding: 0 0 0 1rem;
     text-align: center;
     small {
       display: none;
@@ -108,29 +106,23 @@ const TextFlex = styled.div`
 
   h1 {
     margin: 0;
-    font-size: 1em;
+    font-size: 1rem;
     font-weight: 600;
   }
 
   small {
-    font-size: 0.8em;
+    font-size: 0.8rem;
     font-weight: 400;
-  }
-
-  @media (max-width: 450px) {
-    small {
-      // display: none;
-    }
   }
 
   @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
     h1 {
-      font-size: 1.2em;
+      font-size: 1.2rem;
       font-weight: 600;
     }
 
     small {
-      font-size: 0.9em;
+      font-size: 0.9rem;
       font-weight: 400;
     }
   }
@@ -139,27 +131,27 @@ const TextFlex = styled.div`
     padding: 0;
 
     h1 {
-      margin: 0.5em 0;
-      font-size: 1.4em;
+      margin: 0.5rem 0;
+      font-size: 1.4rem;
       font-weight: 600;
     }
 
     small {
-      font-size: 1em;
+      font-size: 1rem;
       font-weight: 400;
     }
 
     .moving-featured &,
     .is-aside & {
       h1 {
-        font-size: 1em;
+        font-size: 1rem;
       }
     }
   }
 `;
 
 const FlexChild = styled.li`
-  padding: 0.7em;
+  padding: 0.7rem;
   height: 100%;
   width: 100%;
   display: flex;
@@ -180,16 +172,16 @@ const FlexChild = styled.li`
 
   .moving-featured &,
   .is-aside & {
-    padding: 0.5em 1em;
+    padding: 0.5rem 1rem;
     flex-direction: row;
     align-items: center;
   }
   @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
-    padding: 1em;
+    padding: 1rem;
   }
 
   @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
-    padding: 1em;
+    padding: 1rem;
     flex-direction: column;
     align-items: center;
   }
