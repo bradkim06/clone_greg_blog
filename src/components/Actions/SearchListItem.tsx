@@ -37,9 +37,7 @@ export default ({
       <FlexChild>
         {cover ? (
           <ImgSource sizes={cover.childImageSharp.sizes} alt={title} />
-        ) : (
-          <ImgSource fluid={logo.childImageSharp.fluid} alt="Logo image" />
-        )}
+        ) : null}
         <TextFlex>
           <h1>{titleName}</h1>
           <Divider />
@@ -60,23 +58,39 @@ const Divider = styled.div`
 `;
 
 const ImgSource = styled(Img)`
-  max-width: 100%;
-  max-height: 250px;
   border-radius: 20px;
+  @media (max-width: ${props => props.theme.mediaQueryTresholds.M}px) {
+    width: 80px;
+    height: 80px;
+  }
 
   .moving-featured &,
   .is-aside & {
     width: 40px;
     height: 40px;
-    margin-left: 1em;
+  }
+  @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
+    width: 100px;
+    height: 100px;
+  }
+
+  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
+    // width: 150px;
+    // height: 150px;
+    width: 100%;
+    height: 100%;
+    max-width: 300px;
+    max-height: 300px;
   }
 `;
 
 const TextFlex = styled.div`
-  padding: 0 10px 10px;
+  padding: 0 1rem 1rem 1rem;
   display: flex;
+  // word-break: break-all;
   flex-direction: column;
-  justify-content: center;
+  // justify-content: center;
+  // align-items: center;
 
   .moving-featured &,
   .is-aside & {
@@ -86,6 +100,9 @@ const TextFlex = styled.div`
       display: none;
     }
   }
+
+  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
+  }
 `;
 
 const FlexChild = styled.li`
@@ -93,7 +110,7 @@ const FlexChild = styled.li`
   height: 100%;
   width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   color: ${({ theme }) => theme.navigator.colors.postsListItemLink};
   border-radius: 20px;
   background-color: ${({ theme }) => theme.search.colors.listBackground};
@@ -108,12 +125,12 @@ const FlexChild = styled.li`
   }
 
   h1 {
-    font-size: 1.6em;
+    font-size: 1.3em;
     font-weight: 700;
   }
 
   small {
-    font-size: 1em;
+    font-size: 0.9em;
     font-weight: 400;
   }
 
@@ -121,6 +138,16 @@ const FlexChild = styled.li`
   .is-aside & {
     padding: 0;
     flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @media (max-width: ${props => props.theme.mediaQueryTresholds.L}px) {
+    align-items: center;
+  }
+
+  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
+    flex-direction: column;
     align-items: center;
   }
 `;

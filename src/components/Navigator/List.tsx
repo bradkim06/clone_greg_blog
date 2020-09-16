@@ -59,19 +59,20 @@ const GridWrapper = styled.ul`
   margin: 0;
   padding: 0 1rem;
   display: grid;
-  align-items: stretch;
-  justify-items: stretch; /* adjusted */
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  grid-gap: 20px;
+  grid-gap: 1rem;
 
-  .moving-featured &,
-  .is-aside & {
-    // grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    h1 {
-      font-size: 1em;
-    }
-    small {
-      font-size: 0.8em;
+  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 3fr));
+
+    .moving-featured &,
+    .is-aside & {
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      h1 {
+        font-size: 1em;
+      }
+      small {
+        font-size: 0.8em;
+      }
     }
   }
 `;

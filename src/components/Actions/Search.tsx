@@ -151,13 +151,23 @@ const options = {
 };
 
 const GridWrapper = styled.ul`
+  // list-style: none;
+  // padding: 0;
+  // display: grid;
+  // align-items: stretch;
+  // justify-items: center; [> adjusted <]
+  // grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  // grid-gap: 20px;
+
   list-style: none;
-  padding: 0;
+  margin: 0;
+  padding: 0 1rem;
   display: grid;
-  align-items: stretch;
-  justify-items: center; /* adjusted */
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  grid-gap: 20px;
+  grid-gap: 1rem;
+
+  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 3fr));
+  }
 `;
 
 const StyledDialog = styled(Dialog)`
