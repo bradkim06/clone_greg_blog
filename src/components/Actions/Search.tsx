@@ -106,7 +106,7 @@ const SearchDialog = () => {
               onChange={onSearch}
               autoComplete="off"
             />
-            <Grow in={true} timeout={1500}>
+            <Grow in={true} timeout={1000}>
               <GridWrapper>
                 {results &&
                   results.map((post: any) => (

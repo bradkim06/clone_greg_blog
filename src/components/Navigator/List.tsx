@@ -35,7 +35,7 @@ export default ({
             navigatorShape={navigatorShape}
             removeFilter={removeFilter}
           />
-          <Grow in={true} timeout={1500}>
+          <Grow in={true} timeout={1000}>
             <GridWrapper>
               {posts.edges &&
                 posts.edges.map((post, i) => (
@@ -72,6 +72,11 @@ const GridWrapper = styled.ul`
       h1 {
         font-size: 1em;
       }
+    }
+
+    .is-aside.closed &,
+    .moving-featured.closed & {
+      display: none;
     }
   }
 `;
