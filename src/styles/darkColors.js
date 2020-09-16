@@ -1,12 +1,12 @@
 module.exports = {
-  background: "#222222",
+  background: "#121212",
   white: "#f5f5f5",
   accent: "#5ac18e",
-  bright: "#b6b6b6",
+  bright: "#a0a0a0",
   dark: "#333333",
   gray: "#555555",
   lightGray: "#aaaaaa",
-  superLightGray: "#c2c2c2",
+  superLightGray: "#c0c0c0",
 
   palette: {
     second: "#baffc9",

@@ -64,7 +64,9 @@ export default () => {
         maxWidth="sm"
         fullWidth
       >
-        <DialogTitle id="scroll-dialog-title">{title}</DialogTitle>
+        <TocTitle id="scroll-dialog-title" disableTypography>
+          {title}
+        </TocTitle>
         <DialogContent dividers={scroll === "paper"}>
           <DialogContentText
             id="scroll-dialog-description"
@@ -83,6 +85,13 @@ export default () => {
     </div>
   );
 };
+
+const TocTitle = styled(DialogTitle)`
+  font-size: 2em;
+  font-weight: 600;
+  text-align: center;
+  color: ${({ theme }) => theme.base.colors.palette.second};
+`;
 
 const StyledDialog = styled(Dialog)`
   .MuiDialog-paperFullWidth {

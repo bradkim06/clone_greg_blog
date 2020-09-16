@@ -137,7 +137,7 @@ export const lightTheme = {
   search: {
     colors: {
       background: lightColors.background,
-      listBackground: Color(lightColors.background).darken(0.02).string(),
+      listBackground: Color(lightColors.background).darken(0.04).string(),
       hoverBackground: lightColors.background
     }
   },

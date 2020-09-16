@@ -14,7 +14,8 @@ export const darkTheme = {
       linkHover: Color(darkColors.accent).lighten(0.3).string(),
       accent: darkColors.accent,
       lines: darkColors.gray,
-      brightText: darkColors.superLightGray
+      brightText: darkColors.superLightGray,
+      palette: darkColors.palette
     },
     sizes: {
       linesMargin: "20px"
@@ -140,8 +141,8 @@ export const darkTheme = {
   search: {
     colors: {
       background: darkColors.background,
-      listBackground: Color(darkColors.background).lighten(0.5).string(),
-      hoverBackground: Color(darkColors.background).lighten(1).string()
+      listBackground: Color(darkColors.background).lighten(1).string(),
+      hoverBackground: Color(darkColors.background).lighten(2).string()
     }
   },
   mediaQueryTresholds: {
