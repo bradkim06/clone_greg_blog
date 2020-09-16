@@ -1,4 +1,5 @@
 import { useStaticQuery, graphql } from "gatsby";
+import { FluidObject } from "gatsby-image";
 
 export interface PostsProps {
   totalCount: number;
@@ -14,6 +15,11 @@ export interface PostsProps {
         subTitle?: string;
         date?: string;
         category?: string;
+        cover: {
+          childImageSharp: {
+            fluid: FluidObject;
+          };
+        };
       };
     };
   }>;
@@ -50,7 +56,7 @@ export const useLayoutQuery = () => {
                 cover {
                   publicURL
                   childImageSharp {
-                    fluid(maxWidth: 200, maxHeight: 150) {
+                    fluid(quality: 100, srcSetBreakpoints: [30, 60, 80, 200]) {
                       ...GatsbyImageSharpFluid
                     }
                   }

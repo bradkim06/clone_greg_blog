@@ -21,7 +21,7 @@ export const darkTheme = {
     },
     fonts: {
       unstyledFamily: `Arial`,
-      styledFamily: "Fira Code",
+      styledFamily: "Helvetica",
       styledFonts: "300,400,600"
     }
   },

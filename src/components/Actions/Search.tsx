@@ -13,6 +13,7 @@ import Fuse from "fuse.js";
 import SearchListItem from "./SearchListItem";
 import styled from "styled-components";
 import Grow from "@material-ui/core/Grow";
+import { GridWrapper } from "../Navigator/List";
 
 type allMdxProps = {
   allMdx: {
@@ -84,7 +85,7 @@ const SearchDialog = () => {
         scroll={scroll}
         aria-labelledby="scroll-dialog-title"
         aria-describedby="scroll-dialog-description"
-        maxWidth="md"
+        maxWidth="lg"
         fullWidth
       >
         <DialogTitle id="scroll-dialog-title">Search by fuse.js</DialogTitle>
@@ -153,18 +154,6 @@ const options = {
   ]
 };
 
-const GridWrapper = styled.ul`
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-gap: 1rem;
-
-  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  }
-`;
-
 const StyledDialog = styled(Dialog)`
   .MuiDialog-paperFullWidth {
     background-color: ${props => props.theme.search.colors.background};
@@ -189,7 +178,7 @@ const useSearchData = () => {
                 cover {
                   publicURL
                   childImageSharp {
-                    fluid(maxWidth: 200, maxHeight: 150) {
+                    fluid(quality: 100, srcSetBreakpoints: [30, 60, 80, 200]) {
                       ...GatsbyImageSharpFluid
                     }
                   }

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Link from "gatsby-link";
-import Img from "gatsby-image";
+import { FluidObject } from "gatsby-image";
 import { useLogoQuery } from "../Query/LogoQuery";
 
 type SearchResultProps = {
@@ -9,7 +9,11 @@ type SearchResultProps = {
   subTitle?: string;
   excerpt: string;
   slug: string;
-  cover: any;
+  cover: {
+    childImageSharp: {
+      fluid: FluidObject;
+    };
+  };
   linkOnClick: Function;
 };
 
@@ -25,7 +29,8 @@ export default ({
 
   const titleName = JSON.stringify(title, null, 4).replace(/\"/g, "");
   const subTitleName = JSON.stringify(subTitle, null, 4).replace(/\"/g, "");
-  const excerptData = JSON.stringify(excerpt, null, 4).replace(/\"/g, "");
+  const excerptData =
+    JSON.stringify(excerpt, null, 4).replace(/\"/g, "").substr(0, 30) + "...";
   const path = JSON.stringify(slug, null, 4).replace(/\"/g, "");
 
   function movePage() {
@@ -36,8 +41,10 @@ export default ({
     <Link onClick={movePage} to={path}>
       <FlexChild>
         {cover ? (
-          <ImgSource fluid={cover.childImageSharp.fluid} alt={title} />
-        ) : null}
+          <ImgSource src={cover.childImageSharp.fluid.src} alt={title} />
+        ) : (
+          <ImgSource src={logo.childImageSharp.fluid.src} alt={title} />
+        )}
         <TextFlex>
           <h1>{titleName}</h1>
           <Divider />
@@ -50,47 +57,49 @@ export default ({
 
 const Divider = styled.div`
   aspect-ratio: 16/9;
-  margin: 0.2rem 0;
+  margin: 0.2em 0;
   .moving-featured &,
   .is-aside & {
     display: none;
   }
 
   @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
-    margin: 0.2rem 0;
+    margin: 0.2em 0;
   }
 `;
 
-const ImgSource = styled(Img)`
+const ImgSource = styled.img`
   border-radius: 10px;
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
 
   .moving-featured &,
   .is-aside & {
-    width: 35px;
-    height: 35px;
+    width: 30px;
+    height: 30px;
+    margin: 0;
   }
 
   @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
-    width: 70px;
-    height: 70px;
+    width: 80px;
+    height: 80px;
   }
 
   @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
-    width: 100%;
-    height: 100%;
+    width: 80%;
+    height: 150px;
+    margin: 1em 0;
   }
 `;
 
 const TextFlex = styled.div`
-  padding: 0 0 0 1rem;
+  padding: 0 0 0 1em;
   display: flex;
   flex-direction: column;
 
   .moving-featured &,
   .is-aside & {
-    padding: 0 0 0 1rem;
+    padding: 0 0 0 1em;
     text-align: center;
     small {
       display: none;
@@ -100,7 +109,7 @@ const TextFlex = styled.div`
   h1 {
     margin: 0;
     font-size: 1em;
-    font-weight: 700;
+    font-weight: 600;
   }
 
   small {
@@ -108,10 +117,16 @@ const TextFlex = styled.div`
     font-weight: 400;
   }
 
+  @media (max-width: 450px) {
+    small {
+      // display: none;
+    }
+  }
+
   @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
     h1 {
       font-size: 1.2em;
-      font-weight: 700;
+      font-weight: 600;
     }
 
     small {
@@ -124,20 +139,27 @@ const TextFlex = styled.div`
     padding: 0;
 
     h1 {
-      margin: 0.5rem 0;
+      margin: 0.5em 0;
       font-size: 1.4em;
-      font-weight: 700;
+      font-weight: 600;
     }
 
     small {
       font-size: 1em;
       font-weight: 400;
     }
+
+    .moving-featured &,
+    .is-aside & {
+      h1 {
+        font-size: 1em;
+      }
+    }
   }
 `;
 
 const FlexChild = styled.li`
-  padding: 0.7rem;
+  padding: 0.7em;
   height: 100%;
   width: 100%;
   display: flex;
@@ -158,16 +180,16 @@ const FlexChild = styled.li`
 
   .moving-featured &,
   .is-aside & {
-    padding: 0.5rem 1rem;
+    padding: 0.5em 1em;
     flex-direction: row;
     align-items: center;
   }
   @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
-    padding: 1rem;
+    padding: 1em;
   }
 
   @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
-    padding: 1rem;
+    padding: 1em;
     flex-direction: column;
     align-items: center;
   }

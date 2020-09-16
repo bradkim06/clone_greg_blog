@@ -54,24 +54,22 @@ export default ({
   );
 };
 
-const GridWrapper = styled.ul`
+export const GridWrapper = styled.ul`
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
   grid-gap: 1rem;
+  // overflow: hidden;
 
   @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
     padding: 0 1rem;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 
     .moving-featured &,
     .is-aside & {
       padding: 0 0.5rem;
       grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-      h1 {
-        font-size: 1em;
-      }
     }
 
     .is-aside.closed &,

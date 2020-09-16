@@ -1,7 +1,12 @@
 import { useStaticQuery, graphql } from "gatsby";
+import { FluidObject } from "gatsby-image";
 
 export type logoProps = {
-  logo: any;
+  logo: {
+    childImageSharp: {
+      fluid: FluidObject;
+    };
+  };
 };
 
 export const useLogoQuery = () => {
@@ -10,7 +15,7 @@ export const useLogoQuery = () => {
       query LogoData {
         logo: file(relativePath: { eq: "logo.png" }) {
           childImageSharp {
-            fluid {
+            fluid(quality: 100, srcSetBreakpoints: [30, 60, 80, 200]) {
               ...GatsbyImageSharpFluid
             }
           }
