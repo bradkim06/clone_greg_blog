@@ -57,21 +57,20 @@ export default ({
 const GridWrapper = styled.ul`
   list-style: none;
   margin: 0;
-  padding: 0 1rem;
+  padding: 0;
   display: grid;
   grid-gap: 1rem;
 
   @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 3fr));
+    padding: 0 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 
     .moving-featured &,
     .is-aside & {
+      padding: 0 0.5rem;
       grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
       h1 {
         font-size: 1em;
-      }
-      small {
-        font-size: 0.8em;
       }
     }
   }

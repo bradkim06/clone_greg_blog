@@ -50,8 +50,8 @@ export const useLayoutQuery = () => {
                 cover {
                   publicURL
                   childImageSharp {
-                    sizes(maxWidth: 300) {
-                      ...GatsbyImageSharpSizes
+                    fluid(maxWidth: 200, maxHeight: 150) {
+                      ...GatsbyImageSharpFluid
                     }
                   }
                 }

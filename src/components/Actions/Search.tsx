@@ -160,14 +160,8 @@ const GridWrapper = styled.ul`
   display: grid;
   grid-gap: 1rem;
 
-  @media (max-width: 450px) {
-    .gatsby-image-wrapper {
-      display: none;
-    }
-  }
-
   @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 3fr));
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   }
 `;
 
@@ -195,8 +189,8 @@ const useSearchData = () => {
                 cover {
                   publicURL
                   childImageSharp {
-                    sizes(maxWidth: 300) {
-                      ...GatsbyImageSharpSizes
+                    fluid(maxWidth: 200, maxHeight: 150) {
+                      ...GatsbyImageSharpFluid
                     }
                   }
                 }
