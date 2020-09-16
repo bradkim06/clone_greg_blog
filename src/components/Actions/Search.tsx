@@ -12,6 +12,7 @@ import TextField from "@material-ui/core/TextField";
 import Fuse from "fuse.js";
 import SearchListItem from "./SearchListItem";
 import styled from "styled-components";
+import Grow from "@material-ui/core/Grow";
 
 type allMdxProps = {
   allMdx: {
@@ -105,19 +106,21 @@ const SearchDialog = () => {
               onChange={onSearch}
               autoComplete="off"
             />
-            <GridWrapper>
-              {results &&
-                results.map((post: any) => (
-                  <SearchListItem
-                    title={post.item.node.frontmatter.title}
-                    subTitle={post.item.node.frontmatter.subTitle}
-                    excerpt={post.item.node.excerpt}
-                    slug={post.item.node.fields.slug}
-                    cover={post.item.node.frontmatter.cover}
-                    linkOnClick={handleClose}
-                  />
-                ))}
-            </GridWrapper>
+            <Grow in={true} timeout={1500}>
+              <GridWrapper>
+                {results &&
+                  results.map((post: any) => (
+                    <SearchListItem
+                      title={post.item.node.frontmatter.title}
+                      subTitle={post.item.node.frontmatter.subTitle}
+                      excerpt={post.item.node.excerpt}
+                      slug={post.item.node.fields.slug}
+                      cover={post.item.node.frontmatter.cover}
+                      linkOnClick={handleClose}
+                    />
+                  ))}
+              </GridWrapper>
+            </Grow>
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -151,19 +154,17 @@ const options = {
 };
 
 const GridWrapper = styled.ul`
-  // list-style: none;
-  // padding: 0;
-  // display: grid;
-  // align-items: stretch;
-  // justify-items: center; [> adjusted <]
-  // grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  // grid-gap: 20px;
-
   list-style: none;
   margin: 0;
-  padding: 0 1rem;
+  padding: 0;
   display: grid;
   grid-gap: 1rem;
+
+  @media (max-width: 450px) {
+    .gatsby-image-wrapper {
+      display: none;
+    }
+  }
 
   @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
     grid-template-columns: repeat(auto-fill, minmax(250px, 3fr));

@@ -58,39 +58,35 @@ const Divider = styled.div`
 `;
 
 const ImgSource = styled(Img)`
-  border-radius: 20px;
-  @media (max-width: ${props => props.theme.mediaQueryTresholds.M}px) {
-    width: 80px;
-    height: 80px;
-  }
+  border-radius: 10px;
+  width: 80px;
+  height: 80px;
 
   .moving-featured &,
   .is-aside & {
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
+    margin-left: 1em;
   }
+
   @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
     width: 100px;
     height: 100px;
   }
 
   @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
-    // width: 150px;
-    // height: 150px;
     width: 100%;
     height: 100%;
-    max-width: 300px;
-    max-height: 300px;
+    max-width: 250px;
+    max-height: 250px;
   }
 `;
 
 const TextFlex = styled.div`
   padding: 0 1rem 1rem 1rem;
   display: flex;
-  // word-break: break-all;
+  word-break: break-all;
   flex-direction: column;
-  // justify-content: center;
-  // align-items: center;
 
   .moving-featured &,
   .is-aside & {
@@ -111,6 +107,7 @@ const FlexChild = styled.li`
   width: 100%;
   display: flex;
   flex-direction: row;
+  align-items: center;
   color: ${({ theme }) => theme.navigator.colors.postsListItemLink};
   border-radius: 20px;
   background-color: ${({ theme }) => theme.search.colors.listBackground};
@@ -139,11 +136,7 @@ const FlexChild = styled.li`
     padding: 0;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
-  }
-
-  @media (max-width: ${props => props.theme.mediaQueryTresholds.L}px) {
-    align-items: center;
+    // justify-content: center;
   }
 
   @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
