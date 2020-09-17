@@ -3,6 +3,7 @@ import Avatar from "@material-ui/core/Avatar";
 import { Link } from "gatsby";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
+import TopMenu from "./TopMenu";
 import { PagesProps } from "../Query/LayoutQuery";
 import { useLogoQuery } from "../Query/LogoQuery";
 import {
@@ -34,35 +35,40 @@ export default ({ pages }: InfoBarProps) => {
     <InfoBarStyle>
       <AvatarLinkBar>
         <Link to="/" onClick={homeLinkOnClick} title="back to Home">
-          <Avatar src={logo.childImageSharp.fluid.src} alt="logo" />
+          <StyledAvatar src={logo.childImageSharp.fluid.src} alt="logo" />
         </Link>
       </AvatarLinkBar>
       <BarTitle>
         {config.infoTitle}
         <small>{config.infoTitleNote}</small>
       </BarTitle>
+      <TopMenu
+        pages={pages}
+        homeLinkOnClick={homeLinkOnClick}
+        pageLinkOnClick={pageLinkOnClick}
+      />
     </InfoBarStyle>
   );
 };
 
 const InfoBarStyle = styled.aside`
   position: absolute;
-  background: ${props => props.theme.bars.colors.background};
+  background: ${({ theme }) => theme.bars.colors.background};
   top: 0;
   left: 0;
   width: 100%;
-  height: ${props => props.theme.bars.sizes.infoBar}px;
+  height: ${({ theme }) => theme.bars.sizes.infoBar}px;
   &::before {
     content: "";
     position: absolute;
-    left: ${props => props.theme.base.sizes.linesMargin};
-    right: ${props => props.theme.base.sizes.linesMargin};
+    left: ${({ theme }) => theme.base.sizes.linesMargin};
+    right: ${({ theme }) => theme.base.sizes.linesMargin};
     height: 0;
     bottom: 0;
-    border-top: 1px solid ${props => props.theme.base.colors.lines};
+    border-top: 1px solid ${({ theme }) => theme.base.colors.lines};
   }
 
-  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
+  @media (min-width: ${({ theme }) => theme.mediaQueryTresholds.L}px) {
     display: none;
   }
 `;
@@ -73,11 +79,16 @@ const AvatarLinkBar = styled.div`
   margin: 13px 0 0 30px;
 `;
 
+const StyledAvatar = styled(Avatar)`
+  width: 36px;
+  height: 36px;
+`;
+
 const BarTitle = styled.div`
   float: left;
   margin: 10px 0 0 15px;
   font-size: 1.1em;
-  color: ${props => props.theme.bars.colors.text};
+  color: ${({ theme }) => theme.bars.colors.text};
 
   & small {
     display: block;

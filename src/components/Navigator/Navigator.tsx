@@ -118,7 +118,6 @@ const StyleNavigator = styled.nav`
     }
 
     &.moving-aside {
-      transition: left 0.9s;
       left: calc(-100vw + ${props => props.theme.info.sizes.width}*2px + 2px);
       width: calc(100vw - ${props => props.theme.info.sizes.width}px - 60px);
       top: 0;

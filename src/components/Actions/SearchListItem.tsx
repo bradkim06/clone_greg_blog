@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Link from "gatsby-link";
 import { FluidObject } from "gatsby-image";
 import { useLogoQuery } from "../Query/LogoQuery";
+import Grow from "@material-ui/core/Grow";
 
 type SearchResultProps = {
   title: string;
@@ -41,22 +42,26 @@ export default ({
   }
 
   return (
-    <Link onClick={movePage} to={postSlug}>
-      <FlexChild>
-        {cover ? (
-          <ImgSource src={cover.childImageSharp.fluid.src} alt={title} />
-        ) : (
-          <ImgSource src={logo.childImageSharp.fluid.src} alt={title} />
-        )}
-        <TextFlex>
-          <h1>{postTitle}</h1>
-          <Divider />
-          <small>{postSubTitle === "null" ? postExcerpt : postSubTitle}</small>
-          <Divider />
-          <small>{postDate === "null" ? "" : postDate}</small>
-        </TextFlex>
-      </FlexChild>
-    </Link>
+    <Grow in={true} timeout={1000}>
+      <Link onClick={movePage} to={postSlug}>
+        <FlexChild>
+          {cover ? (
+            <ImgSource src={cover.childImageSharp.fluid.src} alt={title} />
+          ) : (
+            <ImgSource src={logo.childImageSharp.fluid.src} alt={title} />
+          )}
+          <TextFlex>
+            <h1>{postTitle}</h1>
+            <Divider />
+            <small>
+              {postSubTitle === "null" ? postExcerpt : postSubTitle}
+            </small>
+            <Divider />
+            <small>{postDate === "null" ? "" : postDate}</small>
+          </TextFlex>
+        </FlexChild>
+      </Link>
+    </Grow>
   );
 };
 
@@ -72,13 +77,18 @@ export default ({
 const Divider = styled.div`
   aspect-ratio: 16/9;
   margin: 0.2rem 0;
-  .moving-featured &,
-  .is-aside & {
-    display: none;
-  }
 
   @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
     margin: 0.2rem 0;
+  }
+
+  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
+    margin: 0.2rem 0;
+
+    .moving-featured &,
+    .is-aside & {
+      display: none;
+    }
   }
 `;
 
@@ -87,11 +97,6 @@ const ImgSource = styled.img`
   width: 60px;
   height: 60px;
 
-  .moving-featured &,
-  .is-aside & {
-    width: 30px;
-    height: 30px;
-  }
   @media (max-width: 300px) {
     display: none;
   }
@@ -104,6 +109,12 @@ const ImgSource = styled.img`
   @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
     width: 100%;
     height: 150px;
+
+    .moving-featured &,
+    .is-aside & {
+      width: 30px;
+      height: 30px;
+    }
   }
 `;
 
@@ -111,15 +122,6 @@ const TextFlex = styled.div`
   padding: 0 0 0 1rem;
   display: flex;
   flex-direction: column;
-
-  .moving-featured &,
-  .is-aside & {
-    padding: 0 0 0 1rem;
-    text-align: center;
-    small {
-      display: none;
-    }
-  }
 
   h1 {
     margin: 0;
@@ -160,6 +162,13 @@ const TextFlex = styled.div`
 
     .moving-featured &,
     .is-aside & {
+      padding: 0 0 0 1rem;
+      text-align: center;
+
+      small {
+        display: none;
+      }
+
       h1 {
         font-size: 1rem;
       }
@@ -189,12 +198,6 @@ const FlexChild = styled.li`
     background-color: ${({ theme }) => theme.search.colors.hoverBackground};
   }
 
-  .moving-featured &,
-  .is-aside & {
-    padding: 0.5rem 1rem;
-    flex-direction: row;
-    align-items: center;
-  }
   @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
     padding: 1rem;
   }
@@ -203,5 +206,12 @@ const FlexChild = styled.li`
     padding: 1rem;
     flex-direction: column;
     align-items: center;
+
+    .moving-featured &,
+    .is-aside & {
+      padding: 0.5rem 1rem;
+      flex-direction: row;
+      align-items: center;
+    }
   }
 `;

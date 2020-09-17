@@ -14,7 +14,6 @@ import SearchListItem from "./SearchListItem";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useTheme } from "@material-ui/core/styles";
 import styled from "styled-components";
-import Grow from "@material-ui/core/Grow";
 import { GridWrapper } from "../Navigator/List";
 
 type allMdxProps = {
@@ -114,22 +113,20 @@ const SearchDialog = () => {
               onChange={onSearch}
               autoComplete="off"
             />
-            <Grow in={true} timeout={1000}>
-              <GridWrapper>
-                {results &&
-                  results.map((post: any) => (
-                    <SearchListItem
-                      title={post.item.node.frontmatter.title}
-                      subTitle={post.item.node.frontmatter.subTitle}
-                      excerpt={post.item.node.excerpt}
-                      date={post.item.node.frontmatter.date}
-                      slug={post.item.node.fields.slug}
-                      cover={post.item.node.frontmatter.cover}
-                      linkOnClick={handleClose}
-                    />
-                  ))}
-              </GridWrapper>
-            </Grow>
+            <GridWrapper>
+              {results &&
+                results.map((post: any) => (
+                  <SearchListItem
+                    title={post.item.node.frontmatter.title}
+                    subTitle={post.item.node.frontmatter.subTitle}
+                    excerpt={post.item.node.excerpt}
+                    date={post.item.node.frontmatter.date}
+                    slug={post.item.node.fields.slug}
+                    cover={post.item.node.frontmatter.cover}
+                    linkOnClick={handleClose}
+                  />
+                ))}
+            </GridWrapper>
           </DialogContentText>
         </DialogContent>
         <DialogActions>

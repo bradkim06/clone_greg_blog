@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { PostsProps } from "../Query/LayoutQuery";
-import Grow from "@material-ui/core/Grow";
 
 import ListHeader from "./ListHeader";
 import ListItem from "./ListItem";
@@ -35,19 +34,17 @@ export default ({
             navigatorShape={navigatorShape}
             removeFilter={removeFilter}
           />
-          <Grow in={true} timeout={1000}>
-            <GridWrapper>
-              {posts.edges &&
-                posts.edges.map((post, i) => (
-                  <ListItem
-                    key={i}
-                    post={post}
-                    linkOnClick={linkOnClick}
-                    categoryFilter={categoryFilter}
-                  />
-                ))}
-            </GridWrapper>
-          </Grow>
+          <GridWrapper>
+            {posts.edges &&
+              posts.edges.map((post, i) => (
+                <ListItem
+                  key={i}
+                  post={post}
+                  linkOnClick={linkOnClick}
+                  categoryFilter={categoryFilter}
+                />
+              ))}
+          </GridWrapper>
         </Inner>
       </SpringScrollbars>
     </Posts>
@@ -60,7 +57,6 @@ export const GridWrapper = styled.ul`
   padding: 0;
   display: grid;
   grid-gap: 1rem;
-  // overflow: hidden;
 
   @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
     padding: 0 1rem;

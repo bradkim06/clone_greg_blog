@@ -56,9 +56,7 @@ export function moveNavAside(state: moveNavAsideState, dispatch: any): void {
         });
       }, 800);
     } else {
-      setTimeout(() => {
-        dispatch(setNavigatorPosition("is-aside"));
-      }, 100);
+      dispatch(setNavigatorPosition("is-aside"));
     }
   }
 
