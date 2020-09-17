@@ -11,6 +11,8 @@ import IconButton from "@material-ui/core/IconButton";
 import TextField from "@material-ui/core/TextField";
 import Fuse from "fuse.js";
 import SearchListItem from "./SearchListItem";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { useTheme } from "@material-ui/core/styles";
 import styled from "styled-components";
 import Grow from "@material-ui/core/Grow";
 import { GridWrapper } from "../Navigator/List";
@@ -40,6 +42,9 @@ const SearchDialog = () => {
   const [open, setOpen] = useState(false);
   const [scroll, setScroll] = useState<"paper" | "body" | undefined>("paper");
   const [query, updateQuery] = useState("");
+
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
   const handleClickOpen = (scrollType: "paper" | "body" | undefined) => () => {
     setOpen(true);
@@ -85,6 +90,7 @@ const SearchDialog = () => {
         scroll={scroll}
         aria-labelledby="scroll-dialog-title"
         aria-describedby="scroll-dialog-description"
+        fullScreen={fullScreen}
         maxWidth="lg"
         fullWidth
       >
@@ -157,13 +163,6 @@ const options = {
 const StyledDialog = styled(Dialog)`
   .MuiDialog-paperFullWidth {
     background-color: ${props => props.theme.search.colors.background};
-  }
-  .MuiDialogContent-root {
-    @media (max-width: 450px) {
-      img {
-        display: none;
-      }
-    }
   }
 `;
 

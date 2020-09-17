@@ -8,6 +8,8 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import TocIcon from "@material-ui/icons/Toc";
 import IconButton from "@material-ui/core/IconButton";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { useTheme } from "@material-ui/core/styles";
 import styled from "styled-components";
 import TocLists from "./TocLists";
 import { ReduxState } from "../../state/store";
@@ -23,6 +25,9 @@ export default () => {
 
   const [open, setOpen] = useState(false);
   const [scroll, setScroll] = useState<"paper" | "body" | undefined>("paper");
+
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("xs"));
 
   const handleClickOpen = (scrollType: "paper" | "body" | undefined) => () => {
     setOpen(true);
@@ -61,8 +66,8 @@ export default () => {
         scroll={scroll}
         aria-labelledby="scroll-dialog-title"
         aria-describedby="scroll-dialog-description"
-        maxWidth="sm"
-        fullWidth
+        fullScreen={fullScreen}
+        maxWidth="md"
       >
         <TocTitle id="scroll-dialog-title" disableTypography>
           {title}

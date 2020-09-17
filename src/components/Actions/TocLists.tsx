@@ -51,6 +51,8 @@ export default ({ toc, linkOnClick }: TocProps) => {
 };
 
 const TocWrapper = styled.div`
+  font-size: 1.4em;
+
   a {
     text-decoration: none;
   }
@@ -59,10 +61,6 @@ const TocWrapper = styled.div`
     font-size: 1.5em;
     text-align: center;
     color: ${({ theme }) => theme.main.colors.title};
-  }
-
-  @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
-    font-size: 1.4em;
   }
 `;
 

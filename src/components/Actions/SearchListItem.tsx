@@ -78,6 +78,9 @@ const ImgSource = styled.img`
     width: 30px;
     height: 30px;
   }
+  @media (max-width: 300px) {
+    display: none;
+  }
 
   @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
     width: 80px;
