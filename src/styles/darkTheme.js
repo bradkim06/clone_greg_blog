@@ -142,7 +142,9 @@ export const darkTheme = {
     colors: {
       background: darkColors.background,
       listBackground: Color(darkColors.background).lighten(1).string(),
-      hoverBackground: Color(darkColors.background).lighten(2).string()
+      hoverBackground: Color(darkColors.background).lighten(2).string(),
+      shadow: Color(darkColors.background).lighten(2).string(),
+      shadowHover: Color(darkColors.background).lighten(4).string()
     }
   },
   mediaQueryTresholds: {

@@ -178,11 +178,13 @@ const FlexChild = styled.li`
   border-radius: 20px;
   background-color: ${({ theme }) => theme.search.colors.listBackground};
 
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  box-shadow: 0 1px 3px ${({ theme }) => theme.search.colors.shadow},
+    0 1px 2px ${({ theme }) => theme.search.colors.shadowHover};
   transition: all 1.2s cubic-bezier(0.25, 0.8, 0.25, 1);
 
   &:hover {
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    box-shadow: 0 14px 28px ${({ theme }) => theme.search.colors.shadowHover},
+      0 10px 10px ${({ theme }) => theme.search.colors.shadowHover};
     color: ${({ theme }) => theme.navigator.colors.postsListItemLinkHover};
     background-color: ${({ theme }) => theme.search.colors.hoverBackground};
   }
