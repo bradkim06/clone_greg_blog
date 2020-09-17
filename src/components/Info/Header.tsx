@@ -5,8 +5,8 @@ import styled from "styled-components";
 import IconButton from "@material-ui/core/IconButton";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
-import avatar from "../../images/jpg/test.png";
 import config from "../../../content/meta/config";
+import { useLogoQuery } from "../Query/LogoQuery";
 
 type InfoHeaderProps = {
   avatarOnClick: (
@@ -17,12 +17,14 @@ type InfoHeaderProps = {
 
 export default ({ avatarOnClick, expandOnClick }: InfoHeaderProps) => {
   const infoTitle = config.infoTitle.replace(/ /g, "\u00a0");
+
+  const { logo } = useLogoQuery();
   return (
     <Header>
       <HeaderAvatarLink>
         <Link to="/" onClick={avatarOnClick} title="back to Home">
           <HeaderAvatar>
-            <img src={avatar} alt="avatar" />
+            <img src={logo.childImageSharp.fluid.src} alt="avatar" />
           </HeaderAvatar>
         </Link>
       </HeaderAvatarLink>

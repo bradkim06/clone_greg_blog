@@ -28,6 +28,9 @@ export interface PostsProps {
 export interface PagesProps {
   edges: Array<{
     node: {
+      fields: {
+        slug: string;
+      };
       frontmatter: {
         title: string;
       };
@@ -51,7 +54,7 @@ export const useLayoutQuery = () => {
               frontmatter {
                 title
                 subTitle
-                date
+                date(formatString: "YYYY.MM.D")
                 category
                 cover {
                   publicURL
@@ -65,9 +68,12 @@ export const useLayoutQuery = () => {
             }
           }
         }
-        pages: allMdx(filter: { fileAbsolutePath: { regex: "//posts//" } }) {
+        pages: allMdx(filter: { fileAbsolutePath: { regex: "//pages//" } }) {
           edges {
             node {
+              fields {
+                slug
+              }
               frontmatter {
                 title
               }

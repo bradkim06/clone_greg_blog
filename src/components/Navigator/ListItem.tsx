@@ -47,6 +47,7 @@ export default ({ post, categoryFilter, linkOnClick }: ListItemProps) => {
           title={title}
           subTitle={subTitle}
           excerpt={excerpt}
+          date={date}
           slug={slug}
           cover={cover}
           linkOnClick={linkOnClick}

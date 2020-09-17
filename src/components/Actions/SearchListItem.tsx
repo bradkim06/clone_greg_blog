@@ -8,6 +8,7 @@ type SearchResultProps = {
   title: string;
   subTitle?: string;
   excerpt: string;
+  date?: string;
   slug: string;
   cover: {
     childImageSharp: {
@@ -21,24 +22,26 @@ export default ({
   title,
   subTitle,
   excerpt,
+  date,
   slug,
   cover,
   linkOnClick
 }: SearchResultProps) => {
   const { logo } = useLogoQuery();
 
-  const titleName = JSON.stringify(title, null, 4).replace(/\"/g, "");
-  const subTitleName = JSON.stringify(subTitle, null, 4).replace(/\"/g, "");
-  const excerptData =
+  const postTitle = JSON.stringify(title, null, 4).replace(/\"/g, "");
+  const postSubTitle = JSON.stringify(subTitle, null, 4).replace(/\"/g, "");
+  const postExcerpt =
     JSON.stringify(excerpt, null, 4).replace(/\"/g, "").substr(0, 30) + "...";
-  const path = JSON.stringify(slug, null, 4).replace(/\"/g, "");
+  const postDate = JSON.stringify(date, null, 4).replace(/\"/g, "");
+  const postSlug = JSON.stringify(slug, null, 4).replace(/\"/g, "");
 
   function movePage() {
     linkOnClick();
   }
 
   return (
-    <Link onClick={movePage} to={path}>
+    <Link onClick={movePage} to={postSlug}>
       <FlexChild>
         {cover ? (
           <ImgSource src={cover.childImageSharp.fluid.src} alt={title} />
@@ -46,14 +49,25 @@ export default ({
           <ImgSource src={logo.childImageSharp.fluid.src} alt={title} />
         )}
         <TextFlex>
-          <h1>{titleName}</h1>
+          <h1>{postTitle}</h1>
           <Divider />
-          <small>{subTitleName === "null" ? excerptData : subTitleName}</small>
+          <small>{postSubTitle === "null" ? postExcerpt : postSubTitle}</small>
+          <Divider />
+          <small>{postDate === "null" ? "" : postDate}</small>
         </TextFlex>
       </FlexChild>
     </Link>
   );
 };
+
+// function myDate(date: string) {
+//   const dateObj = new Date(date).toUTCString();
+//   const dateToShow = dateObj.split(" ").slice(0, 4).join(" ");
+//
+//   if (dateToShow !== "Invalid Date") {
+//     return dateToShow;
+//   }
+// }
 
 const Divider = styled.div`
   aspect-ratio: 16/9;

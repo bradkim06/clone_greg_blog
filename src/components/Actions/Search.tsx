@@ -27,6 +27,7 @@ type allMdxProps = {
         frontmatter: {
           title: string;
           subTitle?: string;
+          date?: string;
           category?: string;
           cover?: any;
         };
@@ -121,6 +122,7 @@ const SearchDialog = () => {
                       title={post.item.node.frontmatter.title}
                       subTitle={post.item.node.frontmatter.subTitle}
                       excerpt={post.item.node.excerpt}
+                      date={post.item.node.frontmatter.date}
                       slug={post.item.node.fields.slug}
                       cover={post.item.node.frontmatter.cover}
                       linkOnClick={handleClose}
@@ -180,6 +182,7 @@ const useSearchData = () => {
               frontmatter {
                 title
                 subTitle
+                date(formatString: "YYYY.MM.D")
                 category
                 cover {
                   publicURL

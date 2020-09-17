@@ -5,9 +5,11 @@ import { useSelector, useDispatch } from "react-redux";
 import HomeIcon from "@material-ui/icons/Home";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import Search from "./Search";
-import Toc from "./Toc";
 import WbSunnyIcon from "@material-ui/icons/WbSunny";
 import Brightness2 from "@material-ui/icons/Brightness2";
+import loadable from "@loadable/component";
+
+const Toc = loadable(() => import("./Toc"));
 
 import {
   setScrollToTop,

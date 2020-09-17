@@ -4,7 +4,7 @@ import { Link } from "gatsby";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { PagesProps } from "../Query/LayoutQuery";
-import avatar from "../../images/jpg/test.png";
+import { useLogoQuery } from "../Query/LogoQuery";
 import {
   moveNavFeature,
   moveNavAside,
@@ -20,6 +20,8 @@ export default ({ pages }: InfoBarProps) => {
   const state = moveNavData();
   const dispatch = useDispatch();
 
+  const { logo } = useLogoQuery();
+
   function homeLinkOnClick(e: any) {
     moveNavFeature(e, state, dispatch);
   }
@@ -32,7 +34,7 @@ export default ({ pages }: InfoBarProps) => {
     <InfoBarStyle>
       <AvatarLinkBar>
         <Link to="/" onClick={homeLinkOnClick} title="back to Home">
-          <Avatar src={avatar} alt="infoBar avatar" />
+          <Avatar src={logo.childImageSharp.fluid.src} alt="logo" />
         </Link>
       </AvatarLinkBar>
       <BarTitle>

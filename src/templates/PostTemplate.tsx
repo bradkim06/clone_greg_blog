@@ -68,7 +68,7 @@ export const postQuery = graphql`
       frontmatter {
         title
         subTitle
-        date
+        date(formatString: "dddd, MMMM Do YYYY, h:m  A")
       }
     }
   }
