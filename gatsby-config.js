@@ -97,7 +97,7 @@ module.exports = {
             options: {
               maxWidth: 1000,
               backgroundColor: "transparent",
-              quality: 100,
+              // quality: 100,
               loading: "auto"
             }
           },
@@ -118,7 +118,7 @@ module.exports = {
             options: {
               maxWidth: 1000,
               backgroundColor: "transparent",
-              quality: 100,
+              // quality: 100,
               loading: "auto"
             }
           }
