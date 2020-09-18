@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import PostComments from "./Comments";
 
 export default () => {
@@ -11,11 +11,16 @@ export default () => {
 };
 
 const StyledPostFooter = styled.footer`
-  color: ${props => props.theme.main.colors.footer};
-  font-size: ${props => props.theme.main.fonts.footer.size}em;
-  line-height: ${props => props.theme.main.fonts.footer.lineHeight};
-
   & p {
     margin: 0;
   }
+
+  ${props => {
+    const { main } = props.theme;
+    return css`
+      color: ${main.colors.footer};
+      font-size: ${main.fonts.footer.size}em;
+      line-height: ${main.fonts.footer.lineHeight};
+    `;
+  }}
 `;

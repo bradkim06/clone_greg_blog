@@ -7,7 +7,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import MenuList from "@material-ui/core/MenuList";
 import IconButton from "@material-ui/core/IconButton";
 import FilterListIcon from "@material-ui/icons/FilterList";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 type CategoryFilterProps = {
   categories: string[];
@@ -100,9 +100,14 @@ export default ({ categories, filterCategory }: CategoryFilterProps) => {
 };
 
 const FilterWrapper = styled.nav`
-  @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
-  }
-  .categoryOpen {
-    color: ${props => props.theme.bars.colors.icon};
-  }
+  ${props => {
+    const { minWidth, bars } = props.theme;
+    return css`
+      @media ${minWidth.M} {
+      }
+      .categoryOpen {
+        color: ${bars.colors.icon};
+      }
+    `;
+  }}
 `;

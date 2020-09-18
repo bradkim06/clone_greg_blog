@@ -1,5 +1,5 @@
 import React from "react";
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle, css } from "styled-components";
 import { normalize } from "styled-normalize";
 
 export const GlobalStyle = createGlobalStyle`
@@ -21,25 +21,6 @@ export const GlobalStyle = createGlobalStyle`
     font-family: inherit;
   }
 
-  html {
-    box-sizing: border-box;
-    -webkit-text-size-adjust: 100%;
-    -moz-text-size-adjust: none;
-    -ms-text-size-adjust: 100%;
-    font-family: ${props => props.theme.base.fonts.styledFamily};
-    line-height: 1.5;
-    text-size-adjust: 100%;
-  }
-
-  body {
-    margin: 0;
-    background: ${props => props.theme.base.colors.background};
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.05);
-  }
-
-  html.wf-active {
-    font-family: ${props => props.theme.base.fonts.unstyledFamily};
-  }
 
   *,
   *:before,
@@ -86,21 +67,45 @@ export const GlobalStyle = createGlobalStyle`
     box-shadow: 0 0 0 50px white inset;
   }
 
-  :not(pre) > code[class*="language-"] {
-    background-color: ${props => props.theme.base.colors.accent};
-    color: ${props => props.theme.base.colors.brightText};
-    text-shadow: none;
-    padding: 1px 5px;
-    border-radius: 2px;
-  }
+  ${props => {
+    const { base, main } = props.theme;
+    return css`
+      html {
+        box-sizing: border-box;
+        -webkit-text-size-adjust: 100%;
+        -moz-text-size-adjust: none;
+        -ms-text-size-adjust: 100%;
+        font-family: ${base.fonts.styledFamily};
+        line-height: 1.5;
+        text-size-adjust: 100%;
+      }
 
-  strong {
-    color: ${props => props.theme.main.colors.contentHeading};
-  }
+      body {
+        margin: 0;
+        background: ${base.colors.background};
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0.05);
+      }
 
-  ::selection {
-    background-color: ${props => props.theme.base.colors.accent};
-    color: ${props => props.theme.base.colors.brightText};
-  }
+      html.wf-active {
+        font-family: ${base.fonts.unstyledFamily};
+      }
 
+      :not(pre) > code[class*="language-"] {
+        background-color: ${base.colors.accent};
+        color: ${base.colors.brightText};
+        text-shadow: none;
+        padding: 1px 5px;
+        border-radius: 2px;
+      }
+
+      strong {
+        color: ${main.colors.contentHeading};
+      }
+
+      ::selection {
+        background-color: ${base.colors.accent};
+        color: ${base.colors.brightText};
+      }
+    `;
+  }}
 `;

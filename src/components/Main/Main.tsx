@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import SpringScrollbars from "../Scroll";
 
 const Main = ({ children }: { children: React.ReactNode }) => {
@@ -18,13 +18,6 @@ const StyleMain = styled.main`
   width: 100%;
   animation-name: main-entry;
   animation-duration: 0.5s;
-  @media (min-width: ${({ theme }) => theme.mediaQueryTresholds.L}px) {
-    width: calc(
-      100vw - ${({ theme }) => theme.info.sizes.width}px -
-        ${({ theme }) => theme.bars.sizes.actionsBar}px
-    );
-    left: ${({ theme }) => theme.info.sizes.width}px;
-  }
 
   @media print {
     position: relative;
@@ -48,6 +41,16 @@ const StyleMain = styled.main`
       transform: translateY(0);
     }
   }
+
+  ${props => {
+    const { minWidth, info, bars } = props.theme;
+    return css`
+      @media ${minWidth.L} {
+        width: calc(100vw - ${info.sizes.width}px - ${bars.sizes.actionsBar}px);
+        left: ${info.sizes.width}px;
+      }
+    `;
+  }}
 `;
 
 export default Main;

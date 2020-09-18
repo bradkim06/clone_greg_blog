@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 type PostHeaderProps = {
   title: string;
@@ -22,40 +22,56 @@ const PostHead = styled.div`
 `;
 
 const PostTitle = styled.h1`
-  color: ${props => props.theme.main.colors.title};
-  font-size: ${props => props.theme.main.fonts.title.size}em;
   letter-spacing: -0.04em;
-  font-weight: ${props => props.theme.main.fonts.title.weight};
-  line-height: ${props => props.theme.main.fonts.title.lineHeight};
-  margin: 0 0 0.4em;
 
-  @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
-    font-size: ${props => props.theme.main.fonts.title.sizeM}em;
-  }
+  ${props => {
+    const { main, minWidth } = props.theme;
+    return css`
+      color: ${main.colors.title};
+      font-size: ${main.fonts.title.size}em;
+      font-weight: ${main.fonts.title.weight};
+      line-height: ${main.fonts.title.lineHeight};
+      margin: 0 0 0.4em;
 
-  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
-    font-size: ${props => props.theme.main.fonts.title.sizeL}em;
-    letter-spacing: -0.05em;
-  }
+      @media ${minWidth.M} {
+        font-size: ${main.fonts.title.sizeM}em;
+      }
+
+      @media ${minWidth.L} {
+        font-size: ${main.fonts.title.sizeL}em;
+        letter-spacing: -0.05em;
+      }
+    `;
+  }}
 `;
 
 const PostSubTitle = styled.h2`
-  color: ${props => props.theme.main.colors.subTitle};
-  font-size: ${props => props.theme.main.fonts.subTitle.size}em;
-  line-height: ${props => props.theme.main.fonts.subTitle.lineHeight};
-  font-weight: ${props => props.theme.main.fonts.subTitle.weight};
+  ${props => {
+    const { main, minWidth } = props.theme;
+    return css`
+      color: ${main.colors.subTitle};
+      font-size: ${main.fonts.subTitle.size}em;
+      line-height: ${main.fonts.subTitle.lineHeight};
+      font-weight: ${main.fonts.subTitle.weight};
 
-  @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
-    font-size: ${props => props.theme.main.fonts.subTitle.sizeM}em;
-  }
+      @media ${minWidth.M} {
+        font-size: ${main.fonts.subTitle.sizeM}em;
+      }
 
-  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
-    font-size: ${props => props.theme.main.fonts.subTitle.sizeL}em;
-  }
+      @media ${minWidth.L} {
+        font-size: ${main.fonts.subTitle.sizeL}em;
+      }
+    `;
+  }}
 `;
 
 const PostDate = styled.div`
-  font-size: ${props => props.theme.main.fonts.meta.size}em;
-  font-weight: ${props => props.theme.main.fonts.meta.weight};
-  color: ${props => props.theme.main.colors.meta};
+  ${props => {
+    const { main } = props.theme;
+    return css`
+      font-size: ${main.fonts.meta.size}em;
+      font-weight: ${main.fonts.meta.weight};
+      color: ${main.colors.meta};
+    `;
+  }}
 `;

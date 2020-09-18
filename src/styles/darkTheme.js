@@ -39,6 +39,10 @@ export const darkTheme = {
       width: 320,
       headerHeight: 170
     },
+    size: {
+      width: "20rem",
+      headerHeight: "10.625rem"
+    },
     fonts: {
       boxTitleSize: 1.3,
       boxTitleSizeM: 1.5,
@@ -58,6 +62,9 @@ export const darkTheme = {
       postsListItemH2Font: 1.1,
       fontIncraseForM: 1.15,
       fontIncraseForL: 1.3
+    },
+    size: {
+      closedHeight: "5rem"
     }
   },
   main: {
@@ -136,6 +143,10 @@ export const darkTheme = {
     sizes: {
       actionsBar: 60,
       infoBar: 60
+    },
+    size: {
+      actionsBar: "3.75rem",
+      infoBar: "3.75rem"
     }
   },
   search: {
@@ -150,6 +161,14 @@ export const darkTheme = {
   mediaQueryTresholds: {
     M: 600,
     L: 1024
+  },
+  minWidth: {
+    M: "(min-width: 37.5rem)",
+    L: "(min-width: 64rem)"
+  },
+  maxWidth: {
+    S: "(max-width: 18.75rem)",
+    L: "(max-width: 63.938rem)"
   },
   palette: {
     primary: {

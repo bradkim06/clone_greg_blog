@@ -4,6 +4,7 @@ import Post from "../components/Post";
 import { useDispatch } from "react-redux";
 import { graphql } from "gatsby";
 import Seo from "../components/Seo";
+import { FluidObject } from "gatsby-image";
 
 import { setCurrentPost } from "../state/store";
 import { moveNavAside, moveNavData } from "../utils/shared";
@@ -24,6 +25,11 @@ export type MdxType = {
     title: string;
     subTitle: string;
     date: string;
+    cover: {
+      childImageSharp: {
+        fluid: FluidObject;
+      };
+    };
   };
 };
 
@@ -69,6 +75,14 @@ export const postQuery = graphql`
         title
         subTitle
         date(formatString: "dddd, MMMM Do YYYY, h:m  A")
+        cover {
+          publicURL
+          childImageSharp {
+            fluid(quality: 100, srcSetBreakpoints: [30, 60, 80, 200]) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
       }
     }
   }

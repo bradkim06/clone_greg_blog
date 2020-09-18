@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "gatsby";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import IconButton from "@material-ui/core/IconButton";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
@@ -45,109 +45,123 @@ export default ({ avatarOnClick, expandOnClick }: InfoHeaderProps) => {
 };
 
 const Header = styled.header`
-  line-height: 1;
-  position: relative;
+  ${props => {
+    const { info } = props.theme;
+    return css`
+      line-height: 1;
+      position: relative;
 
-  .expand {
-    position: absolute;
-    top: 30px;
-    right: -25px;
-    display: none;
-    color: ${props => props.theme.info.colors.socialIcons};
+      .expand {
+        position: absolute;
+        top: 30px;
+        right: -25px;
+        display: none;
+        color: ${info.colors.socialIcons};
 
-    .is-aside.open & {
-      display: block;
-    }
-  }
+        .is-aside.open & {
+          display: block;
+        }
+      }
+    `;
+  }}
 `;
 
 const HeaderAvatarLink = styled.div`
-  will-change: left, top;
-  float: left;
-  display: block;
-  position: relative;
-  margin: 0 12px 0 0;
+  ${props => {
+    const { minWidth } = props.theme;
+    return css`
+      will-change: left, top;
+      float: left;
+      display: block;
+      position: relative;
+      margin: 0 12px 0 0;
 
-  @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
-    margin: 0 20px 0 0;
-  }
+      @media ${minWidth.M} {
+        margin: 0 20px 0 0;
+      }
 
-  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
-    position: absolute;
-    top: 10px;
-    left: 50%;
-    margin-left: -30px;
-    transition: all 0.5s;
-    transition-timing-function: ease;
+      @media ${minWidth.L} {
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        margin-left: -30px;
+        transition: all 0.5s;
+        transition-timing-function: ease;
 
-    .navigator-in-transition-from.navigator-is-opened & {
-      left: 50%;
-    }
+        .navigator-in-transition-from.navigator-is-opened & {
+          left: 50%;
+        }
 
-    .is-aside.open & {
-      left: 8%;
-      top: 0;
-    }
-  }
+        .is-aside.open & {
+          left: 8%;
+          top: 0;
+        }
+      }
+    `;
+  }}
 `;
 
 const HeaderAvatar = styled.div`
-  width: 36px;
-  height: 36px;
-  transition: all 0.3s;
-  transition-timing-function: ease;
-  display: inline-block;
-  overflow: hidden;
-  & img {
-    max-width: 100%;
-  }
-  @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
-    width: 44px;
-    height: 44px;
-  }
+  ${props => {
+    const { minWidth } = props.theme;
+    return css`
+      width: 36px;
+      height: 36px;
+      transition: all 0.3s;
+      transition-timing-function: ease;
+      display: inline-block;
+      overflow: hidden;
+      & img {
+        max-width: 100%;
+      }
+      @media ${minWidth.M} {
+        width: 44px;
+        height: 44px;
+      }
 
-  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
-    width: 60px;
-    height: 60px;
-  }
-
-  // @media (hover: hover) {
-  //   &:hover {
-  //     border-radius: 75% 65%;
-  //   }
-  // }
+      @media ${minWidth.L} {
+        width: 60px;
+        height: 60px;
+      }
+    `;
+  }}
 `;
 
 const HeaderTitle = styled.h1`
-  will-change: transform, left, top;
-  font-size: ${props => props.theme.info.fonts.boxTitleSize}em;
-  margin: 0;
-  float: left;
-  transition-timing-function: ease;
+  ${props => {
+    const { info, minWidth } = props.theme;
+    return css`
+      will-change: transform, left, top;
+      font-size: ${info.fonts.boxTitleSize}rem;
+      margin: 0;
+      float: left;
+      transition-timing-function: ease;
 
-  & small {
-    display: block;
-    font-size: 0.6em;
-    margin-top: 0.3em;
-  }
+      & small {
+        display: block;
+        font-size: 1.1rem;
+        margin-top: 0.3rem;
+      }
 
-  @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
-    font-size: ${props => props.theme.info.fonts.boxTitleSizeM}em;
-  }
+      @media ${minWidth.M} {
+        font-size: ${info.fonts.boxTitleSizeM}rem;
+      }
 
-  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
-    font-size: ${props => props.theme.info.fonts.boxTitleSizeL}em;
-    position: absolute;
-    top: 85px;
-    text-align: center;
-    left: 50%;
-    transform: translate(-50%);
-    transition: all 0.5s;
+      @media ${minWidth.L} {
+        font-size: ${info.fonts.boxTitleSizeL}rem;
+        position: absolute;
+        top: 85px;
+        text-align: center;
+        left: 50%;
+        transform: translate(-50%);
+        transition: all 0.5s;
 
-    .is-aside.open & {
-      left: 60%;
-      top: 0.15em;
-      text-align: left;
-    }
-  }
+        .is-aside.open & {
+          left: 60%;
+          top: 0.15rem;
+          text-align: left;
+        }
+      }
+    `;
+  }}
 `;

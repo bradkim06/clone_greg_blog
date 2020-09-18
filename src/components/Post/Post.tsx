@@ -18,17 +18,15 @@ export default ({ post }: PostProps) => {
   const { body } = post;
 
   return (
-    <React.Fragment>
-      <PostWrapper>
-        <PostHeader title={title} subTitle={subTitle} date={date} />
-        <Article>
-          <MDXProvider components={components}>
-            <MDXRenderer>{body}</MDXRenderer>
-          </MDXProvider>
-        </Article>
-        <PostFooter />
-      </PostWrapper>
-    </React.Fragment>
+    <PostWrapper>
+      <PostHeader title={title} subTitle={subTitle} date={date} />
+      <Article>
+        <MDXProvider components={components}>
+          <MDXRenderer>{body}</MDXRenderer>
+        </MDXProvider>
+      </Article>
+      <PostFooter />
+    </PostWrapper>
   );
 };
 

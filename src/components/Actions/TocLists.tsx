@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Link } from "gatsby";
 
 type TocProps = {
@@ -57,47 +57,68 @@ const TocWrapper = styled.div`
     text-decoration: none;
   }
 
-  h1 {
-    font-size: 1.5em;
-    text-align: center;
-    color: ${({ theme }) => theme.main.colors.title};
-  }
+  ${props => {
+    const title = props.theme.main.colors.title;
+    return css`
+      h1 {
+        font-size: 1.5em;
+        text-align: center;
+        color: ${title};
+      }
+    `;
+  }}
 `;
 
 const H1 = styled.ol`
   li {
     margin: 0.6em 0;
   }
-  a {
-    font-weight: 600;
-    color: ${({ theme }) => theme.base.colors.accent};
-  }
+  ${props => {
+    const accent = props.theme.base.colors.accent;
+    return css`
+      a {
+        font-weight: 600;
+        color: ${accent};
+      }
+    `;
+  }}
 `;
 const H2 = styled.ol`
   padding-left: 1em;
   li {
     margin: 0.3em 0;
   }
-  a {
-    font-weight: 600;
-    color: ${({ theme }) => theme.main.colors.title};
-  }
 
-  @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
-    padding-left: 2em;
-  }
+  ${props => {
+    const { main, minWidth } = props.theme;
+    return css`
+      a {
+        font-weight: 600;
+        color: ${main.colors.title};
+      }
+
+      @media ${minWidth.M} {
+        padding-left: 2em;
+      }
+    `;
+  }}
 `;
 const H3 = styled.ol`
   padding-left: 1em;
   li {
     margin: 0.1em 0;
   }
-  a {
-    font-weight: 400;
-    color: ${({ theme }) => theme.main.colors.subTitle};
-  }
+  ${props => {
+    const { main, minWidth } = props.theme;
+    return css`
+      a {
+        font-weight: 400;
+        color: ${main.colors.subTitle};
+      }
 
-  @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
-    padding-left: 2em;
-  }
+      @media ${minWidth.M} {
+        padding-left: 2em;
+      }
+    `;
+  }}
 `;

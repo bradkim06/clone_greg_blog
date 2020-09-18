@@ -13,7 +13,7 @@ import Fuse from "fuse.js";
 import SearchListItem from "./SearchListItem";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useTheme } from "@material-ui/core/styles";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { GridWrapper } from "../Navigator/List";
 
 type allMdxProps = {
@@ -160,9 +160,14 @@ const options = {
 };
 
 const StyledDialog = styled(Dialog)`
-  .MuiDialog-paperFullWidth {
-    background-color: ${props => props.theme.search.colors.background};
-  }
+  ${props => {
+    const { search } = props.theme;
+    return css`
+      .MuiDialog-paperFullWidth {
+        background-color: ${search.colors.background};
+      }
+    `;
+  }}
 `;
 
 const useSearchData = () => {

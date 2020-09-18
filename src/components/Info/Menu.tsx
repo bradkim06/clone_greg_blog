@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Link } from "gatsby";
 
 type InfoMenuProps = {
@@ -31,12 +31,18 @@ const StyleInfoMenu = styled.nav`
 `;
 
 const StyledLink = styled(Link)`
-  padding: 0.5em;
-  font-weight: 300;
+  padding: 0.5rem;
+  font-weight: 400;
   text-transform: lowercase;
-  color: ${props => props.theme.info.colors.menuLink};
 
-  &:hover {
-    color: ${props => props.theme.info.colors.menuLinkHover};
-  }
+  ${props => {
+    const { info } = props.theme;
+    return css`
+      color: ${info.colors.menuLink};
+
+      &:hover {
+        color: ${info.colors.menuLinkHover};
+      }
+    `;
+  }}
 `;

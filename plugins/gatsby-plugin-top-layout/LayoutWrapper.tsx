@@ -1,12 +1,11 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-export default ({ children }) => {
+export default ({ children }: { children: React.ReactNode }) => {
   return <Wrapper>{children}</Wrapper>;
 };
 
 const Wrapper = styled.div`
-  background-color: ${({ theme }) => theme.bars.colors.background};
   padding: 1px;
   position: absolute;
   top: 0;
@@ -18,4 +17,11 @@ const Wrapper = styled.div`
     position: relative;
     overflow: visible;
   }
+
+  ${props => {
+    const background = props.theme.bars.colors.background;
+    return css`
+      background-color: ${background};
+    `;
+  }}
 `;

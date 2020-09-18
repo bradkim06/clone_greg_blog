@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { useDispatch } from "react-redux";
 
 import InfoHeader from "./Header";
@@ -46,31 +46,38 @@ export default () => {
 
 const StyleInfoBox = styled.aside`
   display: none;
-  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
-    display: block;
-    color: ${props => props.theme.info.colors.text};
-    background: ${props => props.theme.info.colors.background};
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: ${props => props.theme.info.sizes.width}px;
-    height: 100%;
-    padding: 20px 40px;
-    &::after {
-      content: "";
-      position: absolute;
-      right: 0;
-      top: 20px;
-      bottom: 20px;
-      width: 1px;
-      border-right: 1px solid ${props => props.theme.base.colors.lines};
-    }
-  }
+
+  ${props => {
+    const { info, base, minWidth } = props.theme;
+    return css`
+      @media ${minWidth.L} {
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        padding: 20px 40px;
+
+        color: ${info.colors.text};
+        background: ${info.colors.background};
+        width: ${info.size.width};
+
+        &::after {
+          content: "";
+          position: absolute;
+          right: 0;
+          top: 20px;
+          bottom: 20px;
+          width: 1px;
+          border-right: 1px solid ${base.colors.lines};
+        }
+      }
+    `;
+  }}
 `;
 
 const InfoContent = styled.div`
   position: absolute;
-  top: ${props => props.theme.info.sizes.headerHeight}px;
   bottom: 0;
   left: 0;
   width: 100%;
@@ -80,10 +87,6 @@ const InfoContent = styled.div`
   opacity: 1;
   transition-timing-function: ease;
 
-  .is-aside.closed & {
-    bottom: ${props => props.theme.navigator.sizes.closedHeight}px;
-  }
-
   .moving-featured & {
     bottom: 0;
   }
@@ -91,4 +94,15 @@ const InfoContent = styled.div`
   .is-aside.open & {
     display: none;
   }
+
+  ${props => {
+    const { info, navigator } = props.theme;
+    return css`
+      top: ${info.size.headerHeight};
+
+      .is-aside.closed & {
+        bottom: ${navigator.size.closedHeight};
+      }
+    `;
+  }}
 `;

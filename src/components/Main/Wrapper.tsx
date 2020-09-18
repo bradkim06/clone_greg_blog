@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { useSelector } from "react-redux";
 import { ReduxState } from "../../state/store";
 
@@ -12,53 +12,49 @@ export default ({ children }: { children: React.ReactNode }) => {
 };
 
 const StyleArticle = styled.div<{ fontSize: number }>`
-  font-size: calc(
-    ${({ theme }) => theme.main.fonts.content.size}em *
-      ${({ fontSize }) => fontSize}
-  );
-
-  @media (min-width: ${({ theme }) => theme.mediaQueryTresholds.M}px) {
-    font-size: calc(
-      ${({ theme }) => theme.main.fonts.content.sizeM}em *
-        ${({ fontSize }) => fontSize}
-    );
-  }
-
-  @media (min-width: ${({ theme }) => theme.mediaQueryTresholds.L}px) {
-    font-size: calc(
-      ${({ theme }) => theme.main.fonts.content.sizeL}em *
-        ${({ fontSize }) => fontSize}
-    );
-  }
-
-  background: ${({ theme }) => theme.main.colors.background};
-  max-width: ${({ theme }) => theme.main.sizes.articleMaxWidth};
   margin: 0 auto;
-  padding: calc(${({ theme }) => theme.bars.sizes.infoBar}px + 1.5rem) 1.5rem
-    1.5rem 1.5rem;
 
   & strong,
   & b {
     letter-spacing: -0.02em;
   }
 
-  & a {
-    font-weight: bold;
-    letter-spacing: -0.02em;
-    text-decoration: underline;
-    transition: 0.3s;
+  ${props => {
+    const { main, minWidth, base, bars } = props.theme;
+    const fontSize = props.fontSize;
+    return css`
+      font-size: calc(${main.fonts.content.size * fontSize}rem);
 
-    &:hover {
-      color: ${({ theme }) => theme.base.colors.linkHover};
-    }
-  }
+      @media ${minWidth.M} {
+        font-size: calc(${main.fonts.content.sizeM * fontSize}rem);
+      }
 
-  @media (min-width: ${({ theme }) => theme.mediaQueryTresholds.M}px) {
-    padding: calc(2.5rem + ${({ theme }) => theme.bars.sizes.infoBar}px) 3.5rem
-      2.5rem;
-  }
+      @media ${minWidth.M} {
+        font-size: calc(${main.fonts.content.sizeL * fontSize}rem);
+      }
 
-  @media (min-width: ${({ theme }) => theme.mediaQueryTresholds.L}px) {
-    padding: 3.5rem;
-  }
+      background: ${main.colors.background};
+      max-width: ${main.sizes.articleMaxWidth};
+      padding: calc(${bars.sizes.infoBar}px + 1.5em) 1.5em;
+
+      & a {
+        font-weight: bold;
+        letter-spacing: -0.02em;
+        text-decoration: underline;
+        transition: 0.3s;
+
+        &:hover {
+          color: ${base.colors.linkHover};
+        }
+      }
+
+      @media ${minWidth.M} {
+        padding: calc(2.5rem + ${bars.sizes.infoBar}px) 2.5em;
+      }
+
+      @media ${minWidth.L} {
+        padding: 3.5rem 3.5em;
+      }
+    `;
+  }}
 `;

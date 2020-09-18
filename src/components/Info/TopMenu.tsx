@@ -8,7 +8,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import MenuList from "@material-ui/core/MenuList";
 import IconButton from "@material-ui/core/IconButton";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { PagesProps } from "../Query/LayoutQuery";
 
 type TopMenuProps = {
@@ -111,15 +111,20 @@ const TopMenuWrapper = styled.div`
   float: right;
   margin: 5px 10px 0 0;
 
-  a {
-    color: ${({ theme }) => theme.main.colors.title};
-  }
+  ${props => {
+    const { main, bars } = props.theme;
+    return css`
+      a {
+        color: ${main.colors.title};
+      }
 
-  li {
-    color: ${({ theme }) => theme.main.colors.title};
-  }
+      li {
+        color: ${main.colors.title};
+      }
 
-  .MuiIconButton-root {
-    color: ${props => props.theme.bars.colors.icon};
-  }
+      .MuiIconButton-root {
+        color: ${bars.colors.icon};
+      }
+    `;
+  }}
 `;

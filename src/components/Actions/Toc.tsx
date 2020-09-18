@@ -10,7 +10,7 @@ import TocIcon from "@material-ui/icons/Toc";
 import IconButton from "@material-ui/core/IconButton";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useTheme } from "@material-ui/core/styles";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import TocLists from "./TocLists";
 import { ReduxState } from "../../state/store";
 import { PostTemplateProps } from "../../templates/PostTemplate";
@@ -92,14 +92,25 @@ export default () => {
 };
 
 const TocTitle = styled(DialogTitle)`
-  font-size: 2em;
+  font-size: 2rem;
   font-weight: 600;
   text-align: center;
-  color: ${({ theme }) => theme.base.colors.palette.second};
+
+  ${props => {
+    const { base } = props.theme;
+    return css`
+      color: ${base.colors.palette.second};
+    `;
+  }}
 `;
 
 const StyledDialog = styled(Dialog)`
-  .MuiDialog-paperFullWidth {
-    background-color: ${props => props.theme.search.colors.background};
-  }
+  ${props => {
+    const { search } = props.theme;
+    return css`
+      .MuiDialog-paperFullWidth {
+        background-color: ${search.colors.background};
+      }
+    `;
+  }}
 `;

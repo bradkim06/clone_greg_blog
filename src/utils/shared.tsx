@@ -52,9 +52,9 @@ export function moveNavAside(state: moveNavAsideState, dispatch: any): void {
         dispatch(setNavigatorPosition("resizing-aside"));
         setTimeout(() => {
           dispatch(setNavigatorPosition("is-aside"));
-          setTimeout(forceCheck, 600);
+          // setTimeout(forceCheck, 400);
         });
-      }, 800);
+      }, 500);
     } else {
       dispatch(setNavigatorPosition("is-aside"));
     }

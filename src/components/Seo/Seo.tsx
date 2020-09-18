@@ -20,7 +20,7 @@ export default ({ post }: SeoProps) => {
     ? postDescription
     : config.siteDescription;
   const image = postCover
-    ? postCover.childImageSharp.resize.src
+    ? postCover.childImageSharp.fluid.src
     : config.siteImage;
   const url = config.siteUrl + config.pathPrefix + postSlug;
 

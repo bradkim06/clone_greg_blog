@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { PostsProps } from "../Query/LayoutQuery";
 
 import ListHeader from "./ListHeader";
@@ -58,21 +58,26 @@ export const GridWrapper = styled.ul`
   display: grid;
   grid-gap: 1rem;
 
-  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
-    padding: 0 1rem;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  ${props => {
+    const { minWidth } = props.theme;
+    return css`
+      @media ${minWidth.L} {
+        padding: 0 1rem;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 
-    .moving-featured &,
-    .is-aside & {
-      padding: 0 0.5rem;
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    }
+        .moving-featured &,
+        .is-aside & {
+          padding: 0 0.5rem;
+          grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        }
 
-    .is-aside.closed &,
-    .moving-featured.closed & {
-      display: none;
-    }
-  }
+        .is-aside.closed &,
+        .moving-featured.closed & {
+          display: none;
+        }
+      }
+    `;
+  }}
 `;
 
 const Posts = styled.div`
@@ -84,20 +89,25 @@ const Posts = styled.div`
 `;
 
 const Inner = styled.div`
-  padding: calc(${props => props.theme.bars.sizes.infoBar}px + 1.3rem) 1.3rem
-    calc(${props => props.theme.bars.sizes.actionsBar}px + 1.3rem) 1.3rem;
+  ${props => {
+    const { minWidth, bars, info } = props.theme;
+    return css`
+      padding: calc(${bars.sizes.infoBar}px + 1.3rem) 1.3rem
+        calc(${bars.sizes.actionsBar}px + 1.3rem) 1.3rem;
 
-  @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
-    padding: calc(${props => props.theme.bars.sizes.infoBar}px + 2rem) 2rem
-      calc(${props => props.theme.bars.sizes.actionsBar}px + 2rem) 2rem;
-  }
+      @media ${minWidth.M} {
+        padding: calc(${bars.sizes.infoBar}px + 2rem) 2rem
+          calc(${bars.sizes.actionsBar}px + 2rem) 2rem;
+      }
 
-  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
-    padding: 2rem calc(1rem + 17px) calc(2rem + 17px) 2rem;
-    left: ${props => props.theme.info.sizes.width}px;
-    .moving-featured &,
-    .is-aside & {
-      padding: 1rem 0.5rem 1rem 0.5rem;
-    }
-  }
+      @media ${minWidth.L} {
+        padding: 2rem calc(1rem + 17px) calc(2rem + 17px) 2rem;
+        left: ${info.sizes.width}px;
+        .moving-featured &,
+        .is-aside & {
+          padding: 1rem 0.5rem 1rem 0.5rem;
+        }
+      }
+    `;
+  }}
 `;

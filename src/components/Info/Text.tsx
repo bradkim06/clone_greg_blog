@@ -10,7 +10,7 @@ const Text = styled.div`
   display: block;
   font-weight: 300;
   line-height: 1.5;
-  font-size: 0.95em;
+  font-size: 0.95rem;
   text-align: center;
   margin-bottom: 0.8em;
   word-break: break-word;
@@ -22,8 +22,4 @@ const Text = styled.div`
   & p::last-child {
     margin-bottom: 0;
   }
-
-  // .is-aside.open & {
-  //   display: none;
-  // }
 `;

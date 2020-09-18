@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Link from "gatsby-link";
 import { FluidObject } from "gatsby-image";
 import { useLogoQuery } from "../Query/LogoQuery";
@@ -65,31 +65,20 @@ export default ({
   );
 };
 
-// function myDate(date: string) {
-//   const dateObj = new Date(date).toUTCString();
-//   const dateToShow = dateObj.split(" ").slice(0, 4).join(" ");
-//
-//   if (dateToShow !== "Invalid Date") {
-//     return dateToShow;
-//   }
-// }
-
 const Divider = styled.div`
-  aspect-ratio: 16/9;
-  margin: 0.2rem 0;
+  margin: 0.1rem 0;
 
-  @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
-    margin: 0.2rem 0;
-  }
-
-  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
-    margin: 0.2rem 0;
-
-    .moving-featured &,
-    .is-aside & {
-      display: none;
-    }
-  }
+  ${props => {
+    const { minWidth } = props.theme;
+    return css`
+      @media ${minWidth.L} {
+        .moving-featured &,
+        .is-aside & {
+          display: none;
+        }
+      }
+    `;
+  }}
 `;
 
 const ImgSource = styled.img`
@@ -97,25 +86,30 @@ const ImgSource = styled.img`
   width: 60px;
   height: 60px;
 
-  @media (max-width: 300px) {
-    display: none;
-  }
+  ${props => {
+    const { minWidth, maxWidth } = props.theme;
+    return css`
+      @media ${maxWidth.S} {
+        display: none;
+      }
 
-  @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
-    width: 80px;
-    height: 80px;
-  }
+      @media ${minWidth.M} {
+        width: 80px;
+        height: 80px;
+      }
 
-  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
-    width: 100%;
-    height: 150px;
+      @media ${minWidth.L} {
+        width: 100%;
+        height: 150px;
 
-    .moving-featured &,
-    .is-aside & {
-      width: 30px;
-      height: 30px;
-    }
-  }
+        .moving-featured &,
+        .is-aside & {
+          width: 30px;
+          height: 30px;
+        }
+      }
+    `;
+  }}
 `;
 
 const TextFlex = styled.div`
@@ -134,84 +128,95 @@ const TextFlex = styled.div`
     font-weight: 400;
   }
 
-  @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
-    h1 {
-      font-size: 1.2rem;
-      font-weight: 600;
-    }
+  ${props => {
+    const { minWidth } = props.theme;
+    return css`
+      @media ${minWidth.M} {
+        h1 {
+          font-size: 1.2rem;
+          font-weight: 600;
+        }
 
-    small {
-      font-size: 0.9rem;
-      font-weight: 400;
-    }
-  }
-
-  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
-    padding: 0;
-
-    h1 {
-      margin: 0.5rem 0;
-      font-size: 1.4rem;
-      font-weight: 600;
-    }
-
-    small {
-      font-size: 1rem;
-      font-weight: 400;
-    }
-
-    .moving-featured &,
-    .is-aside & {
-      padding: 0 0 0 1rem;
-      text-align: center;
-
-      small {
-        display: none;
+        small {
+          font-size: 0.9rem;
+          font-weight: 400;
+        }
       }
 
-      h1 {
-        font-size: 1rem;
+      @media ${minWidth.L} {
+        padding: 0;
+
+        h1 {
+          margin: 0.5em 0;
+          font-size: 1.4rem;
+          font-weight: 600;
+        }
+
+        small {
+          font-size: 1rem;
+          font-weight: 400;
+        }
+
+        .moving-featured &,
+        .is-aside & {
+          padding: 0 0 0 1rem;
+          text-align: center;
+
+          small {
+            display: none;
+          }
+
+          h1 {
+            font-size: 1rem;
+          }
+        }
       }
-    }
-  }
+    `;
+  }}
 `;
 
 const FlexChild = styled.li`
-  padding: 0.7rem;
+  padding: 0.7em;
   height: 100%;
   width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
-  color: ${({ theme }) => theme.navigator.colors.postsListItemLink};
-  border-radius: 20px;
-  background-color: ${({ theme }) => theme.search.colors.listBackground};
-
-  box-shadow: 0 1px 3px ${({ theme }) => theme.search.colors.shadow},
-    0 1px 2px ${({ theme }) => theme.search.colors.shadowHover};
   transition: all 1.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border-radius: 20px;
 
-  &:hover {
-    box-shadow: 0 14px 28px ${({ theme }) => theme.search.colors.shadowHover},
-      0 10px 10px ${({ theme }) => theme.search.colors.shadowHover};
-    color: ${({ theme }) => theme.navigator.colors.postsListItemLinkHover};
-    background-color: ${({ theme }) => theme.search.colors.hoverBackground};
-  }
+  ${props => {
+    const { navigator, search, minWidth } = props.theme;
 
-  @media (min-width: ${props => props.theme.mediaQueryTresholds.M}px) {
-    padding: 1rem;
-  }
+    return css`
+      color: ${navigator.colors.postsListItemLink};
+      background-color: ${search.colors.listBackground};
 
-  @media (min-width: ${props => props.theme.mediaQueryTresholds.L}px) {
-    padding: 1rem;
-    flex-direction: column;
-    align-items: center;
+      box-shadow: 0 1px 3px ${search.colors.shadow},
+        0 1px 2px ${search.colors.shadowHover};
 
-    .moving-featured &,
-    .is-aside & {
-      padding: 0.5rem 1rem;
-      flex-direction: row;
-      align-items: center;
-    }
-  }
+      &:hover {
+        box-shadow: 0 14px 28px ${search.colors.shadowHover},
+          0 10px 10px ${search.colors.shadowHover};
+        color: ${navigator.colors.postsListItemLinkHover};
+        background-color: ${search.colors.hoverBackground};
+      }
+      @media ${minWidth.M} {
+        padding: 1em 1rem;
+      }
+
+      @media ${minWidth.L} {
+        padding: 1em 1rem;
+        flex-direction: column;
+        align-items: center;
+
+        .moving-featured &,
+        .is-aside & {
+          padding: 0.5em 1rem;
+          flex-direction: row;
+          align-items: center;
+        }
+      }
+    `;
+  }}
 `;
