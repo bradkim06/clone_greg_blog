@@ -86,9 +86,9 @@ export const GlobalStyle = createGlobalStyle`
         -webkit-tap-highlight-color: rgba(0, 0, 0, 0.05);
       }
 
-      html.wf-active {
-        font-family: ${base.fonts.unstyledFamily};
-      }
+      // html.wf-active {
+      //   font-family: ${base.fonts.unstyledFamily};
+      // }
 
       :not(pre) > code[class*="language-"] {
         background-color: ${base.colors.accent};

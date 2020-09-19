@@ -1,4 +1,4 @@
-import { forceCheck } from "react-lazyload";
+// import { forceCheck } from "react-lazyload";
 import { navigate } from "@reach/router";
 import { useSelector, shallowEqual } from "react-redux";
 import {

@@ -11,7 +11,7 @@ const Navigator = loadable(() => import("../../src/components/Navigator"));
 const ActionsBar = loadable(() => import("../../src/components/Actions/Bar"));
 const InfoBar = loadable(() => import("../../src/components/Info/Bar"));
 
-const TopLayout = ({ children }: { children: React.ReactNode }) => {
+const TopLayout: React.FC<null> = ({ children }) => {
   const { posts, pages } = useLayoutQuery();
   const themeContext = useContext(ThemeContext);
   const categories = category(posts);
