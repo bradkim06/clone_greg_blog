@@ -92,18 +92,49 @@ Definition
 
 Typographically, preformatted text is not the same thing as code. Sometimes, a faithful execution of the text requires preformatted text that may not have anything to do with code. Most browsers use Courier and that’s a good default — with one slight adjustment, Courier 10 Pitch over regular Courier for Linux users.
 
-### Code
+## Code Highlight
 
-Code can be presented inline, like `<?php bloginfo('stylesheet_url'); ?>`, or using [jekyll's highlight
-filter](http://jekyllrb.com/docs/templates/#code-snippet-highlighting) to
-highlight a block of code. Because we have more specific typographic needs for code, we’ll specify Consolas and Monaco ahead of the browser-defined monospace font.
+Code can be presented inline, like `<?php bloginfo('stylesheet_url'); ?>` Because we have more specific typographic needs for code, we’ll specify Consolas and Monaco ahead of the browser-defined monospace font.
 
-```css
-#container {
-  float: left;
-  margin: 0 -240px 0 0;
-  width: 100%;
+### Title
+
+To show the title, just add it to your code block. Ex: `title=src/myfile.css`
+
+```css title=src/myfile.css
+.gatsby::before {
+  content: "niceee...";
 }
+```
+
+### Line numbers
+
+If you want to show line number, just add a option `lineNumbers=true`.
+
+```js lineNumbers=true
+const rocket = {
+  launch: () => console.log("Launching...")
+};
+
+rocket.launch();
+```
+
+### React live
+
+As mentioned in the introduction, this theme uses `react-live`, so you can
+create a playground for live editing React components.
+
+To use it, just add a `live=true` option to your code block.
+
+```jsx live=true
+function MyComponent() {
+  function handleButtonClick() {
+    alert("wowww");
+  }
+
+  return <button onClick={handleButtonClick}>Hey, click me!</button>;
+}
+
+render(<MyComponent />);
 ```
 
 ---
@@ -129,7 +160,6 @@ HTML elements
   </abbr> examples <br />
   The <b>b element</b> example <br />
   The <cite>cite element</cite> example <br />
-  The <code>code element</code> example <br />
   The <del>del element</del> example <br />
   The <dfn>dfn element</dfn> and{" "}
   <dfn title="Title text">dfn element with title</dfn> examples <br />

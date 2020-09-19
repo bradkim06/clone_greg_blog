@@ -3,14 +3,21 @@ import PostWrapper from "../Main/Wrapper";
 import PostHeader from "./Header";
 import PostFooter from "./Footer";
 import Article from "../Main/Article";
-import { MDXProvider } from "@mdx-js/react";
 import { MDXRenderer } from "gatsby-plugin-mdx";
-import { Link } from "gatsby";
+import { MDXProvider } from "@mdx-js/react";
 import { MdxType } from "../../templates/PostTemplate";
+import { Link } from "gatsby";
+import Code from "../Code";
 
 type PostProps = {
   post: MdxType;
 };
+
+const components = {
+  Link,
+  inlineCode: props => <code className="inline-code" {...props} />,
+  code: Code
+}; // Provide common components here
 
 export default ({ post }: PostProps) => {
   const { title, subTitle } = post.frontmatter;
@@ -29,5 +36,3 @@ export default ({ post }: PostProps) => {
     </PostWrapper>
   );
 };
-
-const components = { Link }; // Provide common components here

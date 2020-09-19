@@ -28,7 +28,7 @@ function wrapRootElement({ element }: any) {
   );
 }
 
-const Initialize = ({ children }: any) => {
+const Initialize = ({ children }: { children: React.ReactNode }) => {
   const isThemeState = useSelector<ReduxState, boolean>(
     state => state.themeToggle
   );

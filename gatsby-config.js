@@ -108,21 +108,11 @@ module.exports = {
             }
           },
           "gatsby-remark-grid-tables",
-          `gatsby-remark-prismjs`,
+          // `gatsby-remark-prismjs`,
           `gatsby-remark-copy-linked-files`,
           `gatsby-remark-smartypants`
         ],
-        plugins: [
-          {
-            resolve: `gatsby-remark-images`,
-            options: {
-              maxWidth: 1000,
-              backgroundColor: "transparent",
-              // quality: 100,
-              loading: "auto"
-            }
-          }
-        ]
+        plugins: [`gatsby-remark-autolink-headers`, `gatsby-remark-images`]
       }
     },
     `gatsby-transformer-sharp`,

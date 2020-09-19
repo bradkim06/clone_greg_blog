@@ -9,8 +9,6 @@ import { FluidObject } from "gatsby-image";
 import { setCurrentPost } from "../state/store";
 import { moveNavAside, moveNavData } from "../utils/shared";
 
-require("prismjs/themes/prism-okaidia.css");
-
 export type MdxType = {
   id: string;
   body: string;
