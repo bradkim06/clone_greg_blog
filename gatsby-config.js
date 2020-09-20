@@ -97,7 +97,6 @@ module.exports = {
             options: {
               maxWidth: 1000,
               backgroundColor: "transparent",
-              // quality: 100,
               loading: "auto"
             }
           },
@@ -108,7 +107,6 @@ module.exports = {
             }
           },
           "gatsby-remark-grid-tables",
-          // `gatsby-remark-prismjs`,
           `gatsby-remark-copy-linked-files`,
           `gatsby-remark-smartypants`
         ],
