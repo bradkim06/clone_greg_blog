@@ -10,50 +10,6 @@ import {
 import { moveNavAside, moveNavData } from '../../utils/shared';
 import List from './List';
 
-type NavigatorProps = {
-  posts: PostsProps;
-};
-
-export default ({ posts }: NavigatorProps) => {
-  const stateFilter = useSelector<ReduxState, string>(
-    state => state.categoryFilter,
-  );
-  const state = moveNavData();
-  const dispatch = useDispatch();
-
-  function expandOnClick() {
-    dispatch(setNavigatorShape('open'));
-  }
-
-  function linkOnClick() {
-    moveNavAside(state, dispatch);
-  }
-
-  function removefilterOnClick() {
-    dispatch(setCategoryFilter('all posts'));
-  }
-
-  return (
-    <StyleNavigator
-      className={`${state.navigatorPosition ? state.navigatorPosition : ''} ${
-        state.navigatorShape ? state.navigatorShape : ''
-      } `}
-    >
-      {posts.totalCount && (
-        <List
-          posts={posts}
-          navigatorPosition={state.navigatorPosition}
-          navigatorShape={state.navigatorShape}
-          linkOnClick={linkOnClick}
-          expandOnClick={expandOnClick}
-          categoryFilter={stateFilter}
-          removeFilter={removefilterOnClick}
-        />
-      )}
-    </StyleNavigator>
-  );
-};
-
 const StyleNavigator = styled.nav`
   transform: translate3d(0, 0, 0);
   will-change: left, top, bottom, width;
@@ -159,3 +115,47 @@ const StyleNavigator = styled.nav`
     `;
   }}
 `;
+
+type NavigatorProps = {
+  posts: PostsProps;
+};
+
+export default ({ posts }: NavigatorProps) => {
+  const stateFilter = useSelector<ReduxState, string>(
+    state => state.categoryFilter,
+  );
+  const state = moveNavData();
+  const dispatch = useDispatch();
+
+  function expandOnClick() {
+    dispatch(setNavigatorShape('open'));
+  }
+
+  function linkOnClick() {
+    moveNavAside(state, dispatch);
+  }
+
+  function removefilterOnClick() {
+    dispatch(setCategoryFilter('all posts'));
+  }
+
+  return (
+    <StyleNavigator
+      className={`${state.navigatorPosition ? state.navigatorPosition : ''} ${
+        state.navigatorShape ? state.navigatorShape : ''
+      } `}
+    >
+      {posts.totalCount && (
+        <List
+          posts={posts}
+          navigatorPosition={state.navigatorPosition}
+          navigatorShape={state.navigatorShape}
+          linkOnClick={linkOnClick}
+          expandOnClick={expandOnClick}
+          categoryFilter={stateFilter}
+          removeFilter={removefilterOnClick}
+        />
+      )}
+    </StyleNavigator>
+  );
+};

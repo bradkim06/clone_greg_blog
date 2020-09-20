@@ -1,32 +1,31 @@
-const config = require("./content/meta/config");
+const config = require('./content/meta/config');
 
 module.exports = {
   siteMetadata: {
-    title: "bradkim06",
-    siteUrl: `https://bradkim06.github.io`
+    title: 'bradkim06',
+    siteUrl: `https://bradkim06.github.io`,
   },
   plugins: [
-    "gatsby-plugin-top-layout",
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         path: `${__dirname}/content/posts/`,
-        name: "posts"
-      }
+        name: 'posts',
+      },
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         path: `${__dirname}/content/pages/`,
-        name: "pages"
-      }
+        name: 'pages',
+      },
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         path: `${__dirname}/content/images/`,
-        name: "images"
-      }
+        name: 'images',
+      },
     },
     {
       resolve: `gatsby-plugin-manifest`,
@@ -42,42 +41,42 @@ module.exports = {
         theme_color_in_head: false, // This will avoid adding theme-color meta tag.
         display: config.manifestDisplay,
         description: config.manifestDescription,
-        crossOrigin: config.manifestCrossOrigin
-      }
+        crossOrigin: config.manifestCrossOrigin,
+      },
     },
-    "gatsby-plugin-offline",
+    'gatsby-plugin-offline',
     {
       resolve: `gatsby-plugin-prefetch-google-fonts`,
       options: {
         fonts: [
           {
             family: `Open Sans`,
-            variants: [`400`, `600`]
+            variants: [`400`, `600`],
           },
           {
             family: `Lora`,
-            variants: [`400`, `600`]
+            variants: [`400`, `600`],
           },
           {
             family: `Roboto`,
-            variants: [`400`, `600`]
-          }
-        ]
-      }
+            variants: [`400`, `600`],
+          },
+        ],
+      },
     },
     `gatsby-plugin-preload-fonts`,
     {
-      resolve: "gatsby-plugin-material-ui",
+      resolve: 'gatsby-plugin-material-ui',
       // If you want to use styled components you should change the injection order.
       options: {
         // stylesProvider: {
         //   injectFirst: true,
         // },
-      }
+      },
     },
     // If you want to use styled components you should add the plugin here.
     // 'gatsby-plugin-styled-components',
-    "gatsby-plugin-react-helmet",
+    'gatsby-plugin-react-helmet',
     {
       resolve: `gatsby-plugin-mdx`,
       options: {
@@ -89,39 +88,39 @@ module.exports = {
             resolve: `gatsby-remark-images`,
             options: {
               maxWidth: 1000,
-              backgroundColor: "transparent",
-              loading: "auto"
-            }
+              backgroundColor: 'transparent',
+              loading: 'auto',
+            },
           },
           {
             resolve: `gatsby-remark-responsive-iframe`,
             options: {
-              wrapperStyle: `margin-bottom: 2em`
-            }
+              wrapperStyle: `margin-bottom: 2em`,
+            },
           },
-          "gatsby-remark-grid-tables",
+          'gatsby-remark-grid-tables',
           `gatsby-remark-copy-linked-files`,
-          `gatsby-remark-smartypants`
+          `gatsby-remark-smartypants`,
         ],
-        plugins: [`gatsby-remark-autolink-headers`, `gatsby-remark-images`]
-      }
+        plugins: [`gatsby-remark-autolink-headers`, `gatsby-remark-images`],
+      },
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-sitemap`,
     {
-      resolve: "gatsby-plugin-robots-txt",
+      resolve: 'gatsby-plugin-robots-txt',
       options: {
-        host: "https://bradkim06.github.io",
-        sitemap: "https://bradkim06.github.io/sitemap.xml",
-        policy: [{ userAgent: "*", allow: "/" }]
-      }
+        host: 'https://bradkim06.github.io',
+        sitemap: 'https://bradkim06.github.io/sitemap.xml',
+        policy: [{ userAgent: '*', allow: '/' }],
+      },
     },
     {
-      resolve: "gatsby-plugin-webpack-bundle-analyser-v2",
+      resolve: 'gatsby-plugin-webpack-bundle-analyser-v2',
       options: {
-        devMode: true
-      }
-    }
-  ]
+        devMode: true,
+      },
+    },
+  ],
 };

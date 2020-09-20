@@ -7,6 +7,12 @@ import styled, { withTheme } from 'styled-components';
 
 import { setScrollToTop, ReduxState } from '../../state/store';
 
+const Focus = styled.div`
+  &:focus {
+    outline: none;
+  }
+`;
+
 type ScrollType = {
   forceCheckOnScroll: any;
   isNavigator: boolean;
@@ -16,7 +22,7 @@ type ScrollType = {
   theme: {
     bars: {
       colors: {
-        icon: number;
+        icon: string;
       };
     };
   };
@@ -128,17 +134,11 @@ class SpringScrollbars extends Component<ScrollType> {
         renderThumbVertical={this.renderThumb}
         onUpdate={(this as any).handleUpdate}
       >
-        <Focus tabIndex="0">{children}</Focus>
+        <Focus tabIndex={0}>{children}</Focus>
       </Scrollbars>
     );
   }
 }
-
-const Focus = styled.div`
-  &:focus {
-    outline: none;
-  }
-`;
 
 const mapStateToProps = (state: ReduxState) => {
   return {

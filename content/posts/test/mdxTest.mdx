@@ -1,6 +1,6 @@
 ---
 title: MDX full test
-category: "test"
+category: test
 date: 2020-09-17T12:40:07
 ---
 
@@ -102,7 +102,7 @@ To show the title, just add it to your code block. Ex: `title=src/myfile.css`
 
 ```css title=src/myfile.css
 .gatsby::before {
-  content: "niceee...";
+  content: 'niceee...';
 }
 ```
 
@@ -112,7 +112,7 @@ If you want to show line number, just add a option `lineNumbers=true`.
 
 ```js lineNumbers=true
 const rocket = {
-  launch: () => console.log("Launching...")
+  launch: () => console.log('Launching...'),
 };
 
 rocket.launch();
@@ -124,10 +124,10 @@ If you want to highlight lines, just add a option `{2, 4-5}`.
 
 ```js lineNumbers=true {2,4-5}
 const test = 3;
-const foo = "bar";
-const harry = "potter";
-const hermione = "granger";
-const ron = "weasley";
+const foo = 'bar';
+const harry = 'potter';
+const hermione = 'granger';
+const ron = 'weasley';
 ```
 
 ### React live
@@ -140,7 +140,7 @@ To use it, just add a `live=true` option to your code block.
 ```jsx live=true
 function MyComponent() {
   function handleButtonClick() {
-    alert("wowww");
+    alert('wowww');
   }
 
   return <button onClick={handleButtonClick}>Hey, click me!</button>;

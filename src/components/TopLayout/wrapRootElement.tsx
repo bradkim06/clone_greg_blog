@@ -9,26 +9,13 @@ import {
   createMuiTheme,
 } from '@material-ui/core/styles';
 import { ThemeProvider as StyledProvider } from 'styled-components';
-import { lightTheme } from '../../src/styles/lightTheme';
-import { darkTheme } from '../../src/styles/darkTheme';
-import GlobalStyle from '../../src/styles/globals';
+import { lightTheme } from '../../styles/lightTheme';
+import { darkTheme } from '../../styles/darkTheme';
+import GlobalStyle from '../../styles/globals';
 
-import createStore, { ReduxState, setThemeToggle } from '../../src/state/store';
+import createStore, { ReduxState, setThemeToggle } from '../../state/store';
 
 const store = createStore();
-
-// eslint-disable-next-line react/display-name,react/prop-types
-function wrapRootElement({ element }: any) {
-  // Instantiating store in `wrapRootElement` handler ensures:
-  //  - there is fresh store for each SSR page
-  //  - it will be called only once in browser, when React mounts
-
-  return (
-    <ReduxProvider store={store}>
-      <Initialize>{element}</Initialize>
-    </ReduxProvider>
-  );
-}
 
 const Initialize = ({ children }: { children: React.ReactNode }) => {
   const isThemeState = useSelector<ReduxState, boolean>(
@@ -54,5 +41,18 @@ const Initialize = ({ children }: { children: React.ReactNode }) => {
     </StyledProvider>
   );
 };
+
+// eslint-disable-next-line react/display-name,react/prop-types
+function wrapRootElement({ element }: any) {
+  // Instantiating store in `wrapRootElement` handler ensures:
+  //  - there is fresh store for each SSR page
+  //  - it will be called only once in browser, when React mounts
+
+  return (
+    <ReduxProvider store={store}>
+      <Initialize>{element}</Initialize>
+    </ReduxProvider>
+  );
+}
 
 export default wrapRootElement;

@@ -4,6 +4,11 @@ import { useSelector } from 'react-redux';
 import loadable from '@loadable/component';
 import { ReduxState } from '../../state/store';
 
+const StyledComments = styled.div`
+  margin: 3em 0 0;
+  padding: 3em 0 0;
+`;
+
 const PostComments = () => {
   const stateTheme = useSelector<ReduxState>(state => state.themeToggle);
   const themeSelect = stateTheme ? 'photon-dark' : 'github-light';
@@ -29,10 +34,5 @@ const PostComments = () => {
     </StyledComments>
   );
 };
-
-const StyledComments = styled.div`
-  margin: 3em 0 0;
-  padding: 3em 0 0;
-`;
 
 export default loadable(async () => PostComments);

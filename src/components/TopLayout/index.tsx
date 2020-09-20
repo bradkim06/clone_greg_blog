@@ -2,12 +2,12 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useDispatch } from 'react-redux';
 import { ThemeContext } from 'styled-components';
 import LayoutWrapper from './LayoutWrapper';
-import { setIsWideScreen } from '../../src/state/store';
-import { useLayoutQuery } from '../../src/components/Query/LayoutQuery';
-import InfoBox from '../../src/components/Info/Box';
-import Navigator from '../../src/components/Navigator';
-import ActionsBar from '../../src/components/Actions/Bar';
-import InfoBar from '../../src/components/Info/Bar';
+import { setIsWideScreen } from '../../state/store';
+import { useLayoutQuery } from '../Query/LayoutQuery';
+import InfoBox from '../Info/Box';
+import Navigator from '../Navigator';
+import ActionsBar from '../Actions/Bar';
+import InfoBar from '../Info/Bar';
 
 function getWidth(): number {
   let width = 0;
@@ -54,31 +54,21 @@ function useCurrentWidth(theme: {
 }
 
 type CategoryProps = {
-  edges: Array<{
-    node: {
-      frontmatter: {
-        category: string;
-      };
+  node: {
+    frontmatter: {
+      category?: string;
     };
-  }>;
+  };
 };
 
-function getCategory(posts: CategoryProps): string[] {
-  const categoryArray = posts.edges.reduce((list: (string | any)[], edge) => {
-    const { category } = edge.node.frontmatter;
-    if (category && !~list.indexOf(category)) {
-      return list.concat(edge.node.frontmatter.category);
-    }
-    return list;
-  }, []);
-  return categoryArray;
-}
-
-const TopLayout: React.FC<null> = ({ children }) => {
+const TopLayout = ({ children }: { children: React.ReactNode }) => {
   const { posts, pages } = useLayoutQuery();
   const themeContext = useContext(ThemeContext);
-  const categories = getCategory(posts);
-
+  const categories = [
+    ...new Set(
+      posts.edges.map((item: CategoryProps) => item.node.frontmatter.category),
+    ),
+  ];
   const isWideState = useCurrentWidth(themeContext);
   const dispatch = useDispatch();
 

@@ -1,10 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-export default ({ children }: { children: React.ReactNode }) => {
-  return <Wrapper>{children}</Wrapper>;
-};
-
 const Wrapper = styled.div`
   padding: 1px;
   position: absolute;
@@ -25,3 +21,7 @@ const Wrapper = styled.div`
     `;
   }}
 `;
+
+export default ({ children }: { children: React.ReactNode }) => {
+  return <Wrapper>{children}</Wrapper>;
+};
