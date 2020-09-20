@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext, ReactElement } from 'react';
 import { useDispatch } from 'react-redux';
 import { ThemeContext } from 'styled-components';
 import LayoutWrapper from './LayoutWrapper';
@@ -53,17 +53,22 @@ function useCurrentWidth(theme: {
   return width >= mediaQueryL;
 }
 
-type CategoryProps = {
-  node: {
-    frontmatter: {
-      category?: string;
-    };
-  };
+type TopLayoutProps = {
+  children: React.ReactNode;
 };
 
-const TopLayout = ({ children }: { children: React.ReactNode }) => {
+const TopLayout = ({ children }: TopLayoutProps): ReactElement => {
   const { posts, pages } = useLayoutQuery();
   const themeContext = useContext(ThemeContext);
+
+  type CategoryProps = {
+    node: {
+      frontmatter: {
+        category?: string;
+      };
+    };
+  };
+
   const categories = [
     ...new Set(
       posts.edges.map((item: CategoryProps) => item.node.frontmatter.category),

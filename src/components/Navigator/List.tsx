@@ -1,55 +1,9 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import styled, { css } from 'styled-components';
 import { PostsProps } from '../Query/LayoutQuery';
-
 import ListHeader from './ListHeader';
 import ListItem from './ListItem';
 import SpringScrollbars from '../Scroll';
-
-type ListProps = {
-  posts: PostsProps;
-  linkOnClick: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
-  expandOnClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  removeFilter: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  navigatorPosition: string;
-  navigatorShape: string;
-  categoryFilter: string;
-};
-
-export default ({
-  posts,
-  linkOnClick,
-  expandOnClick,
-  removeFilter,
-  categoryFilter,
-  navigatorShape,
-}: ListProps) => {
-  return (
-    <Posts>
-      <SpringScrollbars forceCheckOnScroll isNavigator>
-        <Inner>
-          <ListHeader
-            expandOnClick={expandOnClick}
-            categoryFilter={categoryFilter}
-            navigatorShape={navigatorShape}
-            removeFilter={removeFilter}
-          />
-          <GridWrapper>
-            {posts.edges &&
-              posts.edges.map((post, i) => (
-                <ListItem
-                  key={i}
-                  post={post}
-                  linkOnClick={linkOnClick}
-                  categoryFilter={categoryFilter}
-                />
-              ))}
-          </GridWrapper>
-        </Inner>
-      </SpringScrollbars>
-    </Posts>
-  );
-};
 
 export const GridWrapper = styled.ul`
   list-style: none;
@@ -111,3 +65,49 @@ const Inner = styled.div`
     `;
   }}
 `;
+
+type ListProps = {
+  posts: PostsProps;
+  linkOnClick: () => void;
+  expandOnClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  removeFilter: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  navigatorShape: string;
+  categoryFilter: string;
+};
+
+function List({
+  posts,
+  linkOnClick,
+  expandOnClick,
+  removeFilter,
+  categoryFilter,
+  navigatorShape,
+}: ListProps): ReactElement {
+  return (
+    <Posts>
+      <SpringScrollbars forceCheckOnScroll isNavigator>
+        <Inner>
+          <ListHeader
+            expandOnClick={expandOnClick}
+            categoryFilter={categoryFilter}
+            navigatorShape={navigatorShape}
+            removeFilter={removeFilter}
+          />
+          <GridWrapper>
+            {posts.edges &&
+              posts.edges.map(post => (
+                <ListItem
+                  key={post.node.id}
+                  post={post}
+                  linkOnClick={linkOnClick}
+                  categoryFilter={categoryFilter}
+                />
+              ))}
+          </GridWrapper>
+        </Inner>
+      </SpringScrollbars>
+    </Posts>
+  );
+}
+
+export default List;

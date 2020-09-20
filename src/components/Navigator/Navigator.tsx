@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled, { css } from 'styled-components';
 import { PostsProps } from '../Query/LayoutQuery';
@@ -120,7 +120,7 @@ type NavigatorProps = {
   posts: PostsProps;
 };
 
-export default ({ posts }: NavigatorProps) => {
+const Navigator = ({ posts }: NavigatorProps): ReactElement => {
   const stateFilter = useSelector<ReduxState, string>(
     state => state.categoryFilter,
   );
@@ -148,7 +148,6 @@ export default ({ posts }: NavigatorProps) => {
       {posts.totalCount && (
         <List
           posts={posts}
-          navigatorPosition={state.navigatorPosition}
           navigatorShape={state.navigatorShape}
           linkOnClick={linkOnClick}
           expandOnClick={expandOnClick}
@@ -159,3 +158,5 @@ export default ({ posts }: NavigatorProps) => {
     </StyleNavigator>
   );
 };
+
+export default Navigator;

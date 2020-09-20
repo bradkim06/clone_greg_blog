@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, ReactElement } from 'react';
 import {
   Provider as ReduxProvider,
   useSelector,
@@ -17,13 +17,17 @@ import createStore, { ReduxState, setThemeToggle } from '../../state/store';
 
 const store = createStore();
 
-const Initialize = ({ children }: { children: React.ReactNode }) => {
+type InitializeProps = {
+  children: React.ReactNode;
+};
+
+const Initialize = ({ children }: InitializeProps): ReactElement => {
   const isThemeState = useSelector<ReduxState, boolean>(
     state => state.themeToggle,
   );
   const dispatch = useDispatch();
   const theme = isThemeState ? darkTheme : lightTheme;
-  const materialTheme = (createMuiTheme as any)(theme);
+  const materialTheme = createMuiTheme(theme);
 
   useEffect(() => {
     if (localStorage.getItem('theme') === 'darkTheme') {
@@ -42,8 +46,12 @@ const Initialize = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
+type RootProps = {
+  element: ReactElement;
+};
+
 // eslint-disable-next-line react/display-name,react/prop-types
-function wrapRootElement({ element }: any) {
+function wrapRootElement({ element }: RootProps): ReactElement {
   // Instantiating store in `wrapRootElement` handler ensures:
   //  - there is fresh store for each SSR page
   //  - it will be called only once in browser, when React mounts

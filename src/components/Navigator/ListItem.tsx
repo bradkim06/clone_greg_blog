@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ReactElement } from 'react';
+import { FluidObject } from 'gatsby-image';
 import SearchListItem from '../Actions/SearchListItem';
 
 interface ListItemProps {
@@ -13,15 +14,23 @@ interface ListItemProps {
         subTitle?: string;
         date?: string;
         category?: string;
-        cover?: any;
+        cover?: {
+          childImageSharp: {
+            fluid: FluidObject;
+          };
+        };
       };
     };
   };
   categoryFilter: string;
-  linkOnClick: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
+  linkOnClick: () => void;
 }
 
-export default ({ post, categoryFilter, linkOnClick }: ListItemProps) => {
+const ListItem = ({
+  post,
+  categoryFilter,
+  linkOnClick,
+}: ListItemProps): ReactElement => {
   const {
     excerpt,
     frontmatter: { category, title, subTitle, date, cover },
@@ -56,3 +65,5 @@ export default ({ post, categoryFilter, linkOnClick }: ListItemProps) => {
     </>
   );
 };
+
+export default ListItem;

@@ -1,55 +1,8 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import styled, { css } from 'styled-components';
-
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
-
-type ListHeaderProps = {
-  expandOnClick(event: React.MouseEvent<HTMLButtonElement>): void;
-  removeFilter(event: React.MouseEvent<HTMLButtonElement>): void;
-  categoryFilter: string;
-  navigatorShape: string;
-};
-
-export default ({
-  expandOnClick,
-  categoryFilter,
-  navigatorShape,
-  removeFilter,
-}: ListHeaderProps) => {
-  return (
-    <header>
-      {navigatorShape === 'closed' && (
-        <Closed>
-          <h1>List of posts</h1>
-          <IconButton
-            aria-label="Expand the list"
-            onClick={expandOnClick}
-            title="Expand the list"
-            className="expandButton"
-          >
-            <ExpandLessIcon />
-          </IconButton>
-        </Closed>
-      )}
-      {navigatorShape === 'open' && categoryFilter !== 'all posts' && (
-        <Filter>
-          <small>Active Category Filter:</small>
-          <strong>{categoryFilter}</strong>
-          <IconButton
-            aria-label="Remove filtering"
-            onClick={removeFilter}
-            title="Clear filtering"
-            className="removeButton"
-          >
-            <CloseIcon />
-          </IconButton>
-        </Filter>
-      )}
-    </header>
-  );
-};
 
 const Closed = styled.div`
   display: none;
@@ -135,3 +88,51 @@ const Filter = styled.div`
     `;
   }}
 `;
+
+type ListHeaderProps = {
+  expandOnClick(event: React.MouseEvent<HTMLButtonElement>): void;
+  removeFilter(event: React.MouseEvent<HTMLButtonElement>): void;
+  categoryFilter: string;
+  navigatorShape: string;
+};
+
+const ListHeader = ({
+  expandOnClick,
+  categoryFilter,
+  navigatorShape,
+  removeFilter,
+}: ListHeaderProps): ReactElement => {
+  return (
+    <header>
+      {navigatorShape === 'closed' && (
+        <Closed>
+          <h1>List of posts</h1>
+          <IconButton
+            aria-label="Expand the list"
+            onClick={expandOnClick}
+            title="Expand the list"
+            className="expandButton"
+          >
+            <ExpandLessIcon />
+          </IconButton>
+        </Closed>
+      )}
+      {navigatorShape === 'open' && categoryFilter !== 'all posts' && (
+        <Filter>
+          <small>Active Category Filter:</small>
+          <strong>{categoryFilter}</strong>
+          <IconButton
+            aria-label="Remove filtering"
+            onClick={removeFilter}
+            title="Clear filtering"
+            className="removeButton"
+          >
+            <CloseIcon />
+          </IconButton>
+        </Filter>
+      )}
+    </header>
+  );
+};
+
+export default ListHeader;

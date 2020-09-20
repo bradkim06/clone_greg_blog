@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+// eslint-disable jsx-props-no-spreading
+import React, { useEffect, ReactElement } from 'react';
 import { Link } from 'gatsby';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
@@ -11,15 +12,41 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import styled, { css } from 'styled-components';
 import { PagesProps } from '../Query/LayoutQuery';
 
+const TopMenuWrapper = styled.div`
+  float: right;
+  margin: 5px 10px 0 0;
+
+  ${props => {
+    const { main, bars } = props.theme;
+    return css`
+      a {
+        color: ${main.colors.title};
+      }
+
+      li {
+        color: ${main.colors.title};
+      }
+
+      .MuiIconButton-root {
+        color: ${bars.colors.icon};
+      }
+    `;
+  }}
+`;
+
 type TopMenuProps = {
   pages: PagesProps;
-  homeLinkOnClick: Function;
-  pageLinkOnClick: Function;
+  homeLinkOnClick: (event: React.MouseEvent<HTMLAnchorElement>) => void;
+  pageLinkOnClick: (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
 };
 
-export default ({ pages, homeLinkOnClick, pageLinkOnClick }: TopMenuProps) => {
+const TopMenu = ({
+  pages,
+  homeLinkOnClick,
+  pageLinkOnClick,
+}: TopMenuProps): ReactElement => {
   const [open, setOpen] = React.useState(false);
-  const anchorRef: any = React.useRef(null);
+  const anchorRef = React.useRef(null);
 
   function handleToggle() {
     setOpen(prevOpen => !prevOpen);
@@ -33,9 +60,9 @@ export default ({ pages, homeLinkOnClick, pageLinkOnClick }: TopMenuProps) => {
   const prevOpen = React.useRef(open);
 
   useEffect(() => {
-    if (prevOpen.current === true && open === false) {
-      anchorRef.current.focus();
-    }
+    // if (prevOpen.current === true && open === false) {
+    //   anchorRef.current.focus();
+    // }
 
     prevOpen.current = open;
   }, [open]);
@@ -107,24 +134,4 @@ export default ({ pages, homeLinkOnClick, pageLinkOnClick }: TopMenuProps) => {
   );
 };
 
-const TopMenuWrapper = styled.div`
-  float: right;
-  margin: 5px 10px 0 0;
-
-  ${props => {
-    const { main, bars } = props.theme;
-    return css`
-      a {
-        color: ${main.colors.title};
-      }
-
-      li {
-        color: ${main.colors.title};
-      }
-
-      .MuiIconButton-root {
-        color: ${bars.colors.icon};
-      }
-    `;
-  }}
-`;
+export default TopMenu;

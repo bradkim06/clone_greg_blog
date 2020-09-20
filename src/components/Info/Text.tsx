@@ -1,10 +1,6 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import config from '../../../content/meta/config';
-
-export default () => {
-  return <Text>{config.infoText}</Text>;
-};
 
 const Text = styled.div`
   display: block;
@@ -23,3 +19,9 @@ const Text = styled.div`
     margin-bottom: 0;
   }
 `;
+
+function InfoText(): ReactElement {
+  return <Text>{config.infoText}</Text>;
+}
+
+export default InfoText;

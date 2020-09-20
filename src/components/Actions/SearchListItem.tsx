@@ -1,70 +1,9 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import styled, { css } from 'styled-components';
-import Link from 'gatsby-link';
+import { Link } from 'gatsby';
 import { FluidObject } from 'gatsby-image';
 import Grow from '@material-ui/core/Grow';
 import { useLogoQuery } from '../Query/LogoQuery';
-
-type SearchResultProps = {
-  title: string;
-  subTitle?: string;
-  excerpt: string;
-  date?: string;
-  slug: string;
-  cover: {
-    childImageSharp: {
-      fluid: FluidObject;
-    };
-  };
-  linkOnClick: Function;
-};
-
-export default ({
-  title,
-  subTitle,
-  excerpt,
-  date,
-  slug,
-  cover,
-  linkOnClick,
-}: SearchResultProps) => {
-  const { logo } = useLogoQuery();
-
-  const postTitle = JSON.stringify(title, null, 4).replace(/\"/g, '');
-  const postSubTitle = JSON.stringify(subTitle, null, 4).replace(/\"/g, '');
-  const postExcerpt = `${JSON.stringify(excerpt, null, 4)
-    .replace(/\"/g, '')
-    .substr(0, 30)}...`;
-  const postDate = JSON.stringify(date, null, 4).replace(/\"/g, '');
-  const postSlug = JSON.stringify(slug, null, 4).replace(/\"/g, '');
-
-  function movePage() {
-    linkOnClick();
-  }
-
-  return (
-    <Grow in timeout={1000}>
-      <Link onClick={movePage} to={postSlug}>
-        <FlexChild>
-          {cover ? (
-            <ImgSource src={cover.childImageSharp.fluid.src} alt={title} />
-          ) : (
-            <ImgSource src={logo.childImageSharp.fluid.src} alt={title} />
-          )}
-          <TextFlex>
-            <h1>{postTitle}</h1>
-            <Divider />
-            <small>
-              {postSubTitle === 'null' ? postExcerpt : postSubTitle}
-            </small>
-            <Divider />
-            <time>{postDate === 'null' ? '' : postDate}</time>
-          </TextFlex>
-        </FlexChild>
-      </Link>
-    </Grow>
-  );
-};
 
 const Divider = styled.div`
   margin: 0.1rem 0;
@@ -225,3 +164,72 @@ const FlexChild = styled.li`
     `;
   }}
 `;
+
+type SearchResultProps = {
+  title: string;
+  subTitle?: string;
+  excerpt: string;
+  date?: string;
+  slug: string;
+  cover?: {
+    childImageSharp: {
+      fluid: FluidObject;
+    };
+  };
+  linkOnClick: () => void;
+};
+
+const SearchListItem = ({
+  title,
+  subTitle,
+  excerpt,
+  date,
+  slug,
+  cover,
+  linkOnClick,
+}: SearchResultProps): ReactElement => {
+  const { logo } = useLogoQuery();
+
+  const postTitle = JSON.stringify(title, null, 4).replace(/"/g, '');
+  const postSubTitle = JSON.stringify(subTitle, null, 4).replace(/"/g, '');
+  const postExcerpt = `${JSON.stringify(excerpt, null, 4)
+    .replace(/"/g, '')
+    .substr(0, 30)}...`;
+  const postDate = JSON.stringify(date, null, 4).replace(/"/g, '');
+  const postSlug = JSON.stringify(slug, null, 4).replace(/"/g, '');
+
+  function movePage() {
+    linkOnClick();
+  }
+
+  return (
+    <Grow in timeout={1000}>
+      <Link onClick={movePage} to={postSlug}>
+        <FlexChild>
+          {cover ? (
+            <ImgSource src={cover.childImageSharp.fluid.src} alt={title} />
+          ) : (
+            <ImgSource src={logo.childImageSharp.fluid.src} alt={title} />
+          )}
+          <TextFlex>
+            <h1>{postTitle}</h1>
+            <Divider />
+            <small>
+              {postSubTitle === 'null' ? postExcerpt : postSubTitle}
+            </small>
+            <Divider />
+            <time>{postDate === 'null' ? '' : postDate}</time>
+          </TextFlex>
+        </FlexChild>
+      </Link>
+    </Grow>
+  );
+};
+
+SearchListItem.defaultProps = {
+  subTitle: '',
+  date: '',
+  cover: undefined,
+};
+
+export default SearchListItem;

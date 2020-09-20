@@ -10,39 +10,6 @@ import InfoMenu from './Menu';
 import { moveNavFeature, moveNavAside, moveNavData } from '../../utils/shared';
 import { setNavigatorShape } from '../../state/store';
 
-export default loadable(async () => InfoBox);
-
-const InfoBox = () => {
-  const state = moveNavData();
-  const dispatch = useDispatch();
-
-  function expandOnClick() {
-    dispatch(setNavigatorShape('closed'));
-  }
-
-  function avatarOnClick(e: any) {
-    moveNavFeature(e, state, dispatch);
-  }
-
-  function menulinkOnClick() {
-    dispatch(setNavigatorShape('closed'));
-    moveNavAside(state, dispatch);
-  }
-
-  return (
-    <StyleInfoBox
-      className={`${state.navigatorPosition ? state.navigatorPosition : ''} 
-         ${state.navigatorShape ? state.navigatorShape : ''}`}
-    >
-      <InfoHeader avatarOnClick={avatarOnClick} expandOnClick={expandOnClick} />
-      <InfoContent>
-        <InfoText />
-        <InfoMenu linkOnClick={menulinkOnClick} />
-      </InfoContent>
-    </StyleInfoBox>
-  );
-};
-
 const StyleInfoBox = styled.aside`
   display: none;
 
@@ -105,3 +72,36 @@ const InfoContent = styled.div`
     `;
   }}
 `;
+
+const InfoBox = () => {
+  const state = moveNavData();
+  const dispatch = useDispatch();
+
+  function expandOnClick() {
+    dispatch(setNavigatorShape('closed'));
+  }
+
+  function avatarOnClick(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
+    moveNavFeature(e, state, dispatch);
+  }
+
+  function menulinkOnClick() {
+    dispatch(setNavigatorShape('closed'));
+    moveNavAside(state, dispatch);
+  }
+
+  return (
+    <StyleInfoBox
+      className={`${state.navigatorPosition ? state.navigatorPosition : ''} 
+         ${state.navigatorShape ? state.navigatorShape : ''}`}
+    >
+      <InfoHeader avatarOnClick={avatarOnClick} expandOnClick={expandOnClick} />
+      <InfoContent>
+        <InfoText />
+        <InfoMenu linkOnClick={menulinkOnClick} />
+      </InfoContent>
+    </StyleInfoBox>
+  );
+};
+
+export default loadable(async () => InfoBox);

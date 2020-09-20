@@ -1,25 +1,6 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import styled, { css } from 'styled-components';
 import { Link } from 'gatsby';
-
-type InfoMenuProps = {
-  linkOnClick: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
-};
-
-export default ({ linkOnClick }: InfoMenuProps) => {
-  return (
-    <StyleInfoMenu>
-      <StyledLink
-        key="/about/"
-        to="/about/"
-        onClick={linkOnClick}
-        data-shape="closed"
-      >
-        About
-      </StyledLink>
-    </StyleInfoMenu>
-  );
-};
 
 const StyleInfoMenu = styled.nav`
   display: flex;
@@ -46,3 +27,24 @@ const StyledLink = styled(Link)`
     `;
   }}
 `;
+
+type InfoMenuProps = {
+  linkOnClick: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
+};
+
+function InfoMenu({ linkOnClick }: InfoMenuProps): ReactElement {
+  return (
+    <StyleInfoMenu>
+      <StyledLink
+        key="/about/"
+        to="/about/"
+        onClick={linkOnClick}
+        data-shape="closed"
+      >
+        About
+      </StyledLink>
+    </StyleInfoMenu>
+  );
+}
+
+export default InfoMenu;

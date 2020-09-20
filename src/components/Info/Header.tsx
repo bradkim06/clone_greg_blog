@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { Link } from 'gatsby';
 import styled, { css } from 'styled-components';
 
@@ -7,42 +7,6 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import config from '../../../content/meta/config';
 import { useLogoQuery } from '../Query/LogoQuery';
-
-type InfoHeaderProps = {
-  avatarOnClick: (
-    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
-  ) => void;
-  expandOnClick: () => void;
-};
-
-export default ({ avatarOnClick, expandOnClick }: InfoHeaderProps) => {
-  const infoTitle = config.infoTitle.replace(/ /g, '\u00a0');
-
-  const { logo } = useLogoQuery();
-  return (
-    <Header>
-      <HeaderAvatarLink>
-        <Link to="/" onClick={avatarOnClick} title="back to Home">
-          <HeaderAvatar>
-            <img src={logo.childImageSharp.fluid.src} alt="avatar" />
-          </HeaderAvatar>
-        </Link>
-      </HeaderAvatarLink>
-      <HeaderTitle>
-        {infoTitle}
-        <small>{config.infoTitleNote}</small>
-      </HeaderTitle>
-      <IconButton
-        aria-label="Expand the box"
-        className="expand"
-        onClick={expandOnClick}
-        title="Expand the box"
-      >
-        <ExpandMoreIcon />
-      </IconButton>
-    </Header>
-  );
-};
 
 const Header = styled.header`
   ${props => {
@@ -165,3 +129,44 @@ const HeaderTitle = styled.h1`
     `;
   }}
 `;
+
+type InfoHeaderProps = {
+  avatarOnClick: (
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+  ) => void;
+  expandOnClick: () => void;
+};
+
+function InfoHeader({
+  avatarOnClick,
+  expandOnClick,
+}: InfoHeaderProps): ReactElement {
+  const infoTitle = config.infoTitle.replace(/ /g, '\u00a0');
+
+  const { logo } = useLogoQuery();
+  return (
+    <Header>
+      <HeaderAvatarLink>
+        <Link to="/" onClick={avatarOnClick} title="back to Home">
+          <HeaderAvatar>
+            <img src={logo.childImageSharp.fluid.src} alt="avatar" />
+          </HeaderAvatar>
+        </Link>
+      </HeaderAvatarLink>
+      <HeaderTitle>
+        {infoTitle}
+        <small>{config.infoTitleNote}</small>
+      </HeaderTitle>
+      <IconButton
+        aria-label="Expand the box"
+        className="expand"
+        onClick={expandOnClick}
+        title="Expand the box"
+      >
+        <ExpandMoreIcon />
+      </IconButton>
+    </Header>
+  );
+}
+
+export default InfoHeader;

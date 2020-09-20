@@ -10,44 +10,6 @@ import { useLogoQuery } from '../Query/LogoQuery';
 import { moveNavFeature, moveNavAside, moveNavData } from '../../utils/shared';
 import config from '../../../content/meta/config';
 
-type InfoBarProps = {
-  pages: PagesProps;
-};
-
-const InfoBar = ({ pages }: InfoBarProps) => {
-  const state = moveNavData();
-  const dispatch = useDispatch();
-
-  const { logo } = useLogoQuery();
-
-  function homeLinkOnClick(e: any) {
-    moveNavFeature(e, state, dispatch);
-  }
-
-  function pageLinkOnClick() {
-    moveNavAside(state, dispatch);
-  }
-
-  return (
-    <InfoBarStyle>
-      <AvatarLinkBar>
-        <Link to="/" onClick={homeLinkOnClick} title="back to Home">
-          <StyledAvatar src={logo.childImageSharp.fluid.src} alt="logo" />
-        </Link>
-      </AvatarLinkBar>
-      <BarTitle>
-        {config.infoTitle}
-        <small>{config.infoTitleNote}</small>
-      </BarTitle>
-      <TopMenu
-        pages={pages}
-        homeLinkOnClick={homeLinkOnClick}
-        pageLinkOnClick={pageLinkOnClick}
-      />
-    </InfoBarStyle>
-  );
-};
-
 const InfoBarStyle = styled.aside`
   position: absolute;
   top: 0;
@@ -105,5 +67,43 @@ const BarTitle = styled.div`
     `;
   }}
 `;
+
+type InfoBarProps = {
+  pages: PagesProps;
+};
+
+const InfoBar = ({ pages }: InfoBarProps) => {
+  const state = moveNavData();
+  const dispatch = useDispatch();
+
+  const { logo } = useLogoQuery();
+
+  function homeLinkOnClick(e: React.MouseEvent<HTMLAnchorElement>) {
+    moveNavFeature(e, state, dispatch);
+  }
+
+  function pageLinkOnClick() {
+    moveNavAside(state, dispatch);
+  }
+
+  return (
+    <InfoBarStyle>
+      <AvatarLinkBar>
+        <Link to="/" onClick={homeLinkOnClick} title="back to Home">
+          <StyledAvatar src={logo.childImageSharp.fluid.src} alt="logo" />
+        </Link>
+      </AvatarLinkBar>
+      <BarTitle>
+        {config.infoTitle}
+        <small>{config.infoTitleNote}</small>
+      </BarTitle>
+      <TopMenu
+        pages={pages}
+        homeLinkOnClick={homeLinkOnClick}
+        pageLinkOnClick={pageLinkOnClick}
+      />
+    </InfoBarStyle>
+  );
+};
 
 export default loadable(async () => InfoBar);

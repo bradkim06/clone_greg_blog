@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import styled, { css } from 'styled-components';
 
 const Wrapper = styled.div`
@@ -22,6 +22,12 @@ const Wrapper = styled.div`
   }}
 `;
 
-export default ({ children }: { children: React.ReactNode }) => {
-  return <Wrapper>{children}</Wrapper>;
+type LayoutWrapperProps = {
+  children: React.ReactNode;
 };
+
+function LayoutWrapper({ children }: LayoutWrapperProps): ReactElement {
+  return <Wrapper>{children}</Wrapper>;
+}
+
+export default LayoutWrapper;

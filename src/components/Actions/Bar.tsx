@@ -21,7 +21,11 @@ import { moveNavFeature, moveNavData } from '../../utils/shared';
 import FontSetter from './FontSetter';
 import CategoryFilter from './CategoryFilter';
 
-const ActionsBar = ({ categories }: { categories: string[] }) => {
+type ActionsBarProps = {
+  categories: string[] | unknown[];
+};
+
+const ActionsBar = ({ categories }: ActionsBarProps) => {
   const isThemeState = useSelector<ReduxState, boolean>(
     state => state.themeToggle,
   );
