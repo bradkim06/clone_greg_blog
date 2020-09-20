@@ -52,27 +52,20 @@ module.exports = {
         fonts: [
           {
             family: `Open Sans`,
-            variants: [`300`, `400`, `600`]
+            variants: [`400`, `600`]
+          },
+          {
+            family: `Lora`,
+            variants: [`400`, `600`]
+          },
+          {
+            family: `Roboto`,
+            variants: [`400`, `600`]
           }
         ]
       }
     },
     `gatsby-plugin-preload-fonts`,
-    {
-      resolve: `gatsby-plugin-prefetch-google-fonts`,
-      options: {
-        fonts: [
-          {
-            family: `Open Sans`
-            // subsets: ["korean"]
-          },
-          {
-            family: `IBM Plex Serif`
-            // subsets: ["korean"]
-          }
-        ]
-      }
-    },
     {
       resolve: "gatsby-plugin-material-ui",
       // If you want to use styled components you should change the injection order.

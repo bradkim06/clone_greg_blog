@@ -17,9 +17,9 @@ export const lightTheme = {
       linesMargin: "20px"
     },
     fonts: {
-      unstyledFamily: `Arial`,
+      unstyledFamily: `Roboto`,
       styledFamily: "Open Sans",
-      styledFonts: "300,400,600"
+      styledFonts: "400,600"
     }
   },
   info: {
@@ -175,7 +175,7 @@ export const lightTheme = {
     }
   },
   typography: {
-    fontFamily: `Arial, sans-serif`,
+    fontFamily: `Roboto, sans-serif`,
     fontSize: 16
   }
 };

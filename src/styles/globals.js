@@ -80,8 +80,6 @@ export const GlobalStyle = createGlobalStyle`
     border-radius: 0 0 4px 4px;
     color: #232129;
     font-size: 0.75em;
-    font-family: SFMono-Regular, Menlo, Monaco, Consolas,
-      'Liberation Mono', 'Courier New', monospace;
     letter-spacing: 0.075em;
     line-height: 1;
     padding: 0.25rem 0.5rem;

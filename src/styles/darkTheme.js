@@ -21,9 +21,9 @@ export const darkTheme = {
       linesMargin: "20px"
     },
     fonts: {
-      unstyledFamily: `Arial`,
-      styledFamily: "Helvetica",
-      styledFonts: "300,400,600"
+      unstyledFamily: `Roboto`,
+      styledFamily: "Lora",
+      styledFonts: "400,600"
     }
   },
   info: {
@@ -180,7 +180,7 @@ export const darkTheme = {
     }
   },
   typography: {
-    fontFamily: `Arial, sans-serif`,
+    fontFamily: `Roboto, sans-serif`,
     fontSize: 16
   }
 };
