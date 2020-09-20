@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import Button from "@material-ui/core/Button";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import TocIcon from "@material-ui/icons/Toc";
-import IconButton from "@material-ui/core/IconButton";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { useTheme } from "@material-ui/core/styles";
-import styled, { css } from "styled-components";
-import TocLists from "./TocLists";
-import { ReduxState } from "../../state/store";
-import { PostTemplateProps } from "../../templates/PostTemplate";
-import loadable from "@loadable/component";
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import TocIcon from '@material-ui/icons/Toc';
+import IconButton from '@material-ui/core/IconButton';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useTheme } from '@material-ui/core/styles';
+import styled, { css } from 'styled-components';
+import TocLists from './TocLists';
+import { ReduxState } from '../../state/store';
+import { PostTemplateProps } from '../../templates/PostTemplate';
+import loadable from '@loadable/component';
 
 export default loadable(async () => Toc);
 
@@ -22,17 +22,17 @@ const Toc = () => {
   const {
     mdx: {
       tableOfContents,
-      frontmatter: { title }
-    }
+      frontmatter: { title },
+    },
   } = useSelector<ReduxState, PostTemplateProps>(state => state.currentPost);
 
   const [open, setOpen] = useState(false);
-  const [scroll, setScroll] = useState<"paper" | "body" | undefined>("paper");
+  const [scroll, setScroll] = useState<'paper' | 'body' | undefined>('paper');
 
   const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down("xs"));
+  const fullScreen = useMediaQuery(theme.breakpoints.down('xs'));
 
-  const handleClickOpen = (scrollType: "paper" | "body" | undefined) => () => {
+  const handleClickOpen = (scrollType: 'paper' | 'body' | undefined) => () => {
     setOpen(true);
     setScroll(scrollType);
   };
@@ -56,7 +56,7 @@ const Toc = () => {
     <div>
       <IconButton
         aria-label="Search"
-        onClick={handleClickOpen("paper")}
+        onClick={handleClickOpen('paper')}
         data-shape="closed"
         title="Search"
         className="iconButton"
@@ -75,7 +75,7 @@ const Toc = () => {
         <TocTitle id="scroll-dialog-title" disableTypography>
           {title}
         </TocTitle>
-        <DialogContent dividers={scroll === "paper"}>
+        <DialogContent dividers={scroll === 'paper'}>
           <DialogContentText
             id="scroll-dialog-description"
             ref={descriptionElementRef}

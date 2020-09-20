@@ -1,13 +1,13 @@
-import React, { useEffect, useState, useContext } from "react";
-import { useDispatch } from "react-redux";
-import LayoutWrapper from "./LayoutWrapper";
-import { ThemeContext } from "styled-components";
-import { setIsWideScreen } from "../../src/state/store";
-import { useLayoutQuery } from "../../src/components/Query/LayoutQuery";
-import InfoBox from "../../src/components/Info/Box";
-import Navigator from "../../src/components/Navigator";
-import ActionsBar from "../../src/components/Actions/Bar";
-import InfoBar from "../../src/components/Info/Bar";
+import React, { useEffect, useState, useContext } from 'react';
+import { useDispatch } from 'react-redux';
+import LayoutWrapper from './LayoutWrapper';
+import { ThemeContext } from 'styled-components';
+import { setIsWideScreen } from '../../src/state/store';
+import { useLayoutQuery } from '../../src/components/Query/LayoutQuery';
+import InfoBox from '../../src/components/Info/Box';
+import Navigator from '../../src/components/Navigator';
+import ActionsBar from '../../src/components/Actions/Bar';
+import InfoBar from '../../src/components/Info/Bar';
 
 const TopLayout: React.FC<null> = ({ children }) => {
   const { posts, pages } = useLayoutQuery();
@@ -37,7 +37,7 @@ const TopLayout: React.FC<null> = ({ children }) => {
 function getWidth(): number {
   let width = 0;
 
-  if (typeof window !== "undefined") {
+  if (typeof window !== 'undefined') {
     width =
       window.innerWidth ||
       document.documentElement.clientWidth ||
@@ -65,12 +65,12 @@ function useCurrentWidth(ThemeContext: {
       timeoutId = setTimeout(() => setWidth(getWidth()), 200);
     };
     // set resize listener
-    window.addEventListener("resize", resizeListener);
+    window.addEventListener('resize', resizeListener);
 
     // clean up function
     return () => {
       // remove resize listener
-      window.removeEventListener("resize", resizeListener);
+      window.removeEventListener('resize', resizeListener);
     };
   }, []);
 
