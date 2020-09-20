@@ -116,6 +116,12 @@ module.exports = {
         sitemap: "https://bradkim06.github.io/sitemap.xml",
         policy: [{ userAgent: "*", allow: "/" }]
       }
+    },
+    {
+      resolve: "gatsby-plugin-webpack-bundle-analyser-v2",
+      options: {
+        devMode: true
+      }
     }
   ]
 };
