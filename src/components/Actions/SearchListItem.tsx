@@ -57,7 +57,7 @@ export default ({
               {postSubTitle === "null" ? postExcerpt : postSubTitle}
             </small>
             <Divider />
-            <small>{postDate === "null" ? "" : postDate}</small>
+            <time>{postDate === "null" ? "" : postDate}</time>
           </TextFlex>
         </FlexChild>
       </Link>
@@ -123,7 +123,8 @@ const TextFlex = styled.div`
     font-weight: 600;
   }
 
-  small {
+  small,
+  time {
     font-size: 0.8rem;
     font-weight: 400;
   }
@@ -137,7 +138,8 @@ const TextFlex = styled.div`
           font-weight: 600;
         }
 
-        small {
+        small,
+        time {
           font-size: 0.9rem;
           font-weight: 400;
         }
@@ -152,7 +154,8 @@ const TextFlex = styled.div`
           font-weight: 600;
         }
 
-        small {
+        small,
+        time {
           font-size: 1rem;
           font-weight: 400;
         }
@@ -162,7 +165,8 @@ const TextFlex = styled.div`
           padding: 0 0 0 1rem;
           text-align: center;
 
-          small {
+          small,
+          time {
             display: none;
           }
 

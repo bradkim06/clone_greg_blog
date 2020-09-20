@@ -65,7 +65,7 @@ const PostSubTitle = styled.h2`
   }}
 `;
 
-const PostDate = styled.div`
+const PostDate = styled.time`
   ${props => {
     const { main } = props.theme;
     return css`

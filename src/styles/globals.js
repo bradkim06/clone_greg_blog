@@ -189,6 +189,13 @@ export const GlobalStyle = createGlobalStyle`
     background: #e8bd36;
   }
 
+  .highlight-line {
+    background-color: rgb(63, 69, 79);
+    margin-left: -1rem;
+    padding-left: 0.5rem;
+    border-left: 0.5rem solid ${({ theme }) => theme.base.colors.accent};
+  }
+
   ${props => {
     const { base, main } = props.theme;
     return css`

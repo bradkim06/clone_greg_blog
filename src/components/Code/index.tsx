@@ -1,16 +1,11 @@
 import React, { useState } from "react";
-import Highlight, { defaultProps } from "prism-react-renderer";
+import Highlight, { defaultProps, Language } from "prism-react-renderer";
 import theme from "prism-react-renderer/themes/oceanicNext";
 import { darken } from "polished";
-import {
-  LiveProvider,
-  LiveEditor,
-  LiveError as AuxLiveError,
-  LivePreview as AuxLivePreview
-} from "react-live";
 import { mdx } from "@mdx-js/react";
-import styled, { css } from "styled-components";
-
+import styled from "styled-components";
+import loadable from "@loadable/component";
+import rangeParser from "parse-numeric-range";
 import { copyToClipboard } from "./copy-to-clip";
 
 CodeHighlight.defaultProps = {
@@ -25,6 +20,8 @@ type CodeHighlightProps = {
   live: string | boolean;
   title: string;
   lineNumbers: string;
+  language: Language;
+  metastring?: string;
 };
 
 export default function CodeHighlight({
@@ -32,30 +29,23 @@ export default function CodeHighlight({
   className,
   live,
   title,
-  lineNumbers
+  lineNumbers,
+  metastring = ``
 }: CodeHighlightProps) {
   const [copied, setCopied] = useState(false);
   const codeString = children.trim();
   const language = className.replace(/language-/, "");
+  const shouldHighlightLine = calculateLinesToHighlight(metastring);
 
   if (live) {
     return (
-      <LiveProvider
+      <LazyLiveProvider
         code={codeString}
         noInline
         theme={theme}
         transformCode={code => `/** @jsx mdx */${code}`}
         scope={{ mdx }}
-      >
-        <LiveWrapper>
-          <StyledEditor>
-            <LiveEditor />
-          </StyledEditor>
-          <LivePreview />
-        </LiveWrapper>
-
-        <LiveError />
-      </LiveProvider>
+      />
     );
   }
 
@@ -74,20 +64,32 @@ export default function CodeHighlight({
           language={language}
           theme={theme}
         >
-          {({ className, style, tokens, getLineProps, getTokenProps }) => (
-            <Pre className={className} style={style} hasTitle={title}>
+          {({
+            className: blockClassName,
+            style,
+            tokens,
+            getLineProps,
+            getTokenProps
+          }) => (
+            <Pre className={blockClassName} style={style} hasTitle={title}>
               <CopyCode onClick={handleClick}>
                 {copied ? "Copied!" : "Copy"}
               </CopyCode>
               <code>
-                {tokens.map((line, i) => (
-                  <div {...getLineProps({ line, key: i })}>
-                    {lineNumbers && <LineNo>{i + 1}</LineNo>}
-                    {line.map((token, key) => (
-                      <span {...getTokenProps({ token, key })} />
-                    ))}
-                  </div>
-                ))}
+                {tokens.map((line, index) => {
+                  const lineProps = getLineProps({ line, key: index });
+                  if (shouldHighlightLine(index)) {
+                    lineProps.className = `${lineProps.className} highlight-line`;
+                  }
+                  return (
+                    <div key={index} {...lineProps}>
+                      {lineNumbers && <LineNo>{index + 1}</LineNo>}
+                      {line.map((token, key) => (
+                        <span key={key} {...getTokenProps({ token, key })} />
+                      ))}
+                    </div>
+                  );
+                })}
               </code>
             </Pre>
           )}
@@ -96,6 +98,36 @@ export default function CodeHighlight({
     </>
   );
 }
+
+const LazyLiveProvider = loadable(async () => {
+  const Module = await import(`react-live`);
+  const { LiveProvider, LiveEditor, LiveError, LivePreview } = Module;
+  return (props: any) => (
+    <LiveProvider {...props}>
+      <LiveEditor />
+      <LivePreview />
+      <LiveError />
+    </LiveProvider>
+  );
+});
+
+const calculateLinesToHighlight = (meta: string) => {
+  const RE = /{([\d,-]+)}/;
+
+  if (!RE.test(meta)) {
+    return () => false;
+  }
+  const lineNumbers = RE.exec(meta)![1]
+    .split(`,`)
+    .map(v => v.split(`-`).map(x => parseInt(x, 10)));
+  return (index: number) => {
+    const lineNumber = index + 1;
+    const inRange = lineNumbers.some(([start, end]) =>
+      end ? lineNumber >= start && lineNumber <= end : lineNumber === start
+    );
+    return inRange;
+  };
+};
 
 const Pre = styled.pre`
   text-align: left;
@@ -112,84 +144,6 @@ const Pre = styled.pre`
     height: 1.3em;
     font-size: 1em;
   }
-`;
-
-const LiveWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: stretch;
-  align-items: stretch;
-  border-radius: 3px;
-  box-shadow: 1px 1px 20px rgba(20, 20, 20, 0.27);
-  overflow: hidden;
-  margin-bottom: 32px;
-
-  @media (max-width: 600px) {
-    flex-direction: column;
-  }
-`;
-
-const column = css`
-  flex-basis: 50%;
-  width: 50%;
-  max-width: 50%;
-
-  @media (max-width: 600px) {
-    flex-basis: auto;
-    width: 100%;
-    max-width: 100%;
-  }
-`;
-
-const StyledEditor = styled.div`
-  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
-    "Courier New", monospace;
-  font-variant: no-common-ligatures no-discretionary-ligatures
-    no-historical-ligatures no-contextual;
-  font-size: 16px;
-  line-height: 1.3rem;
-  height: 350px;
-  max-height: 350px;
-  overflow: auto;
-  ${column};
-
-  > div {
-    height: 100%;
-  }
-
-  * > textarea:focus {
-    outline: none;
-  }
-
-  .token {
-    font-style: normal !important;
-  }
-`;
-
-const LivePreview = styled(AuxLivePreview)`
-  position: relative;
-  padding: 0.5rem;
-  background: white;
-  color: black;
-  height: auto;
-  overflow: hidden;
-  ${column};
-`;
-
-const LiveError = styled(AuxLiveError)`
-  display: block;
-  color: rgb(248, 248, 242);
-  white-space: pre-wrap;
-  text-align: left;
-  font-size: 15px;
-  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
-    "Courier New", monospace;
-  font-variant: no-common-ligatures no-discretionary-ligatures
-    no-historical-ligatures no-contextual;
-  padding: 0.5rem;
-  border-radius: 3px;
-  background: rgb(255, 85, 85);
-  margin-bottom: 32px;
 `;
 
 const PreHeader = styled.div`
