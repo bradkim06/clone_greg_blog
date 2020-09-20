@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { ReduxState } from "../../state/store";
+import loadable from "@loadable/component";
 
 const PostComments = () => {
   const stateTheme = useSelector<ReduxState>(state => state.themeToggle);
@@ -34,4 +35,4 @@ const StyledComments = styled.div`
   padding: 3em 0 0;
 `;
 
-export default PostComments;
+export default loadable(async () => PostComments);

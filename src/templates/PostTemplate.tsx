@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { graphql } from "gatsby";
 import Seo from "../components/Seo";
 import { FluidObject } from "gatsby-image";
-
+import loadable from "@loadable/component";
 import { setCurrentPost } from "../state/store";
 import { moveNavAside, moveNavData } from "../utils/shared";
 
@@ -39,7 +39,7 @@ export type PostTemplateProps =
     }
   | any;
 
-export default ({ data }: PostTemplateProps) => {
+const PostTemplate = ({ data }: PostTemplateProps) => {
   const state = moveNavData();
   const dispatch = useDispatch();
 
@@ -85,3 +85,5 @@ export const postQuery = graphql`
     }
   }
 `;
+
+export default loadable(async () => PostTemplate);

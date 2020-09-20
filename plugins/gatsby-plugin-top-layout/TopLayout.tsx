@@ -2,14 +2,12 @@ import React, { useEffect, useState, useContext } from "react";
 import { useDispatch } from "react-redux";
 import LayoutWrapper from "./LayoutWrapper";
 import { ThemeContext } from "styled-components";
-import loadable from "@loadable/component";
 import { setIsWideScreen } from "../../src/state/store";
 import { useLayoutQuery } from "../../src/components/Query/LayoutQuery";
-
-const InfoBox = loadable(() => import("../../src/components/Info/Box"));
-const Navigator = loadable(() => import("../../src/components/Navigator"));
-const ActionsBar = loadable(() => import("../../src/components/Actions/Bar"));
-const InfoBar = loadable(() => import("../../src/components/Info/Bar"));
+import InfoBox from "../../src/components/Info/Box";
+import Navigator from "../../src/components/Navigator";
+import ActionsBar from "../../src/components/Actions/Bar";
+import InfoBar from "../../src/components/Info/Bar";
 
 const TopLayout: React.FC<null> = ({ children }) => {
   const { posts, pages } = useLayoutQuery();

@@ -12,12 +12,13 @@ import {
   moveNavData
 } from "./../../utils/shared";
 import config from "../../../content/meta/config";
+import loadable from "@loadable/component";
 
 type InfoBarProps = {
   pages: PagesProps;
 };
 
-export default ({ pages }: InfoBarProps) => {
+const InfoBar = ({ pages }: InfoBarProps) => {
   const state = moveNavData();
   const dispatch = useDispatch();
 
@@ -108,3 +109,5 @@ const BarTitle = styled.div`
     `;
   }}
 `;
+
+export default loadable(async () => InfoBar);

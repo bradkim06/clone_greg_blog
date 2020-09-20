@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import InfoHeader from "./Header";
 import InfoText from "./Text";
 import InfoMenu from "./Menu";
+import loadable from "@loadable/component";
 
 import {
   moveNavFeature,
@@ -13,7 +14,9 @@ import {
 } from "./../../utils/shared";
 import { setNavigatorShape } from "../../state/store";
 
-export default () => {
+export default loadable(async () => InfoBox);
+
+const InfoBox = () => {
   const state = moveNavData();
   const dispatch = useDispatch();
 

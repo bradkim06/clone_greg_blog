@@ -8,8 +8,7 @@ import Search from "./Search";
 import WbSunnyIcon from "@material-ui/icons/WbSunny";
 import Brightness2 from "@material-ui/icons/Brightness2";
 import loadable from "@loadable/component";
-
-const Toc = loadable(() => import("./Toc"));
+import Toc from "./Toc";
 
 import {
   setScrollToTop,
@@ -22,7 +21,7 @@ import { moveNavFeature, moveNavData } from "../../utils/shared";
 import FontSetter from "./FontSetter";
 import CategoryFilter from "./CategoryFilter";
 
-export default ({ categories }: { categories: string[] }) => {
+const ActionsBar = ({ categories }: { categories: string[] }) => {
   const isThemeState = useSelector<ReduxState, boolean>(
     state => state.themeToggle
   );
@@ -170,3 +169,5 @@ const Group = styled.div`
 `;
 
 const StyledIconButton = styled(IconButton)``;
+
+export default loadable(async () => ActionsBar);

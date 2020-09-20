@@ -14,8 +14,11 @@ import styled, { css } from "styled-components";
 import TocLists from "./TocLists";
 import { ReduxState } from "../../state/store";
 import { PostTemplateProps } from "../../templates/PostTemplate";
+import loadable from "@loadable/component";
 
-export default () => {
+export default loadable(async () => Toc);
+
+const Toc = () => {
   const {
     mdx: {
       tableOfContents,

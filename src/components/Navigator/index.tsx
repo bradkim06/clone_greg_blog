@@ -1,1 +1,3 @@
-export { default } from "./Navigator";
+import loadable from "@loadable/component";
+
+export default loadable(async () => import("./Navigator"));
