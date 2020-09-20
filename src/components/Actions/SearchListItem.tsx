@@ -1,9 +1,9 @@
-import React from "react";
-import styled, { css } from "styled-components";
-import Link from "gatsby-link";
-import { FluidObject } from "gatsby-image";
-import { useLogoQuery } from "../Query/LogoQuery";
-import Grow from "@material-ui/core/Grow";
+import React from 'react';
+import styled, { css } from 'styled-components';
+import Link from 'gatsby-link';
+import { FluidObject } from 'gatsby-image';
+import Grow from '@material-ui/core/Grow';
+import { useLogoQuery } from '../Query/LogoQuery';
 
 type SearchResultProps = {
   title: string;
@@ -26,23 +26,24 @@ export default ({
   date,
   slug,
   cover,
-  linkOnClick
+  linkOnClick,
 }: SearchResultProps) => {
   const { logo } = useLogoQuery();
 
-  const postTitle = JSON.stringify(title, null, 4).replace(/\"/g, "");
-  const postSubTitle = JSON.stringify(subTitle, null, 4).replace(/\"/g, "");
-  const postExcerpt =
-    JSON.stringify(excerpt, null, 4).replace(/\"/g, "").substr(0, 30) + "...";
-  const postDate = JSON.stringify(date, null, 4).replace(/\"/g, "");
-  const postSlug = JSON.stringify(slug, null, 4).replace(/\"/g, "");
+  const postTitle = JSON.stringify(title, null, 4).replace(/\"/g, '');
+  const postSubTitle = JSON.stringify(subTitle, null, 4).replace(/\"/g, '');
+  const postExcerpt = `${JSON.stringify(excerpt, null, 4)
+    .replace(/\"/g, '')
+    .substr(0, 30)}...`;
+  const postDate = JSON.stringify(date, null, 4).replace(/\"/g, '');
+  const postSlug = JSON.stringify(slug, null, 4).replace(/\"/g, '');
 
   function movePage() {
     linkOnClick();
   }
 
   return (
-    <Grow in={true} timeout={1000}>
+    <Grow in timeout={1000}>
       <Link onClick={movePage} to={postSlug}>
         <FlexChild>
           {cover ? (
@@ -54,10 +55,10 @@ export default ({
             <h1>{postTitle}</h1>
             <Divider />
             <small>
-              {postSubTitle === "null" ? postExcerpt : postSubTitle}
+              {postSubTitle === 'null' ? postExcerpt : postSubTitle}
             </small>
             <Divider />
-            <time>{postDate === "null" ? "" : postDate}</time>
+            <time>{postDate === 'null' ? '' : postDate}</time>
           </TextFlex>
         </FlexChild>
       </Link>

@@ -1,22 +1,22 @@
-import React from "react";
-import { Link } from "gatsby";
-import styled, { css } from "styled-components";
+import React from 'react';
+import { Link } from 'gatsby';
+import styled, { css } from 'styled-components';
 
-import IconButton from "@material-ui/core/IconButton";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import IconButton from '@material-ui/core/IconButton';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
-import config from "../../../content/meta/config";
-import { useLogoQuery } from "../Query/LogoQuery";
+import config from '../../../content/meta/config';
+import { useLogoQuery } from '../Query/LogoQuery';
 
 type InfoHeaderProps = {
   avatarOnClick: (
-    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
   ) => void;
   expandOnClick: () => void;
 };
 
 export default ({ avatarOnClick, expandOnClick }: InfoHeaderProps) => {
-  const infoTitle = config.infoTitle.replace(/ /g, "\u00a0");
+  const infoTitle = config.infoTitle.replace(/ /g, '\u00a0');
 
   const { logo } = useLogoQuery();
   return (

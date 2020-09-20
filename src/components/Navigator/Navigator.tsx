@@ -1,14 +1,14 @@
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { PostsProps } from "../Query/LayoutQuery";
-import styled, { css } from "styled-components";
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import styled, { css } from 'styled-components';
+import { PostsProps } from '../Query/LayoutQuery';
 import {
   setNavigatorShape,
   setCategoryFilter,
-  ReduxState
-} from "../../state/store";
-import { moveNavAside, moveNavData } from "../../utils/shared";
-import List from "./List";
+  ReduxState,
+} from '../../state/store';
+import { moveNavAside, moveNavData } from '../../utils/shared';
+import List from './List';
 
 type NavigatorProps = {
   posts: PostsProps;
@@ -16,13 +16,13 @@ type NavigatorProps = {
 
 export default ({ posts }: NavigatorProps) => {
   const stateFilter = useSelector<ReduxState, string>(
-    state => state.categoryFilter
+    state => state.categoryFilter,
   );
   const state = moveNavData();
   const dispatch = useDispatch();
 
   function expandOnClick() {
-    dispatch(setNavigatorShape("open"));
+    dispatch(setNavigatorShape('open'));
   }
 
   function linkOnClick() {
@@ -30,13 +30,13 @@ export default ({ posts }: NavigatorProps) => {
   }
 
   function removefilterOnClick() {
-    dispatch(setCategoryFilter("all posts"));
+    dispatch(setCategoryFilter('all posts'));
   }
 
   return (
     <StyleNavigator
-      className={`${state.navigatorPosition ? state.navigatorPosition : ""} ${
-        state.navigatorShape ? state.navigatorShape : ""
+      className={`${state.navigatorPosition ? state.navigatorPosition : ''} ${
+        state.navigatorShape ? state.navigatorShape : ''
       } `}
     >
       {posts.totalCount && (
@@ -106,7 +106,7 @@ const StyleNavigator = styled.nav`
           }
 
           &::after {
-            content: "";
+            content: '';
             position: absolute;
             top: 0;
             left: ${base.sizes.linesMargin};

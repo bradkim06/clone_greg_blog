@@ -1,5 +1,5 @@
-import { useStaticQuery, graphql } from "gatsby";
-import { FluidObject } from "gatsby-image";
+import { useStaticQuery, graphql } from 'gatsby';
+import { FluidObject } from 'gatsby-image';
 
 export type logoProps = {
   logo: {
@@ -21,7 +21,7 @@ export const useLogoQuery = () => {
           }
         }
       }
-    `
+    `,
   );
 
   return logoData;

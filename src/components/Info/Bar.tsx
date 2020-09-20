@@ -1,18 +1,14 @@
-import React from "react";
-import Avatar from "@material-ui/core/Avatar";
-import { Link } from "gatsby";
-import styled, { css } from "styled-components";
-import { useDispatch } from "react-redux";
-import TopMenu from "./TopMenu";
-import { PagesProps } from "../Query/LayoutQuery";
-import { useLogoQuery } from "../Query/LogoQuery";
-import {
-  moveNavFeature,
-  moveNavAside,
-  moveNavData
-} from "./../../utils/shared";
-import config from "../../../content/meta/config";
-import loadable from "@loadable/component";
+import React from 'react';
+import Avatar from '@material-ui/core/Avatar';
+import { Link } from 'gatsby';
+import styled, { css } from 'styled-components';
+import { useDispatch } from 'react-redux';
+import loadable from '@loadable/component';
+import TopMenu from './TopMenu';
+import { PagesProps } from '../Query/LayoutQuery';
+import { useLogoQuery } from '../Query/LogoQuery';
+import { moveNavFeature, moveNavAside, moveNavData } from '../../utils/shared';
+import config from '../../../content/meta/config';
 
 type InfoBarProps = {
   pages: PagesProps;
@@ -64,7 +60,7 @@ const InfoBarStyle = styled.aside`
       background: ${bars.colors.background};
       height: ${bars.sizes.infoBar}px;
       &::before {
-        content: "";
+        content: '';
         position: absolute;
         left: ${base.sizes.linesMargin};
         right: ${base.sizes.linesMargin};

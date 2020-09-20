@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import { Scrollbars } from "react-custom-scrollbars";
-import { SpringSystem, util, Spring } from "rebound";
-import { forceCheck } from "react-lazyload";
-import { connect } from "react-redux";
-import styled, { withTheme } from "styled-components";
+import React, { Component } from 'react';
+import { Scrollbars } from 'react-custom-scrollbars';
+import { SpringSystem, util, Spring } from 'rebound';
+import { forceCheck } from 'react-lazyload';
+import { connect } from 'react-redux';
+import styled, { withTheme } from 'styled-components';
 
-import { setScrollToTop, ReduxState } from "../../state/store";
+import { setScrollToTop, ReduxState } from '../../state/store';
 
 type ScrollType = {
   forceCheckOnScroll: any;
@@ -22,7 +22,7 @@ type ScrollType = {
   };
 };
 
-type scrollbarsType = {
+type ScrollbarsType = {
   getScrollTop: () => number;
   getScrollHeight: () => number;
   getHeight: () => number;
@@ -30,19 +30,28 @@ type scrollbarsType = {
 };
 
 class SpringScrollbars extends Component<ScrollType> {
+  springSystem!: SpringSystem;
+
+  spring!: Spring;
+
+  scrollbars!: ScrollbarsType;
+
   constructor(props: never) {
     super(props);
     this.handleSpringUpdate = this.handleSpringUpdate.bind(this);
     this.renderThumb = this.renderThumb.bind(this);
   }
-  springSystem!: SpringSystem;
-  spring!: Spring;
-  scrollbars!: scrollbarsType;
+
+  componentDidMount() {
+    this.springSystem = new SpringSystem();
+    this.spring = this.springSystem.createSpring();
+    this.spring.addListener({ onSpringUpdate: this.handleSpringUpdate });
+  }
 
   componentDidUpdate(prevProps: any) {
     if (
       this.props.isNavigator &&
-      this.props.navigatorPosition !== "is-featured"
+      this.props.navigatorPosition !== 'is-featured'
     ) {
       return;
     }
@@ -54,11 +63,6 @@ class SpringScrollbars extends Component<ScrollType> {
       this.scrollTop(0);
       this.props.setScrollToTop(false);
     }
-  }
-  componentDidMount() {
-    this.springSystem = new SpringSystem();
-    this.spring = this.springSystem.createSpring();
-    this.spring.addListener({ onSpringUpdate: this.handleSpringUpdate });
   }
 
   componentWillUnmount() {
@@ -89,7 +93,7 @@ class SpringScrollbars extends Component<ScrollType> {
       0,
       scrollHeight,
       scrollHeight * 0.01,
-      scrollHeight * 0.99
+      scrollHeight * 0.99,
     );
     this.spring.setCurrentValue(scrollTop).setAtRest();
     this.spring.setEndValue(val);
@@ -104,7 +108,7 @@ class SpringScrollbars extends Component<ScrollType> {
 
   renderThumb({ style, ...props }: any) {
     const thumbStyle = {
-      backgroundColor: this.props.theme.bars.colors.icon
+      backgroundColor: this.props.theme.bars.colors.icon,
     };
     return <div style={{ ...style, ...thumbStyle }} {...props} />;
   }
@@ -115,7 +119,7 @@ class SpringScrollbars extends Component<ScrollType> {
     return (
       <Scrollbars
         autoHide
-        universal={true}
+        universal
         onScroll={forceCheckOnScroll && forceCheck}
         ref={comp => {
           (this as any).scrollbars = comp;
@@ -139,15 +143,15 @@ const Focus = styled.div`
 const mapStateToProps = (state: ReduxState) => {
   return {
     scrollToTop: state.scrollToTop,
-    navigatorPosition: state.navigatorPosition
+    navigatorPosition: state.navigatorPosition,
   };
 };
 
 const mapDispatchToProps = {
-  setScrollToTop
+  setScrollToTop,
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(withTheme(SpringScrollbars as any));

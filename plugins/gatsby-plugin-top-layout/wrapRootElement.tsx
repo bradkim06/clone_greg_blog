@@ -1,17 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 import {
   Provider as ReduxProvider,
   useSelector,
-  useDispatch
-} from "react-redux";
-import { ThemeProvider as MaterialProvider } from "@material-ui/core/styles";
-import { ThemeProvider as StyledProvider } from "styled-components";
-import { lightTheme } from "../../src/styles/lightTheme";
-import { darkTheme } from "../../src/styles/darkTheme";
-import { GlobalStyle } from "../../src/styles/globals";
-import { createMuiTheme } from "@material-ui/core/styles";
+  useDispatch,
+} from 'react-redux';
+import {
+  ThemeProvider as MaterialProvider,
+  createMuiTheme,
+} from '@material-ui/core/styles';
+import { ThemeProvider as StyledProvider } from 'styled-components';
+import { lightTheme } from '../../src/styles/lightTheme';
+import { darkTheme } from '../../src/styles/darkTheme';
+import GlobalStyle from '../../src/styles/globals';
 
-import createStore, { ReduxState, setThemeToggle } from "../../src/state/store";
+import createStore, { ReduxState, setThemeToggle } from '../../src/state/store';
 
 const store = createStore();
 
@@ -30,14 +32,14 @@ function wrapRootElement({ element }: any) {
 
 const Initialize = ({ children }: { children: React.ReactNode }) => {
   const isThemeState = useSelector<ReduxState, boolean>(
-    state => state.themeToggle
+    state => state.themeToggle,
   );
   const dispatch = useDispatch();
   const theme = isThemeState ? darkTheme : lightTheme;
   const materialTheme = (createMuiTheme as any)(theme);
 
   useEffect(() => {
-    if (localStorage.getItem("theme") === "darkTheme") {
+    if (localStorage.getItem('theme') === 'darkTheme') {
       dispatch(setThemeToggle());
     }
   }, []);

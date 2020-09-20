@@ -1,5 +1,5 @@
-import React from "react";
-import styled, { css } from "styled-components";
+import React from 'react';
+import styled, { css } from 'styled-components';
 
 export default ({ children }: { children: React.ReactNode }) => {
   return <PageContent>{children}</PageContent>;
@@ -68,7 +68,7 @@ const PageContent = styled.article`
         &::before,
         &::after {
           background: ${main.colors.background};
-          content: "";
+          content: '';
           height: 5px;
           left: 50%;
           margin-left: -47%;

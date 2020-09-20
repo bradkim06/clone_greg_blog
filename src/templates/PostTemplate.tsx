@@ -1,13 +1,13 @@
-import React, { useEffect } from "react";
-import Main from "../components/Main";
-import Post from "../components/Post";
-import { useDispatch } from "react-redux";
-import { graphql } from "gatsby";
-import Seo from "../components/Seo";
-import { FluidObject } from "gatsby-image";
-import loadable from "@loadable/component";
-import { setCurrentPost } from "../state/store";
-import { moveNavAside, moveNavData } from "../utils/shared";
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { graphql } from 'gatsby';
+import { FluidObject } from 'gatsby-image';
+import loadable from '@loadable/component';
+import Seo from '../components/Seo';
+import Post from '../components/Post';
+import Main from '../components/Main';
+import { setCurrentPost } from '../state/store';
+import { moveNavAside, moveNavData } from '../utils/shared';
 
 export type MdxType = {
   id: string;
@@ -31,24 +31,22 @@ export type MdxType = {
   };
 };
 
-export type PostTemplateProps =
-  | {
-      data: {
-        mdx: MdxType;
-      };
-    }
-  | any;
+export type PostTemplateProps = {
+  data: {
+    mdx: MdxType;
+  };
+};
 
 const PostTemplate = ({ data }: PostTemplateProps) => {
   const state = moveNavData();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (state.navigatorPosition === "is-featured") {
+    if (state.navigatorPosition === 'is-featured') {
       moveNavAside(state, dispatch);
     }
 
-    dispatch(setCurrentPost(data));
+    dispatch(setCurrentPost(data as any));
   }, []);
 
   return (

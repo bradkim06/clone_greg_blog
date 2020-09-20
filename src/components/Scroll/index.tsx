@@ -1,1 +1,1 @@
-export { default } from "./SpringScrollbars";
+export { default } from './SpringScrollbars';

@@ -1,12 +1,12 @@
-import React, { useEffect } from "react";
-import ClickAwayListener from "@material-ui/core/ClickAwayListener";
-import Grow from "@material-ui/core/Grow";
-import Paper from "@material-ui/core/Paper";
-import Popper from "@material-ui/core/Popper";
-import MenuItem from "@material-ui/core/MenuItem";
-import MenuList from "@material-ui/core/MenuList";
-import IconButton from "@material-ui/core/IconButton";
-import FormatSizeIcon from "@material-ui/icons/FormatSize";
+import React, { useEffect } from 'react';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import Grow from '@material-ui/core/Grow';
+import Paper from '@material-ui/core/Paper';
+import Popper from '@material-ui/core/Popper';
+import MenuItem from '@material-ui/core/MenuItem';
+import MenuList from '@material-ui/core/MenuList';
+import IconButton from '@material-ui/core/IconButton';
+import FormatSizeIcon from '@material-ui/icons/FormatSize';
 
 type FontSetterProps = {
   increaseFont: (val: number) => void;
@@ -29,7 +29,7 @@ export default ({ increaseFont }: FontSetterProps) => {
   }
 
   function handleSetting(event: React.MouseEvent<HTMLElement>) {
-    const val = (event.target as any).innerText.replace("%", "");
+    const val = (event.target as any).innerText.replace('%', '');
     const factor = +val / 100;
     increaseFont(factor);
 
@@ -52,10 +52,10 @@ export default ({ increaseFont }: FontSetterProps) => {
   }, [open]);
 
   return (
-    <React.Fragment>
+    <>
       <IconButton
         ref={anchorRef}
-        aria-controls={open ? "menu-list-grow" : undefined}
+        aria-controls={open ? 'menu-list-grow' : undefined}
         aria-haspopup="true"
         onClick={handleToggle}
         aria-label="fontOpen"
@@ -75,7 +75,7 @@ export default ({ increaseFont }: FontSetterProps) => {
             {...TransitionProps}
             style={{
               transformOrigin:
-                placement === "bottom" ? "center top" : "center bottom"
+                placement === 'bottom' ? 'center top' : 'center bottom',
             }}
           >
             <Paper>
@@ -90,6 +90,6 @@ export default ({ increaseFont }: FontSetterProps) => {
           </Grow>
         )}
       </Popper>
-    </React.Fragment>
+    </>
   );
 };

@@ -1,6 +1,6 @@
-import React from "react";
-import styled, { css } from "styled-components";
-import PostComments from "./Comments";
+import React from 'react';
+import styled, { css } from 'styled-components';
+import PostComments from './Comments';
 
 export default () => {
   return (

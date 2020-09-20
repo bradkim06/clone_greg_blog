@@ -1,6 +1,6 @@
-import React from "react";
-import styled, { css } from "styled-components";
-import SpringScrollbars from "../Scroll";
+import React from 'react';
+import styled, { css } from 'styled-components';
+import SpringScrollbars from '../Scroll';
 
 const Main = ({ children }: { children: React.ReactNode }) => {
   return (

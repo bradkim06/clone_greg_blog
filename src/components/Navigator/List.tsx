@@ -1,10 +1,10 @@
-import React from "react";
-import styled, { css } from "styled-components";
-import { PostsProps } from "../Query/LayoutQuery";
+import React from 'react';
+import styled, { css } from 'styled-components';
+import { PostsProps } from '../Query/LayoutQuery';
 
-import ListHeader from "./ListHeader";
-import ListItem from "./ListItem";
-import SpringScrollbars from "../Scroll";
+import ListHeader from './ListHeader';
+import ListItem from './ListItem';
+import SpringScrollbars from '../Scroll';
 
 type ListProps = {
   posts: PostsProps;
@@ -22,11 +22,11 @@ export default ({
   expandOnClick,
   removeFilter,
   categoryFilter,
-  navigatorShape
+  navigatorShape,
 }: ListProps) => {
   return (
     <Posts>
-      <SpringScrollbars forceCheckOnScroll={true} isNavigator={true}>
+      <SpringScrollbars forceCheckOnScroll isNavigator>
         <Inner>
           <ListHeader
             expandOnClick={expandOnClick}

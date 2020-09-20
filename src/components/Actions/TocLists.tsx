@@ -1,6 +1,6 @@
-import React from "react";
-import styled, { css } from "styled-components";
-import { Link } from "gatsby";
+import React from 'react';
+import styled, { css } from 'styled-components';
+import { Link } from 'gatsby';
 
 type TocProps = {
   toc: {
@@ -17,14 +17,14 @@ export default ({ toc, linkOnClick }: TocProps) => {
         {toc &&
           toc.items &&
           toc.items.map((h1: any) => (
-            <React.Fragment>
+            <>
               <Link to={h1.url} key={h1.url} onClick={linkOnClick}>
                 <li key={h1.url}>{h1.title}</li>
               </Link>
               <H2>
                 {h1.items &&
                   h1.items.map((h2: any) => (
-                    <React.Fragment>
+                    <>
                       <Link to={h2.url} key={h2.url} onClick={linkOnClick}>
                         <li key={h2.url}>{h2.title}</li>
                       </Link>
@@ -40,10 +40,10 @@ export default ({ toc, linkOnClick }: TocProps) => {
                             </Link>
                           ))}
                       </H3>
-                    </React.Fragment>
+                    </>
                   ))}
               </H2>
-            </React.Fragment>
+            </>
           ))}
       </H1>
     </TocWrapper>
@@ -58,7 +58,7 @@ const TocWrapper = styled.div`
   }
 
   ${props => {
-    const title = props.theme.main.colors.title;
+    const { title } = props.theme.main.colors;
     return css`
       h1 {
         font-size: 1.5em;
@@ -74,7 +74,7 @@ const H1 = styled.ol`
     margin: 0.6em 0;
   }
   ${props => {
-    const accent = props.theme.base.colors.accent;
+    const { accent } = props.theme.base.colors;
     return css`
       a {
         font-weight: 600;

@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { useStaticQuery, graphql } from "gatsby";
-import Button from "@material-ui/core/Button";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import SearchIcon from "@material-ui/icons/Search";
-import IconButton from "@material-ui/core/IconButton";
-import TextField from "@material-ui/core/TextField";
-import Fuse from "fuse.js";
-import SearchListItem from "./SearchListItem";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { useTheme } from "@material-ui/core/styles";
-import styled, { css } from "styled-components";
-import { GridWrapper } from "../Navigator/List";
+import React, { useState, useEffect } from 'react';
+import { useStaticQuery, graphql } from 'gatsby';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import SearchIcon from '@material-ui/icons/Search';
+import IconButton from '@material-ui/core/IconButton';
+import TextField from '@material-ui/core/TextField';
+import Fuse from 'fuse.js';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useTheme } from '@material-ui/core/styles';
+import styled, { css } from 'styled-components';
+import SearchListItem from './SearchListItem';
+import { GridWrapper } from '../Navigator/List';
 
 type allMdxProps = {
   allMdx: {
@@ -40,20 +40,20 @@ const SearchDialog = () => {
   const fuse = new Fuse(data.allMdx.edges, options);
 
   const [open, setOpen] = useState(false);
-  const [scroll, setScroll] = useState<"paper" | "body" | undefined>("paper");
-  const [query, updateQuery] = useState("");
+  const [scroll, setScroll] = useState<'paper' | 'body' | undefined>('paper');
+  const [query, updateQuery] = useState('');
 
   const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const handleClickOpen = (scrollType: "paper" | "body" | undefined) => () => {
+  const handleClickOpen = (scrollType: 'paper' | 'body' | undefined) => () => {
     setOpen(true);
     setScroll(scrollType);
   };
 
   function handleClose() {
     setOpen(false);
-    updateQuery("");
+    updateQuery('');
   }
 
   function onSearch(event: any) {
@@ -77,7 +77,7 @@ const SearchDialog = () => {
     <div>
       <IconButton
         aria-label="Search"
-        onClick={handleClickOpen("paper")}
+        onClick={handleClickOpen('paper')}
         data-shape="closed"
         title="Search"
         className="iconButton"
@@ -95,7 +95,7 @@ const SearchDialog = () => {
         fullWidth
       >
         <DialogTitle id="scroll-dialog-title">Search by fuse.js</DialogTitle>
-        <DialogContent dividers={scroll === "paper"}>
+        <DialogContent dividers={scroll === 'paper'}>
           <DialogContentText
             id="scroll-dialog-description"
             ref={descriptionElementRef}
@@ -107,7 +107,7 @@ const SearchDialog = () => {
               type="search"
               variant="outlined"
               fullWidth
-              autoFocus={true}
+              autoFocus
               helperText="fuzzy searching"
               value={query}
               onChange={onSearch}
@@ -153,10 +153,10 @@ const options = {
   // ignoreLocation: false,
   // ignoreFieldNorm: false,
   keys: [
-    "node.frontmatter.title",
-    "node.frontmatter.subTitle",
-    "node.frontmatter.category"
-  ]
+    'node.frontmatter.title',
+    'node.frontmatter.subTitle',
+    'node.frontmatter.category',
+  ],
 };
 
 const StyledDialog = styled(Dialog)`
@@ -171,7 +171,7 @@ const StyledDialog = styled(Dialog)`
 `;
 
 const useSearchData = () => {
-  let searchData = useStaticQuery(
+  const searchData = useStaticQuery(
     graphql`
       query SearchData {
         allMdx {
@@ -199,7 +199,7 @@ const useSearchData = () => {
           }
         }
       }
-    `
+    `,
   );
   return searchData;
 };

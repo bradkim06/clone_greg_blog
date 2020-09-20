@@ -1,18 +1,14 @@
-import React from "react";
-import styled, { css } from "styled-components";
-import { useDispatch } from "react-redux";
+import React from 'react';
+import styled, { css } from 'styled-components';
+import { useDispatch } from 'react-redux';
 
-import InfoHeader from "./Header";
-import InfoText from "./Text";
-import InfoMenu from "./Menu";
-import loadable from "@loadable/component";
+import loadable from '@loadable/component';
+import InfoHeader from './Header';
+import InfoText from './Text';
+import InfoMenu from './Menu';
 
-import {
-  moveNavFeature,
-  moveNavAside,
-  moveNavData
-} from "./../../utils/shared";
-import { setNavigatorShape } from "../../state/store";
+import { moveNavFeature, moveNavAside, moveNavData } from '../../utils/shared';
+import { setNavigatorShape } from '../../state/store';
 
 export default loadable(async () => InfoBox);
 
@@ -21,7 +17,7 @@ const InfoBox = () => {
   const dispatch = useDispatch();
 
   function expandOnClick() {
-    dispatch(setNavigatorShape("closed"));
+    dispatch(setNavigatorShape('closed'));
   }
 
   function avatarOnClick(e: any) {
@@ -29,14 +25,14 @@ const InfoBox = () => {
   }
 
   function menulinkOnClick() {
-    dispatch(setNavigatorShape("closed"));
+    dispatch(setNavigatorShape('closed'));
     moveNavAside(state, dispatch);
   }
 
   return (
     <StyleInfoBox
-      className={`${state.navigatorPosition ? state.navigatorPosition : ""} 
-         ${state.navigatorShape ? state.navigatorShape : ""}`}
+      className={`${state.navigatorPosition ? state.navigatorPosition : ''} 
+         ${state.navigatorShape ? state.navigatorShape : ''}`}
     >
       <InfoHeader avatarOnClick={avatarOnClick} expandOnClick={expandOnClick} />
       <InfoContent>
@@ -66,7 +62,7 @@ const StyleInfoBox = styled.aside`
         width: ${info.size.width};
 
         &::after {
-          content: "";
+          content: '';
           position: absolute;
           right: 0;
           top: 20px;

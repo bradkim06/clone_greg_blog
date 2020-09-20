@@ -1,11 +1,11 @@
-import React from "react";
-import styled, { css } from "styled-components";
-import { useSelector } from "react-redux";
-import { ReduxState } from "../../state/store";
+import React from 'react';
+import styled, { css } from 'styled-components';
+import { useSelector } from 'react-redux';
+import { ReduxState } from '../../state/store';
 
 export default ({ children }: { children: React.ReactNode }) => {
   const fontSizeState = useSelector<ReduxState, number>(
-    state => state.fontSizeIncrease
+    state => state.fontSizeIncrease,
   );
 
   return <StyleArticle fontSize={fontSizeState}>{children}</StyleArticle>;
@@ -21,7 +21,7 @@ const StyleArticle = styled.div<{ fontSize: number }>`
 
   ${props => {
     const { main, minWidth, base, bars } = props.theme;
-    const fontSize = props.fontSize;
+    const { fontSize } = props;
     return css`
       font-size: calc(${main.fonts.content.size * fontSize}rem);
 

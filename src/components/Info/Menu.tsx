@@ -1,6 +1,6 @@
-import React from "react";
-import styled, { css } from "styled-components";
-import { Link } from "gatsby";
+import React from 'react';
+import styled, { css } from 'styled-components';
+import { Link } from 'gatsby';
 
 type InfoMenuProps = {
   linkOnClick: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;

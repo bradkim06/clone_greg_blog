@@ -11,12 +11,10 @@ import IconButton from '@material-ui/core/IconButton';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import styled, { css } from 'styled-components';
+import loadable from '@loadable/component';
 import TocLists from './TocLists';
 import { ReduxState } from '../../state/store';
 import { PostTemplateProps } from '../../templates/PostTemplate';
-import loadable from '@loadable/component';
-
-export default loadable(async () => Toc);
 
 const Toc = () => {
   const {
@@ -117,3 +115,5 @@ const StyledDialog = styled(Dialog)`
     `;
   }}
 `;
+
+export default loadable(async () => Toc);

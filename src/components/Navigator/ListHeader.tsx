@@ -1,9 +1,9 @@
-import React from "react";
-import styled, { css } from "styled-components";
+import React from 'react';
+import styled, { css } from 'styled-components';
 
-import IconButton from "@material-ui/core/IconButton";
-import CloseIcon from "@material-ui/icons/Close";
-import ExpandLessIcon from "@material-ui/icons/ExpandLess";
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 
 type ListHeaderProps = {
   expandOnClick(event: React.MouseEvent<HTMLButtonElement>): void;
@@ -16,11 +16,11 @@ export default ({
   expandOnClick,
   categoryFilter,
   navigatorShape,
-  removeFilter
+  removeFilter,
 }: ListHeaderProps) => {
   return (
     <header>
-      {navigatorShape === "closed" && (
+      {navigatorShape === 'closed' && (
         <Closed>
           <h1>List of posts</h1>
           <IconButton
@@ -33,7 +33,7 @@ export default ({
           </IconButton>
         </Closed>
       )}
-      {navigatorShape === "open" && categoryFilter !== "all posts" && (
+      {navigatorShape === 'open' && categoryFilter !== 'all posts' && (
         <Filter>
           <small>Active Category Filter:</small>
           <strong>{categoryFilter}</strong>

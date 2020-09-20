@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import Highlight, { defaultProps, Language } from "prism-react-renderer";
-import theme from "prism-react-renderer/themes/oceanicNext";
-import { darken } from "polished";
-import { mdx } from "@mdx-js/react";
-import styled from "styled-components";
-import loadable from "@loadable/component";
-import rangeParser from "parse-numeric-range";
-import { copyToClipboard } from "./copy-to-clip";
+import React, { useState } from 'react';
+import Highlight, { defaultProps, Language } from 'prism-react-renderer';
+import theme from 'prism-react-renderer/themes/oceanicNext';
+import { darken } from 'polished';
+import { mdx } from '@mdx-js/react';
+import styled from 'styled-components';
+import loadable from '@loadable/component';
+import rangeParser from 'parse-numeric-range';
+import { copyToClipboard } from './copy-to-clip';
 
 CodeHighlight.defaultProps = {
   live: false,
   title: null,
-  lineNumbers: null
+  lineNumbers: null,
 };
 
 type CodeHighlightProps = {
@@ -30,11 +30,11 @@ export default function CodeHighlight({
   live,
   title,
   lineNumbers,
-  metastring = ``
+  metastring = '',
 }: CodeHighlightProps) {
   const [copied, setCopied] = useState(false);
   const codeString = children.trim();
-  const language = className.replace(/language-/, "");
+  const language = className.replace(/language-/, '');
   const shouldHighlightLine = calculateLinesToHighlight(metastring);
 
   if (live) {
@@ -69,11 +69,11 @@ export default function CodeHighlight({
             style,
             tokens,
             getLineProps,
-            getTokenProps
+            getTokenProps,
           }) => (
             <Pre className={blockClassName} style={style} hasTitle={title}>
               <CopyCode onClick={handleClick}>
-                {copied ? "Copied!" : "Copy"}
+                {copied ? 'Copied!' : 'Copy'}
               </CopyCode>
               <code>
                 {tokens.map((line, index) => {
@@ -100,7 +100,7 @@ export default function CodeHighlight({
 }
 
 const LazyLiveProvider = loadable(async () => {
-  const Module = await import(`react-live`);
+  const Module = await import('react-live');
   const { LiveProvider, LiveEditor, LiveError, LivePreview } = Module;
   return (props: any) => (
     <LiveProvider {...props}>
@@ -118,12 +118,12 @@ const calculateLinesToHighlight = (meta: string) => {
     return () => false;
   }
   const lineNumbers = RE.exec(meta)![1]
-    .split(`,`)
-    .map(v => v.split(`-`).map(x => parseInt(x, 10)));
+    .split(',')
+    .map(v => v.split('-').map(x => parseInt(x, 10)));
   return (index: number) => {
     const lineNumber = index + 1;
     const inRange = lineNumbers.some(([start, end]) =>
-      end ? lineNumber >= start && lineNumber <= end : lineNumber === start
+      end ? lineNumber >= start && lineNumber <= end : lineNumber === start,
     );
     return inRange;
   };
@@ -136,7 +136,7 @@ const Pre = styled.pre`
   padding: 2rem 1rem 1rem 1rem;
   overflow: auto;
   word-wrap: normal;
-  border-radius: ${({ hasTitle }) => (hasTitle ? "0 0 3px 3px" : "3px")};
+  border-radius: ${({ hasTitle }) => (hasTitle ? '0 0 3px 3px' : '3px')};
   webkit-overflow-scrolling: touch;
 
   & .token-line {
@@ -147,7 +147,7 @@ const Pre = styled.pre`
 `;
 
 const PreHeader = styled.div`
-  background-color: ${darken("0.05", "#282a36")};
+  background-color: ${darken('0.05', '#282a36')};
   color: rgba(248, 248, 242, 0.75);
   font-size: 0.75em;
   margin-top: 0.5rem;

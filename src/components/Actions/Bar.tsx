@@ -1,29 +1,29 @@
-import React from "react";
-import styled, { css } from "styled-components";
-import IconButton from "@material-ui/core/IconButton";
-import { useSelector, useDispatch } from "react-redux";
-import HomeIcon from "@material-ui/icons/Home";
-import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
-import Search from "./Search";
-import WbSunnyIcon from "@material-ui/icons/WbSunny";
-import Brightness2 from "@material-ui/icons/Brightness2";
-import loadable from "@loadable/component";
-import Toc from "./Toc";
+import React from 'react';
+import styled, { css } from 'styled-components';
+import IconButton from '@material-ui/core/IconButton';
+import { useSelector, useDispatch } from 'react-redux';
+import HomeIcon from '@material-ui/icons/Home';
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
+import WbSunnyIcon from '@material-ui/icons/WbSunny';
+import Brightness2 from '@material-ui/icons/Brightness2';
+import loadable from '@loadable/component';
+import Search from './Search';
+import Toc from './Toc';
 
 import {
   setScrollToTop,
   setFontSizeIncrease,
   setCategoryFilter,
   setThemeToggle,
-  ReduxState
-} from "../../state/store";
-import { moveNavFeature, moveNavData } from "../../utils/shared";
-import FontSetter from "./FontSetter";
-import CategoryFilter from "./CategoryFilter";
+  ReduxState,
+} from '../../state/store';
+import { moveNavFeature, moveNavData } from '../../utils/shared';
+import FontSetter from './FontSetter';
+import CategoryFilter from './CategoryFilter';
 
 const ActionsBar = ({ categories }: { categories: string[] }) => {
   const isThemeState = useSelector<ReduxState, boolean>(
-    state => state.themeToggle
+    state => state.themeToggle,
   );
   const state = moveNavData();
   const dispatch = useDispatch();
@@ -47,8 +47,8 @@ const ActionsBar = ({ categories }: { categories: string[] }) => {
   function themeToggleClick() {
     dispatch(setThemeToggle());
 
-    const theme = isThemeState ? "lightTheme" : "darkTheme";
-    localStorage.setItem("theme", theme);
+    const theme = isThemeState ? 'lightTheme' : 'darkTheme';
+    localStorage.setItem('theme', theme);
   }
 
   return (
@@ -62,8 +62,8 @@ const ActionsBar = ({ categories }: { categories: string[] }) => {
           <HomeIcon />
         </StyledIconButton>
         <Search />
-        {((state.isWideScreen && state.navigatorShape === "open") ||
-          state.navigatorPosition !== "is-aside") && (
+        {((state.isWideScreen && state.navigatorShape === 'open') ||
+          state.navigatorPosition !== 'is-aside') && (
           <CategoryFilter
             categories={categories}
             filterCategory={categoryFilterOnClick}
@@ -71,11 +71,11 @@ const ActionsBar = ({ categories }: { categories: string[] }) => {
         )}
       </Group>
       <Group>
-        {state.navigatorPosition === "is-aside" && (
-          <React.Fragment>
+        {state.navigatorPosition === 'is-aside' && (
+          <>
             <Toc />
             <FontSetter increaseFont={fontSetterOnClick} />
-          </React.Fragment>
+          </>
         )}
         <StyledIconButton
           aria-label="Theme Toggle"
@@ -113,7 +113,7 @@ const StyleActionsBar = styled.div`
       height: ${bars.sizes.actionsBar}px;
 
       &::before {
-        content: "";
+        content: '';
         position: absolute;
         left: ${base.sizes.linesMargin};
         right: ${base.sizes.linesMargin};

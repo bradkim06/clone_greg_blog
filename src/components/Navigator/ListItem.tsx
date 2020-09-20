@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import SearchListItem from "../Actions/SearchListItem";
+import React, { useState, useEffect } from 'react';
+import SearchListItem from '../Actions/SearchListItem';
 
 interface ListItemProps {
   post: {
@@ -25,13 +25,13 @@ export default ({ post, categoryFilter, linkOnClick }: ListItemProps) => {
   const {
     excerpt,
     frontmatter: { category, title, subTitle, date, cover },
-    fields: { slug }
+    fields: { slug },
   } = post.node;
 
   const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
-    if (categoryFilter === "all posts") {
+    if (categoryFilter === 'all posts') {
       setHidden(false);
     } else if (category !== categoryFilter) {
       setHidden(true);
@@ -41,7 +41,7 @@ export default ({ post, categoryFilter, linkOnClick }: ListItemProps) => {
   }, [categoryFilter]);
 
   return (
-    <React.Fragment>
+    <>
       {hidden || (
         <SearchListItem
           title={title}
@@ -53,6 +53,6 @@ export default ({ post, categoryFilter, linkOnClick }: ListItemProps) => {
           linkOnClick={linkOnClick}
         />
       )}
-    </React.Fragment>
+    </>
   );
 };

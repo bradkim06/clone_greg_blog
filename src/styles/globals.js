@@ -1,8 +1,7 @@
-import React from "react";
-import { createGlobalStyle, css } from "styled-components";
-import { normalize } from "styled-normalize";
+import { createGlobalStyle, css } from 'styled-components';
+import { normalize } from 'styled-normalize';
 
-export const GlobalStyle = createGlobalStyle`
+const GlobalStyle = createGlobalStyle`
   ${normalize}
 
   html, body, div, span, applet, object, iframe,
@@ -217,7 +216,7 @@ export const GlobalStyle = createGlobalStyle`
       //   font-family: ${base.fonts.unstyledFamily};
       // }
 
-      :not(pre) > code[class*="inline-code"] {
+      :not(pre) > code[class*='inline-code'] {
         background-color: ${base.colors.accent};
         color: ${base.colors.brightText};
         text-shadow: none;
@@ -236,3 +235,5 @@ export const GlobalStyle = createGlobalStyle`
     `;
   }}
 `;
+
+export default GlobalStyle;

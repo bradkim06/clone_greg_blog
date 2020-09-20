@@ -1,5 +1,5 @@
-import { useStaticQuery, graphql } from "gatsby";
-import { FluidObject } from "gatsby-image";
+import { useStaticQuery, graphql } from 'gatsby';
+import { FluidObject } from 'gatsby-image';
 
 export interface PostsProps {
   totalCount: number;
@@ -81,7 +81,7 @@ export const useLayoutQuery = () => {
           }
         }
       }
-    `
+    `,
   );
   return layoutData;
 };

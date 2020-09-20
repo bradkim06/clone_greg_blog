@@ -1,13 +1,13 @@
-import React from "react";
-import PostWrapper from "../Main/Wrapper";
-import PostHeader from "./Header";
-import PostFooter from "./Footer";
-import Article from "../Main/Article";
-import { MDXRenderer } from "gatsby-plugin-mdx";
-import { MDXProvider } from "@mdx-js/react";
-import { MdxType } from "../../templates/PostTemplate";
-import { Link } from "gatsby";
-import Code from "../Code";
+import React from 'react';
+import { MDXRenderer } from 'gatsby-plugin-mdx';
+import { MDXProvider } from '@mdx-js/react';
+import { Link } from 'gatsby';
+import PostWrapper from '../Main/Wrapper';
+import PostHeader from './Header';
+import PostFooter from './Footer';
+import Article from '../Main/Article';
+import { MdxType } from '../../templates/PostTemplate';
+import Code from '../Code';
 
 type PostProps = {
   post: MdxType;
@@ -16,7 +16,7 @@ type PostProps = {
 const components = {
   Link,
   inlineCode: props => <code className="inline-code" {...props} />,
-  code: Code
+  code: Code,
 }; // Provide common components here
 
 export default ({ post }: PostProps) => {

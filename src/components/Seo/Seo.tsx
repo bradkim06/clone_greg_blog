@@ -1,7 +1,7 @@
-import React from "react";
-import Helmet from "react-helmet";
-import config from "../../../content/meta/config";
-import { MdxType } from "../../templates/PostTemplate";
+import React from 'react';
+import Helmet from 'react-helmet';
+import config from '../../../content/meta/config';
+import { MdxType } from '../../templates/PostTemplate';
 
 type SeoProps = {
   post: MdxType;
@@ -16,9 +16,7 @@ export default ({ post }: SeoProps) => {
   const title = postTitle
     ? `${postTitle} - ${config.shortSiteTitle}`
     : config.siteTitle;
-  const description = postDescription
-    ? postDescription
-    : config.siteDescription;
+  const description = postDescription || config.siteDescription;
   const image = postCover
     ? postCover.childImageSharp.fluid.src
     : config.siteImage;
@@ -28,7 +26,7 @@ export default ({ post }: SeoProps) => {
     <Helmet
       htmlAttributes={{
         lang: config.siteLanguage,
-        prefix: "og: http://ogp.me/ns#"
+        prefix: 'og: http://ogp.me/ns#',
       }}
     >
       {/* General tags */}

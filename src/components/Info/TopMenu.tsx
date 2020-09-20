@@ -1,15 +1,15 @@
-import React, { useEffect } from "react";
-import { Link } from "gatsby";
-import ClickAwayListener from "@material-ui/core/ClickAwayListener";
-import Grow from "@material-ui/core/Grow";
-import Paper from "@material-ui/core/Paper";
-import Popper from "@material-ui/core/Popper";
-import MenuItem from "@material-ui/core/MenuItem";
-import MenuList from "@material-ui/core/MenuList";
-import IconButton from "@material-ui/core/IconButton";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import styled, { css } from "styled-components";
-import { PagesProps } from "../Query/LayoutQuery";
+import React, { useEffect } from 'react';
+import { Link } from 'gatsby';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import Grow from '@material-ui/core/Grow';
+import Paper from '@material-ui/core/Paper';
+import Popper from '@material-ui/core/Popper';
+import MenuItem from '@material-ui/core/MenuItem';
+import MenuList from '@material-ui/core/MenuList';
+import IconButton from '@material-ui/core/IconButton';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import styled, { css } from 'styled-components';
+import { PagesProps } from '../Query/LayoutQuery';
 
 type TopMenuProps = {
   pages: PagesProps;
@@ -44,7 +44,7 @@ export default ({ pages, homeLinkOnClick, pageLinkOnClick }: TopMenuProps) => {
     <TopMenuWrapper>
       <IconButton
         ref={anchorRef}
-        aria-controls={open ? "menu-list-grow" : undefined}
+        aria-controls={open ? 'menu-list-grow' : undefined}
         aria-haspopup="true"
         onClick={handleToggle}
         aria-label="fontOpen"
@@ -64,7 +64,7 @@ export default ({ pages, homeLinkOnClick, pageLinkOnClick }: TopMenuProps) => {
             {...TransitionProps}
             style={{
               transformOrigin:
-                placement === "bottom" ? "center top" : "center bottom"
+                placement === 'bottom' ? 'center top' : 'center bottom',
             }}
           >
             <Paper>
@@ -84,7 +84,7 @@ export default ({ pages, homeLinkOnClick, pageLinkOnClick }: TopMenuProps) => {
                       <Link
                         key={fields.slug}
                         to={fields.slug}
-                        style={{ display: "block" }}
+                        style={{ display: 'block' }}
                       >
                         <MenuItem
                           onClick={e => {

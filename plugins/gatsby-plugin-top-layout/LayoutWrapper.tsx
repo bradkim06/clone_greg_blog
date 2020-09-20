@@ -1,5 +1,5 @@
-import React from "react";
-import styled, { css } from "styled-components";
+import React from 'react';
+import styled, { css } from 'styled-components';
 
 export default ({ children }: { children: React.ReactNode }) => {
   return <Wrapper>{children}</Wrapper>;
@@ -19,7 +19,7 @@ const Wrapper = styled.div`
   }
 
   ${props => {
-    const background = props.theme.bars.colors.background;
+    const { background } = props.theme.bars.colors;
     return css`
       background-color: ${background};
     `;

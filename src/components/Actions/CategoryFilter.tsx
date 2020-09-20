@@ -1,13 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
-import ClickAwayListener from "@material-ui/core/ClickAwayListener";
-import Grow from "@material-ui/core/Grow";
-import Paper from "@material-ui/core/Paper";
-import Popper from "@material-ui/core/Popper";
-import MenuItem from "@material-ui/core/MenuItem";
-import MenuList from "@material-ui/core/MenuList";
-import IconButton from "@material-ui/core/IconButton";
-import FilterListIcon from "@material-ui/icons/FilterList";
-import styled, { css } from "styled-components";
+import React, { useEffect, useRef, useState } from 'react';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import Grow from '@material-ui/core/Grow';
+import Paper from '@material-ui/core/Paper';
+import Popper from '@material-ui/core/Popper';
+import MenuItem from '@material-ui/core/MenuItem';
+import MenuList from '@material-ui/core/MenuList';
+import IconButton from '@material-ui/core/IconButton';
+import FilterListIcon from '@material-ui/icons/FilterList';
+import styled, { css } from 'styled-components';
 
 type CategoryFilterProps = {
   categories: string[];
@@ -55,7 +55,7 @@ export default ({ categories, filterCategory }: CategoryFilterProps) => {
     <FilterWrapper>
       <IconButton
         ref={anchorRef}
-        aria-controls={open ? "menu-list-grow" : undefined}
+        aria-controls={open ? 'menu-list-grow' : undefined}
         aria-haspopup="true"
         onClick={handleToggle}
         aria-label="categoryOpen"
@@ -75,7 +75,7 @@ export default ({ categories, filterCategory }: CategoryFilterProps) => {
             {...TransitionProps}
             style={{
               transformOrigin:
-                placement === "bottom" ? "center top" : "center bottom"
+                placement === 'bottom' ? 'center top' : 'center bottom',
             }}
           >
             <Paper>

@@ -1,20 +1,20 @@
-import { createStore as reduxCreateStore, applyMiddleware } from "redux";
-import { composeWithDevTools } from "redux-devtools-extension";
-import { PostTemplateProps, MdxType } from "../templates/PostTemplate";
+import { createStore as reduxCreateStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import { PostTemplateProps } from '../templates/PostTemplate';
 
 /*
  * action types
  */
 
-const SET_NAVIGATOR_POSITION = "SET_NAVIGATOR_POSITION";
-const SET_NAVIGATOR_SHAPE = "SET_NAVIGATOR_SHAPE";
-const SET_NAVIGATOR_FILTER = "SET_NAVIGATOR_FILTER";
-const SET_IS_WIDE_SCREEN = "SET_IS_WIDE_SCREEN";
-const SET_SCROLL_TO_TOP = "SET_SCROLL_TO_TOP";
-const SET_FONT_SIZE_INCREASE = "SET_FONT_SIZE_INCREASE";
-const SET_CATEGORY_FILTER = "SET_CATEGORY_FILTER";
-const SET_THEME_TOGGLE = "SET_THEME_TOGGLE";
-const SET_CURRENT_POST = "SET_CURRENT_POST";
+const SET_NAVIGATOR_POSITION = 'SET_NAVIGATOR_POSITION';
+const SET_NAVIGATOR_SHAPE = 'SET_NAVIGATOR_SHAPE';
+const SET_NAVIGATOR_FILTER = 'SET_NAVIGATOR_FILTER';
+const SET_IS_WIDE_SCREEN = 'SET_IS_WIDE_SCREEN';
+const SET_SCROLL_TO_TOP = 'SET_SCROLL_TO_TOP';
+const SET_FONT_SIZE_INCREASE = 'SET_FONT_SIZE_INCREASE';
+const SET_CATEGORY_FILTER = 'SET_CATEGORY_FILTER';
+const SET_THEME_TOGGLE = 'SET_THEME_TOGGLE';
+const SET_CURRENT_POST = 'SET_CURRENT_POST';
 
 /*
  * action creators
@@ -64,55 +64,55 @@ const reducer = (state: any, action: any) => {
     case SET_NAVIGATOR_POSITION:
       return {
         ...state,
-        navigatorPosition: action.val
+        navigatorPosition: action.val,
       };
 
     case SET_NAVIGATOR_SHAPE:
       return {
         ...state,
-        navigatorShape: action.val
+        navigatorShape: action.val,
       };
 
     case SET_NAVIGATOR_FILTER:
       return {
         ...state,
-        navigatorFilter: action.val
+        navigatorFilter: action.val,
       };
 
     case SET_IS_WIDE_SCREEN:
       return {
         ...state,
-        isWideScreen: action.val
+        isWideScreen: action.val,
       };
 
     case SET_SCROLL_TO_TOP:
       return {
         ...state,
-        scrollToTop: action.val
+        scrollToTop: action.val,
       };
 
     case SET_FONT_SIZE_INCREASE:
       return {
         ...state,
-        fontSizeIncrease: action.val
+        fontSizeIncrease: action.val,
       };
 
     case SET_CATEGORY_FILTER:
       return {
         ...state,
-        categoryFilter: action.val
+        categoryFilter: action.val,
       };
 
     case SET_THEME_TOGGLE:
       return {
         ...state,
-        themeToggle: !state.themeToggle
+        themeToggle: !state.themeToggle,
       };
 
     case SET_CURRENT_POST:
       return {
         ...state,
-        currentPost: action.val
+        currentPost: action.val,
       };
 
     default:
@@ -133,21 +133,21 @@ export type ReduxState = {
 };
 
 const initialState: ReduxState = {
-  navigatorPosition: "is-aside",
-  navigatorShape: "open",
-  navigatorFilter: "",
+  navigatorPosition: 'is-aside',
+  navigatorShape: 'open',
+  navigatorFilter: '',
   isWideScreen: false,
   scrollToTop: false,
   fontSizeIncrease: 1,
-  categoryFilter: "all posts",
+  categoryFilter: 'all posts',
   themeToggle: false,
-  currentPost: null
+  currentPost: {},
 };
 
 const createStore = () =>
   reduxCreateStore(
     reducer,
     initialState,
-    composeWithDevTools(applyMiddleware())
+    composeWithDevTools(applyMiddleware()),
   );
 export default createStore;
