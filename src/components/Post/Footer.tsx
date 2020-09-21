@@ -1,14 +1,6 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import styled, { css } from 'styled-components';
 import PostComments from './Comments';
-
-export default () => {
-  return (
-    <StyledPostFooter>
-      <PostComments />
-    </StyledPostFooter>
-  );
-};
 
 const StyledPostFooter = styled.footer`
   & p {
@@ -24,3 +16,13 @@ const StyledPostFooter = styled.footer`
     `;
   }}
 `;
+
+function PostFooter(): ReactElement {
+  return (
+    <StyledPostFooter>
+      <PostComments />
+    </StyledPostFooter>
+  );
+}
+
+export default PostFooter;

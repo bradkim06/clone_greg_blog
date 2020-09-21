@@ -1,15 +1,7 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import styled, { css } from 'styled-components';
 import { useSelector } from 'react-redux';
 import { ReduxState } from '../../state/store';
-
-export default ({ children }: { children: React.ReactNode }) => {
-  const fontSizeState = useSelector<ReduxState, number>(
-    state => state.fontSizeIncrease,
-  );
-
-  return <StyleArticle fontSize={fontSizeState}>{children}</StyleArticle>;
-};
 
 const StyleArticle = styled.div<{ fontSize: number }>`
   margin: 0 auto;
@@ -58,3 +50,17 @@ const StyleArticle = styled.div<{ fontSize: number }>`
     `;
   }}
 `;
+
+type PostWrapperProps = {
+  children: React.ReactNode;
+};
+
+const PostWrapper = ({ children }: PostWrapperProps): ReactElement => {
+  const fontSizeState = useSelector<ReduxState, number>(
+    state => state.fontSizeIncrease,
+  );
+
+  return <StyleArticle fontSize={fontSizeState}>{children}</StyleArticle>;
+};
+
+export default PostWrapper;

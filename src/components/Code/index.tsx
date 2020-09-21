@@ -1,115 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, ReactElement } from 'react';
 import Highlight, { defaultProps, Language } from 'prism-react-renderer';
 import theme from 'prism-react-renderer/themes/oceanicNext';
 import { darken } from 'polished';
 import { mdx } from '@mdx-js/react';
 import styled from 'styled-components';
-import loadable from '@loadable/component';
-import rangeParser from 'parse-numeric-range';
+import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live';
 import { copyToClipboard } from './copy-to-clip';
-
-CodeHighlight.defaultProps = {
-  live: false,
-  title: null,
-  lineNumbers: null,
-};
-
-type CodeHighlightProps = {
-  children: string;
-  className: string;
-  live: string | boolean;
-  title: string;
-  lineNumbers: string;
-  language: Language;
-  metastring?: string;
-};
-
-export default function CodeHighlight({
-  children,
-  className,
-  live,
-  title,
-  lineNumbers,
-  metastring = '',
-}: CodeHighlightProps) {
-  const [copied, setCopied] = useState(false);
-  const codeString = children.trim();
-  const language = className.replace(/language-/, '');
-  const shouldHighlightLine = calculateLinesToHighlight(metastring);
-
-  if (live) {
-    return (
-      <LazyLiveProvider
-        code={codeString}
-        noInline
-        theme={theme}
-        transformCode={code => `/** @jsx mdx */${code}`}
-        scope={{ mdx }}
-      />
-    );
-  }
-
-  const handleClick = () => {
-    setCopied(true);
-    copyToClipboard(codeString);
-  };
-
-  return (
-    <>
-      {title && <PreHeader>{title}</PreHeader>}
-      <div className="gatsby-highlight">
-        <Highlight
-          {...defaultProps}
-          code={codeString}
-          language={language}
-          theme={theme}
-        >
-          {({
-            className: blockClassName,
-            style,
-            tokens,
-            getLineProps,
-            getTokenProps,
-          }) => (
-            <Pre className={blockClassName} style={style} hasTitle={title}>
-              <CopyCode onClick={handleClick}>
-                {copied ? 'Copied!' : 'Copy'}
-              </CopyCode>
-              <code>
-                {tokens.map((line, index) => {
-                  const lineProps = getLineProps({ line, key: index });
-                  if (shouldHighlightLine(index)) {
-                    lineProps.className = `${lineProps.className} highlight-line`;
-                  }
-                  return (
-                    <div key={index} {...lineProps}>
-                      {lineNumbers && <LineNo>{index + 1}</LineNo>}
-                      {line.map((token, key) => (
-                        <span key={key} {...getTokenProps({ token, key })} />
-                      ))}
-                    </div>
-                  );
-                })}
-              </code>
-            </Pre>
-          )}
-        </Highlight>
-      </div>
-    </>
-  );
-}
-
-const LazyLiveProvider = loadable(async () => {
-  const Module = await import('react-live');
-  const { LiveProvider, LiveEditor, LiveError, LivePreview } = Module;
-  return (props: any) => (
-    <LiveProvider {...props}>
-      <LiveEditor />
-      <LivePreview />
-      <LiveError />
-    </LiveProvider>
-  );
-});
 
 const calculateLinesToHighlight = (meta: string) => {
   const RE = /{([\d,-]+)}/;
@@ -117,7 +13,7 @@ const calculateLinesToHighlight = (meta: string) => {
   if (!RE.test(meta)) {
     return () => false;
   }
-  const lineNumbers = RE.exec(meta)![1]
+  const lineNumbers = RE.exec(meta)[1]
     .split(',')
     .map(v => v.split('-').map(x => parseInt(x, 10)));
   return (index: number) => {
@@ -182,3 +78,105 @@ const CopyCode = styled.button`
     opacity: 0.8;
   }
 `;
+
+type CodeHighlightProps = {
+  children: string;
+  className: string;
+  live?: string | boolean;
+  title?: string;
+  lineNumbers?: string;
+  language?: Language;
+  metastring?: string;
+};
+
+function CodeHighlight({
+  children,
+  className,
+  live,
+  title,
+  lineNumbers,
+  metastring = '',
+}: CodeHighlightProps): ReactElement {
+  const [copied, setCopied] = useState(false);
+  const codeString = children.trim();
+  const language = className.replace(/language-/, '');
+  const shouldHighlightLine = calculateLinesToHighlight(metastring);
+
+  if (live) {
+    return (
+      <LiveProvider
+        code={codeString}
+        noInline
+        theme={theme}
+        transformCode={code => `/** @jsx mdx */${code}`}
+        scope={{ mdx }}
+      >
+        <LiveEditor />
+        <LivePreview />
+        <LiveError />
+      </LiveProvider>
+    );
+  }
+
+  const handleClick = () => {
+    setCopied(true);
+    copyToClipboard(codeString);
+  };
+
+  return (
+    <>
+      {title && <PreHeader>{title}</PreHeader>}
+      <div className="gatsby-highlight">
+        <Highlight
+          {...defaultProps}
+          code={codeString}
+          language={language}
+          theme={theme}
+        >
+          {({
+            className: blockClassName,
+            style,
+            tokens,
+            getLineProps,
+            getTokenProps,
+          }) => (
+            <Pre className={blockClassName} style={style} hasTitle={title}>
+              <CopyCode onClick={handleClick}>
+                {copied ? 'Copied!' : 'Copy'}
+              </CopyCode>
+              <code>
+                {tokens.map((line, index) => {
+                  const lineProps = getLineProps({ line, key: index });
+                  if (shouldHighlightLine(index)) {
+                    lineProps.className = `${lineProps.className} highlight-line`;
+                  }
+                  return (
+                    <div key={lineProps.className} {...lineProps}>
+                      {lineNumbers && <LineNo>{index + 1}</LineNo>}
+                      {line.map((token, key) => (
+                        <span
+                          key={lineNumbers}
+                          {...getTokenProps({ token, key })}
+                        />
+                      ))}
+                    </div>
+                  );
+                })}
+              </code>
+            </Pre>
+          )}
+        </Highlight>
+      </div>
+    </>
+  );
+}
+
+CodeHighlight.defaultProps = {
+  live: false,
+  title: null,
+  lineNumbers: null,
+  language: '',
+  metastring: '',
+};
+
+export default CodeHighlight;

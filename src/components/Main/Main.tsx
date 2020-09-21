@@ -1,14 +1,6 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import styled, { css } from 'styled-components';
 import SpringScrollbars from '../Scroll';
-
-const Main = ({ children }: { children: React.ReactNode }) => {
-  return (
-    <StyleMain>
-      <SpringScrollbars>{children}</SpringScrollbars>
-    </StyleMain>
-  );
-};
 
 const StyleMain = styled.main`
   position: absolute;
@@ -52,5 +44,17 @@ const StyleMain = styled.main`
     `;
   }}
 `;
+
+type MainProps = {
+  children: React.ReactNode;
+};
+
+function Main({ children }: MainProps): ReactElement {
+  return (
+    <StyleMain>
+      <SpringScrollbars>{children}</SpringScrollbars>
+    </StyleMain>
+  );
+}
 
 export default Main;

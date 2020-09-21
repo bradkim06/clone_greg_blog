@@ -1,7 +1,7 @@
 import { useStaticQuery, graphql } from 'gatsby';
 import { FluidObject } from 'gatsby-image';
 
-export type logoProps = {
+export type LogoProps = {
   logo: {
     childImageSharp: {
       fluid: FluidObject;
@@ -9,7 +9,13 @@ export type logoProps = {
   };
 };
 
-export const useLogoQuery = () => {
+type LogoQueryType = {
+  data: {
+    logo: LogoProps;
+  };
+};
+
+export const useLogoQuery = (): LogoQueryType => {
   const logoData = useStaticQuery(
     graphql`
       query LogoData {

@@ -1,21 +1,5 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import styled, { css } from 'styled-components';
-
-type PostHeaderProps = {
-  title: string;
-  subTitle: string;
-  date: string;
-};
-
-export default ({ title, subTitle, date }: PostHeaderProps) => {
-  return (
-    <PostHead>
-      <PostTitle>{title}</PostTitle>
-      <PostSubTitle>{subTitle}</PostSubTitle>
-      <PostDate>{date}</PostDate>
-    </PostHead>
-  );
-};
 
 const PostHead = styled.div`
   margin: 0 0 3em;
@@ -75,3 +59,26 @@ const PostDate = styled.time`
     `;
   }}
 `;
+
+type PostHeaderProps = {
+  title: string;
+  subTitle?: string;
+  date?: string;
+};
+
+function PostHeader({ title, subTitle, date }: PostHeaderProps): ReactElement {
+  return (
+    <PostHead>
+      <PostTitle>{title}</PostTitle>
+      <PostSubTitle>{subTitle}</PostSubTitle>
+      <PostDate>{date}</PostDate>
+    </PostHead>
+  );
+}
+
+PostHeader.defaultProps = {
+  subTitle: '',
+  date: '',
+};
+
+export default PostHeader;

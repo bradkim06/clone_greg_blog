@@ -22,10 +22,12 @@ const PostComments = () => {
     script.setAttribute('repo', 'bradkim06/utterances');
     script.setAttribute('issue-term', 'pathname');
     script.setAttribute('theme', themeSelect);
-    if ((anchor as any).hasChildNodes()) {
-      (anchor as any).removeChild((anchor as any).firstChild);
+    if (anchor) {
+      if (anchor.firstChild) {
+        anchor.removeChild(anchor.firstChild);
+      }
+      anchor.appendChild(script);
     }
-    (anchor as any).appendChild(script);
   }, [themeSelect]);
 
   return (

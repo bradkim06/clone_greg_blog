@@ -1,7 +1,7 @@
 import { useStaticQuery, graphql } from 'gatsby';
 import { FluidObject } from 'gatsby-image';
 
-export interface PostsProps {
+export type PostsProps = {
   totalCount: number;
   edges: Array<{
     node: {
@@ -23,9 +23,9 @@ export interface PostsProps {
       };
     };
   }>;
-}
+};
 
-export interface PagesProps {
+export type PagesProps = {
   edges: Array<{
     node: {
       fields: {
@@ -36,9 +36,16 @@ export interface PagesProps {
       };
     };
   }>;
-}
+};
 
-export const useLayoutQuery = () => {
+type LayoutQueryType = {
+  data: {
+    posts: PostsProps;
+    pages: PagesProps;
+  };
+};
+
+export const useLayoutQuery = (): LayoutQueryType => {
   const layoutData = useStaticQuery(
     graphql`
       query LayoutData {

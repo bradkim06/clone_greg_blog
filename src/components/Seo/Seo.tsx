@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import Helmet from 'react-helmet';
 import config from '../../../content/meta/config';
-import { MdxType } from '../../templates/PostTemplate';
+import { MdxType } from '../../state/store';
 
 type SeoProps = {
   post: MdxType;
 };
 
-export default ({ post }: SeoProps) => {
+function Seo({ post }: SeoProps): ReactElement {
   const postTitle = ((post || {}).frontmatter || {}).title;
   const postDescription = (post || {}).excerpt;
   const postCover = ((post || {}).frontmatter || {}).cover;
@@ -49,4 +49,6 @@ export default ({ post }: SeoProps) => {
       <meta name="theme-color" content="#bae1ff" />
     </Helmet>
   );
-};
+}
+
+export default Seo;

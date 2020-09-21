@@ -5,7 +5,7 @@ import { forceCheck } from 'react-lazyload';
 import { connect } from 'react-redux';
 import styled, { withTheme } from 'styled-components';
 
-import { setScrollToTop, ReduxState } from '../../state/store';
+import { setScrollToTop, ReduxState, Action } from '../../state/store';
 
 const Focus = styled.div`
   &:focus {
@@ -14,11 +14,11 @@ const Focus = styled.div`
 `;
 
 type ScrollType = {
-  forceCheckOnScroll: any;
+  forceCheckOnScroll: boolean;
   isNavigator: boolean;
   navigatorPosition: string;
   scrollToTop: boolean;
-  setScrollToTop: Function;
+  setScrollToTop: (payload: boolean) => Action;
   theme: {
     bars: {
       colors: {
@@ -54,29 +54,29 @@ class SpringScrollbars extends Component<ScrollType> {
     this.spring.addListener({ onSpringUpdate: this.handleSpringUpdate });
   }
 
-  componentDidUpdate(prevProps: any) {
-    if (
-      this.props.isNavigator &&
-      this.props.navigatorPosition !== 'is-featured'
-    ) {
+  componentDidUpdate(prevProps: ScrollType) {
+    const {
+      isNavigator,
+      navigatorPosition,
+      scrollToTop,
+      setScrollToTop,
+    } = this.props;
+    if (isNavigator && navigatorPosition !== 'is-featured') {
       return;
     }
 
-    if (
-      this.props.scrollToTop &&
-      this.props.scrollToTop !== prevProps.scrollToTop
-    ) {
+    if (scrollToTop && scrollToTop !== prevProps.scrollToTop) {
       this.scrollTop(0);
-      this.props.setScrollToTop(false);
+      setScrollToTop(false);
     }
   }
 
   componentWillUnmount() {
     this.springSystem.deregisterSpring(this.spring);
     this.springSystem.removeAllListeners();
-    this.springSystem = undefined!;
+    // this.springSystem = undefined;
     this.spring.destroy();
-    this.spring = undefined!;
+    // this.spring = undefined;
   }
 
   getScrollTop() {
@@ -112,9 +112,10 @@ class SpringScrollbars extends Component<ScrollType> {
     });
   }
 
-  renderThumb({ style, ...props }: any) {
+  renderThumb({ style, ...props }) {
+    const { theme } = this.props;
     const thumbStyle = {
-      backgroundColor: this.props.theme.bars.colors.icon,
+      backgroundColor: theme.bars.colors.icon,
     };
     return <div style={{ ...style, ...thumbStyle }} {...props} />;
   }
@@ -128,11 +129,11 @@ class SpringScrollbars extends Component<ScrollType> {
         universal
         onScroll={forceCheckOnScroll && forceCheck}
         ref={comp => {
-          (this as any).scrollbars = comp;
+          this.scrollbars = comp;
         }}
         renderThumbHorizontal={this.renderThumb}
         renderThumbVertical={this.renderThumb}
-        onUpdate={(this as any).handleUpdate}
+        onUpdate={this.handleUpdate}
       >
         <Focus tabIndex={0}>{children}</Focus>
       </Scrollbars>
@@ -154,4 +155,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(withTheme(SpringScrollbars as any));
+)(withTheme(SpringScrollbars));

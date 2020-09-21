@@ -1,9 +1,5 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import styled, { css } from 'styled-components';
-
-export default ({ children }: { children: React.ReactNode }) => {
-  return <PageContent>{children}</PageContent>;
-};
 
 const PageContent = styled.article`
   & li {
@@ -100,3 +96,13 @@ const PageContent = styled.article`
     `;
   }}
 `;
+
+type ArticleProps = {
+  children: React.ReactNode;
+};
+
+function Article({ children }: ArticleProps): ReactElement {
+  return <PageContent>{children}</PageContent>;
+}
+
+export default Article;
