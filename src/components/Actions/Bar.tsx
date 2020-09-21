@@ -9,7 +9,6 @@ import Brightness2 from '@material-ui/icons/Brightness2';
 import loadable from '@loadable/component';
 import Search from './Search';
 import Toc from './Toc';
-
 import {
   setScrollToTop,
   setFontSizeIncrease,
@@ -20,85 +19,6 @@ import {
 import { moveNavFeature, moveNavData } from '../../utils/shared';
 import FontSetter from './FontSetter';
 import CategoryFilter from './CategoryFilter';
-
-type ActionsBarProps = {
-  categories: string[] | unknown[];
-};
-
-const ActionsBar = ({ categories }: ActionsBarProps) => {
-  const isThemeState = useSelector<ReduxState, boolean>(
-    state => state.themeToggle,
-  );
-  const state = moveNavData();
-  const dispatch = useDispatch();
-
-  function homeOnClick(e: any) {
-    moveNavFeature(e, state, dispatch);
-  }
-
-  function arrowUpOnClick() {
-    dispatch(setScrollToTop(true));
-  }
-
-  function fontSetterOnClick(val: number) {
-    dispatch(setFontSizeIncrease(val));
-  }
-
-  function categoryFilterOnClick(val: string) {
-    dispatch(setCategoryFilter(val));
-  }
-
-  function themeToggleClick() {
-    dispatch(setThemeToggle());
-
-    const theme = isThemeState ? 'lightTheme' : 'darkTheme';
-    localStorage.setItem('theme', theme);
-  }
-
-  return (
-    <StyleActionsBar>
-      <Group>
-        <StyledIconButton
-          aria-label="Back to list"
-          onClick={homeOnClick}
-          title="Back to the list"
-        >
-          <HomeIcon />
-        </StyledIconButton>
-        <Search />
-        {((state.isWideScreen && state.navigatorShape === 'open') ||
-          state.navigatorPosition !== 'is-aside') && (
-          <CategoryFilter
-            categories={categories}
-            filterCategory={categoryFilterOnClick}
-          />
-        )}
-      </Group>
-      <Group>
-        {state.navigatorPosition === 'is-aside' && (
-          <>
-            <Toc />
-            <FontSetter increaseFont={fontSetterOnClick} />
-          </>
-        )}
-        <StyledIconButton
-          aria-label="Theme Toggle"
-          onClick={themeToggleClick}
-          title="Theme Change"
-        >
-          {isThemeState ? <WbSunnyIcon /> : <Brightness2 />}
-        </StyledIconButton>
-        <StyledIconButton
-          aria-label="Back to top"
-          onClick={arrowUpOnClick}
-          title="Scroll to top"
-        >
-          <ArrowUpwardIcon />
-        </StyledIconButton>
-      </Group>
-    </StyleActionsBar>
-  );
-};
 
 const StyleActionsBar = styled.div`
   position: absolute;
@@ -173,5 +93,84 @@ const Group = styled.div`
 `;
 
 const StyledIconButton = styled(IconButton)``;
+
+type ActionsBarProps = {
+  categories: string[];
+};
+
+function ActionsBar({ categories }: ActionsBarProps) {
+  const isThemeState = useSelector<ReduxState, boolean>(
+    state => state.themeToggle,
+  );
+  const state = moveNavData();
+  const dispatch = useDispatch();
+
+  function homeOnClick(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    moveNavFeature(e, state, dispatch);
+  }
+
+  function arrowUpOnClick() {
+    dispatch(setScrollToTop(true));
+  }
+
+  function fontSetterOnClick(val: number) {
+    dispatch(setFontSizeIncrease(val));
+  }
+
+  function categoryFilterOnClick(val: string) {
+    dispatch(setCategoryFilter(val));
+  }
+
+  function themeToggleClick() {
+    dispatch(setThemeToggle());
+
+    const theme = isThemeState ? 'lightTheme' : 'darkTheme';
+    localStorage.setItem('theme', theme);
+  }
+
+  return (
+    <StyleActionsBar>
+      <Group>
+        <StyledIconButton
+          aria-label="Back to list"
+          onClick={homeOnClick}
+          title="Back to the list"
+        >
+          <HomeIcon />
+        </StyledIconButton>
+        <Search />
+        {((state.isWideScreen && state.navigatorShape === 'open') ||
+          state.navigatorPosition !== 'is-aside') && (
+          <CategoryFilter
+            categories={categories}
+            filterCategory={categoryFilterOnClick}
+          />
+        )}
+      </Group>
+      <Group>
+        {state.navigatorPosition === 'is-aside' && (
+          <>
+            <Toc />
+            <FontSetter increaseFont={fontSetterOnClick} />
+          </>
+        )}
+        <StyledIconButton
+          aria-label="Theme Toggle"
+          onClick={themeToggleClick}
+          title="Theme Change"
+        >
+          {isThemeState ? <WbSunnyIcon /> : <Brightness2 />}
+        </StyledIconButton>
+        <StyledIconButton
+          aria-label="Back to top"
+          onClick={arrowUpOnClick}
+          title="Scroll to top"
+        >
+          <ArrowUpwardIcon />
+        </StyledIconButton>
+      </Group>
+    </StyleActionsBar>
+  );
+}
 
 export default loadable(async () => ActionsBar);

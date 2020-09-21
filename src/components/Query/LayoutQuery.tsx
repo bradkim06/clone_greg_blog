@@ -15,7 +15,7 @@ export interface PostsProps {
         subTitle?: string;
         date?: string;
         category?: string;
-        cover: {
+        cover?: {
           childImageSharp: {
             fluid: FluidObject;
           };

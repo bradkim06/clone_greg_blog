@@ -1,43 +1,14 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { graphql } from 'gatsby';
-import { FluidObject } from 'gatsby-image';
 import loadable from '@loadable/component';
 import Seo from '../components/Seo';
 import Post from '../components/Post';
 import Main from '../components/Main';
-import { setCurrentPost } from '../state/store';
+import { CurrentPostProps, setCurrentPost } from '../state/store';
 import { moveNavAside, moveNavData } from '../utils/shared';
 
-export type MdxType = {
-  id: string;
-  body: string;
-  excerpt: string;
-  tableOfContents?: {
-    items?: object[];
-  };
-  fields: {
-    slug: string;
-  };
-  frontmatter: {
-    title: string;
-    subTitle: string;
-    date: string;
-    cover: {
-      childImageSharp: {
-        fluid: FluidObject;
-      };
-    };
-  };
-};
-
-export type PostTemplateProps = {
-  data: {
-    mdx: MdxType;
-  };
-};
-
-const PostTemplate = ({ data }: PostTemplateProps) => {
+const PostTemplate = ({ data }: { data: CurrentPostProps }) => {
   const state = moveNavData();
   const dispatch = useDispatch();
 
@@ -46,7 +17,7 @@ const PostTemplate = ({ data }: PostTemplateProps) => {
       moveNavAside(state, dispatch);
     }
 
-    dispatch(setCurrentPost(data as any));
+    dispatch(setCurrentPost(data));
   }, []);
 
   return (

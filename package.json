@@ -55,6 +55,7 @@
     "react-popper": "^2.2.3",
     "react-redux": "^7.2.1",
     "rebound": "^0.1.0",
+    "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "styled-components": "^5.2.0",
     "styled-normalize": "^8.0.7"

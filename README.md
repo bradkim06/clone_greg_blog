@@ -4,6 +4,10 @@
 
 This blog is not my pure creation, but was created with reference to <a href="https://github.com/greglobinski/gatsby-starter-personal-blog"> greg lobinski's starter</a>. I like this starter. Thank greg lobinski for providing a beautiful design starter as open source.
 
+[greg lobinsky's Original Demo Site](https://gatsby-starter-personal-blog.greglobinski.com/).
+
+[My Custom Demo Site](https://bradkim06.github.io).
+
 ## The difference between Original and Custom
 
 |                         | Original  |      Custom      |
@@ -57,15 +61,9 @@ You can write post both _.md, _.mdx
 
 ![demogif](./static/gatsby-starter-personal-blog.gif)
 
-[Original Demo Site](https://gatsby-starter-personal-blog.greglobinski.com/).
-
 ### Custom
 
 ![demoImg](./static/demo-img.png)
-
-[Custom Demo Site](https://build-0e47e961-1c3c-4034-a39c-4eeda9705420.gtsb.io/)
-
-[My Blog](https://bradkim06.github.io)
 
 ### LightHouse Score
 

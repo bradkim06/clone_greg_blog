@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, ReactElement } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Seo from '../components/Seo';
 import { ReduxState, setNavigatorPosition } from '../state/store';
 
-const Home = () => {
+const Home = (): ReactElement => {
   const stateNavPosition = useSelector<ReduxState, string>(
     state => state.navigatorPosition,
   );

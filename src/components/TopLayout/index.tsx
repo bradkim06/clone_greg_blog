@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { ThemeContext } from 'styled-components';
 import LayoutWrapper from './LayoutWrapper';
 import { setIsWideScreen } from '../../state/store';
-import { useLayoutQuery } from '../Query/LayoutQuery';
+import { useLayoutQuery, PostsProps } from '../Query/LayoutQuery';
 import InfoBox from '../Info/Box';
 import Navigator from '../Navigator';
 import ActionsBar from '../Actions/Bar';
@@ -53,6 +53,24 @@ function useCurrentWidth(theme: {
   return width >= mediaQueryL;
 }
 
+type CategoryProps = {
+  node: {
+    frontmatter: {
+      category?: string | undefined;
+    };
+  };
+};
+
+function Unique(post: PostsProps): string[] {
+  return [
+    ...new Set(
+      post.edges.map(
+        (item: CategoryProps) => item.node.frontmatter.category || '',
+      ),
+    ),
+  ];
+}
+
 type TopLayoutProps = {
   children: React.ReactNode;
 };
@@ -61,19 +79,7 @@ const TopLayout = ({ children }: TopLayoutProps): ReactElement => {
   const { posts, pages } = useLayoutQuery();
   const themeContext = useContext(ThemeContext);
 
-  type CategoryProps = {
-    node: {
-      frontmatter: {
-        category?: string;
-      };
-    };
-  };
-
-  const categories = [
-    ...new Set(
-      posts.edges.map((item: CategoryProps) => item.node.frontmatter.category),
-    ),
-  ];
+  const categories = Unique(posts);
   const isWideState = useCurrentWidth(themeContext);
   const dispatch = useDispatch();
 

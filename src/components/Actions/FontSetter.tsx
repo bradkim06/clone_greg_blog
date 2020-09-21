@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, ReactElement } from 'react';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
 import Paper from '@material-ui/core/Paper';
@@ -12,9 +12,9 @@ type FontSetterProps = {
   increaseFont: (val: number) => void;
 };
 
-export default ({ increaseFont }: FontSetterProps) => {
+const FontSetter = ({ increaseFont }: FontSetterProps): ReactElement => {
   const [open, setOpen] = React.useState(false);
-  const anchorRef: any = React.useRef(null);
+  const anchorRef = React.useRef<HTMLElement | null>(null);
 
   function handleToggle() {
     setOpen(prevOpen => !prevOpen);
@@ -29,7 +29,7 @@ export default ({ increaseFont }: FontSetterProps) => {
   }
 
   function handleSetting(event: React.MouseEvent<HTMLElement>) {
-    const val = (event.target as any).innerText.replace('%', '');
+    const val = event.target.innerText.replace('%', '');
     const factor = +val / 100;
     increaseFont(factor);
 
@@ -93,3 +93,5 @@ export default ({ increaseFont }: FontSetterProps) => {
     </>
   );
 };
+
+export default FontSetter;

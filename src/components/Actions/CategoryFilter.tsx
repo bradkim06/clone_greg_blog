@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, ReactElement } from 'react';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
 import Paper from '@material-ui/core/Paper';
@@ -9,14 +9,30 @@ import IconButton from '@material-ui/core/IconButton';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import styled, { css } from 'styled-components';
 
+const FilterWrapper = styled.nav`
+  ${props => {
+    const { minWidth, bars } = props.theme;
+    return css`
+      @media ${minWidth.M} {
+      }
+      .categoryOpen {
+        color: ${bars.colors.icon};
+      }
+    `;
+  }}
+`;
+
 type CategoryFilterProps = {
   categories: string[];
   filterCategory: (val: string) => void;
 };
 
-export default ({ categories, filterCategory }: CategoryFilterProps) => {
+const CategoryFilter = ({
+  categories,
+  filterCategory,
+}: CategoryFilterProps): ReactElement => {
   const [open, setOpen] = useState(false);
-  const anchorRef: any = useRef(null);
+  const anchorRef = useRef<HTMLElement | null>(null);
 
   function handleToggle() {
     setOpen(prevOpen => !prevOpen);
@@ -30,7 +46,7 @@ export default ({ categories, filterCategory }: CategoryFilterProps) => {
   }
 
   function handleSetting(event: React.MouseEvent<HTMLElement>) {
-    const category: string = (event.target as any).innerText.trim();
+    const category: string = event.target.innerText.trim();
     filterCategory(category);
 
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
@@ -45,7 +61,7 @@ export default ({ categories, filterCategory }: CategoryFilterProps) => {
 
   useEffect(() => {
     if (prevOpen.current === true && open === false) {
-      anchorRef.current.focus();
+      anchorRef.current?.focus();
     }
 
     prevOpen.current = open;
@@ -99,15 +115,4 @@ export default ({ categories, filterCategory }: CategoryFilterProps) => {
   );
 };
 
-const FilterWrapper = styled.nav`
-  ${props => {
-    const { minWidth, bars } = props.theme;
-    return css`
-      @media ${minWidth.M} {
-      }
-      .categoryOpen {
-        color: ${bars.colors.icon};
-      }
-    `;
-  }}
-`;
+export default CategoryFilter;

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
+import React, { useState, useEffect, ReactElement } from 'react';
+import { FluidObject } from 'gatsby-image';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -15,28 +15,65 @@ import { useTheme } from '@material-ui/core/styles';
 import styled, { css } from 'styled-components';
 import SearchListItem from './SearchListItem';
 import { GridWrapper } from '../Navigator/List';
+import useSearchData from '../../hooks/SearchQuery';
 
-type allMdxProps = {
-  allMdx: {
-    edges: Array<{
-      node: {
-        fields: {
-          slug: string;
-        };
-        frontmatter: {
-          title: string;
-          subTitle?: string;
-          date?: string;
-          category?: string;
-          cover?: any;
+const options = {
+  // isCaseSensitive: false,
+  // includeScore: true,
+  shouldSort: true,
+  // includeMatches: false,
+  // findAllMatches: false,
+  // minMatchCharLength: 1,
+  // location: 0,
+  threshold: 0.5,
+  // distance: 100,
+  // useExtendedSearch: false,
+  // ignoreLocation: false,
+  // ignoreFieldNorm: false,
+  keys: [
+    'node.frontmatter.title',
+    'node.excerpt',
+    'node.frontmatter.subTitle',
+    'node.frontmatter.category',
+  ],
+};
+
+const StyledDialog = styled(Dialog)`
+  ${props => {
+    const { search } = props.theme;
+    return css`
+      .MuiDialog-paperFullWidth {
+        background-color: ${search.colors.background};
+      }
+    `;
+  }}
+`;
+
+type SearchResultType = {
+  item: {
+    node: {
+      id: string;
+      excerpt: string;
+      fields: {
+        slug: string;
+      };
+      frontmatter: {
+        title: string;
+        subTitle?: string;
+        date?: string;
+        category?: string;
+        cover?: {
+          childImageSharp: {
+            fluid: FluidObject;
+          };
         };
       };
-    }>;
+    };
   };
 };
 
-const SearchDialog = () => {
-  const data: allMdxProps = useSearchData();
+const SearchDialog = (): ReactElement => {
+  const data = useSearchData();
   const fuse = new Fuse(data.allMdx.edges, options);
 
   const [open, setOpen] = useState(false);
@@ -56,15 +93,17 @@ const SearchDialog = () => {
     updateQuery('');
   }
 
-  function onSearch(event: any) {
+  function onSearch(
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) {
     updateQuery(event.currentTarget.value);
   }
 
-  const descriptionElementRef = React.useRef(null);
+  const descriptionElementRef = React.useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     if (open) {
-      const { current: descriptionElement }: any = descriptionElementRef;
+      const { current: descriptionElement } = descriptionElementRef;
       if (descriptionElement !== null) {
         descriptionElement.focus();
       }
@@ -115,8 +154,9 @@ const SearchDialog = () => {
             />
             <GridWrapper>
               {results &&
-                results.map((post: any) => (
+                results.map((post: SearchResultType) => (
                   <SearchListItem
+                    key={post.item.node.id}
                     title={post.item.node.frontmatter.title}
                     subTitle={post.item.node.frontmatter.subTitle}
                     excerpt={post.item.node.excerpt}
@@ -137,71 +177,6 @@ const SearchDialog = () => {
       </StyledDialog>
     </div>
   );
-};
-
-const options = {
-  // isCaseSensitive: false,
-  // includeScore: true,
-  shouldSort: true,
-  // includeMatches: false,
-  // findAllMatches: false,
-  // minMatchCharLength: 1,
-  // location: 0,
-  threshold: 0.5,
-  // distance: 100,
-  // useExtendedSearch: false,
-  // ignoreLocation: false,
-  // ignoreFieldNorm: false,
-  keys: [
-    'node.frontmatter.title',
-    'node.frontmatter.subTitle',
-    'node.frontmatter.category',
-  ],
-};
-
-const StyledDialog = styled(Dialog)`
-  ${props => {
-    const { search } = props.theme;
-    return css`
-      .MuiDialog-paperFullWidth {
-        background-color: ${search.colors.background};
-      }
-    `;
-  }}
-`;
-
-const useSearchData = () => {
-  const searchData = useStaticQuery(
-    graphql`
-      query SearchData {
-        allMdx {
-          edges {
-            node {
-              excerpt
-              fields {
-                slug
-              }
-              frontmatter {
-                title
-                subTitle
-                date(formatString: "YYYY.MM.D")
-                category
-                cover {
-                  publicURL
-                  childImageSharp {
-                    fluid(quality: 100, srcSetBreakpoints: [30, 60, 80, 200]) {
-                      ...GatsbyImageSharpFluid
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    `,
-  );
-  return searchData;
 };
 
 export default SearchDialog;

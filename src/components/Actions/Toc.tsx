@@ -13,8 +13,31 @@ import { useTheme } from '@material-ui/core/styles';
 import styled, { css } from 'styled-components';
 import loadable from '@loadable/component';
 import TocLists from './TocLists';
-import { ReduxState } from '../../state/store';
-import { PostTemplateProps } from '../../templates/PostTemplate';
+import { ReduxState, CurrentPostProps } from '../../state/store';
+
+const TocTitle = styled(DialogTitle)`
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: center;
+
+  ${props => {
+    const { base } = props.theme;
+    return css`
+      color: ${base.colors.palette.second};
+    `;
+  }}
+`;
+
+const StyledDialog = styled(Dialog)`
+  ${props => {
+    const { search } = props.theme;
+    return css`
+      .MuiDialog-paperFullWidth {
+        background-color: ${search.colors.background};
+      }
+    `;
+  }}
+`;
 
 const Toc = () => {
   const {
@@ -22,7 +45,7 @@ const Toc = () => {
       tableOfContents,
       frontmatter: { title },
     },
-  } = useSelector<ReduxState, PostTemplateProps>(state => state.currentPost);
+  } = useSelector<ReduxState, CurrentPostProps>(state => state.currentPost);
 
   const [open, setOpen] = useState(false);
   const [scroll, setScroll] = useState<'paper' | 'body' | undefined>('paper');
@@ -39,11 +62,11 @@ const Toc = () => {
     setOpen(false);
   }
 
-  const descriptionElementRef = React.useRef(null);
+  const descriptionElementRef = React.useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     if (open) {
-      const { current: descriptionElement }: any = descriptionElementRef;
+      const { current: descriptionElement } = descriptionElementRef;
       if (descriptionElement !== null) {
         descriptionElement.focus();
       }
@@ -91,29 +114,5 @@ const Toc = () => {
     </div>
   );
 };
-
-const TocTitle = styled(DialogTitle)`
-  font-size: 2rem;
-  font-weight: 600;
-  text-align: center;
-
-  ${props => {
-    const { base } = props.theme;
-    return css`
-      color: ${base.colors.palette.second};
-    `;
-  }}
-`;
-
-const StyledDialog = styled(Dialog)`
-  ${props => {
-    const { search } = props.theme;
-    return css`
-      .MuiDialog-paperFullWidth {
-        background-color: ${search.colors.background};
-      }
-    `;
-  }}
-`;
 
 export default loadable(async () => Toc);

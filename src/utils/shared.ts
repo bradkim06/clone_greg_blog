@@ -1,21 +1,19 @@
-// import { forceCheck } from "react-lazyload";
+import { Dispatch } from 'react';
 import { navigate } from '@reach/router';
 import { useSelector, shallowEqual } from 'react-redux';
 import {
   setNavigatorShape,
   setNavigatorPosition,
   ReduxState,
+  Action,
 } from '../state/store';
 
 export function moveNavFeature(
-  e: any,
+  e: React.MouseEvent,
   state: MoveNavAsideState,
-  dispatch: any,
+  dispatch: Dispatch<Action>,
 ): void {
-  e && e.preventDefault();
-  // uncomment following lines if you want to count featuring Navigator as a visit
-  // to index page ('/'), you have to also uncomment import { navigateTo }...
-  // navigate("/");
+  e.preventDefault();
 
   if (state.navigatorPosition === 'is-aside') {
     if (state.isWideScreen) {
@@ -43,7 +41,10 @@ export type MoveNavAsideState = {
   isWideScreen: boolean;
 };
 
-export function moveNavAside(state: MoveNavAsideState, dispatch: any): void {
+export function moveNavAside(
+  state: MoveNavAsideState,
+  dispatch: Dispatch<Action>,
+): void {
   if (state.navigatorPosition === 'is-featured') {
     if (state.isWideScreen) {
       dispatch(setNavigatorPosition('moving-aside'));
@@ -52,7 +53,6 @@ export function moveNavAside(state: MoveNavAsideState, dispatch: any): void {
         dispatch(setNavigatorPosition('resizing-aside'));
         setTimeout(() => {
           dispatch(setNavigatorPosition('is-aside'));
-          // setTimeout(forceCheck, 400);
         });
       }, 500);
     } else {
@@ -61,7 +61,7 @@ export function moveNavAside(state: MoveNavAsideState, dispatch: any): void {
   }
 }
 
-export function moveNavData() {
+export function moveNavData(): MoveNavAsideState {
   return useSelector<ReduxState, MoveNavAsideState>(
     state => ({
       navigatorShape: state.navigatorShape,
