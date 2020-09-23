@@ -6,7 +6,7 @@ import PostWrapper from '../Main/Wrapper';
 import PostHeader from './Header';
 import PostFooter from './Footer';
 import Article from '../Main/Article';
-import Code from '../Code';
+import Code, { InlineCode } from '../Code';
 import { MdxType } from '../../state/store';
 
 type PostProps = {
@@ -15,7 +15,8 @@ type PostProps = {
 
 const components = {
   Link,
-  inlineCode: props => <code className="inline-code" {...props} />,
+  // inlineCode: props => <code className="inline-code" {...props} />,
+  inlineCode: InlineCode,
   code: Code,
 }; // Provide common components here
 

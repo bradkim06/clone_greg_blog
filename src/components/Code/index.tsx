@@ -179,4 +179,12 @@ CodeHighlight.defaultProps = {
   metastring: '',
 };
 
+type InlineCodeProps = {
+  children: string;
+};
+
+export function InlineCode(props: InlineCodeProps): ReactElement {
+  return <code className="inline-code" {...props} />;
+}
+
 export default CodeHighlight;

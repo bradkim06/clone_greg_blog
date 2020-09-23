@@ -2,7 +2,7 @@ import React, { ReactElement, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Scrollbar from 'react-scrollbars-custom';
 import styled, { css } from 'styled-components';
-import { ReduxState, setCurrentPost, setScrollToTop } from '../../state/store';
+import { ReduxState, setScrollToTop } from '../../state/store';
 
 const RootScrollBar = styled(Scrollbar)`
   ${props => {
