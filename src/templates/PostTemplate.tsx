@@ -45,7 +45,7 @@ export const postQuery = graphql`
         cover {
           publicURL
           childImageSharp {
-            fluid(srcSetBreakpoints: [30, 60, 80, 200]) {
+            fluid(srcSetBreakpoints: [50, 80, 100, 150]) {
               ...GatsbyImageSharpFluid
             }
           }

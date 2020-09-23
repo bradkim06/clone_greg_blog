@@ -22,9 +22,10 @@ const Divider = styled.div`
 `;
 
 const ImgSource = styled(Img)`
-  border-radius: 10px;
-  width: 60px;
-  height: 60px;
+  border-radius: 20px;
+  width: 80px;
+  height: 80px;
+  min-width: 80px;
 
   ${props => {
     const { minWidth, maxWidth } = props.theme;
@@ -34,8 +35,9 @@ const ImgSource = styled(Img)`
       }
 
       @media ${minWidth.M} {
-        width: 80px;
-        height: 80px;
+        width: 100px;
+        min-width: 100px;
+        height: 100px;
       }
 
       @media ${minWidth.L} {
@@ -44,8 +46,9 @@ const ImgSource = styled(Img)`
 
         .moving-featured &,
         .is-aside & {
-          width: 30px;
-          height: 30px;
+          width: 50px;
+          min-width: 50px;
+          height: 50px;
         }
       }
     `;
@@ -56,6 +59,7 @@ const TextFlex = styled.div`
   padding: 0 0 0 1rem;
   display: flex;
   flex-direction: column;
+  word-break: break-all;
 
   h1 {
     margin: 0;
@@ -86,6 +90,7 @@ const TextFlex = styled.div`
       }
 
       @media ${minWidth.L} {
+        word-break: break-word;
         padding: 0;
 
         h1 {
@@ -102,7 +107,7 @@ const TextFlex = styled.div`
 
         .moving-featured &,
         .is-aside & {
-          padding: 0 0 0 1rem;
+          padding: 0 0 0 0.5em;
           text-align: center;
 
           small,
