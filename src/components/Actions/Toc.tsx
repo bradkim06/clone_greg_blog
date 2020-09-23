@@ -32,7 +32,7 @@ const StyledDialog = styled(Dialog)`
   ${props => {
     const { search } = props.theme;
     return css`
-      .MuiDialog-paperFullWidth {
+      .MuiPaper-root {
         background-color: ${search.colors.background};
       }
     `;

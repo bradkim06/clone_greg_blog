@@ -19,6 +19,7 @@ const PostComments = () => {
     script.src = 'https://utteranc.es/client.js';
     script.crossOrigin = 'anonymous';
     script.async = true;
+    script.setAttribute('label', '💬');
     script.setAttribute('repo', 'bradkim06/utterances');
     script.setAttribute('issue-term', 'pathname');
     script.setAttribute('theme', themeSelect);

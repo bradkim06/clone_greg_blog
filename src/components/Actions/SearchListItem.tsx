@@ -131,8 +131,9 @@ const FlexLink = styled(Link)`
   display: flex;
   flex-direction: row;
   align-items: center;
-  transition: all 1.2s cubic-bezier(0.25, 0.8, 0.25, 1);
   border-radius: 20px;
+
+  position: relative;
 
   ${props => {
     const { navigator, search, minWidth } = props.theme;
@@ -140,16 +141,25 @@ const FlexLink = styled(Link)`
     return css`
       color: ${navigator.colors.postsListItemLink};
       background-color: ${search.colors.listBackground};
-
-      box-shadow: 0 1px 3px ${search.colors.shadow},
-        0 1px 2px ${search.colors.shadowHover};
-
-      &:hover {
-        box-shadow: 0 14px 28px ${search.colors.shadowHover},
-          0 10px 10px ${search.colors.shadowHover};
-        color: ${navigator.colors.postsListItemLinkHover};
-        background-color: ${search.colors.hoverBackground};
+      box-shadow: 0 1px 2px ${search.colors.shadow},
+        0 2px 4px ${search.colors.shadow}, 0 4px 8px ${search.colors.shadow};
+      &::before {
+        content: ' ';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        border-radius: 20px;
+        box-shadow: 0 10px 50px 0 ${search.colors.shadowHover};
+        opacity: 0;
+        transition: opacity 750ms;
       }
+
+      &:hover::before {
+        opacity: 1;
+      }
+
       @media ${minWidth.M} {
         padding: 1em 1rem;
       }

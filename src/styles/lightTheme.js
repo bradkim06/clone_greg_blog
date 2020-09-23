@@ -150,8 +150,8 @@ export const lightTheme = {
       background: lightColors.background,
       listBackground: Color(lightColors.background).darken(0.04).string(),
       hoverBackground: lightColors.background,
-      shadow: Color(lightColors.background).darken(0.2).string(),
-      shadowHover: Color(lightColors.background).darken(0.4).string(),
+      shadow: Color(lightColors.background).darken(0.15).string(),
+      shadowHover: Color(lightColors.background).darken(0.6).string(),
     },
   },
   mediaQueryTresholds: {

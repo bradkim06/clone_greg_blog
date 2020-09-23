@@ -148,9 +148,9 @@ export const darkTheme = {
   search: {
     colors: {
       background: darkColors.background,
-      listBackground: Color(darkColors.background).lighten(1).string(),
-      hoverBackground: Color(darkColors.background).lighten(2).string(),
-      shadow: Color(darkColors.background).lighten(2).string(),
+      listBackground: Color(darkColors.background).lighten(0.5).string(),
+      hoverBackground: Color(darkColors.background).lighten(1).string(),
+      shadow: Color(darkColors.background).lighten(0.4).string(),
       shadowHover: Color(darkColors.background).lighten(4).string(),
     },
   },
