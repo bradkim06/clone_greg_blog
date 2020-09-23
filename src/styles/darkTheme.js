@@ -24,7 +24,7 @@ export const darkTheme = {
   },
   info: {
     colors: {
-      text: darkColors.bright,
+      text: darkColors.superLightGray,
       background: darkColors.background,
       socialIcons: darkColors.lightGray,
       socialIconsHover: darkColors.accent,

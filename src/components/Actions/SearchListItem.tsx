@@ -119,7 +119,7 @@ const TextFlex = styled.div`
   }}
 `;
 
-const FlexChild = styled.li`
+const FlexLink = styled(Link)`
   padding: 0.7em;
   height: 100%;
   width: 100%;
@@ -203,9 +203,9 @@ const SearchListItem = ({
   }
 
   return (
-    <Grow in timeout={1000}>
-      <Link onClick={movePage} to={postSlug}>
-        <FlexChild>
+    <li key={postSlug}>
+      <Grow in timeout={1000}>
+        <FlexLink onClick={movePage} to={postSlug}>
           {cover ? (
             <ImgSource src={cover.childImageSharp.fluid.src} alt={title} />
           ) : (
@@ -220,9 +220,9 @@ const SearchListItem = ({
             <Divider />
             <time>{postDate === 'null' ? '' : postDate}</time>
           </TextFlex>
-        </FlexChild>
-      </Link>
-    </Grow>
+        </FlexLink>
+      </Grow>
+    </li>
   );
 };
 

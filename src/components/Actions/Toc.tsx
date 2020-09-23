@@ -40,12 +40,9 @@ const StyledDialog = styled(Dialog)`
 `;
 
 const Toc = () => {
-  const {
-    mdx: {
-      tableOfContents,
-      frontmatter: { title },
-    },
-  } = useSelector<ReduxState, CurrentPostProps>(state => state.currentPost);
+  const data = useSelector<ReduxState, CurrentPostProps>(
+    state => state.currentPost,
+  );
 
   const [open, setOpen] = useState(false);
   const [scroll, setScroll] = useState<'paper' | 'body' | undefined>('paper');
@@ -74,7 +71,7 @@ const Toc = () => {
   }, [open]);
 
   return (
-    <div>
+    <>
       <IconButton
         aria-label="Search"
         onClick={handleClickOpen('paper')}
@@ -84,34 +81,39 @@ const Toc = () => {
       >
         <TocIcon />
       </IconButton>
-      <StyledDialog
-        open={open}
-        onClose={handleClose}
-        scroll={scroll}
-        aria-labelledby="scroll-dialog-title"
-        aria-describedby="scroll-dialog-description"
-        fullScreen={fullScreen}
-        maxWidth="md"
-      >
-        <TocTitle id="scroll-dialog-title" disableTypography>
-          {title}
-        </TocTitle>
-        <DialogContent dividers={scroll === 'paper'}>
-          <DialogContentText
-            id="scroll-dialog-description"
-            ref={descriptionElementRef}
-            tabIndex={-1}
-          >
-            <TocLists toc={tableOfContents} linkOnClick={handleClose} />
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
-        </DialogActions>
-      </StyledDialog>
-    </div>
+      {data.mdx && (
+        <StyledDialog
+          open={open}
+          onClose={handleClose}
+          scroll={scroll}
+          aria-labelledby="scroll-dialog-title"
+          aria-describedby="scroll-dialog-description"
+          fullScreen={fullScreen}
+          maxWidth="md"
+        >
+          <TocTitle id="scroll-dialog-title" disableTypography>
+            {data.mdx.frontmatter.title}
+          </TocTitle>
+          <DialogContent dividers={scroll === 'paper'}>
+            <DialogContentText
+              id="scroll-dialog-description"
+              ref={descriptionElementRef}
+              tabIndex={-1}
+            >
+              <TocLists
+                toc={data.mdx.tableOfContents}
+                linkOnClick={handleClose}
+              />
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose} color="primary">
+              Cancel
+            </Button>
+          </DialogActions>
+        </StyledDialog>
+      )}
+    </>
   );
 };
 

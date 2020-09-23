@@ -17,8 +17,9 @@ const InfoBarStyle = styled.aside`
   width: 100%;
 
   ${props => {
-    const { bars, base, minWidth } = props.theme;
+    const { info, bars, base, minWidth } = props.theme;
     return css`
+      color: ${info.colors.text};
       background: ${bars.colors.background};
       height: ${bars.sizes.infoBar}px;
       &::before {
@@ -51,8 +52,9 @@ const StyledAvatar = styled(Avatar)`
 
 const BarTitle = styled.div`
   float: left;
-  margin: 10px 0 0 15px;
-  font-size: 1.1rem;
+  margin: 15px 0 0 15px;
+  font-size: 1.4rem;
+  font-weight: 600;
 
   & small {
     display: block;
@@ -93,10 +95,7 @@ const InfoBar = ({ pages }: InfoBarProps) => {
           <StyledAvatar src={logo.childImageSharp.fluid.src} alt="logo" />
         </Link>
       </AvatarLinkBar>
-      <BarTitle>
-        {config.infoTitle}
-        <small>{config.infoTitleNote}</small>
-      </BarTitle>
+      <BarTitle>{config.infoTitle}</BarTitle>
       <TopMenu
         pages={pages}
         homeLinkOnClick={homeLinkOnClick}
