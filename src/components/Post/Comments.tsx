@@ -16,9 +16,9 @@ const PostComments = () => {
   useEffect(() => {
     const script = document.createElement('script');
     const anchor = document.getElementById('inject-comments-for-uterances');
-    script.setAttribute('src', 'https://utteranc.es/client.js');
-    script.setAttribute('crossorigin', 'anonymous');
-    script.setAttribute('async', 'false');
+    script.src = 'https://utteranc.es/client.js';
+    script.crossOrigin = 'anonymous';
+    script.async = true;
     script.setAttribute('repo', 'bradkim06/utterances');
     script.setAttribute('issue-term', 'pathname');
     script.setAttribute('theme', themeSelect);

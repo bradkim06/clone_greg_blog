@@ -54,6 +54,7 @@
     "react-live": "^2.2.2",
     "react-popper": "^2.2.3",
     "react-redux": "^7.2.1",
+    "react-scrollbars-custom": "^4.0.25",
     "rebound": "^0.1.0",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",

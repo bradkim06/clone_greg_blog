@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import styled, { css } from 'styled-components';
-import SpringScrollbars from '../Scroll';
+import Scroll from '../Scroll';
 
 const StyleMain = styled.main`
   position: absolute;
@@ -52,7 +52,7 @@ type MainProps = {
 function Main({ children }: MainProps): ReactElement {
   return (
     <StyleMain>
-      <SpringScrollbars>{children}</SpringScrollbars>
+      <Scroll isPost>{children}</Scroll>
     </StyleMain>
   );
 }

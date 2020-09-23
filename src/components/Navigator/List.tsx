@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import { PostsProps } from '../Query/LayoutQuery';
 import ListHeader from './ListHeader';
 import ListItem from './ListItem';
-import SpringScrollbars from '../Scroll';
+import Scroll from '../Scroll';
 
 export const GridWrapper = styled.ul`
   list-style: none;
@@ -85,7 +85,7 @@ function List({
 }: ListProps): ReactElement {
   return (
     <Posts>
-      <SpringScrollbars forceCheckOnScroll isNavigator>
+      <Scroll>
         <Inner>
           <ListHeader
             expandOnClick={expandOnClick}
@@ -105,7 +105,7 @@ function List({
               ))}
           </GridWrapper>
         </Inner>
-      </SpringScrollbars>
+      </Scroll>
     </Posts>
   );
 }
