@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import styled, { css } from 'styled-components';
 import { Link } from 'gatsby';
-import { FluidObject } from 'gatsby-image';
+import Img, { FluidObject } from 'gatsby-image';
 import Grow from '@material-ui/core/Grow';
 import { useLogoQuery } from '../Query/LogoQuery';
 
@@ -21,7 +21,7 @@ const Divider = styled.div`
   }}
 `;
 
-const ImgSource = styled.img`
+const ImgSource = styled(Img)`
   border-radius: 10px;
   width: 60px;
   height: 60px;
@@ -207,9 +207,9 @@ const SearchListItem = ({
       <Grow in timeout={1000}>
         <FlexLink onClick={movePage} to={postSlug}>
           {cover ? (
-            <ImgSource src={cover.childImageSharp.fluid.src} alt={title} />
+            <ImgSource fluid={cover.childImageSharp.fluid} alt={title} />
           ) : (
-            <ImgSource src={logo.childImageSharp.fluid.src} alt={title} />
+            <ImgSource fluid={logo.childImageSharp.fluid} alt={title} />
           )}
           <TextFlex>
             <h1>{postTitle}</h1>

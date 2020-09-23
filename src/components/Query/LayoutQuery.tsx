@@ -66,7 +66,7 @@ export const useLayoutQuery = (): LayoutQueryType => {
                 cover {
                   publicURL
                   childImageSharp {
-                    fluid(quality: 100, srcSetBreakpoints: [30, 60, 80, 200]) {
+                    fluid(srcSetBreakpoints: [30, 60, 80, 200]) {
                       ...GatsbyImageSharpFluid
                     }
                   }
