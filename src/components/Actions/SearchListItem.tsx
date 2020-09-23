@@ -2,8 +2,8 @@ import React, { ReactElement } from 'react';
 import styled, { css } from 'styled-components';
 import { Link } from 'gatsby';
 import Img, { FluidObject } from 'gatsby-image';
-import Grow from '@material-ui/core/Grow';
 import { useLogoQuery } from '../Query/LogoQuery';
+import Grow from '@material-ui/core/Grow';
 
 const Divider = styled.div`
   margin: 0.1rem 0;
@@ -124,11 +124,16 @@ const TextFlex = styled.div`
   }}
 `;
 
-const FlexLink = styled(Link)`
-  padding: 0.7em;
+const FlexWrapper = styled.div`
   height: 100%;
   width: 100%;
+`;
+
+const FlexLink = styled(Link)`
+  padding: 0.7em;
   display: flex;
+  height: 100%;
+  width: 100%;
   flex-direction: row;
   align-items: center;
   border-radius: 20px;
@@ -143,6 +148,12 @@ const FlexLink = styled(Link)`
       background-color: ${search.colors.listBackground};
       box-shadow: 0 1px 2px ${search.colors.shadow},
         0 2px 4px ${search.colors.shadow}, 0 4px 8px ${search.colors.shadow};
+      transition: color 1s;
+
+      &:hover {
+        color: ${navigator.colors.postsListItemLinkHover};
+      }
+
       &::before {
         content: ' ';
         position: absolute;
@@ -153,7 +164,7 @@ const FlexLink = styled(Link)`
         border-radius: 20px;
         box-shadow: 0 10px 50px 0 ${search.colors.shadowHover};
         opacity: 0;
-        transition: opacity 750ms;
+        transition: all 1s;
       }
 
       &:hover::before {
@@ -219,23 +230,25 @@ const SearchListItem = ({
 
   return (
     <li key={postSlug}>
-      <Grow in timeout={1000}>
-        <FlexLink onClick={movePage} to={postSlug}>
-          {cover ? (
-            <ImgSource fluid={cover.childImageSharp.fluid} alt={title} />
-          ) : (
-            <ImgSource fluid={logo.childImageSharp.fluid} alt={title} />
-          )}
-          <TextFlex>
-            <h1>{postTitle}</h1>
-            <Divider />
-            <small>
-              {postSubTitle === 'null' ? postExcerpt : postSubTitle}
-            </small>
-            <Divider />
-            <time>{postDate === 'null' ? '' : postDate}</time>
-          </TextFlex>
-        </FlexLink>
+      <Grow in timeout="auto">
+        <FlexWrapper>
+          <FlexLink onClick={movePage} to={postSlug}>
+            {cover ? (
+              <ImgSource fluid={cover.childImageSharp.fluid} alt={title} />
+            ) : (
+              <ImgSource fluid={logo.childImageSharp.fluid} alt={title} />
+            )}
+            <TextFlex>
+              <h1>{postTitle}</h1>
+              <Divider />
+              <small>
+                {postSubTitle === 'null' ? postExcerpt : postSubTitle}
+              </small>
+              <Divider />
+              <time>{postDate === 'null' ? '' : postDate}</time>
+            </TextFlex>
+          </FlexLink>
+        </FlexWrapper>
       </Grow>
     </li>
   );

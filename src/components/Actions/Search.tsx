@@ -14,7 +14,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import styled, { css } from 'styled-components';
 import SearchListItem from './SearchListItem';
-import { GridWrapper } from '../Navigator/List';
+import GrowList from '../Navigator/GrowList';
 import useSearchData from '../../hooks/SearchQuery';
 
 const options = {
@@ -152,7 +152,7 @@ const SearchDialog = (): ReactElement => {
               onChange={onSearch}
               autoComplete="off"
             />
-            <GridWrapper>
+            <GrowList>
               {results &&
                 results.map((post: SearchResultType) => (
                   <SearchListItem
@@ -166,7 +166,7 @@ const SearchDialog = (): ReactElement => {
                     linkOnClick={handleClose}
                   />
                 ))}
-            </GridWrapper>
+            </GrowList>
           </DialogContentText>
         </DialogContent>
         <DialogActions>

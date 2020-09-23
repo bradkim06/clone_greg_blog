@@ -3,36 +3,8 @@ import styled, { css } from 'styled-components';
 import { PostsProps } from '../Query/LayoutQuery';
 import ListHeader from './ListHeader';
 import ListItem from './ListItem';
+import GrowList from './GrowList';
 import Scroll from '../Scroll';
-
-export const GridWrapper = styled.ul`
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-gap: 1rem;
-
-  ${props => {
-    const { minWidth } = props.theme;
-    return css`
-      @media ${minWidth.L} {
-        padding: 0 1rem;
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-
-        .moving-featured &,
-        .is-aside & {
-          padding: 0 0.5rem;
-          grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-        }
-
-        .is-aside.closed &,
-        .moving-featured.closed & {
-          display: none;
-        }
-      }
-    `;
-  }}
-`;
 
 const Posts = styled.div`
   position: absolute;
@@ -93,7 +65,7 @@ function List({
             navigatorShape={navigatorShape}
             removeFilter={removeFilter}
           />
-          <GridWrapper>
+          <GrowList>
             {posts.edges &&
               posts.edges.map(post => (
                 <ListItem
@@ -103,7 +75,7 @@ function List({
                   categoryFilter={categoryFilter}
                 />
               ))}
-          </GridWrapper>
+          </GrowList>
         </Inner>
       </Scroll>
     </Posts>
