@@ -46,26 +46,6 @@ module.exports = {
     },
     'gatsby-plugin-offline',
     {
-      resolve: `gatsby-plugin-prefetch-google-fonts`,
-      options: {
-        fonts: [
-          {
-            family: `Open Sans`,
-            variants: [`400`, `600`],
-          },
-          {
-            family: `Lora`,
-            variants: [`400`, `600`],
-          },
-          {
-            family: `Roboto`,
-            variants: [`400`, `600`],
-          },
-        ],
-      },
-    },
-    `gatsby-plugin-preload-fonts`,
-    {
       resolve: 'gatsby-plugin-material-ui',
       // If you want to use styled components you should change the injection order.
       options: {
@@ -114,12 +94,6 @@ module.exports = {
         host: 'https://bradkim06.github.io',
         sitemap: 'https://bradkim06.github.io/sitemap.xml',
         policy: [{ userAgent: '*', allow: '/' }],
-      },
-    },
-    {
-      resolve: 'gatsby-plugin-webpack-bundle-analyser-v2',
-      options: {
-        devMode: true,
       },
     },
   ],
