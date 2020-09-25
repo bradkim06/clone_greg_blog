@@ -39,10 +39,8 @@ export type PagesProps = {
 };
 
 type LayoutQueryType = {
-  data: {
-    posts: PostsProps;
-    pages: PagesProps;
-  };
+  posts: PostsProps;
+  pages: PagesProps;
 };
 
 export const useLayoutQuery = (): LayoutQueryType => {

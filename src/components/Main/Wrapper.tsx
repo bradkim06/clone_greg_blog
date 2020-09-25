@@ -26,7 +26,7 @@ const StyleArticle = styled.div<{ fontSize: number }>`
       }
 
       background: ${main.colors.background};
-      max-width: ${main.sizes.articleMaxWidth};
+      max-width: ${main.sizes.articleMinWidth};
       padding: calc(${bars.sizes.infoBar}px + 1.5em) 1.5em;
 
       & a {
@@ -45,6 +45,7 @@ const StyleArticle = styled.div<{ fontSize: number }>`
       }
 
       @media ${minWidth.L} {
+        max-width: ${main.sizes.articleMaxWidth};
         padding: 3.5rem 3.5em;
       }
     `;

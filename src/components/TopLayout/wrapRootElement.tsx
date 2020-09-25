@@ -26,7 +26,7 @@ const Initialize = ({ children }: InitializeProps): ReactElement => {
     state => state.themeToggle,
   );
   const dispatch = useDispatch();
-  const theme = isThemeState ? darkTheme : lightTheme;
+  const theme: Record<string, unknown> = isThemeState ? darkTheme : lightTheme;
   const materialTheme = createMuiTheme(theme);
 
   useEffect(() => {

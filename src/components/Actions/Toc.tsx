@@ -40,7 +40,7 @@ const StyledDialog = styled(Dialog)`
 `;
 
 const Toc = () => {
-  const data = useSelector<ReduxState, CurrentPostProps>(
+  const data = useSelector<ReduxState, Partial<CurrentPostProps>>(
     state => state.currentPost,
   );
 

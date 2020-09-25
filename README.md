@@ -67,4 +67,4 @@ You can write post both _.md, _.mdx
 
 ### LightHouse Score
 
-![LightHouse Score](./static/lightHoust.png)
+![LightHouse Score](./static/lightHoust.jpg)

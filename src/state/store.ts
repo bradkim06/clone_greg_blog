@@ -46,7 +46,19 @@ const initialState = {
   currentPost: {},
 };
 
-export type ReduxState = typeof initialState;
+export type ReduxState = {
+  navigatorPosition: string;
+  navigatorShape: string;
+  navigatorFilter: string;
+  isWideScreen: boolean;
+  scrollToTop: boolean;
+  fontSizeIncrease: number;
+  categoryFilter: string;
+  themeToggle: boolean;
+  currentPost: Partial<CurrentPostProps>;
+};
+
+// export type ReduxState = typeof initialState;
 
 const SET_NAVIGATOR_POSITION = 'SET_NAVIGATOR_POSITION';
 const SET_NAVIGATOR_SHAPE = 'SET_NAVIGATOR_SHAPE';
@@ -176,18 +188,6 @@ function reducer(state: ReduxState, action: Action): ReduxState {
       return state;
   }
 }
-
-// export type ReduxState = {
-//   navigatorPosition: string;
-//   navigatorShape: string;
-//   navigatorFilter: string;
-//   isWideScreen: boolean;
-//   scrollToTop: boolean;
-//   fontSizeIncrease: number;
-//   categoryFilter: string;
-//   themeToggle: boolean;
-//   currentPost: Record<string, unknown> | CurrentPostProps;
-// };
 
 const createStore = (): StoreCreator =>
   reduxCreateStore(
