@@ -2,12 +2,11 @@ import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import { Link } from 'gatsby';
 import styled, { css } from 'styled-components';
-import { useDispatch } from 'react-redux';
 import loadable from '@loadable/component';
 import TopMenu from './TopMenu';
 import { PagesProps } from '../Query/LayoutQuery';
 import { useLogoQuery } from '../Query/LogoQuery';
-import { moveNavFeature, moveNavAside, moveNavData } from '../../utils/shared';
+import { moveNavFeature, moveNavAside } from '../../utils/shared';
 import config from '../../../content/meta/config';
 
 const InfoBarStyle = styled.aside`
@@ -74,17 +73,14 @@ type InfoBarProps = {
 };
 
 const InfoBar = ({ pages }: InfoBarProps) => {
-  const state = moveNavData();
-  const dispatch = useDispatch();
-
   const { logo } = useLogoQuery();
 
   function homeLinkOnClick(e: React.MouseEvent<HTMLAnchorElement>) {
-    moveNavFeature(e, state, dispatch);
+    moveNavFeature(e);
   }
 
   function pageLinkOnClick() {
-    moveNavAside(state, dispatch);
+    moveNavAside();
   }
 
   return (

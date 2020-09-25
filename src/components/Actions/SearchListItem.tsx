@@ -2,8 +2,8 @@ import React, { ReactElement } from 'react';
 import styled, { css } from 'styled-components';
 import { Link } from 'gatsby';
 import Img, { FluidObject } from 'gatsby-image';
-import { useLogoQuery } from '../Query/LogoQuery';
 import Grow from '@material-ui/core/Grow';
+import { useLogoQuery } from '../Query/LogoQuery';
 
 const Divider = styled.div`
   margin: 0.1rem 0;

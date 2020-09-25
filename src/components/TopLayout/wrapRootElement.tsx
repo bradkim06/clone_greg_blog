@@ -13,9 +13,7 @@ import { lightTheme } from '../../styles/lightTheme';
 import { darkTheme } from '../../styles/darkTheme';
 import GlobalStyle from '../../styles/globals';
 
-import createStore, { ReduxState, setThemeToggle } from '../../state/store';
-
-const store = createStore();
+import store, { ReduxState, setThemeToggle } from '../../state/store';
 
 type InitializeProps = {
   children: React.ReactNode;

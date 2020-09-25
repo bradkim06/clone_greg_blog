@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import styled, { css } from 'styled-components';
 import { useDispatch } from 'react-redux';
 import InfoHeader from './Header';
 import InfoText from './Text';
 import InfoMenu from './Menu';
+import useSelector from '../../state/selectors';
 
-import { moveNavFeature, moveNavAside, moveNavData } from '../../utils/shared';
+import { moveNavFeature, moveNavAside } from '../../utils/shared';
 import { setNavigatorShape } from '../../state/store';
 
 const StyleInfoBox = styled.aside`
@@ -71,8 +72,11 @@ const InfoContent = styled.div`
   }}
 `;
 
-const InfoBox = () => {
-  const state = moveNavData();
+const InfoBox = (): ReactElement => {
+  const state = useSelector(redux => ({
+    navigatorShape: redux.navigatorShape,
+    navigatorPosition: redux.navigatorPosition,
+  }));
   const dispatch = useDispatch();
 
   function expandOnClick() {
@@ -80,12 +84,12 @@ const InfoBox = () => {
   }
 
   function avatarOnClick(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
-    moveNavFeature(e, state, dispatch);
+    moveNavFeature(e);
   }
 
   function menulinkOnClick() {
     dispatch(setNavigatorShape('closed'));
-    moveNavAside(state, dispatch);
+    moveNavAside();
   }
 
   return (

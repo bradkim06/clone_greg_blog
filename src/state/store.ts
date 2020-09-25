@@ -1,8 +1,4 @@
-import {
-  createStore as reduxCreateStore,
-  applyMiddleware,
-  StoreCreator,
-} from 'redux';
+import { createStore as reduxCreateStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { FluidObject } from 'gatsby-image';
 
@@ -189,10 +185,12 @@ function reducer(state: ReduxState, action: Action): ReduxState {
   }
 }
 
-const createStore = (): StoreCreator =>
+const createStore = () =>
   reduxCreateStore(
     reducer,
     initialState,
     composeWithDevTools(applyMiddleware()),
   );
-export default createStore;
+
+const store = createStore();
+export default store;

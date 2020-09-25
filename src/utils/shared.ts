@@ -1,32 +1,38 @@
-import { Dispatch } from 'react';
 import { navigate } from '@reach/router';
 import { useSelector, shallowEqual } from 'react-redux';
-import {
+import store, {
   setNavigatorShape,
   setNavigatorPosition,
   ReduxState,
-  Action,
 } from '../state/store';
 
-export function moveNavFeature(
-  e: React.MouseEvent,
-  state: MoveNavAsideState,
-  dispatch: Dispatch<Action>,
-): void {
+export function moveNavData(): MoveNavAsideState {
+  return useSelector<ReduxState, MoveNavAsideState>(
+    state => ({
+      navigatorShape: state.navigatorShape,
+      navigatorPosition: state.navigatorPosition,
+      isWideScreen: state.isWideScreen,
+    }),
+    shallowEqual,
+  );
+}
+
+export function moveNavFeature(e: React.MouseEvent): void {
   e.preventDefault();
+  const state = store.getState();
 
   if (state.navigatorPosition === 'is-aside') {
     if (state.isWideScreen) {
-      dispatch(setNavigatorPosition('moving-featured'));
+      store.dispatch(setNavigatorPosition('moving-featured'));
 
       setTimeout(() => {
-        dispatch(setNavigatorPosition('resizing-featured'));
-        dispatch(setNavigatorPosition('is-featured'));
-        dispatch(setNavigatorShape('open'));
+        store.dispatch(setNavigatorPosition('resizing-featured'));
+        store.dispatch(setNavigatorPosition('is-featured'));
+        store.dispatch(setNavigatorShape('open'));
       }, 500);
     } else {
       setTimeout(() => {
-        dispatch(setNavigatorPosition('is-featured'));
+        store.dispatch(setNavigatorPosition('is-featured'));
       }, 0);
     }
   }
@@ -41,33 +47,20 @@ export type MoveNavAsideState = {
   isWideScreen: boolean;
 };
 
-export function moveNavAside(
-  state: MoveNavAsideState,
-  dispatch: Dispatch<Action>,
-): void {
+export function moveNavAside(): void {
+  const state = store.getState();
   if (state.navigatorPosition === 'is-featured') {
     if (state.isWideScreen) {
-      dispatch(setNavigatorPosition('moving-aside'));
+      store.dispatch(setNavigatorPosition('moving-aside'));
 
       setTimeout(() => {
-        dispatch(setNavigatorPosition('resizing-aside'));
+        store.dispatch(setNavigatorPosition('resizing-aside'));
         setTimeout(() => {
-          dispatch(setNavigatorPosition('is-aside'));
+          store.dispatch(setNavigatorPosition('is-aside'));
         });
       }, 500);
     } else {
-      dispatch(setNavigatorPosition('is-aside'));
+      store.dispatch(setNavigatorPosition('is-aside'));
     }
   }
-}
-
-export function moveNavData(): MoveNavAsideState {
-  return useSelector<ReduxState, MoveNavAsideState>(
-    state => ({
-      navigatorShape: state.navigatorShape,
-      navigatorPosition: state.navigatorPosition,
-      isWideScreen: state.isWideScreen,
-    }),
-    shallowEqual,
-  );
 }

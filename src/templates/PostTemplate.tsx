@@ -4,20 +4,21 @@ import { graphql } from 'gatsby';
 import Seo from '../components/Seo';
 import Post from '../components/Post';
 import Main from '../components/Main';
+import useSelector from '../state/selectors';
 import { CurrentPostProps, setCurrentPost } from '../state/store';
-import { moveNavAside, moveNavData } from '../utils/shared';
+import { moveNavAside } from '../utils/shared';
 
 const PostTemplate = ({ data }: { data: CurrentPostProps }): ReactElement => {
-  const state = moveNavData();
+  const navigatorPosition = useSelector(redux => redux.navigatorPosition);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (state.navigatorPosition === 'is-featured') {
-      moveNavAside(state, dispatch);
+    if (navigatorPosition === 'is-featured') {
+      moveNavAside();
     }
 
     dispatch(setCurrentPost(data));
-  }, []);
+  }, [data]);
 
   return (
     <>

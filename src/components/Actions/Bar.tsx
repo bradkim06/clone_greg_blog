@@ -1,11 +1,12 @@
 import React, { ReactElement } from 'react';
 import styled, { css } from 'styled-components';
 import IconButton from '@material-ui/core/IconButton';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import HomeIcon from '@material-ui/icons/Home';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import WbSunnyIcon from '@material-ui/icons/WbSunny';
 import Brightness2 from '@material-ui/icons/Brightness2';
+import useSelector from '../../state/selectors';
 import Search from './Search';
 import Toc from './Toc';
 import {
@@ -13,9 +14,8 @@ import {
   setFontSizeIncrease,
   setCategoryFilter,
   setThemeToggle,
-  ReduxState,
 } from '../../state/store';
-import { moveNavFeature, moveNavData } from '../../utils/shared';
+import { moveNavFeature } from '../../utils/shared';
 import FontSetter from './FontSetter';
 import CategoryFilter from './CategoryFilter';
 
@@ -98,14 +98,16 @@ type ActionsBarProps = {
 };
 
 function ActionsBar({ categories }: ActionsBarProps): ReactElement {
-  const isThemeState = useSelector<ReduxState, boolean>(
-    state => state.themeToggle,
-  );
-  const state = moveNavData();
+  const state = useSelector(redux => ({
+    themeToggle: redux.themeToggle,
+    isWideScreen: redux.isWideScreen,
+    navigatorShape: redux.navigatorShape,
+    navigatorPosition: redux.navigatorPosition,
+  }));
   const dispatch = useDispatch();
 
   function homeOnClick(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-    moveNavFeature(e, state, dispatch);
+    moveNavFeature(e);
   }
 
   function arrowUpOnClick() {
@@ -123,7 +125,7 @@ function ActionsBar({ categories }: ActionsBarProps): ReactElement {
   function themeToggleClick() {
     dispatch(setThemeToggle());
 
-    const theme = isThemeState ? 'lightTheme' : 'darkTheme';
+    const theme = state.themeToggle ? 'lightTheme' : 'darkTheme';
     localStorage.setItem('theme', theme);
   }
 
@@ -158,7 +160,7 @@ function ActionsBar({ categories }: ActionsBarProps): ReactElement {
           onClick={themeToggleClick}
           title="Theme Change"
         >
-          {isThemeState ? <WbSunnyIcon /> : <Brightness2 />}
+          {state.themeToggle ? <WbSunnyIcon /> : <Brightness2 />}
         </StyledIconButton>
         <StyledIconButton
           aria-label="Back to top"

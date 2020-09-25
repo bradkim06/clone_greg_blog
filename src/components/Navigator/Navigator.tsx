@@ -1,13 +1,10 @@
 import React, { ReactElement } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import styled, { css } from 'styled-components';
+import useSelector from '../../state/selectors';
 import { PostsProps } from '../Query/LayoutQuery';
-import {
-  setNavigatorShape,
-  setCategoryFilter,
-  ReduxState,
-} from '../../state/store';
-import { moveNavAside, moveNavData } from '../../utils/shared';
+import { setNavigatorShape, setCategoryFilter } from '../../state/store';
+import { moveNavAside } from '../../utils/shared';
 import List from './List';
 
 const StyleNavigator = styled.nav`
@@ -121,10 +118,11 @@ type NavigatorProps = {
 };
 
 const Navigator = ({ posts }: NavigatorProps): ReactElement => {
-  const stateFilter = useSelector<ReduxState, string>(
-    state => state.categoryFilter,
-  );
-  const state = moveNavData();
+  const state = useSelector(redux => ({
+    categoryFilter: redux.categoryFilter,
+    navigatorShape: redux.navigatorShape,
+    navigatorPosition: redux.navigatorPosition,
+  }));
   const dispatch = useDispatch();
 
   function expandOnClick() {
@@ -132,7 +130,7 @@ const Navigator = ({ posts }: NavigatorProps): ReactElement => {
   }
 
   function linkOnClick() {
-    moveNavAside(state, dispatch);
+    moveNavAside();
   }
 
   function removefilterOnClick() {
@@ -151,7 +149,7 @@ const Navigator = ({ posts }: NavigatorProps): ReactElement => {
           navigatorShape={state.navigatorShape}
           linkOnClick={linkOnClick}
           expandOnClick={expandOnClick}
-          categoryFilter={stateFilter}
+          categoryFilter={state.categoryFilter}
           removeFilter={removefilterOnClick}
         />
       )}
