@@ -18,7 +18,7 @@ const PostTemplate = ({ data }: { data: CurrentPostProps }): ReactElement => {
     }
 
     dispatch(setCurrentPost(data));
-  }, [data]);
+  }, []);
 
   return (
     <>

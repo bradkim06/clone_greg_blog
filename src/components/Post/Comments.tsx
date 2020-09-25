@@ -21,7 +21,7 @@ const PostComments = () => {
     script.async = true;
     script.setAttribute('label', '💬');
     script.setAttribute('repo', 'bradkim06/utterances');
-    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('issue-term', 'og:title');
     script.setAttribute('theme', themeSelect);
     if (anchor) {
       if (anchor.firstChild) {
