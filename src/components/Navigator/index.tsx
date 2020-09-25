@@ -1,3 +1,3 @@
 import loadable from '@loadable/component';
 
-export default loadable(async () => import('./Navigator'));
+export default loadable(() => import('./Navigator'));

@@ -1,1 +1,3 @@
-export { default } from './Main';
+import loadable from '@loadable/component';
+
+export default loadable(() => import('./Main'));

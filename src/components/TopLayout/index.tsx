@@ -1,13 +1,15 @@
 import React, { useEffect, useState, useContext, ReactElement } from 'react';
 import { useDispatch } from 'react-redux';
 import { ThemeContext } from 'styled-components';
+import loadable from '@loadable/component';
 import LayoutWrapper from './LayoutWrapper';
 import { setIsWideScreen } from '../../state/store';
 import { useLayoutQuery, PostsProps } from '../Query/LayoutQuery';
-import InfoBox from '../Info/Box';
 import Navigator from '../Navigator';
-import ActionsBar from '../Actions/Bar';
-import InfoBar from '../Info/Bar';
+import ActionsBar from '../Actions';
+
+const InfoBox = loadable(() => import('../Info/Box'));
+const InfoBar = loadable(() => import('../Info/Bar'));
 
 function getWidth(): number {
   let width = 0;
@@ -61,7 +63,7 @@ type CategoryProps = {
   };
 };
 
-function Unique(post: PostsProps): string[] {
+function getCategories(post: PostsProps): string[] {
   return [
     ...new Set(
       post.edges.map(
@@ -79,9 +81,9 @@ const TopLayout = ({ children }: TopLayoutProps): ReactElement => {
   const { posts, pages } = useLayoutQuery();
   const themeContext = useContext(ThemeContext);
 
-  const categories = Unique(posts);
-  const isWideState = useCurrentWidth(themeContext);
+  const categories = getCategories(posts);
   const dispatch = useDispatch();
+  const isWideState = useCurrentWidth(themeContext);
 
   useEffect(() => {
     dispatch(setIsWideScreen(isWideState));

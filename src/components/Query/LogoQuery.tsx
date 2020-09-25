@@ -2,17 +2,13 @@ import { useStaticQuery, graphql } from 'gatsby';
 import { FluidObject } from 'gatsby-image';
 
 export type LogoProps = {
-  logo: {
-    childImageSharp: {
-      fluid: FluidObject;
-    };
+  childImageSharp: {
+    fluid: FluidObject;
   };
 };
 
 type LogoQueryType = {
-  data: {
-    logo: LogoProps;
-  };
+  logo: LogoProps;
 };
 
 export const useLogoQuery = (): LogoQueryType => {

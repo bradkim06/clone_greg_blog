@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import styled, { css } from 'styled-components';
 import IconButton from '@material-ui/core/IconButton';
 import { useSelector, useDispatch } from 'react-redux';
@@ -6,7 +6,6 @@ import HomeIcon from '@material-ui/icons/Home';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import WbSunnyIcon from '@material-ui/icons/WbSunny';
 import Brightness2 from '@material-ui/icons/Brightness2';
-import loadable from '@loadable/component';
 import Search from './Search';
 import Toc from './Toc';
 import {
@@ -98,7 +97,7 @@ type ActionsBarProps = {
   categories: string[];
 };
 
-function ActionsBar({ categories }: ActionsBarProps) {
+function ActionsBar({ categories }: ActionsBarProps): ReactElement {
   const isThemeState = useSelector<ReduxState, boolean>(
     state => state.themeToggle,
   );
@@ -173,4 +172,4 @@ function ActionsBar({ categories }: ActionsBarProps) {
   );
 }
 
-export default loadable(async () => ActionsBar);
+export default ActionsBar;

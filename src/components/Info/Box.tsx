@@ -1,8 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { useDispatch } from 'react-redux';
-
-import loadable from '@loadable/component';
 import InfoHeader from './Header';
 import InfoText from './Text';
 import InfoMenu from './Menu';
@@ -104,4 +102,4 @@ const InfoBox = () => {
   );
 };
 
-export default loadable(async () => InfoBox);
+export default InfoBox;

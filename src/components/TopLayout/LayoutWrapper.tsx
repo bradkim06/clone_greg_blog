@@ -26,8 +26,8 @@ type LayoutWrapperProps = {
   children: React.ReactNode;
 };
 
-function LayoutWrapper({ children }: LayoutWrapperProps): ReactElement {
-  return <Wrapper>{children}</Wrapper>;
-}
+const LayoutWrapper = ({ children }: LayoutWrapperProps): ReactElement => (
+  <Wrapper>{children}</Wrapper>
+);
 
 export default LayoutWrapper;

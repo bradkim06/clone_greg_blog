@@ -1,14 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, ReactElement } from 'react';
 import { useDispatch } from 'react-redux';
 import { graphql } from 'gatsby';
-import loadable from '@loadable/component';
 import Seo from '../components/Seo';
 import Post from '../components/Post';
 import Main from '../components/Main';
 import { CurrentPostProps, setCurrentPost } from '../state/store';
 import { moveNavAside, moveNavData } from '../utils/shared';
 
-const PostTemplate = ({ data }: { data: CurrentPostProps }) => {
+const PostTemplate = ({ data }: { data: CurrentPostProps }): ReactElement => {
   const state = moveNavData();
   const dispatch = useDispatch();
 
@@ -21,10 +20,12 @@ const PostTemplate = ({ data }: { data: CurrentPostProps }) => {
   }, []);
 
   return (
-    <Main>
+    <>
       <Seo post={data.mdx} />
-      <Post post={data.mdx} />
-    </Main>
+      <Main>
+        <Post post={data.mdx} />
+      </Main>
+    </>
   );
 };
 
@@ -55,4 +56,4 @@ export const postQuery = graphql`
   }
 `;
 
-export default loadable(async () => PostTemplate);
+export default PostTemplate;

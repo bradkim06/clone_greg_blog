@@ -54,7 +54,6 @@ const BarTitle = styled.div`
   float: left;
   margin: 15px 0 0 15px;
   font-size: 1.4rem;
-  font-weight: 600;
 
   & small {
     display: block;
