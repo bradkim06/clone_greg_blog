@@ -90,9 +90,9 @@ export const lightTheme = {
         lineHeight: 1.5,
       },
       subTitle: {
-        size: 1.5,
-        sizeM: 1.8,
-        sizeL: 1.95,
+        size: 1,
+        sizeM: 1.3,
+        sizeL: 1.45,
         weight: 300,
         lineHeight: 1.5,
       },
