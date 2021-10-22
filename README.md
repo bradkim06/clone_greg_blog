@@ -2,11 +2,11 @@
 
 ## Introduce
 
-This blog is not my pure creation, but was created with reference to <a href="https://github.com/greglobinski/gatsby-starter-personal-blog"> greg lobinski's starter</a>. I like this starter. Thank greg lobinski for providing a beautiful design starter as open source.
+This blog is not my pure creation, but was created with reference to <a href="https://github.com/greglobinski/gatsby-starter-personal-blog"> greg lobinski's starter</a>.
 
 [greg lobinsky's Original Demo Site](https://gatsby-starter-personal-blog.greglobinski.com/).
 
-[My Custom Demo Site](https://bradkim06.github.io).
+[My Custom Site](https://bradkim06.github.io).
 
 ## The difference between Original and Custom
 
@@ -16,9 +16,13 @@ This blog is not my pure creation, but was created with reference to <a href="ht
 |        **style**        | react-jss | styled component |
 | **component file type** |    js     |    TypeScript    |
 |     **Search Tool**     |  Algoria  |     fuse.js      |
-|  **FullScreen Button**  |     O     |        X         |
-|    **Theme Toggle**     |     X     |        O         |
 |    **Post Comment**     | Facebook  |    Utterance     |
+|   **Gatsby Version**    |    1~2    |        3         |
+
+## Add Blog Functions
+
+- Theme Dark, White Toggle
+- Table of contents button
 
 ## Quick Start
 
@@ -54,16 +58,6 @@ You can write post both _.md, _.mdx
 # or
 [NEW_SITE_DIRECTORY_NAME]/content/posts/*.mdx
 ```
-
-## Demo
-
-### Original
-
-![demogif](./static/gatsby-starter-personal-blog.gif)
-
-### Custom
-
-![demoImg](./static/demo-img.png)
 
 ### LightHouse Score
 
