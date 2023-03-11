@@ -17,3 +17,7 @@ yarn-error.log*
 # Gatsby.js
 /public
 /.cache
+
+# my post
+content/manuscript/*
+content/posts/*
