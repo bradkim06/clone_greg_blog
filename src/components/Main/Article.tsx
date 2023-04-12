@@ -53,28 +53,15 @@ const PageContent = styled.article`
         }
       }
       & blockquote {
-        border: 5px solid ${main.colors.blockquoteFrame};
+        border-left: 5px solid ${main.colors.blockquoteFrame};
         font-style: italic;
+
         margin: 2.5em 0;
         padding: 1em 1.1em 1em 1.3em;
         position: relative;
+
         & p {
           margin: 0;
-        }
-        &::before,
-        &::after {
-          background: ${main.colors.background};
-          content: '';
-          height: 5px;
-          left: 50%;
-          margin-left: -47%;
-          position: absolute;
-          top: -5px;
-          width: 94%;
-        }
-        &::after {
-          top: auto;
-          bottom: -5px;
         }
       }
 
