@@ -11,7 +11,7 @@ module.exports = {
   // info
   infoTitle: 'bradkim06',
   infoTitleNote: 'personal blog',
-  infoText: 'software developer',
+  infoText: 'Embedded S/W developer',
   // manifest.json
   // PWA App Name
   manifestName: 'bradkim06 blog',

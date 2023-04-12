@@ -15,11 +15,7 @@ const Home = (): ReactElement => {
     }
   }, []);
 
-  return (
-    <>
-      <Seo />
-    </>
-  );
+  return <>{Seo}</>;
 };
 
 export default Home;

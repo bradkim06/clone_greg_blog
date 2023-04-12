@@ -20,13 +20,11 @@ const GlobalStyle = createGlobalStyle`
     font-family: inherit;
   }
 
-
   *,
   *:before,
   *:after {
     box-sizing: inherit;
   }
-
 
   noscript {
     background: #d00;
