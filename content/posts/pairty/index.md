@@ -1,6 +1,6 @@
 ---
 title: parity 계산하기
-subTitle: from. 266가지 문제로 정복하는 코딩 인터뷰
+subTitle: from. Elements of Programming Interviews in C++
 category: algorithm
 date: 2023-04-19T12:33:58
 cover:
