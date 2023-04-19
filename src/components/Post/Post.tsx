@@ -15,7 +15,6 @@ type PostProps = {
 
 const components = {
   Link,
-  // inlineCode: props => <code className="inline-code" {...props} />,
   inlineCode: InlineCode,
   code: Code,
 }; // Provide common components here

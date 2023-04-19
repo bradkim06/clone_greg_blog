@@ -1,3 +1,4 @@
+import 'katex/dist/katex.min.css';
 import wrapRootProvider from './src/components/TopLayout/wrapRootElement';
 import wrapPageProvider from './src/components/TopLayout/wrapPageElement';
 

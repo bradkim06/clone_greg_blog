@@ -55,15 +55,19 @@ module.exports = {
       resolve: `gatsby-plugin-mdx`,
       options: {
         extensions: [`.mdx`, `.md`],
+        remarkPlugins: [require('remark-math')],
+        rehypePlugins: [require('rehype-katex')],
         gatsbyRemarkPlugins: [
           `gatsby-plugin-sharp`,
           `gatsby-remark-autolink-headers`,
           {
             resolve: `gatsby-remark-images`,
             options: {
-              maxWidth: 1000,
+              maxWidth: 800,
               backgroundColor: 'transparent',
               loading: 'auto',
+              quality: 90,
+              linkImagesToOriginal: false,
             },
           },
           {
