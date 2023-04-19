@@ -10,6 +10,9 @@ type AllMdxProps = {
         fields: {
           slug: string;
         };
+        headings: {
+          value: string;
+        };
         frontmatter: {
           title: string;
           subTitle?: string;
@@ -37,6 +40,9 @@ const useSearchData = (): AllMdxProps => {
               excerpt
               fields {
                 slug
+              }
+              headings {
+                value
               }
               frontmatter {
                 title

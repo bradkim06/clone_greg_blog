@@ -18,23 +18,23 @@ import GrowList from '../Navigator/GrowList';
 import useSearchData from '../../hooks/SearchQuery';
 
 const options = {
-  // isCaseSensitive: false,
-  // includeScore: true,
+  isCaseSensitive: false,
   shouldSort: true,
+  threshold: 0.3,
+  // includeScore: true,
   // includeMatches: false,
   // findAllMatches: false,
   // minMatchCharLength: 1,
   // location: 0,
-  threshold: 0.5,
   // distance: 100,
   // useExtendedSearch: false,
   // ignoreLocation: false,
   // ignoreFieldNorm: false,
   keys: [
     'node.frontmatter.title',
-    'node.excerpt',
     'node.frontmatter.subTitle',
     'node.frontmatter.category',
+    'node.headings.value',
   ],
 };
 
