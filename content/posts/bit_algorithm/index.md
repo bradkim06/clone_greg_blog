@@ -10,7 +10,7 @@ cover:
 
 # 비트 조작
 
-#### 최하위 비트 조작
+## 최하위 비트 조작
 
 ```cpp
 int result = 0;
@@ -20,7 +20,7 @@ result = x & (x - 1);
 result = x & ~(x - 1);
 ```
 
-#### i번째 비트와 j번째 비트를 Swap
+## i번째 비트와 j번째 비트를 Swap
 
 ```cpp
 long long SwapBits(long long x, int i, int j) {
@@ -33,9 +33,9 @@ long long SwapBits(long long x, int i, int j) {
 }
 ```
 
-### 비트 뒤집기
+# 비트 뒤집기
 
-#### 무식하게 해결하기 `O(N)`
+## 무식하게 해결하기 `O(N)`
 
 ```cpp
 template<std::size_t N>
@@ -48,7 +48,7 @@ void reverse(std::bitset<N> &b) {
 }
 ```
 
-#### 무식하게 해결하기2 `O(N)`
+## 무식하게 해결하기2 `O(N)`
 
 ```cpp
 #include <algorithm>
@@ -73,7 +73,7 @@ int main() {
 // 01010000000000000000000000000000
 ```
 
-#### LUT 사용 `O(N/L)`
+## LUT 사용 `O(N/L)`
 
 N = 전체 비트수(32), L = 해시 테이블의 키값의 크기(8)
 
@@ -106,7 +106,7 @@ q[0] = BitReverseTable256[p[3]];
 
 Parity를 구하는 알고리즘 비교.
 
-#### 무식하게 풀기 `O(N)`
+## 무식하게 풀기 `O(N)`
 
 ```cpp
 short Pairty(int x){
@@ -119,14 +119,14 @@ short Pairty(int x){
 }
 ```
 
-#### STL Bitset `O(N)`
+## STL Bitset `O(N)`
 
 ```cpp
 long long value = 23423423;
 cout << (bitset<64>(value).count() & 1) << endl;
 ```
 
-#### 1로 세팅된 비트의 개수가 k개면 `O(k)`
+## 1로 세팅된 비트의 개수가 k개면 `O(k)`
 
 ```cpp
 short Parity(int x) {
@@ -139,7 +139,7 @@ short Parity(int x) {
 }
 ```
 
-#### LookUp Table을 이용한 방법 `O(N/L)`
+## LookUp Table을 이용한 방법 `O(N/L)`
 
 N = 전체 비트수(32), L = 해시 테이블의 키값의 크기(8)
 
@@ -163,7 +163,7 @@ short findParity(int x) {
 }
 ```
 
-#### 결합법칙, 교환법칙 응용 `O(logn)`
+## 결합법칙, 교환법칙 응용 `O(logn)`
 
 ```cpp
 // Compute parity of a number `x` using the lookup table
@@ -181,7 +181,7 @@ short findParity(int x) {
 }
 ```
 
-#### Maybe... Best Practice
+## Maybe... Best Practice
 
 ```cpp
 static const bool ParityTable256[256] = {
@@ -208,6 +208,70 @@ int main() {
 }
 ```
 
-### Reference
+# BitCount 개수가 같은 가장 가까운 정수 찾기 `O(N)`
+
+```cpp
+unsigned long long ClosestIntSameBitCount(unsigned long long x) {
+    const static int numBits = 64;
+    for (int i = 0; i < numBits - 1; i++) {
+        if (((x >> i) & 1) != ((x >> (i + 1)) & 1)) {
+            // swap (bit - i), (bit-(i+1))
+            x ^= (1UL << i) | (1UL << (i + 1));
+            return x;
+        }
+    }
+
+    throw invalid_argument("All bits are 0 or 1");
+}
+```
+
+# 곱셈과 덧셈 없이 x\*y 계산하기 `O(N)`
+
+> x를 y번 더하는 방식은 O(2^N)으로 비효율적.
+
+```cpp
+// 더하기는 &연산은 carry를 계산하고, ^연산은 단순 더하기가 된다.
+unsigned long long Add(unsigned long long a, unsigned long long b) {
+    while (b) {
+        unsigned long long carry = a & b;
+        a = a ^ b;
+        b = carry << 1;
+    }
+    return a;
+}
+
+// 곱하기는 x의 setBit만큼 y를 Shift하여 더하면 된다.
+unsigned long long Multiply(unsigned long long x, unsigned long long y) {
+    unsigned long long sum = 0;
+    while (x) {
+        // x의 각 비트 확인
+        if (x & 1) sum = Add(sum, y);
+        x >>= 1, y <<= 1;
+    }
+    return sum;
+}
+```
+
+# 산술 연산자 없이 나눗셈 계산하기 `O(N)`
+
+```cpp
+int Divide(int x, int y) {
+    int result = 0;
+    int power = 32;
+    unsigned long long y_power = static_cast<unsigned long long>(y) << power;
+    while (x >= y) {
+        while (y_power > x) {
+            y_power >>= 1;
+            --power;
+        }
+
+        result += 1 << power;
+        x -= y_power;
+    }
+    return result;
+}
+```
+
+# Reference
 
 https://graphics.stanford.edu/~seander/bithacks.html
