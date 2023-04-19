@@ -35,7 +35,7 @@ long long SwapBits(long long x, int i, int j) {
 
 # 비트 뒤집기
 
-## 무식하게 해결하기 `O(N)`
+## 무식하게 해결하기 $O(N)$
 
 ```cpp
 template<std::size_t N>
@@ -48,7 +48,7 @@ void reverse(std::bitset<N> &b) {
 }
 ```
 
-## 무식하게 해결하기2 `O(N)`
+## 무식하게 해결하기2 $O(N)$
 
 ```cpp
 #include <algorithm>
@@ -73,7 +73,7 @@ int main() {
 // 01010000000000000000000000000000
 ```
 
-## LUT 사용 `O(N/L)`
+## LUT 사용 $O(N/L)$
 
 N = 전체 비트수(32), L = 해시 테이블의 키값의 크기(8)
 
@@ -106,7 +106,7 @@ q[0] = BitReverseTable256[p[3]];
 
 Parity를 구하는 알고리즘 비교.
 
-## 무식하게 풀기 `O(N)`
+## 무식하게 풀기 $O(N)$
 
 ```cpp
 short Pairty(int x){
@@ -126,7 +126,7 @@ long long value = 23423423;
 cout << (bitset<64>(value).count() & 1) << endl;
 ```
 
-## 1로 세팅된 비트의 개수가 k개면 `O(k)`
+## 1로 세팅된 비트의 개수가 k개면 $O(k)$
 
 ```cpp
 short Parity(int x) {
@@ -139,7 +139,7 @@ short Parity(int x) {
 }
 ```
 
-## LookUp Table을 이용한 방법 `O(N/L)`
+## LookUp Table을 이용한 방법 $O(N/L)$
 
 N = 전체 비트수(32), L = 해시 테이블의 키값의 크기(8)
 
@@ -163,7 +163,7 @@ short findParity(int x) {
 }
 ```
 
-## 결합법칙, 교환법칙 응용 `O(logn)`
+## 결합법칙, 교환법칙 응용 $O(log{}n)$
 
 ```cpp
 // Compute parity of a number `x` using the lookup table
@@ -208,7 +208,7 @@ int main() {
 }
 ```
 
-# BitCount 개수가 같은 가장 가까운 정수 찾기 `O(N)`
+# BitCount 개수가 같은 가장 가까운 정수 찾기 $O(N)$
 
 ```cpp
 unsigned long long ClosestIntSameBitCount(unsigned long long x) {
@@ -225,7 +225,7 @@ unsigned long long ClosestIntSameBitCount(unsigned long long x) {
 }
 ```
 
-# 곱셈과 덧셈 없이 x\*y 계산하기 `O(N)`
+# 곱셈과 덧셈 없이 x\*y 계산하기 $O(N)$
 
 > x를 y번 더하는 방식은 O(2^N)으로 비효율적.
 
@@ -252,7 +252,7 @@ unsigned long long Multiply(unsigned long long x, unsigned long long y) {
 }
 ```
 
-# 산술 연산자 없이 나눗셈 계산하기 `O(N)`
+# 산술 연산자 없이 나눗셈 계산하기 $O(N)$
 
 ```cpp
 int Divide(int x, int y) {
