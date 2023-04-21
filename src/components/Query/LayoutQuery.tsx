@@ -47,7 +47,10 @@ export const useLayoutQuery = (): LayoutQueryType => {
   const layoutData = useStaticQuery(
     graphql`
       query LayoutData {
-        posts: allMdx(filter: { fileAbsolutePath: { regex: "//posts//" } }) {
+        posts: allMdx(
+          filter: { fileAbsolutePath: { regex: "//posts//" } }
+          sort: { fields: frontmatter___date, order: DESC }
+        ) {
           totalCount
           edges {
             node {
