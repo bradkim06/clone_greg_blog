@@ -94,6 +94,31 @@ Definition
 
 Typographically, preformatted text is not the same thing as code. Sometimes, a faithful execution of the text requires preformatted text that may not have anything to do with code. Most browsers use Courier and that’s a good default — with one slight adjustment, Courier 10 Pitch over regular Courier for Linux users.
 
+---
+
+## Katex
+
+Find $$\{ x, y, z \} \in \N$$ where:
+$$x^2 + y^2 = z^2$$
+
+---
+
+## Mermaid
+
+import { Mermaid } from 'mdx-mermaid/Mermaid'
+
+<Mermaid chart={`sequenceDiagram
+    participant Alice
+    participant Bob
+    Alice->>John: Hello John, how are you?
+    loop Healthcheck
+        John->>John: Fight against hypochondria
+    end
+    Note right of John: Rational thoughts <br/>prevail!
+    John-->>Alice: Great!
+    John->>Bob: How about you?
+    Bob-->>John: Jolly good!`} />
+
 ## Code Highlight Test
 
 Code can be presented inline, like `<?php bloginfo('stylesheet_url'); ?>` Because we have more specific typographic needs for code, we’ll specify Consolas and Monaco ahead of the browser-defined monospace font.
