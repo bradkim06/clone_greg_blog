@@ -1,9 +1,8 @@
 ---
 title: 비트 조작(bit manipulation) 알고리즘
-subTitle: from. Elements of Programming Interviews in C++
 category: algorithm
 date: 2023-04-19T12:33:58
-cover:
+cover: ../cover.jpeg
 ---
 
 책 내용이 좋아 기록해 둔다.

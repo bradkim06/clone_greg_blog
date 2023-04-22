@@ -1,9 +1,8 @@
 ---
 title: 숫자(Numeric) 알고리즘
-subTitle: from. Elements of Programming Interviews in C++
 category: algorithm
 date: 2023-04-19T17:42:33
-cover:
+cover: ../cover.jpeg
 ---
 
 # pow(x,y) 계산하기 $O(N)$
