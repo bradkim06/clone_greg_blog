@@ -15,7 +15,8 @@ const StyleNavigator = styled.nav`
   left: 0;
   height: 100vh;
   transition-timing-function: ease;
-  transition: left 0.7s;
+  // Main Frame Left Moving part
+  // transition: left 0.5s;
   width: 100%;
 
   ${props => {
@@ -35,14 +36,16 @@ const StyleNavigator = styled.nav`
 
       @media ${minWidth.L} {
         &.is-featured {
-          transition: left 0.7s;
+          // Main Frame Right Moving part
+          // transition: left 0.5s;
           width: calc(100vw - ${info.size.width} - ${bars.size.actionsBar});
           left: ${info.size.width};
           top: 0;
         }
 
         &.is-aside {
-          transition: bottom 0.5s;
+          // side frame up part
+          transition: bottom 0.3s;
           left: 0;
           width: calc(${info.size.width} - 1px);
           z-index: 1;
@@ -93,6 +96,7 @@ const StyleNavigator = styled.nav`
         }
 
         &.moving-featured {
+          // side frame down part
           transition: bottom 0.3s;
           bottom: -100%;
           top: auto;

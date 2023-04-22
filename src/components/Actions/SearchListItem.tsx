@@ -148,7 +148,7 @@ const FlexLink = styled(Link)`
       background-color: ${search.colors.listBackground};
       box-shadow: 0 1px 2px ${search.colors.shadow},
         0 2px 4px ${search.colors.shadow}, 0 4px 8px ${search.colors.shadow};
-      transition: color 1s;
+      transition: color 0.5s;
 
       &:hover {
         color: ${navigator.colors.postsListItemLinkHover};
@@ -164,7 +164,7 @@ const FlexLink = styled(Link)`
         border-radius: 20px;
         box-shadow: 0 10px 50px 0 ${search.colors.shadowHover};
         opacity: 0;
-        transition: all 1s;
+        transition: all 0.5s;
       }
 
       &:hover::before {
