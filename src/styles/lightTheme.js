@@ -157,11 +157,11 @@ export const lightTheme = {
   },
   mediaQueryTresholds: 1300,
   minWidth: {
-    M: '(min-width: 300px)',
+    M: '(min-width: 37.5rem)',
     L: '(min-width: 1300px)',
   },
   maxWidth: {
-    S: '(max-width: 300px)',
+    S: '(max-width: 18.75rem)',
     L: '(max-width: 1300px)',
   },
   palette: {
