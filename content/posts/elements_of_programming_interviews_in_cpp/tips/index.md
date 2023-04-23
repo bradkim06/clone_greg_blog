@@ -1,7 +1,7 @@
 ---
 title: Elements of Programming Interviews in C++
 category: algorithm
-date: 2023-04-19T21:01:00
+date: 2023-04-19T11:33:58
 cover: ../cover.jpeg
 ---
 
@@ -113,3 +113,21 @@ time: <1 us **_ You've passed ALL tests. Congratulations! _**
 # Chapter 6. 문자열
 
 - 문자열은 배열처럼 구성되어 있다는 걸 기억하라. insert(A.begin() + middle, "Gauss")와 같이 문자열 중간에서 발생하는 작업은 효율이 떨어진다
+
+# Chapter 12. 해시 테이블
+
+- 해시 테이블은 문자열 집합을 표현하기 좋은 자료구조
+- trie 트리 자료구조는 동적으로 변하는 문자열 집합을 저장할 때 유용하다
+
+## 롤링 해시
+
+문자열 맨 앞의 문자를 삭제하고 맨 뒤에 문자를 추가하는 방식은 새로운 해시 코드를 $O(1)$ 시간 내에 계산할 수 있다.
+
+```cpp
+int StringHash(const string& s, int modulus) {
+    const int kMult = 997;
+    return accumulate(s.begin(), s.end(), 0, [kMult, modulus](int val, char c) {
+        return (val * kMult * c) % modulus;
+    });
+}
+```
