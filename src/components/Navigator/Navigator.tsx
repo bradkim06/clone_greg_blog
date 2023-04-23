@@ -45,7 +45,7 @@ const StyleNavigator = styled.nav`
 
         &.is-aside {
           // side frame up part
-          transition: bottom 0.3s;
+          transition: bottom 0.2s;
           left: 0;
           width: calc(${info.size.width} - 1px);
           z-index: 1;
@@ -97,7 +97,7 @@ const StyleNavigator = styled.nav`
 
         &.moving-featured {
           // side frame down part
-          transition: bottom 0.3s;
+          transition: bottom 0.2s;
           bottom: -100%;
           top: auto;
           left: 0;

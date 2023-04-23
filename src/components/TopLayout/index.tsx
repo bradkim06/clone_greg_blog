@@ -24,9 +24,7 @@ function getWidth(): number {
   return width;
 }
 
-function useCurrentWidth(theme: {
-  mediaQueryTresholds: { L: number };
-}): boolean {
+function useCurrentWidth(theme: { mediaQueryTresholds: number }): boolean {
   // save current window width in the state object
   const [width, setWidth] = useState(getWidth());
 
@@ -51,8 +49,8 @@ function useCurrentWidth(theme: {
     };
   }, []);
 
-  const mediaQueryL = theme.mediaQueryTresholds.L;
-  return width >= mediaQueryL;
+  const mediaQuery = theme.mediaQueryTresholds;
+  return width >= mediaQuery;
 }
 
 type CategoryProps = {

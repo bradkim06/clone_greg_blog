@@ -33,7 +33,7 @@ const StyleArticle = styled.div<{ fontSize: number }>`
         font-weight: bold;
         letter-spacing: -0.02em;
         text-decoration: underline;
-        transition: 0.3s;
+        transition: 0.1s;
 
         &:hover {
           color: ${base.colors.linkHover};

@@ -79,7 +79,7 @@ export const darkTheme = {
     },
     sizes: {
       articleMinWidth: '100%',
-      articleMaxWidth: '70rem',
+      articleMaxWidth: '100rem',
     },
     fonts: {
       title: {
@@ -155,17 +155,14 @@ export const darkTheme = {
       shadowHover: Color(darkColors.background).lighten(4).string(),
     },
   },
-  mediaQueryTresholds: {
-    M: 600,
-    L: 1024,
-  },
+  mediaQueryTresholds: 1300,
   minWidth: {
-    M: '(min-width: 37.5rem)',
-    L: '(min-width: 64rem)',
+    M: '(min-width: 300px)',
+    L: '(min-width: 1300px)',
   },
   maxWidth: {
-    S: '(max-width: 18.75rem)',
-    L: '(max-width: 63.938rem)',
+    S: '(max-width: 300px)',
+    L: '(max-width: 1300px)',
   },
   palette: {
     primary: {
