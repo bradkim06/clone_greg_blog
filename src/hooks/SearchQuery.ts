@@ -33,7 +33,7 @@ const useSearchData = (): AllMdxProps => {
   const searchData = useStaticQuery(
     graphql`
       query SearchData {
-        allMdx {
+        allMdx(sort: { fields: frontmatter___date, order: DESC }) {
           edges {
             node {
               id
