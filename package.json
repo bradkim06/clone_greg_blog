@@ -69,6 +69,7 @@
     "styled-normalize": "^8.0.7"
   },
   "scripts": {
+    "pre" : "export NODE_OPTIONS=--openssl-legacy-provider",
     "preload-fonts": "gatsby-preload-fonts",
     "deploy": "gatsby build && gh-pages -d public -b master -r https://github.com/bradkim06/bradkim06.github.io",
     "dev": "gatsby develop -p 4000",
