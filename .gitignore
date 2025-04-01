@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+/post_backup
 
 # misc
 .DS_Store
